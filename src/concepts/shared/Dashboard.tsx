@@ -11,6 +11,7 @@ import {
   TrendUp,
 } from '../../components/icons'
 import { USE_HTML_DASHBOARD } from '../../lib/flags'
+import { useCountUp } from '../../lib/motion'
 import { DashboardImage, DashboardImageMobile, NewOrderImage } from './DashboardImage'
 import { SalesChart } from './SalesChart'
 
@@ -31,10 +32,10 @@ const NAV = [
 ]
 
 const METRICS = [
-  { label: 'Total sales', value: '$128,460', delta: '24.8%' },
-  { label: 'Orders', value: '1,842', delta: '18.6%' },
-  { label: 'Conversion rate', value: '3.4%', delta: '0.6pt' },
-  { label: 'ROAS', value: '5.05', delta: null },
+  { label: 'Total sales', count: 128460, delta: '24.8%' },
+  { label: 'Orders', count: 1842, delta: '18.6%' },
+  { label: 'Conversion rate', count: 3.4, delta: '0.6pt' },
+  { label: 'ROAS', count: 5.05, delta: null },
 ]
 
 export function DeltaPill({ children }: { children: React.ReactNode }) {
@@ -46,7 +47,26 @@ export function DeltaPill({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function AnalyticsPanel({ compactChart = false }: { compactChart?: boolean }) {
+/** Formats a counted value back into the label it is drawn as. */
+const METRIC_FORMAT: Record<string, (n: number) => string> = {
+  'Total sales': (n) => `$${Math.round(n).toLocaleString('en-US')}`,
+  Orders: (n) => Math.round(n).toLocaleString('en-US'),
+  'Conversion rate': (n) => `${n.toFixed(1)}%`,
+  ROAS: (n) => n.toFixed(2),
+}
+
+function MetricValue({ label, value, delay }: { label: string; value: number; delay?: number }) {
+  const n = useCountUp(value, { delay: delay ?? 0, run: delay !== undefined })
+  return <>{METRIC_FORMAT[label](n)}</>
+}
+
+export function AnalyticsPanel({
+  compactChart = false,
+  countUpDelay,
+}: {
+  compactChart?: boolean
+  countUpDelay?: number
+}) {
   return (
     <div className="ui-font flex-1 p-4 md:p-6">
       <div className="flex items-center justify-between">
@@ -68,7 +88,7 @@ export function AnalyticsPanel({ compactChart = false }: { compactChart?: boolea
           >
             <p className="text-[9.5px] font-medium uppercase tracking-[0.04em] text-muted">{m.label}</p>
             <p className="mt-1.5 text-[19px] font-semibold tabular-nums leading-none text-[#1A1A1A]">
-              {m.value}
+              <MetricValue label={m.label} value={m.count} delay={countUpDelay} />
             </p>
             {m.delta && (
               <div className="mt-2">
@@ -119,12 +139,18 @@ function Sidebar() {
  * Figma export (DashboardImage) but kept here and reachable via
  * USE_HTML_DASHBOARD in src/lib/flags.ts.
  */
-export function DashboardHtml({ className = '' }: { className?: string }) {
+export function DashboardHtml({
+  className = '',
+  countUpDelay,
+}: {
+  className?: string
+  countUpDelay?: number
+}) {
   return (
     <div className={`glass-rim glass-rim-lg ${className}`}>
       <div className="rim-card flex">
         <Sidebar />
-        <AnalyticsPanel />
+        <AnalyticsPanel countUpDelay={countUpDelay} />
       </div>
     </div>
   )
@@ -177,11 +203,21 @@ export function NewOrderCardHtml({ className = '' }: { className?: string }) {
  * flipping USE_HTML_DASHBOARD swaps the HTML recreation back in.
  * ------------------------------------------------------------------------- */
 
-export function Dashboard({ className = '' }: { className?: string }) {
+export function Dashboard({
+  className = '',
+  chartRevealDelay,
+  countUpDelay,
+}: {
+  className?: string
+  /** Seconds before the chart draws in; omit to skip. */
+  chartRevealDelay?: number
+  /** Seconds before the metrics count up; only the HTML variant can do this. */
+  countUpDelay?: number
+}) {
   return USE_HTML_DASHBOARD ? (
-    <DashboardHtml className={className} />
+    <DashboardHtml className={className} countUpDelay={countUpDelay} />
   ) : (
-    <DashboardImage className={className} />
+    <DashboardImage className={className} chartRevealDelay={chartRevealDelay} />
   )
 }
 

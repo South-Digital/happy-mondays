@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion'
 import { Photo } from '../../components/Photo'
 import { DASH, IMG } from '../../lib/assets'
+import { DUR, EASE, usePrefersReducedMotion } from '../../lib/motion'
 
 /**
  * The Shopify window exactly as drawn in Figma: sidebar and analytics panel
@@ -9,11 +11,18 @@ import { DASH, IMG } from '../../lib/assets'
  *
  * No browser bar, per §A1. The glass rim and the 78vw geometry are unchanged.
  */
-export function DashboardImage({ className = '' }: { className?: string }) {
+export function DashboardImage({
+  className = '',
+  /** Seconds to wait before drawing the chart in; omit to skip the reveal. */
+  chartRevealDelay,
+}: {
+  className?: string
+  chartRevealDelay?: number
+}) {
   return (
     <div className={`glass-rim glass-rim-lg ${className}`}>
       <div
-        className="rim-card grid items-start"
+        className="rim-card relative grid items-start overflow-hidden"
         style={{ gridTemplateColumns: `${DASH.sidebarW}fr ${DASH.panelW}fr` }}
       >
         <Photo
@@ -34,8 +43,35 @@ export function DashboardImage({ className = '' }: { className?: string }) {
           className="block h-auto w-full"
           fallback="linear-gradient(180deg,#FFFFFF,#F7F7F6)"
         />
+
+        {chartRevealDelay !== undefined && <ChartReveal delay={chartRevealDelay} />}
       </div>
     </div>
+  )
+}
+
+/**
+ * Draws the chart line in.
+ *
+ * The panel is a Figma export, so there is no stroke to dash. Instead a panel-
+ * coloured cover sits over the plot area and translates off to the right, which
+ * reads as the line drawing left to right — and is a transform, so it composites
+ * without touching layout. The inset is in percentages of the 908×615 panel, so
+ * it tracks the artwork at any width.
+ */
+function ChartReveal({ delay }: { delay: number }) {
+  const reduced = usePrefersReducedMotion()
+  if (reduced) return null
+
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute bg-white"
+      style={{ left: '25.5%', right: '-1%', top: '43%', height: '46%' }}
+      initial={{ x: '0%' }}
+      animate={{ x: '101%' }}
+      transition={{ duration: DUR.chart, delay, ease: EASE.state }}
+    />
   )
 }
 

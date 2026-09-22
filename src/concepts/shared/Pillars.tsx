@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { Photo } from '../../components/Photo'
 import { IMG } from '../../lib/assets'
-import { usePrefersReducedMotion } from '../../lib/motion'
+import { groupChild, groupParent, sectionReveal, usePrefersReducedMotion, VIEWPORT } from '../../lib/motion'
 import {
   AlgorithmCard,
   BiddingOnlyChip,
@@ -65,21 +65,22 @@ export function Pillars({ className = '' }: { className?: string }) {
   return (
     <section className={className}>
       <div className="content-grid">
-        <p className="tagline">Why Happy Mondays</p>
-        <h2 className="mt-4 max-w-[760px] text-section-m md:text-section">
-          Three things most Google Ads agencies get wrong. We don't.
-        </h2>
+        <motion.div {...sectionReveal(reduced)}>
+          <p className="tagline">Why Happy Mondays</p>
+          <h2 className="mt-4 max-w-[760px] text-section-m md:text-section">
+            Three things most Google Ads agencies get wrong. We don't.
+          </h2>
+        </motion.div>
 
-        <ul className="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
+        <motion.ul
+          className="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 md:gap-6 xl:grid-cols-3"
+          variants={groupParent}
+          initial={reduced ? false : 'hidden'}
+          whileInView="show"
+          viewport={VIEWPORT}
+        >
           {PILLARS.map((p) => (
-            <motion.li
-              key={p.title}
-              className="group w-full xl:w-[384px]"
-              initial={reduced ? false : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <motion.li key={p.title} className="group w-full xl:w-[384px]" variants={groupChild(reduced)}>
               {/* Hover: the glass rim lifts 4px and the chip drifts 2px (§A4) */}
               <div className="relative h-[300px] overflow-hidden rounded-[20px] transition-transform duration-200 group-hover:-translate-y-1 md:h-[336px]">
                 <Photo
@@ -102,7 +103,7 @@ export function Pillars({ className = '' }: { className?: string }) {
               <p className="mt-2 max-w-[384px] text-card-desc text-ink-60">{p.description}</p>
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
     </section>
   )

@@ -39,6 +39,18 @@ is kept in the repo behind `USE_HTML_DASHBOARD` in `src/lib/flags.ts`. See
 `public/images/README.md` for filenames, node IDs and two notes about the
 exports themselves.
 
+## Motion
+
+Every animation on both concepts is defined in `src/lib/motion.ts`: one easing
+family (`cubic-bezier(0.22, 1, 0.36, 1)` for entrances, `cubic-bezier(0.4, 0, 0.2, 1)`
+for state changes), durations grouped as micro / entrance / ambient, a 70ms
+stagger, and a 20%-visible viewport for scroll reveals that fire once. Only
+transform and opacity animate.
+
+Under `prefers-reduced-motion` everything renders in its final state: no drift,
+no parallax, the chart fully drawn, count-ups at their final values, and tab
+switches instant.
+
 ## Deployment
 
 Vercel project: [happy-mondays](https://vercel.com/zac-santers-projects/happy-mondays).

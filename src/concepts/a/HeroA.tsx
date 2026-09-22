@@ -6,18 +6,28 @@ import { Photo } from '../../components/Photo'
 import { MockLink } from '../../components/Toast'
 import { ArrowUpRight } from '../../components/icons'
 import { IMG } from '../../lib/assets'
-import { usePrefersReducedMotion } from '../../lib/motion'
+import { DIST, DUR, EASE, riseAt, usePrefersReducedMotion } from '../../lib/motion'
 import { Dashboard, DashboardMobile, NewOrderCard } from '../shared/Dashboard'
 import { LogoStrip } from '../shared/LogoStrip'
 import { ProofRow } from '../shared/ProofRow'
 
-/** §A4 load sequence: nav → line 1 → "Smile." → subline → CTA, 80ms apart. */
-const EASE = [0.16, 1, 0.3, 1] as const
-const rise = (delay: number) => ({
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: EASE, delay },
-})
+/**
+ * §A4 load sequence, on the shared 70ms stagger: nav → line 1 → "Smile." →
+ * subline → CTA. The dashboard settles last, then the chart draws in, then the
+ * New order card lands. Nothing else moves.
+ */
+const SEQ = {
+  nav: 0,
+  line1: 1,
+  smile: 2,
+  subline: 3,
+  cta: 4,
+} as const
+
+/** Absolute timings, in seconds, for the steps that follow the text. */
+const DASHBOARD_AT = 0.45
+const CHART_AT = DASHBOARD_AT + DUR.entranceSlow // the dashboard has settled
+const CARD_AT = CHART_AT + 0.2
 
 export function HeroA() {
   const reduced = usePrefersReducedMotion()
@@ -30,8 +40,6 @@ export function HeroA() {
     offset: ['start start', 'end start'],
   })
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
-
-  const d = (n: number) => (reduced ? 0 : n)
 
   return (
     <section className="bg-white">
@@ -55,7 +63,7 @@ export function HeroA() {
         </motion.div>
 
         <div className="relative z-10 px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0">
-          <motion.div {...rise(d(0))}>
+          <motion.div {...riseAt(SEQ.nav, reduced)}>
             <Nav variant="a" />
             <MobileNav variant="a" />
           </motion.div>
@@ -63,24 +71,24 @@ export function HeroA() {
           {/* Headline block */}
           <div className="mx-auto mt-16 flex w-full max-w-content flex-col items-center text-center xl:mt-24">
             <h1 className="text-hero-m md:text-hero-t xl:text-hero">
-              <motion.span className="block" {...rise(d(0.08))}>
+              <motion.span className="block" {...riseAt(SEQ.line1, reduced)}>
                 Open Shopify.
               </motion.span>
-              <motion.span className="block text-ink-50" {...rise(d(0.16))}>
+              <motion.span className="block text-ink-50" {...riseAt(SEQ.smile, reduced)}>
                 Smile.
               </motion.span>
             </h1>
 
             <motion.p
               className="mt-6 max-w-[430px] text-subline-m text-ink md:text-subline"
-              {...rise(d(0.24))}
+              {...riseAt(SEQ.subline, reduced)}
             >
               Google Ads for Shopify brands.
               <br />
               Senior expertise. A flat monthly fee.
             </motion.p>
 
-            <motion.div className="mt-8" {...rise(d(0.32))}>
+            <motion.div className="mt-8" {...riseAt(SEQ.cta, reduced)}>
               <MockLink className="btn-liquid">
                 <span>Book a call</span>
                 <ArrowUpRight width={16} height={16} />
@@ -91,18 +99,29 @@ export function HeroA() {
           {/* Dashboard settles last — from +32px and 96% scale, over ~900ms (§A4) */}
           <motion.div
             className="relative mx-auto mt-16 hidden w-[78vw] max-w-[1120px] md:block xl:mt-20"
-            initial={reduced ? false : { opacity: 0, y: 32, scale: 0.96 }}
+            initial={reduced ? false : { opacity: 0, y: DIST.lg, scale: DIST.scaleFrom }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: d(0.5) }}
+            transition={{
+              duration: DUR.entranceSlow,
+              ease: EASE.entrance,
+              delay: reduced ? 0 : DASHBOARD_AT,
+            }}
           >
-            <Dashboard />
+            <Dashboard
+              chartRevealDelay={reduced ? undefined : CHART_AT}
+              countUpDelay={reduced ? undefined : CHART_AT}
+            />
 
             {/* Breaks the frame on the dashboard's left edge; lands 200ms later */}
             <motion.div
               className="absolute -left-[140px] top-[44%] hidden xl:block"
-              initial={reduced ? false : { opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}
+              initial={reduced ? false : { opacity: 0, y: DIST.sm }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: DUR.entrance,
+                ease: EASE.entrance,
+                delay: reduced ? 0 : CARD_AT,
+              }}
             >
               <NewOrderCard />
             </motion.div>
@@ -112,16 +131,24 @@ export function HeroA() {
               New order card overlapping its bottom-left. */}
           <motion.div
             className="relative mx-auto mt-12 w-full max-w-[420px] md:hidden"
-            initial={reduced ? false : { opacity: 0, y: 24, scale: 0.97 }}
+            initial={reduced ? false : { opacity: 0, y: DIST.lg, scale: DIST.scaleFrom }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.9, ease: EASE, delay: d(0.5) }}
+            transition={{
+              duration: DUR.entranceSlow,
+              ease: EASE.entrance,
+              delay: reduced ? 0 : DASHBOARD_AT,
+            }}
           >
             <DashboardMobile />
             <motion.div
               className="absolute -bottom-7 -left-3 origin-bottom-left scale-[0.62]"
-              initial={reduced ? false : { opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}
+              initial={reduced ? false : { opacity: 0, y: DIST.sm }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: DUR.entrance,
+                ease: EASE.entrance,
+                delay: reduced ? 0 : CARD_AT,
+              }}
             >
               <NewOrderCard />
             </motion.div>

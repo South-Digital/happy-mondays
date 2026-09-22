@@ -6,16 +6,11 @@ import { Photo } from '../../components/Photo'
 import { MockLink } from '../../components/Toast'
 import { ArrowUpRight } from '../../components/icons'
 import { IMG } from '../../lib/assets'
-import { usePrefersReducedMotion } from '../../lib/motion'
+import { DUR, EASE, riseAt, usePrefersReducedMotion } from '../../lib/motion'
 import { HeroProofChips } from './HeroProofChips'
 import { SHOW_HERO_CHIPS } from './flags'
 
-const EASE = [0.16, 1, 0.3, 1] as const
-const rise = (delay: number) => ({
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: EASE, delay },
-})
+const SEQ = { nav: 0, line1: 1, smile: 2, subline: 3, cta: 4 } as const
 
 /**
  * §B1 — full-bleed Santorini photo, text block left-aligned at the 120px edge,
@@ -30,9 +25,8 @@ export function HeroB() {
     target: sceneRef,
     offset: ['start start', 'end start'],
   })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '10%'])
-
-  const d = (n: number) => (reduced ? 0 : n)
+  // §B5 — a very slow parallax so the photo and the text separate slightly.
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '8%'])
 
   return (
     <section ref={sceneRef} className="relative aspect-[4/5] overflow-hidden bg-offwhite md:aspect-auto md:min-h-[600px] xl:h-[1200px]">
@@ -46,7 +40,7 @@ export function HeroB() {
           className="h-[110%] w-full"
           initial={reduced ? false : { scale: 1.06 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 20, ease: 'easeOut' }}
+          transition={{ duration: DUR.drift, ease: EASE.entrance }}
         >
           <Photo
             src={IMG.bHero}
@@ -93,7 +87,7 @@ export function HeroB() {
       />
 
       <div className="relative z-30 flex h-full flex-col px-5 pb-10 pt-7 md:pb-24 xl:px-0">
-        <motion.div {...rise(d(0))}>
+        <motion.div {...riseAt(SEQ.nav, reduced)}>
           <Nav variant="b" />
           <MobileNav variant="b" />
         </motion.div>
@@ -101,24 +95,24 @@ export function HeroB() {
         {/* Text block, left-aligned at the 120px content edge */}
         <div className="mx-auto mt-auto flex w-full max-w-content flex-col justify-end pb-2 md:mt-24 md:flex-1 md:justify-center md:pb-0 xl:mt-0">
           <h1 className="text-hero-m md:text-hero-t xl:text-hero">
-            <motion.span className="block text-white" {...rise(d(0.08))}>
+            <motion.span className="block text-white" {...riseAt(SEQ.line1, reduced)}>
               Open Shopify.
             </motion.span>
-            <motion.span className="block text-white/[0.76]" {...rise(d(0.16))}>
+            <motion.span className="block text-white/[0.76]" {...riseAt(SEQ.smile, reduced)}>
               Smile.
             </motion.span>
           </h1>
 
           <motion.p
             className="mt-6 max-w-[430px] text-subline-m text-white/90 md:text-subline"
-            {...rise(d(0.24))}
+            {...riseAt(SEQ.subline, reduced)}
           >
             Google Ads for Shopify brands.
             <br />
             Senior expertise. A flat monthly fee.
           </motion.p>
 
-          <motion.div className="mt-8" {...rise(d(0.32))}>
+          <motion.div className="mt-8" {...riseAt(SEQ.cta, reduced)}>
             <MockLink className="btn-solid">
               Book a call
               <ArrowUpRight width={15} height={15} />

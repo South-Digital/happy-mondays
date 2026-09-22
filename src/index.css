@@ -1,9 +1,28 @@
+/**
+ * Metrics-matched fallback for Manrope. Measured against Arial at 100px, the
+ * same string renders 2.86% wider in Manrope, so the fallback is scaled to match
+ * and the swap no longer moves anything — the nav row and the hero headline were
+ * shifting on font load (CLS 0.058 on Concept B at 1440, cold cache).
+ */
+@font-face {
+  font-family: 'Manrope Fallback';
+  src: local('Arial');
+  size-adjust: 102.9%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    /* The motion system's easing family — mirrors src/lib/motion.ts */
+    --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
+
     --ink: #22201c;
     --muted: #807b73;
     --offwhite: #faf9f6;
@@ -106,9 +125,11 @@
     font-size: 15px;
     line-height: 1;
     cursor: pointer;
+    /* 150ms micro-interaction. Background is a paint-only change, not layout —
+       the brief asks for a slight fill brightening on hover. */
     transition:
-      transform 200ms ease-out,
-      background 200ms ease-out;
+      transform 150ms var(--ease-state),
+      background-color 150ms var(--ease-state);
   }
 
   /* 1px white edge on the top and left, as drawn */
@@ -142,8 +163,13 @@
   }
 
   .btn-liquid:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.46);
     transform: translateY(-1px);
+  }
+  /* Pressed returns to rest faster than it left */
+  .btn-liquid:active {
+    transform: translateY(0);
+    transition-duration: 100ms;
   }
 
   /* Nav variant — 42px tall, 18px sides (2171:622) */
@@ -168,16 +194,41 @@
     line-height: 1;
     cursor: pointer;
     transition:
-      transform 200ms ease-out,
-      filter 200ms ease-out;
+      transform 150ms var(--ease-state),
+      background-color 150ms var(--ease-state);
   }
   .btn-solid:hover {
-    filter: brightness(1.08);
+    background: #3b74ee;
     transform: translateY(-1px);
+  }
+  .btn-solid:active {
+    transform: translateY(0);
+    transition-duration: 100ms;
   }
   .btn-solid-sm {
     padding: 11px 18px;
     font-size: 13px;
+  }
+
+  /* Nav link — the underline wipes in from the left, 150ms */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 150ms var(--ease-state);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
   }
 
   /* Section tagline — DM Mono, uppercase */

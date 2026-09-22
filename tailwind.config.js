@@ -20,7 +20,7 @@ export default {
         pos: { DEFAULT: '#288C48', bg: '#EAF6ED', border: '#D0E8D6' },
       },
       fontFamily: {
-        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Manrope', '"Manrope Fallback"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['"DM Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
         ui: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },

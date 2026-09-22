@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion'
-import { usePrefersReducedMotion } from '../../lib/motion'
+import { DIST, DUR, EASE, STAGGER, sectionReveal, usePrefersReducedMotion, VIEWPORT } from '../../lib/motion'
 import { Dashboard, DashboardMobile } from '../shared/Dashboard'
 import { ShoppingGraphic } from '../shared/graphics/ShoppingGraphic'
-
-const EASE = [0.16, 1, 0.3, 1] as const
 
 /**
  * §B2 — "Every sale, traced back to the search."
@@ -20,13 +18,15 @@ export function BandOne({ className = '' }: { className?: string }) {
   return (
     <section className={`overflow-x-clip ${className}`}>
       <div className="content-grid">
-        <h2 className="max-w-[760px] text-section-m md:text-section">
-          Every sale, traced back to the search.
-        </h2>
-        {/* TODO: confirm copy — drafted in design, not from Notion. */}
-        <p className="mt-5 max-w-[560px] text-card-desc text-ink-60">
-          Your Shopify numbers and your Google Shopping results, managed as one.
-        </p>
+        <motion.div {...sectionReveal(reduced)}>
+          <h2 className="max-w-[760px] text-section-m md:text-section">
+            Every sale, traced back to the search.
+          </h2>
+          {/* TODO: confirm copy — drafted in design, not from Notion. */}
+          <p className="mt-5 max-w-[560px] text-card-desc text-ink-60">
+            Your Shopify numbers and your Google Shopping results, managed as one.
+          </p>
+        </motion.div>
 
         <div className="relative mt-16">
           {/* Soft blue blurred wash behind the glass */}
@@ -41,10 +41,10 @@ export function BandOne({ className = '' }: { className?: string }) {
           />
 
           <motion.div
-            initial={reduced ? false : { opacity: 0, y: 28 }}
+            initial={reduced ? false : { opacity: 0, y: DIST.lg }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.7, ease: EASE }}
+            viewport={VIEWPORT}
+            transition={{ duration: DUR.entrance, ease: EASE.entrance }}
             className="relative"
           >
             <Dashboard className="hidden w-full md:block" />
@@ -54,10 +54,14 @@ export function BandOne({ className = '' }: { className?: string }) {
             {/* Shopping widget over the lower-right corner */}
             <motion.div
               className="absolute -bottom-12 right-4 hidden w-[380px] lg:block xl:-bottom-16 xl:-right-6 xl:w-[440px]"
-              initial={reduced ? false : { opacity: 0, x: 24 }}
+              initial={reduced ? false : { opacity: 0, x: DIST.lg }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.6, ease: EASE, delay: reduced ? 0 : 0.15 }}
+              viewport={VIEWPORT}
+              transition={{
+                duration: DUR.entrance,
+                ease: EASE.entrance,
+                delay: reduced ? 0 : STAGGER * 2,
+              }}
             >
               <ShoppingGraphic compact />
             </motion.div>
@@ -67,10 +71,14 @@ export function BandOne({ className = '' }: { className?: string }) {
               bottom edge by about 40px on mobile. */}
           <motion.div
             className="relative z-10 -mt-10 px-2 md:mt-8 md:px-0 lg:hidden"
-            initial={reduced ? false : { opacity: 0, y: 20 }}
+            initial={reduced ? false : { opacity: 0, y: DIST.md }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, ease: EASE, delay: reduced ? 0 : 0.15 }}
+            viewport={VIEWPORT}
+            transition={{
+              duration: DUR.entrance,
+              ease: EASE.entrance,
+              delay: reduced ? 0 : STAGGER * 2,
+            }}
           >
             <ShoppingGraphic compact />
           </motion.div>

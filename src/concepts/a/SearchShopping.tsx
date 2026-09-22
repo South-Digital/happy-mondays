@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { Photo } from '../../components/Photo'
 import { IMG } from '../../lib/assets'
-import { usePrefersReducedMotion } from '../../lib/motion'
+import { DUR, EASE, sectionReveal, usePrefersReducedMotion } from '../../lib/motion'
 import { ShoppingChip, ShoppingGraphic } from '../shared/graphics/ShoppingGraphic'
 import {
   PmaxGraphic,
@@ -68,6 +68,8 @@ const TABS: Tab[] = [
 ]
 
 const DEFAULT_TAB = 1 // Shopping is expanded by default (§A3)
+/** The panel follows the heading by one stagger step. */
+const STAGGER_PANEL = 0.07
 const AUTO_ADVANCE_MS = 6000
 
 /**
@@ -87,12 +89,14 @@ function ProgressBar({
     <div className={`h-px w-full overflow-hidden bg-transparent ${className}`}>
       <motion.div
         key={autoAdvancing ? `auto-${active}` : `static-${active}`}
-        className="h-full bg-cobalt"
-        initial={{ width: autoAdvancing ? '0%' : '100%' }}
-        animate={{ width: '100%' }}
+        className="h-full w-full origin-left bg-cobalt"
+        /* scaleX, not width: width is a layout property and would reflow the
+           column on every frame of the 6s fill. */
+        initial={{ scaleX: autoAdvancing ? 0 : 1 }}
+        animate={{ scaleX: 1 }}
         transition={{
-          duration: autoAdvancing ? AUTO_ADVANCE_MS / 1000 : 0.35,
-          ease: autoAdvancing ? 'linear' : 'easeOut',
+          duration: autoAdvancing ? AUTO_ADVANCE_MS / 1000 : DUR.state,
+          ease: autoAdvancing ? 'linear' : EASE.state,
         }}
       />
     </div>
@@ -137,9 +141,9 @@ export function SearchShopping({ className = '' }: { className?: string }) {
   return (
     <section className={className}>
       <div className="content-grid">
-        <h2 className="max-w-[640px] text-section-m md:text-section">
+        <motion.h2 className="max-w-[640px] text-section-m md:text-section" {...sectionReveal(reduced)}>
           Search and shopping, managed properly.
-        </h2>
+        </motion.h2>
 
         <div className="mt-14 grid items-start gap-12 xl:grid-cols-[320px_minmax(0,1fr)]">
           {/* Tab list — a vertical list on desktop; §5 turns it into a
@@ -216,12 +220,13 @@ export function SearchShopping({ className = '' }: { className?: string }) {
           </div>
 
           {/* Panel */}
-          <div
+          <motion.div
             role="tabpanel"
             id={`ss-panel-${current.id}`}
             aria-labelledby={`ss-tab-${current.id}`}
             tabIndex={0}
             className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px] md:aspect-[880/648]"
+            {...sectionReveal(reduced, STAGGER_PANEL)}
           >
             <Photo
               src={IMG.panelBackdrop}
@@ -240,13 +245,13 @@ export function SearchShopping({ className = '' }: { className?: string }) {
                   initial={reduced ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduced ? { opacity: 1 } : { opacity: 0, y: -8 }}
-                  transition={{ duration: reduced ? 0 : 0.25, ease: 'easeOut' }}
+                  transition={{ duration: reduced ? 0 : DUR.crossfade, ease: EASE.state }}
                 >
                   {current.graphic}
                 </motion.div>
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

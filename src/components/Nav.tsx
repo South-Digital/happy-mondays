@@ -20,7 +20,7 @@ export function Nav({ variant }: { variant: 'a' | 'b' }) {
             <ul className="flex items-center gap-7">
               {LINKS.map((l) => (
                 <li key={l}>
-                  <MockLink className="text-nav text-ink-72 transition-colors hover:text-ink">{l}</MockLink>
+                  <MockLink className="nav-link text-nav text-ink-72">{l}</MockLink>
                 </li>
               ))}
             </ul>
@@ -41,7 +41,7 @@ export function Nav({ variant }: { variant: 'a' | 'b' }) {
           <ul className="flex items-center gap-7">
             {LINKS.map((l) => (
               <li key={l}>
-                <MockLink className="text-nav text-ink-72 drop-shadow-[0_1px_2px_rgba(255,255,255,.5)] transition-colors hover:text-ink">
+                <MockLink className="nav-link text-nav text-ink-72 drop-shadow-[0_1px_2px_rgba(255,255,255,.5)]">
                   {l}
                 </MockLink>
               </li>

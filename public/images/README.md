@@ -90,3 +90,20 @@ The hand-built HTML/CSS recreation is still in the repo (`DashboardHtml`,
 `DashboardHtmlMobile`, `NewOrderCardHtml` in `src/concepts/shared/Dashboard.tsx`).
 Setting `USE_HTML_DASHBOARD` in `src/lib/flags.ts` to `true` swaps it back in on
 both concepts.
+
+## Motion
+
+All motion is defined in `src/lib/motion.ts` — one easing family, one set of
+durations, one stagger — and consumed from there by both concepts. Two notes
+that bear on the assets:
+
+- **The chart "draws in" by masking, not by stroke-dashing.** The panel is a
+  Figma export, so there is no stroke to animate. A panel-coloured cover sits
+  over the plot area and translates off to the right, which reads as the line
+  drawing left to right and composites without touching layout. Its inset is set
+  in percentages of the 908×615 panel, so it tracks the artwork at any width — if
+  the panel export is ever replaced at a different crop, re-check `ChartReveal`
+  in `src/concepts/shared/DashboardImage.tsx`.
+- **The metric count-up only runs on the HTML recreation.** The exported panel's
+  numbers are pixels, so they cannot count. `DashboardHtml` counts all four up
+  over 900ms; the export shows them final.
