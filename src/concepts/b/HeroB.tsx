@@ -44,6 +44,7 @@ export function HeroB() {
         >
           <Photo
             src={IMG.bHero}
+            responsive
             alt="A whitewashed Santorini terrace looking out over the caldera"
             width={2000}
             height={1667}

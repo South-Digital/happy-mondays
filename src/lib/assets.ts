@@ -48,10 +48,12 @@ export const IMG = {
   googleAdsPartner: '/images/icon-google-ads.svg',
 
   /**
-   * Weekly-Loom thumbnail (pillar 3). Not part of §8 and not delivered — this
-   * one still renders as a CSS fallback.
+   * Weekly-Loom thumbnail (pillar 3). Not part of §8 and never delivered.
+   * Deliberately empty: pointing at a missing file put a 404 in the console on
+   * every load. <Photo> renders its CSS fallback when the src is empty, with no
+   * request. Set this to the real path once the thumbnail exists.
    */
-  videoThumb: '/images/video-thumb.webp',
+  videoThumb: '',
 } as const
 
 export type ImgKey = keyof typeof IMG

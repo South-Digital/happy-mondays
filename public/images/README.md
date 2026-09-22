@@ -27,8 +27,20 @@ bad path degrades rather than leaving a hole.
 | `icon-google-ads` | `2171:651` | 18×18 SVG | Google Ads mark, proof row |
 | `partner-*-lockup` | `2171:647/650` | 234×44, 142×22 | Delivered lockups, kept as source |
 
-Not delivered, still a fallback: `video-thumb`, the weekly-Loom thumbnail in
-pillar 3. It is not part of §8.
+Not delivered: `video-thumb`, the weekly-Loom thumbnail in pillar 3 (not part of
+§8). `IMG.videoThumb` is deliberately an empty string — pointing it at a missing
+file put a 404 in the console on every load, and `<Photo>` renders its CSS
+fallback for an empty src without making a request. Set it to the real path once
+the thumbnail exists.
+
+## Narrow variants
+
+The large photographs also ship a `-1000.webp` variant, offered through `srcSet`
+by `<Photo responsive>`, so a phone does not download a 2000px image:
+`a-hero-bg`, `a-foreground`, `b-hero`, `panel-bg`, `dash-panel`. This took
+Concept A's Lighthouse mobile performance from 77 to 88 and its LCP from 4.6s to
+3.5s. Regenerate a variant with the same basename if its source is ever
+replaced.
 
 ## The partner marks
 

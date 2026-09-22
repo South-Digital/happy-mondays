@@ -53,6 +53,7 @@ export function HeroA() {
         >
           <Photo
             src={IMG.aHeroBg}
+            responsive
             alt=""
             width={2000}
             height={1786}
@@ -161,6 +162,7 @@ export function HeroA() {
         <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-20 overflow-hidden">
           <Photo
             src={IMG.aHeroFg}
+            responsive
             alt=""
             width={2000}
             height={467}

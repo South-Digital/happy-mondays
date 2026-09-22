@@ -54,7 +54,11 @@ export function BrandLogo({ name, src }: { name: string; src: string }) {
       width={327}
       height={144}
       className="block h-auto w-full"
-      loading="lazy"
+      /* Not lazy: in the mobile marquee these move by CSS transform rather than
+         by scrolling, so the lazy trigger never fires for the ones that start
+         off-screen and three of the eight stayed blank as they came round. They
+         are 2–6KB each. */
+      loading="eager"
       decoding="async"
       onError={() => setFailed(true)}
     />

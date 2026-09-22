@@ -230,6 +230,7 @@ export function SearchShopping({ className = '' }: { className?: string }) {
           >
             <Photo
               src={IMG.panelBackdrop}
+              responsive
               alt=""
               width={1760}
               height={1296}

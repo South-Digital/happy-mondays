@@ -188,6 +188,9 @@
     border-radius: 999px;
     background: var(--cobalt);
     color: #fff;
+    /* 14px padding either side of a 15px line box gives 43px — one pixel under
+       the 44px touch target §5 requires. */
+    min-height: 44px;
     padding: 14px 24px;
     font-weight: 600;
     font-size: 15px;
