@@ -32,3 +32,20 @@ dev and preview servers in `vite.config.ts`), and `public/robots.txt`.
 
 The Figma exports are not committed yet — see `public/images/README.md` for the
 filenames and node IDs. The UI renders with CSS fallbacks until they are added.
+
+## Deployment
+
+Vercel project: [happy-mondays](https://vercel.com/zac-santers-projects/happy-mondays).
+
+The repository is connected through Vercel's native GitHub integration:
+
+- Pushes to `claude/dreamy-goodall-19ek6p` automatically build and deploy to Production.
+- Pushes to other branches and pull requests receive Preview deployments.
+- Installation uses `npm ci`; `npm run build` typechecks and builds Vite into `dist`.
+- A failed build does not replace the current live deployment. Check the Vercel deployment logs or GitHub checks for failures.
+
+Before pushing, run `npm ci && npm run build`. No GitHub Actions workflow or repository deployment secrets are required.
+
+The app currently lives on the branch above; `main` contains only the initial documentation. When the app is merged into `main`, change **Settings → Environments → Production → Branch Tracking** in Vercel to `main`.
+
+For a rollback, open the Vercel project's Deployments page and promote a previous successful deployment. Revert the offending commit in GitHub too, so subsequent deployments preserve the fix.
