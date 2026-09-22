@@ -13,7 +13,14 @@ const CHIPS = [
  * (component C2 / Hero proof chips, 2107:215). Behind SHOW_HERO_CHIPS.
  * They rise in sequence, 80ms apart (§B5).
  */
-export function HeroProofChips({ className = '' }: { className?: string }) {
+export function HeroProofChips({
+  className = '',
+  mobileOnlyFirst = false,
+}: {
+  className?: string
+  /** §5 — show only the Clutch chip on mobile. */
+  mobileOnlyFirst?: boolean
+}) {
   const reduced = usePrefersReducedMotion()
 
   return (
@@ -21,7 +28,9 @@ export function HeroProofChips({ className = '' }: { className?: string }) {
       {CHIPS.map((chip, i) => (
         <motion.li
           key={chip.id}
-          className="glass-chip flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-ink"
+          className={`glass-chip flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-ink ${
+            mobileOnlyFirst && i > 0 ? 'hidden md:flex' : ''
+          }`}
           initial={reduced ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: reduced ? 0 : 0.5 + i * 0.08 }}

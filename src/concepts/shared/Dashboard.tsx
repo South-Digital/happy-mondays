@@ -46,23 +46,21 @@ export function DeltaPill({ children }: { children: React.ReactNode }) {
 
 export function AnalyticsPanel({ compactChart = false }: { compactChart?: boolean }) {
   return (
-    <div className="ui-font flex-1 p-6">
+    <div className="ui-font flex-1 p-4 md:p-6">
       <div className="flex items-center justify-between">
         <h3 className="text-[15px] font-semibold text-[#1A1A1A]">Analytics</h3>
-        <button
-          type="button"
-          tabIndex={-1}
+        <span
           aria-hidden
           className="flex items-center gap-1.5 rounded-lg border border-line bg-white px-2.5 py-1.5 text-[11px] font-medium text-[#4A4A4A]"
         >
           Last 7 days
           <ChevronDown width={12} height={12} />
-        </button>
+        </span>
       </div>
 
-      <div className="mt-4 grid grid-cols-4 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-2 md:gap-3 lg:grid-cols-4">
         {METRICS.map((m) => (
-          <div key={m.label} className="rounded-xl bg-tile px-3.5 py-3">
+          <div key={m.label} className="rounded-xl bg-tile px-3 py-2.5 md:px-3.5 md:py-3">
             <p className="text-[9.5px] font-medium uppercase tracking-[0.04em] text-muted">{m.label}</p>
             <p className="mt-1.5 text-[19px] font-semibold tabular-nums leading-none text-[#1A1A1A]">
               {m.value}
@@ -111,22 +109,38 @@ function Sidebar() {
   )
 }
 
-/**
- * Full admin window. `variant="light"` is Concept B's lighter glass treatment.
- * On mobile the sidebar is dropped and only the analytics panel shows (§5).
- */
-export function Dashboard({
-  className = '',
-  showSidebar = true,
-}: {
-  className?: string
-  showSidebar?: boolean
-}) {
+/** Full admin window (desktop). */
+export function Dashboard({ className = '' }: { className?: string }) {
   return (
     <div className={`glass-rim glass-rim-lg ${className}`}>
       <div className="rim-card flex">
-        {showSidebar && <Sidebar />}
+        <Sidebar />
         <AnalyticsPanel />
+      </div>
+    </div>
+  )
+}
+
+/**
+ * §5 mobile — the analytics panel only, no sidebar, clipped to roughly its top
+ * third (metrics row + chart header + the top of the chart) with a fade out of
+ * the bottom edge.
+ */
+export function DashboardMobile({
+  className = '',
+  height = 300,
+}: {
+  className?: string
+  height?: number
+}) {
+  return (
+    <div className={`glass-rim ${className}`}>
+      <div className="rim-card relative overflow-hidden" style={{ height }}>
+        <AnalyticsPanel compactChart />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-white"
+        />
       </div>
     </div>
   )

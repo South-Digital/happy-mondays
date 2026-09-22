@@ -1,12 +1,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { MobileNav } from '../../components/MobileNav'
 import { Nav } from '../../components/Nav'
 import { Photo } from '../../components/Photo'
 import { MockLink } from '../../components/Toast'
 import { ArrowUpRight } from '../../components/icons'
 import { IMG } from '../../lib/assets'
 import { usePrefersReducedMotion } from '../../lib/motion'
-import { Dashboard, NewOrderCard } from '../shared/Dashboard'
+import { Dashboard, DashboardMobile, NewOrderCard } from '../shared/Dashboard'
 import { LogoStrip } from '../shared/LogoStrip'
 import { ProofRow } from '../shared/ProofRow'
 
@@ -53,9 +54,10 @@ export function HeroA() {
           />
         </motion.div>
 
-        <div className="relative z-10 px-5 pb-[max(28px,2.8vw)] pt-7 xl:px-0">
+        <div className="relative z-10 px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0">
           <motion.div {...rise(d(0))}>
             <Nav variant="a" />
+            <MobileNav variant="a" />
           </motion.div>
 
           {/* Headline block */}
@@ -88,7 +90,7 @@ export function HeroA() {
 
           {/* Dashboard settles last — from +32px and 96% scale, over ~900ms (§A4) */}
           <motion.div
-            className="relative mx-auto mt-16 w-[78vw] max-w-[1120px] xl:mt-20"
+            className="relative mx-auto mt-16 hidden w-[78vw] max-w-[1120px] md:block xl:mt-20"
             initial={reduced ? false : { opacity: 0, y: 32, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, ease: EASE, delay: d(0.5) }}
@@ -99,6 +101,25 @@ export function HeroA() {
             <motion.div
               className="absolute -left-[128px] top-[46%] hidden xl:block"
               initial={reduced ? false : { opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}
+            >
+              <NewOrderCard />
+            </motion.div>
+          </motion.div>
+
+          {/* §5 mobile — analytics panel only, clipped to its top third, with the
+              New order card overlapping its bottom-left. */}
+          <motion.div
+            className="relative mx-auto mt-12 w-full max-w-[420px] md:hidden"
+            initial={reduced ? false : { opacity: 0, y: 24, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, ease: EASE, delay: d(0.5) }}
+          >
+            <DashboardMobile height={430} />
+            <motion.div
+              className="absolute bottom-[42px] -left-2 origin-bottom-left scale-[0.82]"
+              initial={reduced ? false : { opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}
             >
@@ -117,7 +138,7 @@ export function HeroA() {
             width={2000}
             height={467}
             priority
-            className="ml-auto block h-auto w-[120%] max-w-none"
+            className="ml-auto block h-auto w-[180%] max-w-none md:w-[120%]"
             fallback="linear-gradient(180deg,rgba(206,195,176,0) 0%,rgba(206,195,176,.55) 34%,#C8BCA4 68%,#B6A88C 100%)"
           />
         </div>

@@ -70,7 +70,7 @@ export function Pillars({ className = '' }: { className?: string }) {
           Three things most Google Ads agencies get wrong. We don't.
         </h2>
 
-        <ul className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <ul className="mt-10 grid gap-8 md:mt-14 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
           {PILLARS.map((p) => (
             <motion.li
               key={p.title}
@@ -81,7 +81,7 @@ export function Pillars({ className = '' }: { className?: string }) {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Hover: the glass rim lifts 4px and the chip drifts 2px (§A4) */}
-              <div className="relative h-[336px] overflow-hidden rounded-[20px] transition-transform duration-200 group-hover:-translate-y-1">
+              <div className="relative h-[300px] overflow-hidden rounded-[20px] transition-transform duration-200 group-hover:-translate-y-1 md:h-[336px]">
                 <Photo
                   src={p.backdrop}
                   alt=""

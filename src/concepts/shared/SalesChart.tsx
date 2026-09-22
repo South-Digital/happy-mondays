@@ -29,7 +29,7 @@ export function SalesChart({ compact = false }: { compact?: boolean }) {
     <div className="ui-font">
       <div className="flex items-center justify-between">
         <p className="text-[13px] font-semibold text-[#1A1A1A]">Total sales over time</p>
-        <div className="flex items-center gap-3.5">
+        <div className="hidden items-center gap-3.5 lg:flex">
           <Legend label="This week" />
           <Legend label="Previous week" dashed />
         </div>

@@ -70,6 +70,23 @@ const TABS: Tab[] = [
 const DEFAULT_TAB = 1 // Shopping is expanded by default (§A3)
 const AUTO_ADVANCE_MS = 6000
 
+function ProgressBar({ active, autoAdvancing }: { active: number; autoAdvancing: boolean }) {
+  return (
+    <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-line">
+      <motion.div
+        key={autoAdvancing ? `auto-${active}` : `static-${active}`}
+        className="h-full rounded-full bg-cobalt"
+        initial={{ width: autoAdvancing ? '0%' : '100%' }}
+        animate={{ width: '100%' }}
+        transition={{
+          duration: autoAdvancing ? AUTO_ADVANCE_MS / 1000 : 0.35,
+          ease: autoAdvancing ? 'linear' : 'easeOut',
+        }}
+      />
+    </div>
+  )
+}
+
 export function SearchShopping({ className = '' }: { className?: string }) {
   const reduced = usePrefersReducedMotion()
   const [active, setActive] = useState(DEFAULT_TAB)
@@ -113,61 +130,67 @@ export function SearchShopping({ className = '' }: { className?: string }) {
         </h2>
 
         <div className="mt-14 grid items-start gap-12 xl:grid-cols-[320px_minmax(0,1fr)]">
-          {/* Tab list */}
+          {/* Tab list — a vertical list on desktop; §5 turns it into a
+              horizontally scrollable row of pills above the panel on mobile,
+              with the active description underneath. */}
           <div
-            role="tablist"
-            aria-label="Google Ads services"
-            aria-orientation="vertical"
-            onKeyDown={onKeyDown}
+            className="min-w-0"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
             onFocus={() => setPaused(true)}
             onBlur={() => setPaused(false)}
-            className="flex flex-col"
           >
-            {TABS.map((tab, i) => {
-              const selected = i === active
-              return (
-                <div key={tab.id} className="border-b border-line last:border-b-0">
-                  <button
-                    ref={(el) => {
-                      tabRefs.current[i] = el
-                    }}
-                    role="tab"
-                    id={`ss-tab-${tab.id}`}
-                    aria-selected={selected}
-                    aria-controls={`ss-panel-${tab.id}`}
-                    tabIndex={selected ? 0 : -1}
-                    onClick={() => select(i)}
-                    className={`w-full py-4 text-left text-[20px] font-medium tracking-[-0.02em] transition-colors ${
-                      selected ? 'text-ink' : 'text-ink-60 hover:text-ink'
-                    }`}
+            <div
+              role="tablist"
+              aria-label="Google Ads services"
+              aria-orientation="vertical"
+              onKeyDown={onKeyDown}
+              className="-mx-5 flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden xl:mx-0 xl:flex-col xl:gap-0 xl:overflow-visible xl:px-0"
+            >
+              {TABS.map((tab, i) => {
+                const selected = i === active
+                return (
+                  <div
+                    key={tab.id}
+                    className="shrink-0 snap-start xl:w-full xl:border-b xl:border-line xl:last:border-b-0"
                   >
-                    {tab.label}
-                  </button>
+                    <button
+                      ref={(el) => {
+                        tabRefs.current[i] = el
+                      }}
+                      role="tab"
+                      id={`ss-tab-${tab.id}`}
+                      aria-selected={selected}
+                      aria-controls={`ss-panel-${tab.id}`}
+                      tabIndex={selected ? 0 : -1}
+                      onClick={() => select(i)}
+                      className={`min-h-[44px] whitespace-nowrap rounded-pill border px-4 text-[15px] font-medium transition-colors xl:w-full xl:rounded-none xl:border-0 xl:px-0 xl:py-4 xl:text-left xl:text-[20px] xl:tracking-[-0.02em] ${
+                        selected
+                          ? 'border-ink bg-ink text-white xl:bg-transparent xl:text-ink'
+                          : 'border-line bg-white text-ink-60 xl:bg-transparent xl:hover:text-ink'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
 
-                  {selected && (
-                    <div className="pb-4">
-                      <p className="max-w-[300px] text-card-desc text-ink-60">{tab.description}</p>
-                      {/* Progress bar — fills while auto-advancing, static once the
-                          user has taken over. */}
-                      <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-line">
-                        <motion.div
-                          key={autoAdvancing ? `auto-${active}` : `static-${active}`}
-                          className="h-full rounded-full bg-cobalt"
-                          initial={{ width: autoAdvancing ? '0%' : '100%' }}
-                          animate={{ width: '100%' }}
-                          transition={{
-                            duration: autoAdvancing ? AUTO_ADVANCE_MS / 1000 : 0.35,
-                            ease: autoAdvancing ? 'linear' : 'easeOut',
-                          }}
-                        />
+                    {/* Desktop keeps the description and progress bar inside the
+                        list, under the active tab. */}
+                    {selected && (
+                      <div className="hidden pb-4 xl:block">
+                        <p className="max-w-[300px] text-card-desc text-ink-60">{tab.description}</p>
+                        <ProgressBar active={active} autoAdvancing={autoAdvancing} />
                       </div>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Mobile: the active description sits under the pill row. */}
+            <div className="mt-5 xl:hidden">
+              <p className="text-card-desc text-ink-60">{current.description}</p>
+              <ProgressBar active={active} autoAdvancing={autoAdvancing} />
+            </div>
           </div>
 
           {/* Panel */}
@@ -176,7 +199,7 @@ export function SearchShopping({ className = '' }: { className?: string }) {
             id={`ss-panel-${current.id}`}
             aria-labelledby={`ss-tab-${current.id}`}
             tabIndex={0}
-            className="relative aspect-[880/648] w-full overflow-hidden rounded-[20px]"
+            className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px] md:aspect-[880/648]"
           >
             <Photo
               src={IMG.panelBackdrop}
@@ -187,7 +210,7 @@ export function SearchShopping({ className = '' }: { className?: string }) {
               fallback="linear-gradient(145deg,#E9F0FB 0%,#F5F2EC 55%,#E6E9F2 100%)"
             />
 
-            <div className="relative grid h-full place-items-center p-10 lg:p-12">
+            <div className="relative grid h-full place-items-center p-5 sm:p-8 lg:p-12">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current.id}

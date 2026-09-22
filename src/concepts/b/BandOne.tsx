@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { usePrefersReducedMotion } from '../../lib/motion'
-import { Dashboard } from '../shared/Dashboard'
+import { Dashboard, DashboardMobile } from '../shared/Dashboard'
 import { ShoppingGraphic } from '../shared/graphics/ShoppingGraphic'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -47,7 +47,9 @@ export function BandOne({ className = '' }: { className?: string }) {
             transition={{ duration: 0.7, ease: EASE }}
             className="relative"
           >
-            <Dashboard className="w-full" />
+            <Dashboard className="hidden w-full md:block" />
+            {/* §5 — analytics panel only on mobile */}
+            <DashboardMobile className="md:hidden" height={380} />
 
             {/* Shopping widget over the lower-right corner */}
             <motion.div
@@ -61,9 +63,10 @@ export function BandOne({ className = '' }: { className?: string }) {
             </motion.div>
           </motion.div>
 
-          {/* Below lg the widget sits under the dashboard rather than over it */}
+          {/* §5 — below lg the widget sits under the dashboard, overlapping its
+              bottom edge by about 40px on mobile. */}
           <motion.div
-            className="mt-8 lg:hidden"
+            className="relative z-10 -mt-10 px-2 md:mt-8 md:px-0 lg:hidden"
             initial={reduced ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}

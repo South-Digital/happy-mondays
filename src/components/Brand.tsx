@@ -7,7 +7,7 @@ import { useState } from 'react'
 export function Wordmark({ className = '', tone = 'ink' }: { className?: string; tone?: 'ink' | 'white' }) {
   return (
     <span
-      className={`select-none text-[17px] font-semibold tracking-[-0.03em] ${
+      className={`flex min-h-[44px] select-none items-center text-[17px] font-semibold tracking-[-0.03em] md:min-h-0 ${
         tone === 'white' ? 'text-white' : 'text-ink'
       } ${className}`}
     >

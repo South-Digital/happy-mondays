@@ -51,6 +51,15 @@ export default {
       maxWidth: {
         content: '1200px',
       },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 28s linear infinite',
+      },
       boxShadow: {
         rim: '0 16px 40px rgba(28,33,48,.12)',
         'rim-lg': '0 24px 56px rgba(28,33,48,.12)',

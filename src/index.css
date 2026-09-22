@@ -161,7 +161,7 @@
 
   /* Section tagline — DM Mono, uppercase */
   .tagline {
-    @apply font-mono uppercase text-tagline;
+    @apply font-mono uppercase text-tagline-m md:text-tagline;
     color: rgba(34, 32, 28, 0.55);
   }
 
