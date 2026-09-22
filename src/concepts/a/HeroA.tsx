@@ -82,8 +82,8 @@ export function HeroA() {
 
             <motion.div className="mt-8" {...rise(d(0.32))}>
               <MockLink className="btn-liquid">
-                Book a call
-                <ArrowUpRight width={15} height={15} />
+                <span>Book a call</span>
+                <ArrowUpRight width={16} height={16} />
               </MockLink>
             </motion.div>
           </div>
@@ -154,8 +154,8 @@ export function HeroA() {
       <div className="bg-white pb-20 pt-16">
         <div className="content-grid">
           <ProofRow />
-          <LogoStrip className="mt-16" />
         </div>
+        <LogoStrip className="mt-14" />
       </div>
     </section>
   )

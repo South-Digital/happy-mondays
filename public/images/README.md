@@ -23,8 +23,14 @@ bad path degrades rather than leaving a hole.
 | `logo-hm` | `2171:569` | 313×71 | Happy Mondays wordmark |
 | `logo-*` ×8 | `2171:660`–`674` | 327×144 | Client logos |
 
-Not delivered, still a CSS fallback: `video-thumb` (the weekly-Loom thumbnail in
-pillar 3). It is not part of §8.
+Not delivered, still a fallback:
+
+- `video-thumb` — the weekly-Loom thumbnail in pillar 3. Not part of §8.
+- `icon-shopify.png` (16×19, node `2171:648`) and `icon-google-ads.svg` (18×18,
+  node `2171:651`) — the proof-row partner icons. The Figma asset CDN is blocked
+  by this environment's egress policy, so they could not be exported here. The
+  slots are wired: drop the two files in at those paths and they replace the
+  placeholder marks with no code change.
 
 ## Two things to know about the exports
 
@@ -38,6 +44,13 @@ alpha is 128), so the strip must not apply a further `opacity-50` or they drop t
 25% and all but vanish. They also vary in density between files, so `LogoStrip`
 flattens each to a silhouette with `grayscale(1) brightness(0)` to get the single
 flat grey §A1 asks for.
+
+**Each logo export is a whole list cell, not a cropped mark** — 163.25 × 72 at 1x
+(327 × 144 at 2x), with the mark already positioned and sized inside it. So the
+marks come out at their drawn sizes (~32px tall, ~16px for the wider At Present
+and Go Flower marks) simply by rendering each cell at full width in an eight-column
+row with a 10px gutter, which is the 1376px strip from the frame. Setting a
+uniform height on the images instead renders every mark at the wrong scale.
 
 ## A note on the rooftop cut-out
 

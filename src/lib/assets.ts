@@ -38,6 +38,17 @@ export const IMG = {
   wordmark: '/images/logo-hm.webp',
 
   /**
+   * Proof-row partner icons, from the Figma proof row (2171:646).
+   * NOT YET DELIVERED — the Figma asset CDN is blocked by this environment's
+   * egress policy, so they could not be exported here. Drop the two files in at
+   * these paths and they replace the placeholder marks with no code change:
+   *   icon-shopify      node 2171:648, shopify.png, 16×19
+   *   icon-google-ads   node 2171:651, google-ads-icon.svg, 18×18
+   */
+  shopifyPartner: '/images/icon-shopify.png',
+  googleAdsPartner: '/images/icon-google-ads.svg',
+
+  /**
    * Weekly-Loom thumbnail (pillar 3). Not part of §8 and not delivered — this
    * one still renders as a CSS fallback.
    */

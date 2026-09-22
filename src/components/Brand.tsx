@@ -53,7 +53,7 @@ export function BrandLogo({ name, src }: { name: string; src: string }) {
       alt={name}
       width={327}
       height={144}
-      className="h-11 w-auto object-contain"
+      className="block h-auto w-full"
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}

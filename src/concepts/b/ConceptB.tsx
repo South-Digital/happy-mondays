@@ -14,10 +14,7 @@ export default function ConceptB() {
         {/* §B2 */}
         <BandOne className="pt-24 xl:pt-32" />
         {/* §B3 */}
-        <LogoStrip
-          label="Growing Shopify brands we work with"
-          className="pt-36 xl:pt-44"
-        />
+        <LogoStrip label="Growing Shopify brands we work with" className="pt-36 xl:pt-44" />
         {/* §B4 */}
         <Pillars className="py-24 xl:py-32" />
       </main>

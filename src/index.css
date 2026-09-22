@@ -76,26 +76,31 @@
     border-radius: 18px;
   }
 
-  /* Liquid-glass pill button — Concept A (nav + hero CTA) */
+  /* Liquid-glass pill button — Concept A (nav + hero CTA).
+     Transcribed from the Figma component (hero 2171:635, nav 2171:622):
+     white 37% fill over a 3.8px backdrop blur, a 1px white top/left edge, and
+     the five stacked inset shadows that give the soft raised edge.
+
+     Figma also stacks a color-burn and a plus-lighter layer under the fill.
+     Those cannot be reproduced as elements here: the button sits inside a
+     transformed (animated) ancestor, which is an isolating stacking context, so
+     mix-blend-mode would blend against transparent black rather than the
+     photograph and the pill renders as a grey blob. Over a light backdrop the
+     two layers very nearly cancel — burn darkens ~10%, plus-lighter adds ~11% —
+     so omitting them matches the rendered result. */
   .btn-liquid {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 24px;
     border-radius: 999px;
-    padding: 14px 24px;
+    border: 0;
     background: rgba(255, 255, 255, 0.37);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid transparent;
-    background-clip: padding-box;
-    box-shadow:
-      inset 0 0 33px rgba(242, 242, 242, 0.5),
-      inset -3px -4.5px 1.5px -3px #b3b3b3,
-      inset 3px 4.5px 1.5px -3px rgba(179, 179, 179, 0.2),
-      inset 4.5px 4.5px 1.5px -5px rgba(255, 255, 255, 0.5),
-      inset -4.5px -4.5px 1.5px -5px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(3.8px);
+    -webkit-backdrop-filter: blur(3.8px);
     color: #000;
     font-weight: 600;
     font-size: 15px;
@@ -105,30 +110,46 @@
       transform 200ms ease-out,
       background 200ms ease-out;
   }
-  /* 1px gradient border (white → transparent) via a masked ::before */
+
+  /* 1px white edge on the top and left, as drawn */
   .btn-liquid::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(140deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
     pointer-events: none;
   }
+
+  /* The five stacked inset shadows */
+  .btn-liquid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset -4.5px -4.5px 1.5px -5.25px rgba(255, 255, 255, 0.5),
+      inset 4.5px 4.5px 1.5px -5.25px rgba(255, 255, 255, 0.5),
+      inset 3px 4.5px 1.5px -3px rgba(179, 179, 179, 0.2),
+      inset -3px -4.5px 1.5px -3px #b3b3b3,
+      inset 0 0 33px 0 rgba(242, 242, 242, 0.5);
+  }
+
+  .btn-liquid > * {
+    position: relative;
+  }
+
   .btn-liquid:hover {
-    background: rgba(255, 255, 255, 0.52);
+    background: rgba(255, 255, 255, 0.5);
     transform: translateY(-1px);
   }
+
+  /* Nav variant — 42px tall, 18px sides (2171:622) */
   .btn-liquid-sm {
-    padding: 12px 18px;
+    min-height: 42px;
+    padding: 0 18px;
     font-size: 13px;
   }
 

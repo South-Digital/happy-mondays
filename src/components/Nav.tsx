@@ -47,7 +47,9 @@ export function Nav({ variant }: { variant: 'a' | 'b' }) {
               </li>
             ))}
           </ul>
-          <MockLink className="btn-liquid btn-liquid-sm">Book a call</MockLink>
+          <MockLink className="btn-liquid btn-liquid-sm">
+            <span>Book a call</span>
+          </MockLink>
         </div>
       </div>
     </nav>

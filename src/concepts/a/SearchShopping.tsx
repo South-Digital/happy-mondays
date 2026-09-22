@@ -70,12 +70,24 @@ const TABS: Tab[] = [
 const DEFAULT_TAB = 1 // Shopping is expanded by default (§A3)
 const AUTO_ADVANCE_MS = 6000
 
-function ProgressBar({ active, autoAdvancing }: { active: number; autoAdvancing: boolean }) {
+/**
+ * The active tab's progress reads as the divider line beneath it filling up:
+ * 1px tall, full column width, cobalt, sitting on the divider itself.
+ */
+function ProgressBar({
+  active,
+  autoAdvancing,
+  className = '',
+}: {
+  active: number
+  autoAdvancing: boolean
+  className?: string
+}) {
   return (
-    <div className="mt-4 h-[3px] w-full overflow-hidden rounded-full bg-line">
+    <div className={`h-px w-full overflow-hidden bg-transparent ${className}`}>
       <motion.div
         key={autoAdvancing ? `auto-${active}` : `static-${active}`}
-        className="h-full rounded-full bg-cobalt"
+        className="h-full bg-cobalt"
         initial={{ width: autoAdvancing ? '0%' : '100%' }}
         animate={{ width: '100%' }}
         transition={{
@@ -152,7 +164,7 @@ export function SearchShopping({ className = '' }: { className?: string }) {
                 return (
                   <div
                     key={tab.id}
-                    className="shrink-0 snap-start xl:w-full xl:border-b xl:border-line xl:last:border-b-0"
+                    className="relative shrink-0 snap-start xl:w-full xl:border-b xl:border-line xl:last:border-b-0"
                   >
                     <button
                       ref={(el) => {
@@ -176,10 +188,18 @@ export function SearchShopping({ className = '' }: { className?: string }) {
                     {/* Desktop keeps the description and progress bar inside the
                         list, under the active tab. */}
                     {selected && (
-                      <div className="hidden pb-4 xl:block">
-                        <p className="max-w-[300px] text-card-desc text-ink-60">{tab.description}</p>
-                        <ProgressBar active={active} autoAdvancing={autoAdvancing} />
-                      </div>
+                      <>
+                        <div className="hidden pb-5 xl:block">
+                          <p className="max-w-[300px] text-card-desc text-ink-60">
+                            {tab.description}
+                          </p>
+                        </div>
+                        <ProgressBar
+                          active={active}
+                          autoAdvancing={autoAdvancing}
+                          className="absolute inset-x-0 -bottom-px hidden xl:block"
+                        />
+                      </>
                     )}
                   </div>
                 )
@@ -189,7 +209,9 @@ export function SearchShopping({ className = '' }: { className?: string }) {
             {/* Mobile: the active description sits under the pill row. */}
             <div className="mt-5 xl:hidden">
               <p className="text-card-desc text-ink-60">{current.description}</p>
-              <ProgressBar active={active} autoAdvancing={autoAdvancing} />
+              <div className="mt-4 h-px w-full bg-line">
+                <ProgressBar active={active} autoAdvancing={autoAdvancing} />
+              </div>
             </div>
           </div>
 
