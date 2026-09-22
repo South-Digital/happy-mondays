@@ -1,9 +1,13 @@
 # Image assets
 
-The exports listed in §8 of the build spec are **not committed to this repo**. This
-session could not fetch them: the Figma MCP resolves the nodes, but the Figma asset
-CDN (`www.figma.com`) is blocked by the environment's egress policy, so the files
-could not be downloaded here.
+Three exports have been delivered and are wired in: the Concept A hero background
+and rooftop foreground, and the Concept B hero photo. Each is committed both as the
+supplied PNG (source of record) and as the WebP the app actually serves; the
+foreground's alpha channel is preserved in both.
+
+The remaining exports listed in §8 are **not in this repo yet**. The Figma MCP
+resolves the nodes, but the Figma asset CDN (`www.figma.com`) is blocked by the
+environment's egress policy, so they could not be downloaded here.
 
 Every consumer degrades gracefully — `<Photo>` (src/components/Photo.tsx) falls back
 to a tuned CSS gradient when a file is missing, so layout, spacing and intrinsic
@@ -12,11 +16,21 @@ and they go live with no code change.**
 
 All at **2x, WebP** unless noted.
 
+### A note on the rooftop cut-out
+
+`a-foreground.webp` is only fully opaque across its whole width from **81% down**;
+higher up, coverage drops to ~73% because the far-left terrace sits low in frame.
+Concept A's hero relies on this: the dashboard is held at a constant 78vw and the
+scene's bottom padding is set in `vw`, so the dashboard's bottom edge always lands
+at ~90% down the rooftop — below the opaque line at every width. Changing either
+value risks exposing the dashboard's lower edge. `.dev/verify-overlap.mjs` checks
+this against the image's real alpha channel.
+
 | File | Figma node | Notes |
 |---|---|---|
-| `a-hero-bg.webp` | `2171:556` | Concept A hero background (Zac's Magnific image) |
-| `a-hero-foreground.webp` | `2171:561` | Rooftop cut-out — **alpha required** |
-| `b-hero.webp` | `2171:677` | Concept B hero photo (Santorini) |
+| `a-hero-bg.webp` | `2171:556` | **Delivered.** 2000×1786. Concept A hero background |
+| `a-foreground.webp` | `2171:561` | **Delivered.** 2000×467, alpha intact. Rooftop cut-out |
+| `b-hero.webp` | `2171:677` | **Delivered.** 2000×1667. Concept B hero photo |
 | `pillar-1-backdrop.webp` | `2171:313` | Backdrop layer only (hide graphics before export) |
 | `pillar-2-backdrop.webp` | `2171:374` | As above |
 | `pillar-3-backdrop.webp` | `2171:437` | As above |

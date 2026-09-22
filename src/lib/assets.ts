@@ -10,7 +10,7 @@ export const IMG = {
   /** A hero background — Zac's Magnific image, node 2171:556 */
   aHeroBg: '/images/a-hero-bg.webp',
   /** A foreground rooftop cut-out — node 2171:561, alpha required */
-  aHeroFg: '/images/a-hero-foreground.webp',
+  aHeroFg: '/images/a-foreground.webp',
   /** B hero photo (Santorini) — node 2171:677 */
   bHero: '/images/b-hero.webp',
   /** Pillar card backdrops — nodes 2171:313 / 374 / 437 */

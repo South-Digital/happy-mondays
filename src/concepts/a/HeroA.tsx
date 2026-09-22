@@ -45,15 +45,15 @@ export function HeroA() {
           <Photo
             src={IMG.aHeroBg}
             alt=""
-            width={2880}
-            height={2572}
+            width={2000}
+            height={1786}
             priority
             className="h-[115%] w-full object-cover object-top"
             fallback="linear-gradient(180deg,#C6DAF0 0%,#DDE6EC 38%,#E9E4D9 72%,#DED4C2 100%)"
           />
         </motion.div>
 
-        <div className="relative z-10 px-5 pb-[180px] pt-7 xl:px-0">
+        <div className="relative z-10 px-5 pb-[max(28px,2.8vw)] pt-7 xl:px-0">
           <motion.div {...rise(d(0))}>
             <Nav variant="a" />
           </motion.div>
@@ -88,7 +88,7 @@ export function HeroA() {
 
           {/* Dashboard settles last — from +32px and 96% scale, over ~900ms (§A4) */}
           <motion.div
-            className="relative mx-auto mt-16 w-full max-w-[1120px] xl:mt-20"
+            className="relative mx-auto mt-16 w-[78vw] max-w-[1120px] xl:mt-20"
             initial={reduced ? false : { opacity: 0, y: 32, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, ease: EASE, delay: d(0.5) }}
@@ -97,7 +97,7 @@ export function HeroA() {
 
             {/* Breaks the frame on the dashboard's left edge; lands 200ms later */}
             <motion.div
-              className="absolute -left-[128px] top-[46%] hidden lg:block"
+              className="absolute -left-[128px] top-[46%] hidden xl:block"
               initial={reduced ? false : { opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}
@@ -110,14 +110,14 @@ export function HeroA() {
         {/* Foreground rooftop — full-bleed, above the dashboard and overlapping its
             lower half, so the dashboard reads as inside the scene. Locked to the
             dashboard (no parallax). */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-[460px]">
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 z-20 overflow-hidden">
           <Photo
             src={IMG.aHeroFg}
             alt=""
-            width={2880}
-            height={920}
+            width={2000}
+            height={467}
             priority
-            className="h-full w-full object-cover object-bottom"
+            className="ml-auto block h-auto w-[120%] max-w-none"
             fallback="linear-gradient(180deg,rgba(206,195,176,0) 0%,rgba(206,195,176,.55) 34%,#C8BCA4 68%,#B6A88C 100%)"
           />
         </div>
