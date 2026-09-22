@@ -30,8 +30,11 @@ dev and preview servers in `vite.config.ts`), and `public/robots.txt`.
 
 ## Assets
 
-The Figma exports are not committed yet — see `public/images/README.md` for the
-filenames and node IDs. The UI renders with CSS fallbacks until they are added.
+The two Concept A hero layers and the Concept B hero photo are committed, as the
+source PNG and the WebP the app serves. The remaining §8 exports (pillar backdrops,
+the tab panel backdrop, product shots and the logo SVGs) are not in yet; the UI
+renders them as CSS fallbacks until they are added. See `public/images/README.md`
+for the exact filenames and node IDs.
 
 ## Deployment
 
