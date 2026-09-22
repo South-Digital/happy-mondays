@@ -62,7 +62,7 @@ export function HeroA() {
 
           {/* Headline block */}
           <div className="mx-auto mt-16 flex w-full max-w-content flex-col items-center text-center xl:mt-24">
-            <h1 className="text-hero-m md:text-hero">
+            <h1 className="text-hero-m md:text-hero-t xl:text-hero">
               <motion.span className="block" {...rise(d(0.08))}>
                 Open Shopify.
               </motion.span>

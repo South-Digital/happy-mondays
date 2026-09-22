@@ -58,9 +58,12 @@ export function AnalyticsPanel({ compactChart = false }: { compactChart?: boolea
         </span>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2 md:gap-3 lg:grid-cols-4">
+      <div className="mt-4 grid grid-cols-2 gap-2 [grid-template-rows:auto_auto_auto] md:gap-3 lg:grid-cols-4">
         {METRICS.map((m) => (
-          <div key={m.label} className="rounded-xl bg-tile px-3 py-2.5 md:px-3.5 md:py-3">
+          <div
+            key={m.label}
+            className="grid rounded-xl bg-tile px-3 py-2.5 [grid-row:span_3] [grid-template-rows:subgrid] md:px-3.5 md:py-3"
+          >
             <p className="text-[9.5px] font-medium uppercase tracking-[0.04em] text-muted">{m.label}</p>
             <p className="mt-1.5 text-[19px] font-semibold tabular-nums leading-none text-[#1A1A1A]">
               {m.value}

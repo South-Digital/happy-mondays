@@ -18,7 +18,7 @@ export function BandOne({ className = '' }: { className?: string }) {
   const reduced = usePrefersReducedMotion()
 
   return (
-    <section className={className}>
+    <section className={`overflow-x-clip ${className}`}>
       <div className="content-grid">
         <h2 className="max-w-[760px] text-section-m md:text-section">
           Every sale, traced back to the search.

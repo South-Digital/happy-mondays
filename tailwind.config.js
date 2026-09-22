@@ -27,6 +27,17 @@ export default {
       fontSize: {
         // Desktop
         hero: ['80px', { lineHeight: '80px', letterSpacing: '-4.4px', fontWeight: '500' }],
+        // Tablet: 56px at 768 rising to 80px at 1280, where `hero` takes over.
+        'hero-t': [
+          'clamp(56px, 4.6875vw + 20px, 80px)',
+          {
+            lineHeight: '1',
+            // Tracks with the size so it meets the desktop -4.4px at 1280
+            // without a step: -2.52px at 768 to -4.4px at 1280.
+            letterSpacing: 'clamp(-4.4px, calc(0.3px - 0.367vw), -2.52px)',
+            fontWeight: '500',
+          },
+        ],
         subline: ['18px', { lineHeight: '28.8px' }],
         section: ['56px', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '500' }],
         tagline: ['13px', { lineHeight: '1.2', letterSpacing: '0.08em', fontWeight: '500' }],

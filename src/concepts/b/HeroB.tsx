@@ -100,7 +100,7 @@ export function HeroB() {
 
         {/* Text block, left-aligned at the 120px content edge */}
         <div className="mx-auto mt-auto flex w-full max-w-content flex-col justify-end pb-2 md:mt-24 md:flex-1 md:justify-center md:pb-0 xl:mt-0">
-          <h1 className="text-hero-m md:text-hero">
+          <h1 className="text-hero-m md:text-hero-t xl:text-hero">
             <motion.span className="block text-white" {...rise(d(0.08))}>
               Open Shopify.
             </motion.span>
