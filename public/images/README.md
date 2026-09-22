@@ -23,14 +23,31 @@ bad path degrades rather than leaving a hole.
 | `logo-hm` | `2171:569` | 313×71 | Happy Mondays wordmark |
 | `logo-*` ×8 | `2171:660`–`674` | 327×144 | Client logos |
 
-Not delivered, still a fallback:
+| `icon-shopify` | `2171:648` | 32×36 | Shopify mark, proof row |
+| `icon-google-ads` | `2171:651` | 18×18 SVG | Google Ads mark, proof row |
+| `partner-*-lockup` | `2171:647/650` | 234×44, 142×22 | Delivered lockups, kept as source |
 
-- `video-thumb` — the weekly-Loom thumbnail in pillar 3. Not part of §8.
-- `icon-shopify.png` (16×19, node `2171:648`) and `icon-google-ads.svg` (18×18,
-  node `2171:651`) — the proof-row partner icons. The Figma asset CDN is blocked
-  by this environment's egress policy, so they could not be exported here. The
-  slots are wired: drop the two files in at those paths and they replace the
-  placeholder marks with no code change.
+Not delivered, still a fallback: `video-thumb`, the weekly-Loom thumbnail in
+pillar 3. It is not part of §8.
+
+## The partner marks
+
+The two partner assets arrived as **icon + label lockups** (the Figma
+*Containers*, `2171:647` and `2171:650`) rather than the bare icons — the words
+"Shopify Partner" and "Google Ads Partner" are baked into the artwork. Using them
+whole would have printed each label twice, once from the image and once from the
+row's own markup, and would have replaced the row's Manrope with whatever type
+the lockups carry.
+
+So the marks are cropped out and the labels stay as markup:
+
+- `icon-shopify.png` — the first 40px of the 234×44 lockup, trimmed to the mark
+  (32×36; the frame draws it at 16×19).
+- `icon-google-ads.svg` — the lockup's viewBox narrowed to `0 2 18 18`, which
+  crops to the mark losslessly without touching the paths.
+
+The delivered lockups are kept as `partner-shopify-lockup.png` and
+`partner-google-ads-lockup.svg` in case the full badge is wanted somewhere.
 
 ## Two things to know about the exports
 
