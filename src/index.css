@@ -1,0 +1,277 @@
+/**
+ * Metrics-matched fallback for Manrope. Measured against Arial at 100px, the
+ * same string renders 2.86% wider in Manrope, so the fallback is scaled to match
+ * and the swap no longer moves anything — the nav row and the hero headline were
+ * shifting on font load (CLS 0.058 on Concept B at 1440, cold cache).
+ */
+@font-face {
+  font-family: 'Manrope Fallback';
+  src: local('Arial');
+  size-adjust: 102.9%;
+  ascent-override: 100%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* The motion system's easing family — mirrors src/lib/motion.ts */
+    --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --ink: #22201c;
+    --muted: #807b73;
+    --offwhite: #faf9f6;
+    --cobalt: #2563eb;
+    --tile: #f3f2ee;
+    --line: #eceae6;
+    --soft-blue: #ecf2fe;
+    --pos: #288c48;
+    --pos-bg: #eaf6ed;
+    --pos-border: #d0e8d6;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--cobalt);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* ---- §2 Glass recipes ---- */
+
+  /* Glass rim — wraps every product-shot card */
+  .glass-rim {
+    padding: 7px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.36);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 16px 40px rgba(28, 33, 48, 0.12);
+  }
+  .glass-rim > .rim-card {
+    border-radius: 18px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  /* Large panel variant: 8px padding, 30/22 radii, deeper shadow */
+  .glass-rim-lg {
+    padding: 8px;
+    border-radius: 30px;
+    box-shadow: 0 24px 56px rgba(28, 33, 48, 0.12);
+  }
+  .glass-rim-lg > .rim-card {
+    border-radius: 22px;
+  }
+
+  /* Floating chip — overlaps a card edge */
+  .glass-chip {
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 30px rgba(28, 33, 48, 0.12);
+  }
+  .glass-chip-lg {
+    border-radius: 18px;
+  }
+
+  /* Liquid-glass pill button — Concept A (nav + hero CTA).
+     Transcribed from the Figma component (hero 2171:635, nav 2171:622):
+     white 37% fill over a 3.8px backdrop blur, a 1px white top/left edge, and
+     the five stacked inset shadows that give the soft raised edge.
+
+     Figma also stacks a color-burn and a plus-lighter layer under the fill.
+     Those cannot be reproduced as elements here: the button sits inside a
+     transformed (animated) ancestor, which is an isolating stacking context, so
+     mix-blend-mode would blend against transparent black rather than the
+     photograph and the pill renders as a grey blob. Over a light backdrop the
+     two layers very nearly cancel — burn darkens ~10%, plus-lighter adds ~11% —
+     so omitting them matches the rendered result. */
+  .btn-liquid {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: 999px;
+    border: 0;
+    background: rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur(3.8px);
+    -webkit-backdrop-filter: blur(3.8px);
+    color: #000;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
+    /* 150ms micro-interaction. Background is a paint-only change, not layout —
+       the brief asks for a slight fill brightening on hover. */
+    transition:
+      transform 150ms var(--ease-state),
+      background-color 150ms var(--ease-state);
+  }
+
+  /* 1px white edge on the top and left, as drawn */
+  .btn-liquid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    pointer-events: none;
+  }
+
+  /* The five stacked inset shadows */
+  .btn-liquid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset -4.5px -4.5px 1.5px -5.25px rgba(255, 255, 255, 0.5),
+      inset 4.5px 4.5px 1.5px -5.25px rgba(255, 255, 255, 0.5),
+      inset 3px 4.5px 1.5px -3px rgba(179, 179, 179, 0.2),
+      inset -3px -4.5px 1.5px -3px #b3b3b3,
+      inset 0 0 33px 0 rgba(242, 242, 242, 0.5);
+  }
+
+  .btn-liquid > * {
+    position: relative;
+  }
+
+  .btn-liquid:hover {
+    background: rgba(255, 255, 255, 0.46);
+    transform: translateY(-1px);
+  }
+  /* Pressed returns to rest faster than it left */
+  .btn-liquid:active {
+    transform: translateY(0);
+    transition-duration: 100ms;
+  }
+
+  /* Nav variant — 42px tall, 18px sides (2171:622) */
+  .btn-liquid-sm {
+    min-height: 42px;
+    padding: 0 18px;
+    font-size: 13px;
+  }
+
+  /* Solid pill button — Concept B */
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 999px;
+    background: var(--cobalt);
+    color: #fff;
+    /* 14px padding either side of a 15px line box gives 43px — one pixel under
+       the 44px touch target §5 requires. */
+    min-height: 44px;
+    padding: 14px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      transform 150ms var(--ease-state),
+      background-color 150ms var(--ease-state);
+  }
+  .btn-solid:hover {
+    background: #3b74ee;
+    transform: translateY(-1px);
+  }
+  .btn-solid:active {
+    transform: translateY(0);
+    transition-duration: 100ms;
+  }
+  .btn-solid-sm {
+    padding: 11px 18px;
+    font-size: 13px;
+  }
+
+  /* Nav link — the underline wipes in from the left, 150ms */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 150ms var(--ease-state);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Section tagline — DM Mono, uppercase */
+  .tagline {
+    @apply font-mono uppercase text-tagline-m md:text-tagline;
+    color: rgba(34, 32, 28, 0.55);
+  }
+
+  /* Dashboard UI uses Inter to stay faithful to Shopify */
+  .ui-font {
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      sans-serif;
+  }
+}
+
+@layer utilities {
+  .content-grid {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 1280px) {
+    .content-grid {
+      padding-inline: 0;
+    }
+  }
+}
+
+/* §6 — motion safety. Reduced motion renders the final state, no transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

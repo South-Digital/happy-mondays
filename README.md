@@ -1,1 +1,69 @@
-# happy-mondays
+# Happy Mondays — interactive prototypes
+
+Two client-review prototypes of the new homepage, built to
+`Happy Mondays Illustrations.md` (the build spec).
+
+- `/` — index, links to both concepts
+- `/concept-a` — **Landscape with depth** (preferred direction)
+- `/concept-b` — **Nature first**
+
+These are **not** production builds: no CMS, no backend, no form submission or data
+capture. Links are mocked and all campaign/dashboard numbers are illustrative — see
+§7 of the spec.
+
+## Stack
+
+Vite · React · TypeScript · Tailwind CSS · Framer Motion · React Router.
+
+```bash
+npm install
+npm run dev      # dev server
+npm run build    # typecheck + production build
+npm run preview  # serve the build
+```
+
+## Search indexing
+
+Kept out of search three ways: `<meta name="robots" content="noindex, nofollow">` in
+`index.html`, an `X-Robots-Tag` header on `/(.*)` via `vercel.json` (mirrored on the
+dev and preview servers in `vite.config.ts`), and `public/robots.txt`.
+
+## Assets
+
+All §8 exports are committed and wired in, plus the Shopify window as three
+images — each as the supplied PNG and as the WebP the app serves. The only CSS
+fallback left is the pillar-3 video thumbnail, which is not part of §8.
+
+The window is the Figma export rather than the HTML recreation; that recreation
+is kept in the repo behind `USE_HTML_DASHBOARD` in `src/lib/flags.ts`. See
+`public/images/README.md` for filenames, node IDs and two notes about the
+exports themselves.
+
+## Motion
+
+Every animation on both concepts is defined in `src/lib/motion.ts`: one easing
+family (`cubic-bezier(0.22, 1, 0.36, 1)` for entrances, `cubic-bezier(0.4, 0, 0.2, 1)`
+for state changes), durations grouped as micro / entrance / ambient, a 70ms
+stagger, and a 20%-visible viewport for scroll reveals that fire once. Only
+transform and opacity animate.
+
+Under `prefers-reduced-motion` everything renders in its final state: no drift,
+no parallax, the chart fully drawn, count-ups at their final values, and tab
+switches instant.
+
+## Deployment
+
+Vercel project: [happy-mondays](https://vercel.com/zac-santers-projects/happy-mondays).
+
+The repository is connected through Vercel's native GitHub integration:
+
+- Pushes to `claude/dreamy-goodall-19ek6p` automatically build and deploy to Production.
+- Pushes to other branches and pull requests receive Preview deployments.
+- Installation uses `npm ci`; `npm run build` typechecks and builds Vite into `dist`.
+- A failed build does not replace the current live deployment. Check the Vercel deployment logs or GitHub checks for failures.
+
+Before pushing, run `npm ci && npm run build`. No GitHub Actions workflow or repository deployment secrets are required.
+
+The app currently lives on the branch above; `main` contains only the initial documentation. When the app is merged into `main`, change **Settings → Environments → Production → Branch Tracking** in Vercel to `main`.
+
+For a rollback, open the Vercel project's Deployments page and promote a previous successful deployment. Revert the offending commit in GitHub too, so subsequent deployments preserve the fix.
