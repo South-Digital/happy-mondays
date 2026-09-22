@@ -5,3 +5,6 @@ dist
 .DS_Store
 
 *.tsbuildinfo
+
+# local QA scripts (playwright), not part of the prototype
+.dev
