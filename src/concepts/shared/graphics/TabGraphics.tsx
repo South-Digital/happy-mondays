@@ -105,8 +105,8 @@ export function PmaxGraphic() {
         <Photo
           src={IMG.productJuliet}
           alt=""
-          width={96}
-          height={96}
+          width={358}
+          height={247}
           className="h-10 w-10 rounded-lg object-cover"
           fallback="linear-gradient(150deg,#F6E9D8,#E3CDB0)"
         />
@@ -151,8 +151,8 @@ export function YouTubeGraphic() {
             <Photo
               src={IMG.productJuliet}
               alt=""
-              width={96}
-              height={96}
+              width={358}
+              height={247}
               className="h-11 w-11 rounded-lg object-cover"
               fallback="linear-gradient(150deg,#F6E9D8,#E3CDB0)"
             />

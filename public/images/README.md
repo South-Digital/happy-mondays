@@ -1,22 +1,45 @@
 # Image assets
 
-Three exports have been delivered and are wired in: the Concept A hero background
-and rooftop foreground, and the Concept B hero photo. Each is committed both as the
-supplied PNG (source of record) and as the WebP the app actually serves; the
-foreground's alpha channel is preserved in both.
+Every §8 export has been delivered and is wired in, plus the Shopify window as
+three images. Each is committed both as the supplied PNG (source of record) and
+as the WebP the app serves; alpha is preserved where the export has it.
 
-The remaining exports listed in §8 are **not in this repo yet**. The Figma MCP
-resolves the nodes, but the Figma asset CDN (`www.figma.com`) is blocked by the
-environment's egress policy, so they could not be downloaded here.
+`<Photo>` still falls back to a tuned CSS gradient if a file goes missing, so a
+bad path degrades rather than leaving a hole.
 
-Every consumer degrades gracefully — `<Photo>` (src/components/Photo.tsx) falls back
-to a tuned CSS gradient when a file is missing, so layout, spacing and intrinsic
-sizes are correct without them. **Drop the real exports in at these exact filenames
-and they go live with no code change.**
+| File | Figma node | Size | Notes |
+|---|---|---|---|
+| `a-hero-bg` | `2171:556` | 2000×1786 | Concept A hero background |
+| `a-foreground` | `2171:561` | 2000×467, alpha | Rooftop cut-out |
+| `b-hero` | `2171:677` | 2000×1667 | Concept B hero photo |
+| `dash-sidebar` | — | 440×1318 (220×659 @2x) | Shopify sidebar |
+| `dash-panel` | — | 1816×1230 (908×615 @2x) | Analytics panel |
+| `dash-neworder` | — | 836×228 (418×114 @2x) | "New order" card |
+| `pillar-bg-1/2/3` | `2171:313/374/437` | 768×672 (384×336 @2x) | Pillar backdrops |
+| `panel-bg` | `2171:513` | 1760×1296 (880×648 @2x) | Search & shopping backdrop |
+| `product-juliet` | `2171:531` | 358×247 | Lucky Honey product photo |
+| `product-checkered` | `2171:537` | 358×247 | Lucky Honey product photo |
+| `product-crewstripe` | `2171:543` | 358×247 | Lucky Honey product photo |
+| `logo-hm` | `2171:569` | 313×71 | Happy Mondays wordmark |
+| `logo-*` ×8 | `2171:660`–`674` | 327×144 | Client logos |
 
-All at **2x, WebP** unless noted.
+Not delivered, still a CSS fallback: `video-thumb` (the weekly-Loom thumbnail in
+pillar 3). It is not part of §8.
 
-### A note on the rooftop cut-out
+## Two things to know about the exports
+
+**`product-juliet.png` and `product-crewstripe.png` are byte-identical** (same
+MD5), so two of the three Shopping results show the same photograph. Replacing
+`product-crewstripe.png` with the real Crew Stripe shot fixes it with no code
+change.
+
+**The client logos already carry their ~50% grey in the alpha channel** (max
+alpha is 128), so the strip must not apply a further `opacity-50` or they drop to
+25% and all but vanish. They also vary in density between files, so `LogoStrip`
+flattens each to a silhouette with `grayscale(1) brightness(0)` to get the single
+flat grey §A1 asks for.
+
+## A note on the rooftop cut-out
 
 `a-foreground.webp` is only fully opaque across its whole width from **81% down**;
 higher up, coverage drops to ~73% because the far-left terrace sits low in frame.
@@ -26,26 +49,14 @@ at ~90% down the rooftop — below the opaque line at every width. Changing eith
 value risks exposing the dashboard's lower edge. `.dev/verify-overlap.mjs` checks
 this against the image's real alpha channel.
 
-| File | Figma node | Notes |
-|---|---|---|
-| `a-hero-bg.webp` | `2171:556` | **Delivered.** 2000×1786. Concept A hero background |
-| `a-foreground.webp` | `2171:561` | **Delivered.** 2000×467, alpha intact. Rooftop cut-out |
-| `b-hero.webp` | `2171:677` | **Delivered.** 2000×1667. Concept B hero photo |
-| `pillar-1-backdrop.webp` | `2171:313` | Backdrop layer only (hide graphics before export) |
-| `pillar-2-backdrop.webp` | `2171:374` | As above |
-| `pillar-3-backdrop.webp` | `2171:437` | As above |
-| `panel-backdrop.webp` | `2171:513` | Search & shopping panel backdrop |
-| `product-juliet-grip-sock.webp` | `2171:531` | Lucky Honey product photo |
-| `product-checkered-crew-grip-sock.webp` | `2171:537` | Lucky Honey product photo |
-| `product-crew-stripe-grip-sock.webp` | `2171:543` | Lucky Honey product photo |
-| `video-thumb.webp` | — | Weekly-Loom thumbnail (pillar 3) |
+## The Shopify window
 
-## Logos (SVG preferred, rendered grey via CSS)
+The window is the Figma export, composed as sidebar + panel side by side and
+top-aligned. The sidebar (659) is taller than the panel (615) and so sets the
+window height, with the card's white showing below the panel — which is how the
+frame reads. There is no browser bar, per §A1.
 
-`logo-at-present.svg` `2171:660` · `logo-jpha.svg` `2171:662` ·
-`logo-reincoat.svg` `2171:664` · `logo-plum.svg` `2171:666` ·
-`logo-lucky-honey.svg` `2171:668` · `logo-go-flower.svg` `2171:670` ·
-`logo-nativemed.svg` `2171:672` · `logo-our-pets-life.svg` `2171:674`
-
-The Happy Mondays wordmark (`2171:569`) and the Shopify / Google Ads partner icons
-are drawn inline as SVG in the components, so they need no export.
+The hand-built HTML/CSS recreation is still in the repo (`DashboardHtml`,
+`DashboardHtmlMobile`, `NewOrderCardHtml` in `src/concepts/shared/Dashboard.tsx`).
+Setting `USE_HTML_DASHBOARD` in `src/lib/flags.ts` to `true` swaps it back in on
+both concepts.

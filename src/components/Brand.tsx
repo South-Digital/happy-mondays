@@ -1,17 +1,33 @@
 import { useState } from 'react'
+import { IMG } from '../lib/assets'
 
 /**
  * Happy Mondays wordmark. The SVG export (node 2171:569) is not in the repo yet,
  * so this falls back to a type-only wordmark in the brand face.
  */
 export function Wordmark({ className = '', tone = 'ink' }: { className?: string; tone?: 'ink' | 'white' }) {
+  const [failed, setFailed] = useState(false)
+
   return (
-    <span
-      className={`flex min-h-[44px] select-none items-center text-[17px] font-semibold tracking-[-0.03em] md:min-h-0 ${
-        tone === 'white' ? 'text-white' : 'text-ink'
-      } ${className}`}
-    >
-      Happy Mondays
+    <span className={`flex min-h-[44px] select-none items-center md:min-h-0 ${className}`}>
+      {failed ? (
+        <span
+          className={`text-[17px] font-semibold tracking-[-0.03em] ${
+            tone === 'white' ? 'text-white' : 'text-ink'
+          }`}
+        >
+          Happy Mondays
+        </span>
+      ) : (
+        <img
+          src={IMG.wordmark}
+          alt="Happy Mondays"
+          width={313}
+          height={71}
+          className={`h-[26px] w-auto ${tone === 'white' ? 'brightness-0 invert' : ''}`}
+          onError={() => setFailed(true)}
+        />
+      )}
     </span>
   )
 }
@@ -35,8 +51,9 @@ export function BrandLogo({ name, src }: { name: string; src: string }) {
     <img
       src={src}
       alt={name}
-      height={28}
-      className="h-7 w-auto object-contain"
+      width={327}
+      height={144}
+      className="h-11 w-auto object-contain"
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}

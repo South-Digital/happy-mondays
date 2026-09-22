@@ -30,11 +30,14 @@ dev and preview servers in `vite.config.ts`), and `public/robots.txt`.
 
 ## Assets
 
-The two Concept A hero layers and the Concept B hero photo are committed, as the
-source PNG and the WebP the app serves. The remaining §8 exports (pillar backdrops,
-the tab panel backdrop, product shots and the logo SVGs) are not in yet; the UI
-renders them as CSS fallbacks until they are added. See `public/images/README.md`
-for the exact filenames and node IDs.
+All §8 exports are committed and wired in, plus the Shopify window as three
+images — each as the supplied PNG and as the WebP the app serves. The only CSS
+fallback left is the pillar-3 video thumbnail, which is not part of §8.
+
+The window is the Figma export rather than the HTML recreation; that recreation
+is kept in the repo behind `USE_HTML_DASHBOARD` in `src/lib/flags.ts`. See
+`public/images/README.md` for filenames, node IDs and two notes about the
+exports themselves.
 
 ## Deployment
 

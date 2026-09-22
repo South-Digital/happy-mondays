@@ -20,10 +20,10 @@ export function LogoStrip({ label, className = '' }: { label?: string; className
       <ul
         className={`${
           reduced ? 'grid grid-cols-4 gap-x-6 gap-y-8 md:flex' : 'hidden md:flex'
-        } flex-wrap items-center justify-center gap-x-12 gap-y-8`}
+        } flex-wrap items-center justify-center gap-x-10 gap-y-8`}
       >
         {LOGOS.map((logo) => (
-          <li key={logo.name} className="flex justify-center opacity-50 grayscale [&_*]:text-ink">
+          <li key={logo.name} className="flex justify-center [filter:grayscale(1)_brightness(0)] [&_*]:text-ink">
             <BrandLogo name={logo.name} src={logo.src} />
           </li>
         ))}
@@ -43,7 +43,7 @@ export function LogoStrip({ label, className = '' }: { label?: string; className
             {[0, 1].map((copy) => (
               <li key={copy} className="flex shrink-0 items-center gap-10" aria-hidden={copy === 1}>
                 {LOGOS.map((logo) => (
-                  <span key={logo.name} className="opacity-50 grayscale [&_*]:text-ink">
+                  <span key={logo.name} className="[filter:grayscale(1)_brightness(0)] [&_*]:text-ink">
                     <BrandLogo name={logo.name} src={logo.src} />
                   </span>
                 ))}

@@ -99,7 +99,7 @@ export function HeroA() {
 
             {/* Breaks the frame on the dashboard's left edge; lands 200ms later */}
             <motion.div
-              className="absolute -left-[128px] top-[46%] hidden xl:block"
+              className="absolute -left-[140px] top-[44%] hidden xl:block"
               initial={reduced ? false : { opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}
@@ -116,9 +116,9 @@ export function HeroA() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, ease: EASE, delay: d(0.5) }}
           >
-            <DashboardMobile height={430} />
+            <DashboardMobile />
             <motion.div
-              className="absolute bottom-[42px] -left-2 origin-bottom-left scale-[0.82]"
+              className="absolute -bottom-7 -left-3 origin-bottom-left scale-[0.62]"
               initial={reduced ? false : { opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, ease: EASE, delay: d(1.6) }}

@@ -1,6 +1,6 @@
 import { Photo } from '../../../components/Photo'
 import { SearchIcon } from '../../../components/icons'
-import { IMG } from '../../../lib/assets'
+import { IMG, PRODUCT_ASPECT } from '../../../lib/assets'
 
 const PRODUCTS = [
   { name: 'Juliet Grip Sock', src: IMG.productJuliet, fallback: 'linear-gradient(150deg,#F6E9D8,#E3CDB0)' },
@@ -43,9 +43,10 @@ export function ShoppingGraphic({ compact = false }: { compact?: boolean }) {
               <Photo
                 src={p.src}
                 alt={p.name}
-                width={320}
-                height={320}
-                className="aspect-square w-full object-cover"
+                width={358}
+                height={247}
+                className="w-full object-cover"
+                style={{ aspectRatio: PRODUCT_ASPECT }}
                 fallback={p.fallback}
               />
               <div className="p-2.5">

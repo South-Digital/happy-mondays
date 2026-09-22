@@ -10,6 +10,8 @@ import {
   ShopBag,
   TrendUp,
 } from '../../components/icons'
+import { USE_HTML_DASHBOARD } from '../../lib/flags'
+import { DashboardImage, DashboardImageMobile, NewOrderImage } from './DashboardImage'
 import { SalesChart } from './SalesChart'
 
 /**
@@ -112,8 +114,12 @@ function Sidebar() {
   )
 }
 
-/** Full admin window (desktop). */
-export function Dashboard({ className = '' }: { className?: string }) {
+/**
+ * The hand-built HTML/CSS recreation of the Shopify window. Superseded by the
+ * Figma export (DashboardImage) but kept here and reachable via
+ * USE_HTML_DASHBOARD in src/lib/flags.ts.
+ */
+export function DashboardHtml({ className = '' }: { className?: string }) {
   return (
     <div className={`glass-rim glass-rim-lg ${className}`}>
       <div className="rim-card flex">
@@ -129,7 +135,7 @@ export function Dashboard({ className = '' }: { className?: string }) {
  * third (metrics row + chart header + the top of the chart) with a fade out of
  * the bottom edge.
  */
-export function DashboardMobile({
+export function DashboardHtmlMobile({
   className = '',
   height = 300,
 }: {
@@ -149,8 +155,8 @@ export function DashboardMobile({
   )
 }
 
-/** "New order" card that breaks the frame on the dashboard's left edge (§A1). */
-export function NewOrderCard({ className = '' }: { className?: string }) {
+/** Hand-built "New order" card. Superseded by the export; see the flag. */
+export function NewOrderCardHtml({ className = '' }: { className?: string }) {
   return (
     <div className={`glass-chip ui-font w-[212px] px-3.5 py-3 ${className}`}>
       <div className="flex items-center gap-2">
@@ -162,5 +168,42 @@ export function NewOrderCard({ className = '' }: { className?: string }) {
       </p>
       <p className="mt-0.5 text-[11px] text-muted">Just now</p>
     </div>
+  )
+}
+
+
+/* ---------------------------------------------------------------------------
+ * What the concepts actually render. The Figma export is the default on both;
+ * flipping USE_HTML_DASHBOARD swaps the HTML recreation back in.
+ * ------------------------------------------------------------------------- */
+
+export function Dashboard({ className = '' }: { className?: string }) {
+  return USE_HTML_DASHBOARD ? (
+    <DashboardHtml className={className} />
+  ) : (
+    <DashboardImage className={className} />
+  )
+}
+
+export function DashboardMobile({
+  className = '',
+  height = 430,
+}: {
+  className?: string
+  /** Only the HTML recreation needs an explicit height; the export crops by ratio. */
+  height?: number
+}) {
+  return USE_HTML_DASHBOARD ? (
+    <DashboardHtmlMobile className={className} height={height} />
+  ) : (
+    <DashboardImageMobile className={className} />
+  )
+}
+
+export function NewOrderCard({ className = '' }: { className?: string }) {
+  return USE_HTML_DASHBOARD ? (
+    <NewOrderCardHtml className={className} />
+  ) : (
+    <NewOrderImage className={className} />
   )
 }
