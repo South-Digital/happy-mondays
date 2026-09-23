@@ -1680,3 +1680,14 @@
     background: linear-gradient(90deg, rgba(12,42,66,.64), rgba(12,42,66,.54) 44%, rgba(12,42,66,.1) 72%, transparent);
   }
 }
+
+/* One shared edge for the navigation frame and the complete hero content. */
+.nb-page { --nb-frame-width: min(1280px, calc(100% - 64px)); }
+@media (max-width: 1050px) {
+  .nb-page { --nb-frame-width: calc(100% - 48px); }
+}
+@media (max-width: 600px) {
+  .nb-page { --nb-frame-width: calc(100% - 32px); }
+}
+.nb-nav,
+.nb-hero-copy { width: var(--nb-frame-width); }
