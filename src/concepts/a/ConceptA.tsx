@@ -3,7 +3,7 @@ import { HeroAStudy } from "./HeroAStudy";
 export default function ConceptA() {
   return (
     <>
-      <Seo title="Concept A — landscape hero study · Happy Mondays" />
+      <Seo title="Concept A — Landscape with depth · Happy Mondays" />
       <main>
         <HeroAStudy />
       </main>

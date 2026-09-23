@@ -11,3 +11,5 @@ dist
 
 # Full-resolution working masters and inspection crops remain local.
 .design/
+
+dist-client
