@@ -102,6 +102,9 @@ export function StorePreview() {
                 />
                 <path d="M5 1v4m6-4v4M2 7h12" stroke="currentColor" />
               </svg>
+              <span className="ha-store-range-value" aria-hidden="true">
+                {range === "week" ? "Last 7 days" : "Last 30 days"}
+              </span>
               <select
                 value={range}
                 onChange={(e) => setRange(e.target.value as "week" | "month")}
