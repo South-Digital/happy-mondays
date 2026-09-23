@@ -150,7 +150,7 @@
   color: #b8cbdc;
 }
 .nb-hero-copy h1 span:last-child {
-  font-weight: 600;
+  font-weight: inherit;
 }
 .nb-hero-copy > p {
   font-size: 18px;
