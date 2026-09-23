@@ -82,6 +82,19 @@
     border-radius: 22px;
   }
 
+  /* The Shopify window's rim (frame 2171:557): 8px padding, 18px radius.
+     Not the concentric 30/22 of .glass-rim-lg — the frame draws rim and cards
+     at the same 18px radius. */
+  .dash-rim {
+    padding: 8px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.36);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 56px rgba(28, 33, 48, 0.12);
+  }
+
   /* Floating chip — overlaps a card edge */
   .glass-chip {
     border-radius: 16px;
@@ -172,11 +185,29 @@
     transition-duration: 100ms;
   }
 
-  /* Nav variant — 42px tall, 18px sides (2171:622) */
+  /*
+   * Nav variant (2171:622). The nav instance overrides the hero's values and is
+   * a different treatment, not just a smaller one:
+   *   fill    white 25%, not 37%
+   *   blur    none at all, where the hero has 3.8px
+   *   shadow  two inset shadows, not five
+   *   size    42px tall, 18px horizontal padding, 13px type
+   */
   .btn-liquid-sm {
     min-height: 42px;
     padding: 0 18px;
     font-size: 13px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .btn-liquid-sm::after {
+    box-shadow:
+      inset -3px -4.5px 1.5px -3px #b3b3b3,
+      inset 0 0 33px 0 rgba(242, 242, 242, 0.5);
+  }
+  .btn-liquid-sm:hover {
+    background: rgba(255, 255, 255, 0.34);
   }
 
   /* Solid pill button — Concept B */

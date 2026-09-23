@@ -33,14 +33,34 @@ file put a 404 in the console on every load, and `<Photo>` renders its CSS
 fallback for an empty src without making a request. Set it to the real path once
 the thumbnail exists.
 
-## Narrow variants
+## Variants, and the resolution ceiling
 
-The large photographs also ship a `-1000.webp` variant, offered through `srcSet`
-by `<Photo responsive>`, so a phone does not download a 2000px image:
-`a-hero-bg`, `a-foreground`, `b-hero`, `panel-bg`, `dash-panel`. This took
-Concept A's Lighthouse mobile performance from 77 to 88 and its LCP from 4.6s to
-3.5s. Regenerate a variant with the same basename if its source is ever
-replaced.
+The large photographs ship `-1000.webp` and `-1600.webp` variants, offered
+through `srcSet` by `<Photo responsive variants={[...]}>`.
+
+**The three hero photographs are upscaled on large or retina screens and cannot
+be fixed from the files we have.** Source width / drawn width, measured in
+Chromium accounting for `object-fit: cover` (1.00 = pixel-perfect, below 1.00 =
+upscaled):
+
+| photo | source | 1440@2x | 1920@2x | 2560@2x |
+|---|---|---|---|---|
+| `a-hero-bg` | 2000px | 0.61 | 0.52 | 0.39 |
+| `b-hero` | 2000px | 0.63 | 0.52 | 0.38 |
+| `a-foreground` | 2000px | 0.58 | 0.43 | 0.33 |
+
+Everything else measures at or above 1.00 at 2x.
+
+No 2400 or 3200 variants are generated, deliberately: the sources are 2000px, so
+those would be upscales that add bytes and no detail. Reaching 1.00 at 2560@2x
+needs roughly **5200px** for the two hero backgrounds and **6100px** for the
+rooftop — about a 3x export of the 1716px-wide frame. When those land, drop them
+in and add their widths to the `variants` prop; nothing else changes.
+
+Note `naturalWidth` is density-corrected once `srcSet` and `sizes` are set, so it
+reports the CSS size rather than the file's pixels — measuring upscaling that way
+gives a false 1.00. `.dev/img-quality2.mjs` reads the real pixel dimensions off
+disk instead.
 
 ## The partner marks
 
@@ -85,18 +105,32 @@ uniform height on the images instead renders every mark at the wrong scale.
 
 `a-foreground.webp` is only fully opaque across its whole width from **81% down**;
 higher up, coverage drops to ~73% because the far-left terrace sits low in frame.
-Concept A's hero relies on this: the dashboard is held at a constant 78vw and the
-scene's bottom padding is set in `vw`, so the dashboard's bottom edge always lands
-at ~90% down the rooftop — below the opaque line at every width. Changing either
-value risks exposing the dashboard's lower edge. `.dev/verify-overlap.mjs` checks
-this against the image's real alpha channel.
+Concept A's hero relies on this: the dashboard is held at a constant **80vw** (the
+frame's 1152/1440, node `2171:557`) and the scene's bottom padding is set in `vw`,
+so the dashboard's bottom edge always lands at ~90% down the rooftop — below the
+opaque line at every width. The rooftop itself is pinned to the frame's own
+geometry, node `2171:561`: **117.83% wide, offset −8.243%**, which is x −118.7 to
+x 1578 in a 1440 frame. All three numbers are load-bearing — changing any of them
+risks exposing the dashboard's lower edge. `.dev/verify-overlap.mjs` checks this
+against the image's real alpha channel and is the gate on any change here; at the
+current values it measures 43 / 38 / 30px of cover at 1440 / 1280 / 1024.
 
 ## The Shopify window
 
-The window is the Figma export, composed as sidebar + panel side by side and
-top-aligned. The sidebar (659) is taller than the panel (615) and so sets the
-window height, with the card's white showing below the panel — which is how the
-frame reads. There is no browser bar, per §A1.
+Frame `2171:557` draws this as **two separate cards inside one glass rim**, not a
+single split card:
+
+```
+rim       8px padding, radius 18
+row       1136 wide, justify-between, items-start
+sidebar   220 x 658.894, radius 18, at x0
+panel     908 x 615,     radius 18, at x228   -> an 8px gap between them
+```
+
+The panel is 43.9px shorter than the sidebar, so the rim shows below it — that is
+the design, not a bug. The rim's radius is 18, the same as the cards, so this
+does not use the concentric 30/22 `.glass-rim-lg`; it has its own `.dash-rim`.
+There is no browser bar, per §A1.
 
 The hand-built HTML/CSS recreation is still in the repo (`DashboardHtml`,
 `DashboardHtmlMobile`, `NewOrderCardHtml` in `src/concepts/shared/Dashboard.tsx`).

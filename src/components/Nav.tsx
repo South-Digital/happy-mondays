@@ -33,12 +33,12 @@ export function Nav({ variant }: { variant: 'a' | 'b' }) {
 
   return (
     <nav className="relative z-30 hidden md:block">
-      <div className="mx-auto flex w-full max-w-content items-center justify-between">
+      <div className="mx-auto flex w-full max-w-content items-center justify-between xl:h-[68px] xl:px-6">
         <MockLink label="Happy Mondays — home">
-          <Wordmark />
+          <Wordmark size="lg" />
         </MockLink>
-        <div className="flex items-center gap-7">
-          <ul className="flex items-center gap-7">
+        <div className="flex items-center gap-7 xl:gap-6">
+          <ul className="flex items-center gap-7 xl:gap-[27px]">
             {LINKS.map((l) => (
               <li key={l}>
                 <MockLink className="nav-link text-nav text-ink-72 drop-shadow-[0_1px_2px_rgba(255,255,255,.5)]">

@@ -14,11 +14,15 @@ type PhotoProps = {
   fallback?: string
   sizes?: string
   /**
-   * When true, a `-1000.webp` variant of the same file is offered alongside the
-   * full-width one, so a phone does not download a 2000px photo. Generate the
-   * variant with the same basename — see public/images/README.md.
+   * Offers narrower variants of the same file alongside the full-width one, so a
+   * phone does not download a 2000px photo. Pass the widths that actually exist
+   * on disk as `<basename>-<width>.webp`; see public/images/README.md.
+   *
+   * When higher-resolution sources are re-exported, add their widths here and
+   * the browser will start picking them with no other change.
    */
   responsive?: boolean
+  variants?: number[]
 }
 
 /**
@@ -36,6 +40,7 @@ export function Photo({
   fallback,
   sizes,
   responsive = false,
+  variants = [1000],
 }: PhotoProps) {
   const [failed, setFailed] = useState(false)
 
@@ -52,7 +57,9 @@ export function Photo({
     )
   }
 
-  const narrow = responsive ? src.replace(/\.webp$/, '-1000.webp') : null
+  const srcSet = responsive
+    ? [...variants.map((v) => `${src.replace(/\.webp$/, `-${v}.webp`)} ${v}w`), `${src} ${width}w`].join(', ')
+    : undefined
 
   return (
     <img
@@ -60,8 +67,8 @@ export function Photo({
       alt={alt}
       width={width}
       height={height}
-      srcSet={narrow ? `${narrow} 1000w, ${src} ${width}w` : undefined}
-      sizes={narrow ? (sizes ?? '100vw') : sizes}
+      srcSet={srcSet}
+      sizes={srcSet ? (sizes ?? '100vw') : sizes}
       loading={priority ? 'eager' : 'lazy'}
       decoding={priority ? 'sync' : 'async'}
       draggable={false}

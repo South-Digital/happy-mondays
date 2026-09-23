@@ -61,15 +61,25 @@ export type ImgKey = keyof typeof IMG
 /** Product photos are landscape, not square — see §A3 Shopping graphic. */
 export const PRODUCT_ASPECT = '358 / 247'
 
-/** The Figma window composes as sidebar + panel, top-aligned. */
+/**
+ * The Figma window (frame 2171:557) is two separate cards inside one glass rim,
+ * not a single split card:
+ *   rim        8px padding, radius 18
+ *   row        1136 wide, justify-between, items-start
+ *   sidebar    220 x 658.894, radius 18, at x0
+ *   panel      908 x 615,     radius 18, at x228  -> an 8px gap between them
+ * The panel is 43.894px shorter than the sidebar, so the rim shows below it.
+ */
 export const DASH = {
   sidebarW: 220,
-  sidebarH: 659,
+  sidebarH: 658.894,
   panelW: 908,
   panelH: 615,
-  /** Combined window, which the glass rim wraps. */
-  width: 1128,
-  height: 659,
+  gap: 8,
+  /** The row the two cards sit in; the rim adds 8px padding around it. */
+  rowW: 1136,
+  rimPad: 8,
+  radius: 18,
   newOrderW: 418,
   newOrderH: 114,
 } as const
