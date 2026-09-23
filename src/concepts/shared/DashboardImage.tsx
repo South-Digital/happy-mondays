@@ -4,13 +4,19 @@ import { DASH, IMG } from '../../lib/assets'
 import { DUR, EASE, usePrefersReducedMotion } from '../../lib/motion'
 
 /**
- * The Shopify window exactly as drawn in Figma: sidebar and analytics panel
- * exported as images and composed side by side, top-aligned. The sidebar is the
- * taller of the two (659 vs 615) and so sets the window height, with the card's
- * white showing below the panel — which is how the frame reads.
+ * The Shopify window exactly as drawn in Figma (frame 2171:557): the sidebar and
+ * the analytics panel are two separate cards, 8px apart, each with an 18px
+ * radius, inside one glass rim with 8px padding and an 18px radius. The panel is
+ * 43.9px shorter than the sidebar, so the rim's white shows below it — that gap
+ * is part of the design, not a bug.
  *
- * No browser bar, per §A1. The glass rim and the 78vw geometry are unchanged.
+ * No browser bar, per §A1.
  */
+
+/** Percentages of the 1136px row, so the split holds at any rendered width. */
+const SIDEBAR_PCT = (DASH.sidebarW / DASH.rowW) * 100
+const PANEL_PCT = (DASH.panelW / DASH.rowW) * 100
+
 export function DashboardImage({
   className = '',
   /** Seconds to wait before drawing the chart in; omit to skip the reveal. */
@@ -20,31 +26,33 @@ export function DashboardImage({
   chartRevealDelay?: number
 }) {
   return (
-    <div className={`glass-rim glass-rim-lg ${className}`}>
-      <div
-        className="rim-card relative grid items-start overflow-hidden"
-        style={{ gridTemplateColumns: `${DASH.sidebarW}fr ${DASH.panelW}fr` }}
-      >
+    <div className={`dash-rim ${className}`}>
+      <div className="flex items-start justify-between">
         <Photo
           src={IMG.dashSidebar}
           alt=""
           width={440}
           height={1318}
           priority
-          className="block h-auto w-full"
+          className="block h-auto overflow-hidden rounded-[18px]"
+          style={{ width: `${SIDEBAR_PCT}%` }}
           fallback="linear-gradient(180deg,#FBFBFA,#F4F4F3)"
         />
-        <Photo
-          src={IMG.dashPanel}
-          alt="Shopify analytics: total sales $128,460, 1,842 orders, 3.4% conversion rate, 5.05 ROAS, and total sales over time for the week."
-          width={1816}
-          height={1230}
-          priority
-          className="block h-auto w-full"
-          fallback="linear-gradient(180deg,#FFFFFF,#F7F7F6)"
-        />
 
-        {chartRevealDelay !== undefined && <ChartReveal delay={chartRevealDelay} />}
+        <div className="relative overflow-hidden rounded-[18px]" style={{ width: `${PANEL_PCT}%` }}>
+          <Photo
+            src={IMG.dashPanel}
+            alt="Shopify analytics: total sales $128,460, 1,842 orders, 3.4% conversion rate, 5.05 ROAS, and total sales over time for the week."
+            width={1816}
+            height={1230}
+            priority
+            responsive
+            sizes="(max-width: 767px) 92vw, 62vw"
+            className="block h-auto w-full"
+            fallback="linear-gradient(180deg,#FFFFFF,#F7F7F6)"
+          />
+          {chartRevealDelay !== undefined && <ChartReveal delay={chartRevealDelay} />}
+        </div>
       </div>
     </div>
   )
@@ -67,7 +75,7 @@ function ChartReveal({ delay }: { delay: number }) {
     <motion.div
       aria-hidden
       className="pointer-events-none absolute bg-white"
-      style={{ left: '25.5%', right: '-1%', top: '43%', height: '46%' }}
+      style={{ left: '6%', right: '-1%', top: '43%', height: '46%' }}
       initial={{ x: '0%' }}
       animate={{ x: '101%' }}
       transition={{ duration: DUR.chart, delay, ease: EASE.state }}
@@ -76,26 +84,20 @@ function ChartReveal({ delay }: { delay: number }) {
 }
 
 /**
- * §5 mobile — the panel only, no sidebar, cropped to roughly its top third with
- * a fade out of the bottom edge.
+ * §5 mobile — the analytics panel only, cropped to roughly its top three
+ * quarters with a fade out of the bottom edge.
  */
 export function DashboardImageMobile({
   className = '',
-  /**
-   * Fraction of the panel's height to show. The panel is 908×615; keeping the
-   * top ~76% leaves the metrics row, the chart header and the top of the chart,
-   * which is what §5 asks for, and the crop scales with the container instead of
-   * leaving white space under a fixed-height box.
-   */
   crop = 0.76,
 }: {
   className?: string
   crop?: number
 }) {
   return (
-    <div className={`glass-rim ${className}`}>
+    <div className={`dash-rim ${className}`}>
       <div
-        className="rim-card relative overflow-hidden"
+        className="relative overflow-hidden rounded-[18px]"
         style={{ aspectRatio: `908 / ${Math.round(615 * crop)}` }}
       >
         <Photo
@@ -104,6 +106,8 @@ export function DashboardImageMobile({
           width={1816}
           height={1230}
           priority
+          responsive
+          sizes="92vw"
           className="block h-auto w-full"
           fallback="linear-gradient(180deg,#FFFFFF,#F7F7F6)"
         />

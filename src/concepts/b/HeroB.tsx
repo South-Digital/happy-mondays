@@ -49,7 +49,7 @@ export function HeroB() {
             width={2000}
             height={1667}
             priority
-            className="h-full w-full object-cover object-[78%_72%] md:object-center"
+            className="h-full w-full object-cover object-[32%_72%] md:object-center"
             fallback="linear-gradient(180deg,#9FC3DC 0%,#6E97B4 45%,#4E6E86 100%)"
           />
         </motion.div>
@@ -94,7 +94,13 @@ export function HeroB() {
         </motion.div>
 
         {/* Text block, left-aligned at the 120px content edge */}
-        <div className="mx-auto mt-auto flex w-full max-w-content flex-col justify-end pb-2 md:mt-24 md:flex-1 md:justify-center md:pb-0 xl:mt-0">
+        {/* At xl, where the hero is the frame's fixed 1200px, the block is
+            pinned to 46% of its height — the frame places it at 46%-73%, and
+            centring it sat about 110px too high. Below xl the hero is a
+            min-height, so 46% has nothing fixed to resolve against and the
+            block stays centred. */}
+        <div className="mx-auto mt-auto flex w-full max-w-content flex-col justify-end pb-2 md:mt-24 md:flex-1 md:justify-center md:pb-0 xl:absolute xl:inset-x-0 xl:top-[46%] xl:mx-auto xl:mt-0 xl:max-w-none xl:flex-none xl:px-0">
+          <div className="mx-auto w-full max-w-content">
           <h1 className="text-hero-m md:text-hero-t xl:text-hero">
             <motion.span className="block text-white" {...riseAt(SEQ.line1, reduced)}>
               Open Shopify.
@@ -121,6 +127,7 @@ export function HeroB() {
           </motion.div>
 
           {SHOW_HERO_CHIPS && <HeroProofChips className="mt-8 md:mt-10" mobileOnlyFirst />}
+          </div>
         </div>
       </div>
     </section>
