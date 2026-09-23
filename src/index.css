@@ -293,6 +293,79 @@
       padding-inline: 0;
     }
   }
+
+  /* ---- Hero-to-page fade (A1 / B1) ----------------------------------------
+     Starts at 62% of the hero and spans the remaining 38%. Sized in percent,
+     not pixels, so it scales with the hero at any height - including the hero
+     height options still under review.
+
+     The ramp is a ten-stop ease-in-out approximation rather than the two-stop
+     linear gradient both concepts had: a linear ramp has a visible top edge
+     where it meets the photograph, because it leaves alpha 0 at a constant
+     rate. The authored curve is remapped onto 0-85% of the element, so alpha
+     reaches 1 at 85% and the last 15% is a solid band. That solid band is what
+     removes the seam at the hero's bottom edge - concept B's gradient only
+     reached solid exactly AT the boundary, so any rounding left a visible line.
+
+     Colour is carried as an unpacked RGB triple so the same ramp can be tinted
+     per concept; it must match the section below exactly or the solid band
+     itself becomes the seam. */
+  .hero-fade {
+    --fade-rgb: 255 255 255;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 38%;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--fade-rgb) / 0) 0%,
+      rgb(var(--fade-rgb) / 0.02) 10.2%,
+      rgb(var(--fade-rgb) / 0.08) 21.25%,
+      rgb(var(--fade-rgb) / 0.2) 32.3%,
+      rgb(var(--fade-rgb) / 0.38) 42.5%,
+      rgb(var(--fade-rgb) / 0.58) 52.7%,
+      rgb(var(--fade-rgb) / 0.78) 63.75%,
+      rgb(var(--fade-rgb) / 0.92) 73.1%,
+      rgb(var(--fade-rgb) / 0.98) 79.9%,
+      rgb(var(--fade-rgb) / 1) 85%,
+      rgb(var(--fade-rgb) / 1) 100%
+    );
+  }
+
+  /* Concept B's ground. */
+  .hero-fade-offwhite {
+    --fade-rgb: 250 249 246;
+  }
+
+  /* Dither. Eight-bit alpha stepped over ~470px at 1440 shows as banding, so a
+     3% fractal-noise layer breaks the bands up. Masked to the transition
+     itself: it ramps in over the top 28% so there is no grain edge against the
+     photograph, and back out by 86% so none lands on the solid band, where
+     texture would read against the flat page colour.
+
+     Measured over the real 475px at 1440 (.dev/band-where.mjs): undithered the
+     column holds 155 distinct levels with flat runs at 8/12/15/18% and 81/83%;
+     with this dither it holds 328, and the only runs left are at 0-4%, where
+     alpha is under 0.01 and there is nothing to band. */
+  .hero-fade::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 86%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 86%);
+  }
+
+  /* Slightly quieter where the viewer has asked for less visual noise. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade::after {
+      opacity: 0.022;
+    }
+  }
 }
 
 /* §6 — motion safety. Reduced motion renders the final state, no transitions. */

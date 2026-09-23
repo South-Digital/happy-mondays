@@ -85,11 +85,9 @@ export function HeroB() {
         }}
       />
 
-      {/* Fade to off-white at the bottom */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-40 bg-gradient-to-b from-transparent to-offwhite"
-      />
+      {/* Fade to the off-white page below. Stays at z-20: above the photograph
+          and its scrims, below the content at z-30. */}
+      <div aria-hidden className="hero-fade hero-fade-offwhite z-20" />
 
       <div className="relative z-30 flex h-full flex-col px-5 pb-10 pt-7 md:pb-24 xl:px-0">
         <motion.div {...riseAt(SEQ.nav, reduced)}>

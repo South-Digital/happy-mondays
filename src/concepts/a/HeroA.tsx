@@ -77,14 +77,14 @@ export function HeroA() {
           </div>
         </motion.div>
 
-        <div className="relative z-10 px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0 xl:pt-[3px]">
-          <motion.div {...riseAt(SEQ.nav, reduced)}>
+        <div className="relative px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0 xl:pt-[3px]">
+          <motion.div className="relative z-40" {...riseAt(SEQ.nav, reduced)}>
             <Nav variant="a" />
             <MobileNav variant="a" />
           </motion.div>
 
           {/* Headline block */}
-          <div className="mx-auto mt-16 flex w-full max-w-content flex-col items-center text-center xl:mt-[60px]">
+          <div className="relative z-40 mx-auto mt-16 flex w-full max-w-content flex-col items-center text-center xl:mt-[60px]">
             <h1 className="text-hero-m md:text-hero-t xl:text-hero">
               <motion.span className="block" {...riseAt(SEQ.line1, reduced)}>
                 Open Shopify.
@@ -113,7 +113,7 @@ export function HeroA() {
 
           {/* Dashboard settles last — from +32px and 96% scale, over ~900ms (§A4) */}
           <motion.div
-            className="relative mx-auto mt-16 hidden w-[80vw] max-w-[1152px] md:block xl:mt-20"
+            className="relative z-10 mx-auto mt-16 hidden w-[80vw] max-w-[1152px] md:block xl:mt-20"
             initial={reduced ? false : { opacity: 0, y: DIST.lg, scale: DIST.scaleFrom }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -145,7 +145,7 @@ export function HeroA() {
           {/* §5 mobile — analytics panel only, clipped to its top third, with the
               New order card overlapping its bottom-left. */}
           <motion.div
-            className="relative mx-auto mt-12 w-full max-w-[420px] md:hidden"
+            className="relative z-40 mx-auto mt-12 w-full max-w-[420px] md:hidden"
             initial={reduced ? false : { opacity: 0, y: DIST.lg, scale: DIST.scaleFrom }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -188,11 +188,16 @@ export function HeroA() {
           />
         </div>
 
-        {/* Fade from the scene into white */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-40 bg-gradient-to-b from-transparent to-white"
-        />
+        {/* Fade from the scene into the white page below.
+
+            Above the rooftop, not below it. The rooftop's bottom edge IS the
+            hero's bottom edge, so a fade underneath it would leave that edge
+            cutting straight into the page. It does not wash the rooftop the way
+            the old 160px linear ramp did: the rooftop starts at 68% of the hero
+            and the ramp is only ~4% opaque there, so its readable upper two
+            thirds are untouched. Everything else - headline, subline, CTA,
+            dashboard body - sits above 62% and is outside the fade entirely. */}
+        <div aria-hidden className="hero-fade z-[25]" />
       </div>
 
       {/* Proof + logos, on the white the scene fades into */}
