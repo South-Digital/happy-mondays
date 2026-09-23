@@ -460,18 +460,47 @@
     0 100%
   );
 }
+/* Smoothstep opacity avoids abrupt changes in the fade's slope. */
 .ha-scene-fade {
   position: absolute;
   z-index: 4;
   inset: auto 0 -1px;
-  height: 150px;
+  height: 190px;
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(250, 250, 248, 0),
-    rgba(250, 250, 248, 0.28) 25%,
-    rgba(250, 250, 248, 0.83) 62%,
-    var(--ha-ground) 97%
+    rgba(250, 250, 248, 0) 0%,
+    rgba(250, 250, 248, 0.011) 6.25%,
+    rgba(250, 250, 248, 0.043) 12.5%,
+    rgba(250, 250, 248, 0.092) 18.75%,
+    rgba(250, 250, 248, 0.156) 25%,
+    rgba(250, 250, 248, 0.232) 31.25%,
+    rgba(250, 250, 248, 0.316) 37.5%,
+    rgba(250, 250, 248, 0.407) 43.75%,
+    rgba(250, 250, 248, 0.5) 50%,
+    rgba(250, 250, 248, 0.593) 56.25%,
+    rgba(250, 250, 248, 0.684) 62.5%,
+    rgba(250, 250, 248, 0.768) 68.75%,
+    rgba(250, 250, 248, 0.844) 75%,
+    rgba(250, 250, 248, 0.908) 81.25%,
+    rgba(250, 250, 248, 0.957) 87.5%,
+    rgba(250, 250, 248, 0.989) 93.75%,
+    var(--ha-ground) 100%
+  );
+}
+/* Subtle monochrome dither breaks up 8-bit bands, fading out at both edges. */
+.ha-scene-fade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23808080' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mask-image: linear-gradient(transparent, #000 20%, #000 70%, transparent);
+  -webkit-mask-image: linear-gradient(
+    transparent,
+    #000 20%,
+    #000 70%,
+    transparent
   );
 }
 .ha-order-position {
@@ -535,16 +564,6 @@
   margin-left: auto;
   margin-top: 3px;
 }
-.ha-data-note {
-  position: absolute;
-  z-index: 5;
-  bottom: 12px;
-  width: 100%;
-  text-align: center;
-  color: #68747e;
-  font-size: 10px;
-  letter-spacing: 0.015em;
-}
 .ha-credentials {
   padding: 29px 24px 46px;
   max-width: 1250px;
@@ -565,21 +584,6 @@
 }
 .ha-logos img {
   opacity: 0.9;
-}
-.ha-review-boundary {
-  background: #fafaf8;
-  border-top: 1px solid #e7eaec;
-  padding: 24px;
-  text-align: center;
-  font-size: 12px;
-  color: #68737d;
-  line-height: 1.8;
-}
-.ha-review-boundary a {
-  color: #345f98;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  margin: 0 7px;
 }
 @media (min-width: 1600px) {
   .ha-scene {
@@ -856,10 +860,6 @@
     width: 19px;
     height: 23px;
   }
-  .ha-data-note {
-    bottom: 17px;
-    font-size: 9px;
-  }
   .ha-coast {
     width: 1180px;
     left: 52%;
@@ -875,7 +875,7 @@
     );
   }
   .ha-scene-fade {
-    height: 130px;
+    height: 155px;
   }
   .ha-credentials {
     padding: 27px 16px 32px;
@@ -891,10 +891,6 @@
   }
   .ha-logos {
     margin-top: 26px;
-  }
-  .ha-review-boundary {
-    font-size: 11px;
-    padding: 20px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

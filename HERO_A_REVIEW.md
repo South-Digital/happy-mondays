@@ -10,7 +10,7 @@
 - Original B: `/concept-b`
 - Rejected prior pass: `/rejected/concept-a` and `/rejected/concept-b`
 
-The current A stops after the hero and credentials. Its review footer and the entry page explain the scope. Lower sections have not been recomposed around an unapproved hero.
+The current A stops after the hero and credentials. The entry page explains the scope. Visible review controls and the illustrative-data caption were removed from the concept at Zac’s request. Lower sections have not been recomposed around an unapproved hero.
 
 ## Source decisions
 
@@ -47,3 +47,7 @@ The exact generation prompt and method are in [the asset README](public/images/h
 ## Remaining design and launch work
 
 This study needs to be judged against the original and client references. The rest of A, B's refinement, the position-five-to-one Shopping narrative and early human proof remain unfinished. Booking/navigation destinations are mocked. All dashboard figures are illustrative. Final evidence/permissions, client sign-off and Framer implementation remain outside this study. Existing production is unchanged.
+
+## Follow-up: foreground fade
+
+Replaced the four-stop foreground fade with a longer smoothstep gradient and subtle monochrome dithering to reduce visible bands. Removed the on-page data caption and review footer at Zac’s request.

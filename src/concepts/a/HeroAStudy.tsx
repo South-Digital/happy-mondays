@@ -145,7 +145,6 @@ export function HeroAStudy() {
         <motion.div className="ha-order-position" {...riseAt(7, reduced, 8)}>
           <OrderPreview />
         </motion.div>
-        <p className="ha-data-note">Illustrative store data</p>
       </div>
       <div className="ha-credentials">
         <ProofRow />
