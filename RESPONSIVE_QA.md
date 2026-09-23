@@ -28,7 +28,7 @@ Visual checks focused on 320px phones (top, menu and bottom), 390px reduced moti
 
 ## Verified
 
-- All 20 widths: no horizontal page overflow, clipped metric values or header collisions; all navigation choices available. Date selector is 44px tall with a computed 16px native font.
+- All 20 widths: no horizontal page overflow, clipped metric values or header collisions; all navigation choices available. Date selector is now 46px tall with a computed 16px native font.
 - Native date selection changes between 7-day and 30-day data, chart labels and the visible control label.
 - Small-phone menu opens; Escape closes it and returns focus to the summary.
 - At 568×320 landscape, the last menu item is reachable, clicking it closes the menu, restores summary focus and shows prototype feedback.
@@ -40,3 +40,5 @@ Visual checks focused on 320px phones (top, menu and bottom), 390px reduced moti
 ## Limits
 
 This is browser viewport testing, not physical-device certification. Real iOS Safari, Android Chrome, alternate browser engines, hardware performance, device pixel ratios and the actual OS reduced-motion preference were not exercised. Reduced motion was tested through the page's explicit review override. Booking and navigation remain prototype feedback actions; this pass does not connect destinations.
+
+The final whole-page review repeated the 20-size matrix after the typography, static mobile logo grid and contrast refinements. See [FINAL_HERO_REVIEW.md](FINAL_HERO_REVIEW.md) for the current findings, scroll endpoint measurements and remaining scope.
