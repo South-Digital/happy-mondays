@@ -42,3 +42,9 @@ Visual checks focused on 320px phones (top, menu and bottom), 390px reduced moti
 This is browser viewport testing, not physical-device certification. Real iOS Safari, Android Chrome, alternate browser engines, hardware performance, device pixel ratios and the actual OS reduced-motion preference were not exercised. Reduced motion was tested through the page's explicit review override. Booking and navigation remain prototype feedback actions; this pass does not connect destinations.
 
 The final whole-page review repeated the 20-size matrix after the typography, static mobile logo grid and contrast refinements. See [FINAL_HERO_REVIEW.md](FINAL_HERO_REVIEW.md) for the current findings, scroll endpoint measurements and remaining scope.
+
+## Mobile dashboard refinement
+
+At Zac's request, the phone dashboard now emphasises total sales with fluid 20–26px semibold type, larger metric/chart/date labels, and slightly more chart height. Orders and conversion remain secondary. The order notification is reduced from 232px to 210px wide, moved down to straddle the dashboard's lower edge, and limited to 8px of upward scroll travel. Desktop styling remains unchanged.
+
+Checked widths 320, 360, 375, 390, 430, 568, 700 and the 701px desktop breakpoint. Initial 320/375px sales overflow was corrected with fluid sizing and adjusted metric columns; all five phone widths were rechecked with the longer monthly figures and no metric overflow. Date control retains its 46px target and both ranges work. Visual checks at 320×568 and 390×844 confirm a smaller notification footprint and more visible chart. Normal-motion endpoint at 390px leaves the notification about 12px below the dashboard edge with no horizontal overflow; reduced-motion composition also checked. Build and whitespace checks pass; browser console has no captured warnings/errors.

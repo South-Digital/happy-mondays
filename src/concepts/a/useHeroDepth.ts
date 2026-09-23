@@ -36,7 +36,7 @@ export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
       // The card shares the chart's horizontal space at medium widths;
       // keep it anchored so its surface cannot cover the chart heading.
       orderTravel.set(
-        window.innerWidth <= 700 ? -19.8 : window.innerWidth <= 1200 ? 0 : -44,
+        window.innerWidth <= 700 ? -8 : window.innerWidth <= 1200 ? 0 : -44,
       );
       strength.set(
         window.innerWidth <= 700 ? 0.45 : window.innerWidth <= 1100 ? 0.7 : 1,

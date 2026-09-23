@@ -840,13 +840,13 @@
   .ha-store-interior {
     border-radius: 15px;
     min-height: 0;
-    height: 343px;
+    height: 360px;
   }
   .ha-store-sidebar {
     display: none;
   }
   .ha-store-main {
-    padding: 20px 15px 14px;
+    padding: 16px 16px 14px;
   }
   .ha-store-heading h2 {
     font-size: 15px;
@@ -859,28 +859,37 @@
   .ha-store-range > svg:first-of-type {
     display: none;
   }
+  .ha-store-range-value {
+    font-size: 11px;
+    min-width: 69px;
+  }
   .ha-store-metrics {
-    grid-template-columns: 1.35fr 0.8fr 1fr;
+    grid-template-columns: 1.5fr 0.85fr 1.2fr;
     gap: 8px;
-    margin: 23px 0 18px;
+    margin: 18px 0 18px;
     padding-bottom: 16px;
   }
   .ha-store-metrics > div:last-child {
     display: none;
   }
   .ha-metric-label {
-    font-size: 8px;
+    font-size: 9px;
     margin-bottom: 6px;
   }
   .ha-store-metrics strong {
-    font-size: 21px;
+    font-size: 20px;
+    line-height: 32px;
+  }
+  .ha-store-metrics > div:first-child strong {
+    font-size: clamp(20px, calc(8vw - 5.6px), 26px);
+    font-weight: 600;
   }
   .ha-metric-change {
     font-size: 8px;
     margin-top: 6px;
   }
   .ha-chart-title h3 {
-    font-size: 9px;
+    font-size: 11px;
   }
   .ha-chart-title > div {
     display: none;
@@ -890,7 +899,7 @@
     gap: 5px;
   }
   .ha-chart-scale {
-    font-size: 7px;
+    font-size: 8px;
     width: 22px;
     padding-bottom: 18px;
   }
@@ -905,27 +914,32 @@
   }
   .ha-order-position {
     top: auto;
-    bottom: 130px;
+    bottom: 104px;
     left: max(25px, calc(50% - 222px));
   }
   .ha-order {
-    width: 232px;
+    width: 210px;
     border-radius: 15px;
-    gap: 11px;
-    padding: 14px 15px;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+  .ha-order > div {
+    gap: 2px;
   }
   .ha-order strong {
     font-size: 12px;
+    line-height: 1.35;
   }
   .ha-order > div > span {
     font-size: 10px;
+    line-height: 1.4;
   }
   .ha-order-time {
     font-size: 8px;
   }
   .ha-order-icon {
-    width: 35px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 10px;
   }
   .ha-order-icon img {
@@ -1012,23 +1026,16 @@
   }
 }
 @media (max-width: 360px) {
-  .ha-store-metrics {
-    grid-template-columns: 1.45fr 1fr 1.15fr;
-    gap: 9px;
-  }
   .ha-store-metrics strong {
     font-size: 18px;
-  }
-  .ha-metric-label {
-    font-size: 7.5px;
   }
 }
 @media (max-width: 700px) and (max-height: 799px) {
   .ha-store-interior {
-    height: 330px;
+    height: 348px;
   }
   .ha-chart svg {
-    height: 125px;
+    height: 132px;
   }
 }
 

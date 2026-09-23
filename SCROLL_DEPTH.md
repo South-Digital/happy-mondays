@@ -15,7 +15,7 @@ No pinned scene, scroll interception, added scroll distance, animated blur, new 
 | Sea | +28px | +12.6px |
 | Foreground | −10px | −4.5px |
 | Dashboard | −10px; scale 1.01 | −4.5px; scale 1.0045 |
-| Order card | −44px; scale 1.018 | −19.8px; scale 1.0081 |
+| Order card | −44px; scale 1.018 | −8px; scale 1.0081 |
 | Partner row | 12px → 0; opacity 0.55 → 1 | Same reveal, once entering viewport |
 
 701–1100px uses 70% of the scene movement. At 701–1200px the order card stays vertically anchored to preserve clearance around the chart heading. Its subtle scale follows the scene.
