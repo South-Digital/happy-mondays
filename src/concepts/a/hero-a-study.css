@@ -76,6 +76,7 @@
   align-items: center;
   gap: 27px;
   font-size: 13px;
+  font-weight: 500;
   color: #565e65;
 }
 .ha-nav-desktop > a:not(.ha-button) {
@@ -124,8 +125,9 @@
   background-color: #1d47bb;
   box-shadow: inset 0 1px 3px rgba(12, 31, 79, 0.2);
 }
-.ha-button:focus-visible,
-.ha-mobile-menu summary:focus-visible {
+.ha-study a:focus-visible,
+.ha-mobile-menu summary:focus-visible,
+.ha-mobile-menu button:focus-visible {
   outline: 2px solid #2858d9;
   outline-offset: 4px;
 }
@@ -179,13 +181,21 @@
 }
 .ha-intro h1 span:last-child {
   color: #202730;
+  font-weight: 600;
 }
 .ha-intro p {
   margin: 23px auto 0;
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 18px;
+  line-height: 1.55;
   color: #515b65;
   letter-spacing: -0.015em;
+}
+.ha-intro p span {
+  display: block;
+}
+.ha-intro p span:first-child {
+  color: #343e48;
+  font-weight: 500;
 }
 .ha-hero-cta {
   position: relative;
@@ -325,6 +335,15 @@
   padding: 0 8px;
   height: 46px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+@media (hover: hover) {
+  .ha-store-range:hover {
+    background-color: #fff;
+    border-color: #cbd3dc;
+  }
 }
 .ha-store-range-value {
   font-size: 10px;
@@ -748,6 +767,7 @@
   .ha-mobile-menu summary > span {
     font-size: 18px;
     font-weight: 400;
+    transition: transform 200ms ease;
   }
   .ha-mobile-menu[open] summary > span {
     transform: rotate(45deg);
@@ -760,6 +780,9 @@
     border-radius: 18px;
     background: #fafaf8;
     box-shadow: 0 20px 50px rgba(33, 50, 70, 0.12);
+  }
+  .ha-mobile-menu[open] nav {
+    animation: ha-menu-enter 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .ha-mobile-menu nav button {
     width: 100%;
@@ -774,6 +797,9 @@
     border: 0;
     color: #2a63f5;
   }
+  .ha-mobile-menu nav button:active {
+    color: #2858d9;
+  }
   .ha-intro {
     padding: 34px 20px 0;
   }
@@ -783,8 +809,8 @@
     letter-spacing: -0.04em;
   }
   .ha-intro p {
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.6;
     margin-top: 21px;
     color: #58636e;
   }
@@ -926,8 +952,15 @@
     padding: 27px 16px 32px;
   }
   .ha-proof-reveal > div:first-child {
-    gap: 8px 15px;
-    font-size: 10px;
+    gap: 12px 20px;
+    font-size: 12px;
+  }
+  .ha-proof-reveal > div:first-child > span:first-child {
+    justify-content: center;
+    width: 100%;
+  }
+  .ha-proof-reveal > div:first-child > span[aria-hidden] {
+    display: none;
   }
   .ha-proof-reveal > div:first-child svg,
   .ha-proof-reveal > div:first-child img {
@@ -935,12 +968,36 @@
     max-height: 14px;
   }
   .ha-logos {
-    margin-top: 26px;
+    margin-top: 28px;
+  }
+  .ha-logos > div {
+    padding-inline: 0;
+  }
+  .ha-logos ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 24px;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
+@keyframes ha-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ha-button {
+  .ha-button,
+  .ha-store-range,
+  .ha-mobile-menu summary > span {
     transition: none;
+  }
+  .ha-mobile-menu[open] nav {
+    animation: none;
   }
 }
 
@@ -974,8 +1031,13 @@
   }
 }
 
-.ha-study[data-motion="reduce"] .ha-button {
+.ha-study[data-motion="reduce"] .ha-button,
+.ha-study[data-motion="reduce"] .ha-store-range,
+.ha-study[data-motion="reduce"] .ha-mobile-menu summary > span {
   transition: none;
+}
+.ha-study[data-motion="reduce"] .ha-mobile-menu[open] nav {
+  animation: none;
 }
 
 /* Keep the chart visible as the photograph grows on very wide screens. */

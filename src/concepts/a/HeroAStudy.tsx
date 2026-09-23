@@ -116,9 +116,8 @@ export function HeroAStudy() {
             <motion.span {...riseAt(1, reduced)}>Smile.</motion.span>
           </h1>
           <motion.p {...riseAt(2, reduced)}>
-            Google Ads for Shopify brands.
-            <br />
-            Senior expertise. A flat monthly fee.
+            <span>Google Ads for Shopify brands.</span>
+            <span>Senior expertise. A flat monthly fee.</span>
           </motion.p>
         </div>
         <motion.div className="ha-hero-cta" {...riseAt(3, reduced)}>
@@ -179,7 +178,7 @@ export function HeroAStudy() {
           style={reduced ? undefined : { y: proofY, opacity: proofOpacity }}
         >
           <ProofRow clutchIcon />
-          <LogoStrip className="ha-logos" />
+          <LogoStrip className="ha-logos" staticMobile />
         </motion.div>
       </div>
     </section>

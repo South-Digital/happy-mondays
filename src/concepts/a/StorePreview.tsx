@@ -178,7 +178,15 @@ export function StorePreview() {
                 <g stroke="#dfe3e8" strokeWidth=".7" strokeDasharray="2 5">
                   <path d="M0 12H600M0 96H600M0 180H600" />
                 </g>
-                <path d={`${data.line} L598 190H0Z`} fill={`url(#${fillId})`} />
+                <motion.path
+                  initial={false}
+                  animate={{ d: `${data.line} L598 190H0Z` }}
+                  transition={{
+                    duration: reduced ? 0 : 0.4,
+                    ease: [0.4, 0, 0.2, 1],
+                  }}
+                  fill={`url(#${fillId})`}
+                />
                 <path
                   d="M0 166 C60 161 75 153 130 159 S201 139 265 146 S337 126 398 133 S456 107 529 117 S574 106 598 100"
                   stroke="#c5ced8"
@@ -187,18 +195,19 @@ export function StorePreview() {
                   strokeDasharray="3 5"
                 />
                 <motion.path
-                  key={range}
-                  d={data.line}
                   fill="none"
                   stroke="#5d87cf"
                   strokeWidth="2.4"
                   strokeLinecap="round"
-                  initial={reduced ? false : { pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
+                  initial={reduced ? false : { pathLength: 0, d: data.line }}
+                  animate={{ pathLength: 1, d: data.line }}
                   transition={{
-                    duration: reduced ? 0 : 1.1,
-                    delay: range === "week" ? 0.5 : 0,
-                    ease: "easeOut",
+                    pathLength: {
+                      duration: reduced ? 0 : 1.1,
+                      delay: reduced ? 0 : 0.5,
+                      ease: "easeOut",
+                    },
+                    d: { duration: reduced ? 0 : 0.4, ease: [0.4, 0, 0.2, 1] },
                   }}
                 />
               </svg>

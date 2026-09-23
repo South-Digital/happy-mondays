@@ -37,7 +37,7 @@ The exact generation prompt and method are in [the asset README](public/images/h
 
 - Production TypeScript/Vite build passes.
 - Browser visual review: 320 × 740, 390 × 844, 768 × 1024, 1440 × 1100, 1920 × 1080.
-- Additional DOM boundary checks at widths 700 and 1100. No document horizontal overflow or overlap between visible metric values across the seven checked widths. On 320 × 740 the hero CTA spans y=678–727.
+- Additional DOM boundary checks at widths 700 and 1100. No document horizontal overflow or overlap between visible metric values across the seven checked widths. The later mobile placement pass moved the CTA directly under the copy.
 - Native date selector changes the example figures and chart from 7 to 30 days; the example remains labelled illustrative. This is an interaction demonstration, not a data connection.
 - Mobile menu opens, Escape closes it and restores summary focus. Booking invokes the existing prototype feedback.
 - Reduced-motion review mode disables entrances/chart animation/drift. Actual OS settings were not changed.
@@ -51,3 +51,14 @@ This study needs to be judged against the original and client references. The re
 ## Follow-up: foreground fade
 
 Replaced the four-stop foreground fade with a longer smoothstep gradient and subtle monochrome dithering to reduce visible bands. Removed the on-page data caption and review footer at Zac’s request.
+
+## Follow-up: Apple-reference polish
+
+Zac authorised a further polish pass against the client's repeated Apple reference. The call's soft materials, recognisable Shopify object and conventional navigation remain the direction; [Apple's MacBook Air page](https://www.apple.com/macbook-air/) was consulted as an additional reference for product hierarchy, not a template to copy.
+
+- Added weight to “Smile.” and made the service line slightly larger and more prominent than the supporting sentence. Existing copy, composition and recently restored raised buttons remain.
+- Date-range changes now morph the chart line and its filled area together over 400ms. The entrance draws once; switching back to seven days no longer restarts the delayed line reveal. Reduced motion switches directly to the final data and geometry.
+- Mobile client logos form a readable, static two-column grid. Partner credentials use a larger two-line arrangement. The shared logo component opts into this only for the current hero; its default behavior remains intact elsewhere.
+- Added consistent keyboard focus treatment to navigation and menu controls, date-selector hover feedback, and a short mobile menu entrance with a rotating close indicator. Reduced motion disables the added motion.
+
+Validation: production build and whitespace checks pass; no captured browser warnings/errors. Browser layout checks at 320, 390, 700, 701, 768, 1101, 1440 and 1920px found no horizontal overflow, overflowing metrics or CTA/dashboard intersection. Visually inspected desktop, narrow-phone, mobile menu and proof grid. Verified both chart ranges, intermediate/final path geometry, and Escape restoring focus to the menu summary. At 390px with `?motion=reduce`, chart changes are immediate, glass opacity is 1 and the menu animation is disabled. This is browser QA, not physical-device or cross-browser certification.
