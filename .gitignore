@@ -8,3 +8,6 @@ dist
 
 # local QA scripts (playwright), not part of the prototype
 .dev
+
+# Full-resolution working masters and inspection crops remain local.
+.design/

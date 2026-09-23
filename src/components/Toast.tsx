@@ -1,6 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import type { ReactNode } from 'react'
+import { usePrefersReducedMotion } from '../lib/motion'
 
 type ToastContextValue = { show: (message?: string) => void }
 
@@ -10,14 +19,17 @@ const ToastContext = createContext<ToastContextValue>({ show: () => {} })
 export const PROTOTYPE_TOAST = 'Prototype — links disabled'
 
 export function ToastProvider({ children }: { children: ReactNode }) {
+  const reduced = usePrefersReducedMotion()
   const [message, setMessage] = useState<string | null>(null)
   const timer = useRef<number | undefined>(undefined)
 
   const show = useCallback((next: string = PROTOTYPE_TOAST) => {
     window.clearTimeout(timer.current)
     setMessage(next)
-    timer.current = window.setTimeout(() => setMessage(null), 2000)
+    timer.current = window.setTimeout(() => setMessage(null), 6000)
   }, [])
+
+  useEffect(() => () => window.clearTimeout(timer.current), [])
 
   const value = useMemo(() => ({ show }), [show])
 
@@ -31,11 +43,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         <AnimatePresence>
           {message && (
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={reduced ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.2 }}
-              className="rounded-pill bg-ink/90 px-4 py-2.5 text-[13px] font-medium text-white shadow-chip backdrop-blur"
+              exit={{ opacity: 0, y: reduced ? 0 : 8 }}
+              transition={{ duration: reduced ? 0 : 0.2 }}
+              className="max-w-[470px] rounded-2xl bg-ink/95 px-4 py-2.5 text-[13px] font-medium text-white shadow-chip backdrop-blur"
             >
               {message}
             </motion.div>
