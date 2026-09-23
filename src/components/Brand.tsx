@@ -5,7 +5,17 @@ import { IMG } from '../lib/assets'
  * Happy Mondays wordmark. The SVG export (node 2171:569) is not in the repo yet,
  * so this falls back to a type-only wordmark in the brand face.
  */
-export function Wordmark({ className = '', tone = 'ink' }: { className?: string; tone?: 'ink' | 'white' }) {
+export function Wordmark({
+  className = '',
+  tone = 'ink',
+  size = 'md',
+}: {
+  className?: string
+  tone?: 'ink' | 'white'
+  /** `lg` is the desktop nav's 156x35.29 from node 2171:569; `md` keeps the
+      26px height everywhere else (mobile nav, concept B's pill). */
+  size?: 'md' | 'lg'
+}) {
   const [failed, setFailed] = useState(false)
 
   return (
@@ -24,7 +34,9 @@ export function Wordmark({ className = '', tone = 'ink' }: { className?: string;
           alt="Happy Mondays"
           width={313}
           height={71}
-          className={`h-[26px] w-auto ${tone === 'white' ? 'brightness-0 invert' : ''}`}
+          className={`w-auto ${size === 'lg' ? 'h-[26px] xl:h-[35.29px]' : 'h-[26px]'} ${
+            tone === 'white' ? 'brightness-0 invert' : ''
+          }`}
           onError={() => setFailed(true)}
         />
       )}

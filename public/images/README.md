@@ -105,11 +105,15 @@ uniform height on the images instead renders every mark at the wrong scale.
 
 `a-foreground.webp` is only fully opaque across its whole width from **81% down**;
 higher up, coverage drops to ~73% because the far-left terrace sits low in frame.
-Concept A's hero relies on this: the dashboard is held at a constant 78vw and the
-scene's bottom padding is set in `vw`, so the dashboard's bottom edge always lands
-at ~90% down the rooftop — below the opaque line at every width. Changing either
-value risks exposing the dashboard's lower edge. `.dev/verify-overlap.mjs` checks
-this against the image's real alpha channel.
+Concept A's hero relies on this: the dashboard is held at a constant **80vw** (the
+frame's 1152/1440, node `2171:557`) and the scene's bottom padding is set in `vw`,
+so the dashboard's bottom edge always lands at ~90% down the rooftop — below the
+opaque line at every width. The rooftop itself is pinned to the frame's own
+geometry, node `2171:561`: **117.83% wide, offset −8.243%**, which is x −118.7 to
+x 1578 in a 1440 frame. All three numbers are load-bearing — changing any of them
+risks exposing the dashboard's lower edge. `.dev/verify-overlap.mjs` checks this
+against the image's real alpha channel and is the gate on any change here; at the
+current values it measures 43 / 38 / 30px of cover at 1440 / 1280 / 1024.
 
 ## The Shopify window
 

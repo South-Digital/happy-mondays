@@ -63,19 +63,19 @@ export function HeroA() {
           />
         </motion.div>
 
-        <div className="relative z-10 px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0">
+        <div className="relative z-10 px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0 xl:pt-[3px]">
           <motion.div {...riseAt(SEQ.nav, reduced)}>
             <Nav variant="a" />
             <MobileNav variant="a" />
           </motion.div>
 
           {/* Headline block */}
-          <div className="mx-auto mt-16 flex w-full max-w-content flex-col items-center text-center xl:mt-24">
+          <div className="mx-auto mt-16 flex w-full max-w-content flex-col items-center text-center xl:mt-[60px]">
             <h1 className="text-hero-m md:text-hero-t xl:text-hero">
               <motion.span className="block" {...riseAt(SEQ.line1, reduced)}>
                 Open Shopify.
               </motion.span>
-              <motion.span className="block text-ink-50" {...riseAt(SEQ.smile, reduced)}>
+              <motion.span className="block text-ink-50 xl:mt-2" {...riseAt(SEQ.smile, reduced)}>
                 Smile.
               </motion.span>
             </h1>
@@ -89,7 +89,7 @@ export function HeroA() {
               Senior expertise. A flat monthly fee.
             </motion.p>
 
-            <motion.div className="mt-8" {...riseAt(SEQ.cta, reduced)}>
+            <motion.div className="mt-8 xl:mt-6" {...riseAt(SEQ.cta, reduced)}>
               <MockLink className="btn-liquid">
                 <span>Book a call</span>
                 <ArrowUpRight width={16} height={16} />
@@ -99,7 +99,7 @@ export function HeroA() {
 
           {/* Dashboard settles last — from +32px and 96% scale, over ~900ms (§A4) */}
           <motion.div
-            className="relative mx-auto mt-16 hidden w-[78vw] max-w-[1120px] md:block xl:mt-20"
+            className="relative mx-auto mt-16 hidden w-[80vw] max-w-[1152px] md:block xl:mt-20"
             initial={reduced ? false : { opacity: 0, y: DIST.lg, scale: DIST.scaleFrom }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -115,7 +115,7 @@ export function HeroA() {
 
             {/* Breaks the frame on the dashboard's left edge; lands 200ms later */}
             <motion.div
-              className="absolute -left-[140px] top-[44%] hidden xl:block"
+              className="absolute -left-[77px] top-[44%] hidden xl:block"
               initial={reduced ? false : { opacity: 0, y: DIST.sm }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -167,7 +167,7 @@ export function HeroA() {
             width={2000}
             height={467}
             priority
-            className="ml-auto block h-auto w-[180%] max-w-none md:w-[120%]"
+            className="ml-auto block h-auto w-[180%] max-w-none md:ml-[-8.243%] md:w-[117.83%]"
             fallback="linear-gradient(180deg,rgba(206,195,176,0) 0%,rgba(206,195,176,.55) 34%,#C8BCA4 68%,#B6A88C 100%)"
           />
         </div>
