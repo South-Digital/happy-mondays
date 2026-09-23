@@ -14,8 +14,8 @@ const directions = [
     route: "b",
     name: "Nature first.",
     image: "/images/hero-b-v2/terrace-1440.webp",
-    description: "A little room to breathe. Nature makes the first impression, followed by a store-and-search story that connects the feeling of growth to the work behind it.",
-    scope: "Explore the opening, the approach and the people behind it.",
+    description: "A little room to breathe. An immersive coastal landscape, a confident headline and soft details give the brand space to make its first impression.",
+    scope: "Explore the nature-first hero.",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function ClientReviewPage() {
       </section>
       <footer className="mt-10 max-w-3xl pb-4 text-xs leading-relaxed text-ink-60">
         Interactive design previews. Booking and navigation are for demonstration;
-        store figures and Shopping placements are illustrative. These links show the design direction,
+        Concept A’s store figures are illustrative. These links explore the hero direction,
         rather than a finished website.
       </footer>
     </main>

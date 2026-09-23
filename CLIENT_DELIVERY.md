@@ -19,7 +19,7 @@ The original `happy-mondays` Vercel project is separate and its settings were no
 
 ## Review scope
 
-A explores the opening and brand credentials. B explores a nature-first opening, the store/search explanation, client credentials and founder close. They are design previews. Booking and navigation show preview feedback; store values and Shopping placements are illustrative. The review page sets this expectation without internal study labels on the concepts.
+A explores the opening and brand credentials. B is a standalone nature-first hero. The store/search story, lower client strip, founder close and footer were removed at the user’s request to focus the comparison on the opening. They are design previews. Booking and navigation show preview feedback; Concept A’s store values are illustrative. The review page sets this expectation without internal study labels on the concepts.
 
 ## Final local verification
 

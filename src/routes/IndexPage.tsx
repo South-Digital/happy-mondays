@@ -14,9 +14,9 @@ const directions = [
     route: "b",
     title: "Nature first.",
     image: "/images/hero-b-v2/terrace-1440.webp",
-    label: "Concept B · Opening sequence",
+    label: "Concept B · Hero study",
     description:
-      "Space to breathe, then a clearer path to growth. An immersive coastal opening, store-and-search demonstration and a personal close.",
+      "Space to breathe. An immersive coastal opening with a confident headline and soft materials.",
   },
 ];
 export default function IndexPage() {
@@ -87,15 +87,14 @@ export default function IndexPage() {
         <h2 className="text-xl font-semibold">What to judge</h2>
         <p className="mt-3 max-w-3xl leading-relaxed text-ink-72">
           Does each opening feel premium, warm and unmistakably for Shopify
-          brands? Does B make the step from nature to the commercial work feel
-          natural? These are reviewable design directions, not client-approved
+          brands? Which balance of landscape and ecommerce makes the strongest
+          first impression? These are reviewable design directions, not client-approved
           finished homepages.
         </p>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-ink-72">
           Booking and unbuilt navigation destinations show a preview message.
-          All store figures and Shopping placements are illustrative. B’s
-          example plays once when visible and can be replayed; reduced motion
-          presents a complete static explanation. Partner claims, final copy and
+          Concept A’s store figures are illustrative. Both previews focus on
+          the hero; reduced motion presents the opening without animation. Partner claims, final copy and
           booking destination remain launch checks.
         </p>
       </section>
