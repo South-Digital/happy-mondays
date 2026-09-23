@@ -3,6 +3,7 @@ import { ToastProvider } from "./components/Toast";
 import IndexPage from "./routes/IndexPage";
 import ConceptA from "./concepts/a/ConceptA";
 import BaselineA from "./concepts/a/BaselineA";
+import BaselineB from "./concepts/b/BaselineB";
 import ConceptB from "./concepts/b/ConceptB";
 import RefinedSite from "./refinement/RefinedSite";
 
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/concept-a" element={<ConceptA />} />
           <Route path="/baseline/concept-a" element={<BaselineA />} />
           <Route path="/concept-b" element={<ConceptB />} />
+          <Route path="/baseline/concept-b" element={<BaselineB />} />
           <Route
             path="/rejected/concept-a"
             element={<RefinedSite route="a" />}

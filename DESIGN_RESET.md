@@ -51,3 +51,7 @@ This pass re-read the full client call transcript, not its recording. It re-open
 ## Follow-up after Zac authorised proceeding
 
 A focused hero study is now available at `/concept-a`. The original is preserved at `/baseline/concept-a`; B remains the original at `/concept-b`. This supersedes the immediate-recovery route map above. The current implementation, source links, asset dimensions and validation are in [HERO_A_REVIEW.md](HERO_A_REVIEW.md). There is no client design approval and no claim that the homepage is complete.
+
+## Concept B follow-up
+
+The nature-first opening sequence is now implemented at `/concept-b`, with Emmanuel’s original retained at `/baseline/concept-b`. This supersedes the earlier statement that B remains unchanged. See [CONCEPT_B_ROADMAP.md](CONCEPT_B_ROADMAP.md) and [CONCEPT_B_REVIEW.md](CONCEPT_B_REVIEW.md). Current A is unchanged by this pass.
