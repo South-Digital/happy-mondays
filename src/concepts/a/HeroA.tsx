@@ -51,16 +51,30 @@ export function HeroA() {
           className="absolute inset-0 overflow-hidden"
           style={reduced ? undefined : { y: bgY }}
         >
-          <Photo
-            src={IMG.aHeroBg}
-            responsive
-            alt=""
-            width={2000}
-            height={1786}
-            priority
-            className="h-[115%] w-full object-cover object-top"
-            fallback="linear-gradient(180deg,#C6DAF0 0%,#DDE6EC 38%,#E9E4D9 72%,#DED4C2 100%)"
-          />
+          {/* Nodes 2171:555/556: the photograph renders 1716x1286 inside the
+              1440x1286 hero at x-138 - 119.1667% of the hero's WIDTH, centred,
+              top-anchored, with the excess cropping off the bottom.
+
+              Keyed to width, never to height. Sizing it by height (which is what
+              `h-[115%] object-cover` did) makes the horizontal crop depend on how
+              tall the hero happens to be, and that is what was cutting the village
+              out of the right-hand slice. `min-h-full` only takes over below 1440,
+              where the hero is proportionally taller than the frame's box; because
+              the box is already 19.17% wider than the viewport, the fill stays
+              width-driven there too, so the same horizontal content still shows. */}
+          <div className="absolute left-1/2 top-0 aspect-[1716/1286] w-[119.1667%] min-h-full -translate-x-1/2">
+            <Photo
+              src={IMG.aHeroBg}
+              responsive
+              alt=""
+              width={2000}
+              height={1786}
+              priority
+              sizes="120vw"
+              className="h-full w-full object-cover object-center"
+              fallback="linear-gradient(180deg,#C6DAF0 0%,#DDE6EC 38%,#E9E4D9 72%,#DED4C2 100%)"
+            />
+          </div>
         </motion.div>
 
         <div className="relative z-10 px-5 pb-[70px] pt-7 md:pb-[max(28px,2.8vw)] xl:px-0 xl:pt-[3px]">
@@ -163,6 +177,8 @@ export function HeroA() {
           <Photo
             src={IMG.aHeroFg}
             responsive
+            /* 117.83% of the viewport, per node 2171:561. */
+            sizes="118vw"
             alt=""
             width={2000}
             height={467}

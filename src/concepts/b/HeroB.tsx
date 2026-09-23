@@ -45,6 +45,10 @@ export function HeroB() {
           <Photo
             src={IMG.bHero}
             responsive
+            /* Paints at 110vw at 1440 and 100vw at 1920 (object-cover on a 110%
+               box); 100vw would under-declare it and pull a file that is too
+               small. */
+            sizes="110vw"
             alt="A whitewashed Santorini terrace looking out over the caldera"
             width={2000}
             height={1667}

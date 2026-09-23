@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
+import VARIANTS from '../lib/image-variants.json'
+
+type VariantEntry = { w: number; h: number; variants: number[] }
+const MANIFEST = VARIANTS as Record<string, VariantEntry>
 
 type PhotoProps = {
   src: string
@@ -14,14 +18,18 @@ type PhotoProps = {
   fallback?: string
   sizes?: string
   /**
-   * Offers narrower variants of the same file alongside the full-width one, so a
-   * phone does not download a 2000px photo. Pass the widths that actually exist
-   * on disk as `<basename>-<width>.webp`; see public/images/README.md.
+   * Builds a srcset from the variant ladder in src/lib/image-variants.json,
+   * which `npm run images` regenerates from whatever is on disk. Drop a
+   * higher-resolution export into public/images, re-run it, and the browser
+   * starts picking the new rungs with no change here.
    *
-   * When higher-resolution sources are re-exported, add their widths here and
-   * the browser will start picking them with no other change.
+   * `sizes` must describe the width the image actually PAINTS at, which for a
+   * full-bleed `object-cover` photo is not 100vw - concept A's hero background
+   * paints at 119vw. Understating it makes the browser pick a file that is too
+   * small, which is indistinguishable from a low-resolution source.
    */
   responsive?: boolean
+  /** Overrides the manifest, for a file it does not cover. */
   variants?: number[]
 }
 
@@ -40,7 +48,7 @@ export function Photo({
   fallback,
   sizes,
   responsive = false,
-  variants = [1000],
+  variants,
 }: PhotoProps) {
   const [failed, setFailed] = useState(false)
 
@@ -57,9 +65,15 @@ export function Photo({
     )
   }
 
-  const srcSet = responsive
-    ? [...variants.map((v) => `${src.replace(/\.webp$/, `-${v}.webp`)} ${v}w`), `${src} ${width}w`].join(', ')
-    : undefined
+  const entry = MANIFEST[src]
+  const rungs = variants ?? entry?.variants ?? []
+  // The full-size file carries its real width, so the browser can tell when no
+  // rung is big enough rather than being told a variant is larger than it is.
+  const fullWidth = entry?.w ?? width
+  const srcSet =
+    responsive && rungs.length
+      ? [...rungs.map((v) => `${src.replace(/\.webp$/, `-${v}.webp`)} ${v}w`), `${src} ${fullWidth}w`].join(', ')
+      : undefined
 
   return (
     <img
@@ -71,6 +85,7 @@ export function Photo({
       sizes={srcSet ? (sizes ?? '100vw') : sizes}
       loading={priority ? 'eager' : 'lazy'}
       decoding={priority ? 'sync' : 'async'}
+      {...(priority ? { fetchPriority: 'high' as const } : {})}
       draggable={false}
       className={className}
       style={style}

@@ -231,6 +231,7 @@ export function SearchShopping({ className = '' }: { className?: string }) {
             <Photo
               src={IMG.panelBackdrop}
               responsive
+              sizes="(max-width: 1023px) 95vw, 832px"
               alt=""
               width={1760}
               height={1296}

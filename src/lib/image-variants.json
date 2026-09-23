@@ -1,0 +1,117 @@
+{
+  "/images/a-foreground.webp": {
+    "w": 2000,
+    "h": 467,
+    "variants": [
+      1000,
+      1200,
+      1600
+    ]
+  },
+  "/images/a-hero-bg.webp": {
+    "w": 2000,
+    "h": 1786,
+    "variants": [
+      1000,
+      1200,
+      1600
+    ]
+  },
+  "/images/b-hero.webp": {
+    "w": 2000,
+    "h": 1667,
+    "variants": [
+      1000,
+      1200,
+      1600
+    ]
+  },
+  "/images/dash-neworder.webp": {
+    "w": 836,
+    "h": 228,
+    "variants": []
+  },
+  "/images/dash-panel.webp": {
+    "w": 1816,
+    "h": 1230,
+    "variants": [
+      1000,
+      1200,
+      1600
+    ]
+  },
+  "/images/dash-sidebar.webp": {
+    "w": 440,
+    "h": 1318,
+    "variants": []
+  },
+  "/images/logo-atpresent.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-goflower.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-hm.webp": {
+    "w": 313,
+    "h": 71,
+    "variants": []
+  },
+  "/images/logo-jpha.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-luckyhoney.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-nativemed.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-ourpetslife.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-plum.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/logo-reincoat.webp": {
+    "w": 327,
+    "h": 144,
+    "variants": []
+  },
+  "/images/panel-bg.webp": {
+    "w": 1760,
+    "h": 1296,
+    "variants": [
+      1000,
+      1200,
+      1600
+    ]
+  },
+  "/images/product-checkered.webp": {
+    "w": 358,
+    "h": 247,
+    "variants": []
+  },
+  "/images/product-crewstripe.webp": {
+    "w": 358,
+    "h": 247,
+    "variants": []
+  },
+  "/images/product-juliet.webp": {
+    "w": 358,
+    "h": 247,
+    "variants": []
+  }
+}

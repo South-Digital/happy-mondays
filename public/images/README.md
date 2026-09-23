@@ -153,3 +153,56 @@ that bear on the assets:
 - **The metric count-up only runs on the HTML recreation.** The exported panel's
   numbers are pixels, so they cannot count. `DashboardHtml` counts all four up
   over 900ms; the export shows them final.
+
+## Resolution and the variant ladder
+
+`npm run images` (scripts/gen-image-variants.mjs) encodes the WebP ladder
+**1000 / 1200 / 1600 / 2400 / 3200 / 4000** at quality 84 and writes
+`src/lib/image-variants.json`, which `<Photo responsive>` reads to build its
+srcset. It **never upscales**: a rung is only emitted when the source is at
+least that wide, so a photo that cannot cover its slot stays visibly soft in
+the audit rather than being stretched to hide it. Drop a larger export in here,
+re-run it, and the new rungs are picked up with no code change.
+
+`sizes` must describe the width the image actually PAINTS at, not the width of
+its box. For a full-bleed `object-cover` photo those differ: concept A's hero
+background paints at **119vw** (node 2171:555) and the rooftop at **118vw**
+(node 2171:561). Declaring 100vw makes the browser choose a file that is too
+small, which is indistinguishable from a low-resolution source.
+
+Measured at the time of writing (painted width at a 1440 viewport, and what
+DPR 2 needs), via `.dev/img-audit.mjs`:
+
+| file | source | painted @1440 | needs @2x | ratio | verdict |
+|---|---|---|---|---|---|
+| a-hero-bg | 2000x1786 | 1716 | 3432 | **0.58** | re-export ≥ 4600px wide |
+| a-foreground | 2000x467 | 1697 | 3394 | **0.59** | re-export ≥ 4600px wide |
+| b-hero | 2000x1667 | 1584 | 3168 | **0.63** | re-export ≥ 3900px wide |
+| dash-panel | 1816x1230 | 906 | 1812 | 1.00 | ok |
+| dash-sidebar | 440x1318 | 220 | 440 | 1.00 | ok |
+| panel-bg | 1760x1296 | 832 | 1664 | 1.06 | ok |
+| pillar-bg-1/2/3 | 768x672 | 384 | 768 | 1.00 | ok |
+| logo-* | 327x144 | 163 | 326 | 1.00 | ok |
+| product-* | 358x247 | 123-160 | 246-320 | 1.12-2.91 | ok |
+
+At 1920 the three photographs fall to 0.44 / 0.44 / 0.52. A 3x export from the
+frame clears every case: 1716, 1697 and 1450 at 3x are 5148, 5090 and 4350.
+
+## A note on the hero photograph's crop
+
+Node 2171:555 renders the background **1716x1286 in a 1440x1286 hero at x-138**:
+119.1667% of the hero's WIDTH, horizontally centred, top-anchored, with the
+excess cropping off the bottom. It is keyed to width and never to height.
+
+Sizing it by height - which is what `h-[115%] object-cover` did - makes the
+horizontal crop depend on how tall the hero happens to be, so the visible slice
+of the photograph moved with the viewport: source x 105..1895 at 1440, but
+210..1790 at 1024, cutting the village and trees out of the right-hand edge.
+Keyed to width it is **x 161..1839 at every width**, which is the frame's own
+window. `.dev/village.mjs` measures this.
+
+Concept B has the same height-keyed crop and has NOT been changed: its window
+is x 91..1909 at 1440, 192..1808 at 1280 and the full 0..2000 at 1024, where it
+flips to width-driven. Its export is a 2000x1667 **landscape** crop while the
+frame uses a 1450x1933 **portrait** one (node 2166:4484, object-position centre
+92%), so the frame's crop cannot be reproduced from this file at all.
