@@ -187,11 +187,12 @@ function Hero() {
   );
 }
 function Analytics() {
+  const reduced = usePrefersReducedMotion();
   return (
     <div
       className="nb-analytics"
       role="img"
-      aria-label="Illustrative Shopify analytics, not a client result. Total sales 128,460 dollars, 1,842 orders, conversion rate 3.4 percent."
+      aria-label="Illustrative Shopify analytics, not a client result. Total sales 128,460 dollars, 1,842 orders, conversion rate 3.4 percent. The solid blue sales line shows this week; the dashed grey line shows the previous week."
     >
       <div className="nb-store-bar">
         <span>
@@ -223,38 +224,59 @@ function Analytics() {
           </div>
         </div>
         <div className="nb-chart">
-          <p>Total sales over time</p>
-          <div>
-            <span>
-              $24K
-              <br />
-              <br />
-              <br />
-              $12K
-            </span>
-            <svg viewBox="0 0 500 150" preserveAspectRatio="none" aria-hidden>
+          <div className="nb-chart-heading">
+            <p>Total sales over time</p>
+            <div className="nb-chart-legend" aria-hidden>
+              <span>This week</span>
+              <span>Previous week</span>
+            </div>
+          </div>
+          <div className="nb-chart-plot">
+            <div className="nb-chart-axis" aria-hidden>
+              <span>$24K</span>
+              <span>$12K</span>
+              <span>$0</span>
+            </div>
+            <svg viewBox="0 0 500 160" preserveAspectRatio="none" aria-hidden>
               <defs>
-                <linearGradient id="nb-fill" x2="0" y2="1">
+                <linearGradient id="nb-fill" x1="0" y1="0" x2="0" y2="1">
                   <stop stopColor="#739bdc" stopOpacity=".22" />
                   <stop offset="1" stopColor="#739bdc" stopOpacity="0" />
                 </linearGradient>
               </defs>
               <path
-                d="M0 15H500M0 78H500M0 140H500"
+                d="M0 15H500M0 80H500M0 145H500"
                 fill="none"
                 stroke="#dce2e9"
                 strokeDasharray="2 5"
               />
               <path
-                d="M0 132C35 130 39 114 70 118S111 93 146 99S188 70 218 80S270 53 307 60S350 34 380 42S432 10 458 18S480 12 500 6V150H0Z"
-                fill="url(#nb-fill)"
+                d="M0 138C35 135 40 128 70 130S112 117 146 121S188 101 218 110S270 90 307 99S350 78 380 87S432 69 458 74S480 68 500 62"
+                fill="none"
+                stroke="#b2becd"
+                strokeWidth="1.8"
+                strokeDasharray="3 5"
               />
-              <path
-                d="M0 132C35 130 39 114 70 118S111 93 146 99S188 70 218 80S270 53 307 60S350 34 380 42S432 10 458 18S480 12 500 6"
+              <motion.path
+                d="M0 132C35 130 39 114 70 118S111 93 146 99S188 70 218 80S270 53 307 60S350 34 380 42S432 18 458 25S480 23 500 17V145H0Z"
+                fill="url(#nb-fill)"
+                initial={reduced ? false : { opacity: 0 }}
+                animate={reduced ? { opacity: 1 } : undefined}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: .4 }}
+                transition={{ duration: reduced ? 0 : .8, delay: reduced ? 0 : .2, ease }}
+              />
+              <motion.path
+                d="M0 132C35 130 39 114 70 118S111 93 146 99S188 70 218 80S270 53 307 60S350 34 380 42S432 18 458 25S480 23 500 17"
                 fill="none"
                 stroke="#5d87cf"
                 strokeWidth="2.5"
                 strokeLinecap="round"
+                initial={reduced ? false : { pathLength: 0 }}
+                animate={reduced ? { pathLength: 1 } : undefined}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true, amount: .4 }}
+                transition={{ duration: reduced ? 0 : 1.1, ease }}
               />
             </svg>
           </div>
@@ -422,7 +444,14 @@ function GrowthStory() {
           </a>
         </div>
         <div className="nb-demo-grid">
-          <div className="nb-dashboard-scene">
+          <motion.div
+            className="nb-dashboard-scene"
+            initial={reduced ? false : { y: 16 }}
+            animate={reduced ? { y: 0 } : undefined}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true, amount: .2 }}
+            transition={{ duration: reduced ? 0 : .9, ease }}
+          >
             <div className="nb-scene-soft" aria-hidden />
             <Analytics />
             <div className="nb-store-caption">
@@ -431,15 +460,22 @@ function GrowthStory() {
               <br />
               <strong>One joined-up approach.</strong>
             </div>
-          </div>
-          <div className="nb-shopping-scene">
+          </motion.div>
+          <motion.div
+            className="nb-shopping-scene"
+            initial={reduced ? false : { y: 16 }}
+            animate={reduced ? { y: 0 } : undefined}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true, amount: .2 }}
+            transition={{ duration: reduced ? 0 : .9, delay: reduced ? 0 : .1, ease }}
+          >
             <Shopping phase={current} />
             <div
               ref={intervention}
               className={`nb-intervention nb-intervention-${current}`}
             >
               <span className="nb-work-mark" aria-hidden>
-                ✳
+                <img src="/images/logo-hm.png" alt="" width="313" height="71" />
               </span>
               <div>
                 <strong>
@@ -463,7 +499,7 @@ function GrowthStory() {
                     : "Position 5"}
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className="nb-example-controls">
           <p>An illustrative journey. Placements and results vary.</p>

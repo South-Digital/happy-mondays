@@ -54,3 +54,12 @@ Validation: 19 viewport geometry checks from 320×568 through 2560×1440, includ
 Normal-motion browser verification captured position five, the explicit work stage still at five, and the final position one. Scrolling away during work retained that stage; returning completed the move. Reduced motion shows all three explanations plus the written 5→work→1 description, with no replay or scenery transform. Landscape menu booking closes the menu, restores focus and shows the preview message. Final production build/TypeScript and whitespace checks pass; no captured browser warnings/errors. `npm ci` still reports the four inherited dependency advisories (three moderate, one high); this visual pass does not perform a framework migration.
 
 These checks remain viewport/browser validation, not physical-device or cross-engine certification. No additional imagery generation or Magnific credits were used in this review.
+
+## Store-detail and motion continuation
+
+- Analytics now uses Inter and tabular numerals, matching the supplied Shopify UI guidance. Replaced manual line-break axis positioning with labels aligned to the actual grid; added a labelled, dashed previous-week series. Numbers and both lines remain illustrative.
+- The two demonstration cards settle vertically by 16px over 900ms, once, with a 100ms stagger. They remain fully opaque throughout. The chart draws over 1.1 seconds and its area appears softly; reduced motion renders the final chart/cards immediately. Scrolling away and back does not restart the entrance.
+- The intervention uses the supplied Happy Mondays symbol (a CSS window onto the original wordmark asset). Reserved the longest label’s height: a narrow-phone review had found a 17px shift between before/work states. This is now prevented by a 96px minimum on phones and 82px elsewhere.
+- Header links and booking now have 44px-high hit areas; touch devices do not inherit the button’s hover lift.
+
+Verification: production build and whitespace checks passed. Twelve viewport checks (320, 390, 600/601, 768, 801, 900/901, 1100/1101, 1440, 1920) found no horizontal overflow, overlapping metric values, chart/legend overflow or navigation collisions; all visible header controls were 44px high. Visually inspected 1440 desktop, 901 two-column boundary and 390/320 phones. Sampled the chart mid-draw and settled; both cards ended at no transform and remained settled on re-entry. Reduced-motion cards were untransformed across the matrix. The original A and baseline components remain untouched.

@@ -54,3 +54,10 @@ Validation and remaining launch inputs: [CONCEPT_B_REVIEW.md](CONCEPT_B_REVIEW.m
 Source conflict resolved: the internal hero brief proposes a sector bento, but the later repository implementation specification explicitly says to ignore the hidden sector-bento band. It remains outside this focused route review. The historical pillars’ 60–70% / capacity / weekly-Loom claims remain excluded because the evidence notes identify them as unresolved.
 
 The original 1.1/3.2-second timing and transient-caption description above are historical. Current timing is 1.8 seconds at fifth, then 3.2 seconds with the work identified, then an 850ms move to first. Visibility is measured on the intervention label so short screens can trigger it. Leaving view cancels the pending advance; returning gives the current stage its full reading interval again. Static explanations remain throughout.
+
+## Store-detail continuation
+
+- [x] Restore native UI typography and align chart labels to the plotted grid; make the comparison understandable with a legend.
+- [x] Add finite card/chart entrances, keeping surface opacity constant and reduced-motion output complete.
+- [x] Replace the generic work mark with the supplied brand symbol; prevent narrow-phone intervention-height shifts.
+- [x] Recheck typography bounds, touch targets, motion re-entry and deployment.

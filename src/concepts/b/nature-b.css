@@ -1543,3 +1543,78 @@
   .nb-work-mark { font-size: 22px; }
   .nb-metrics span { font-size: 9px; }
 }
+
+/* Native store typography and a properly aligned comparison chart. */
+.nb-analytics {
+  font-family: Inter, Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.nb-metrics strong { letter-spacing: -.045em; }
+.nb-metrics span, .nb-store-bar, .nb-store-title > span { color: #64717e; }
+.nb-metrics small { color: #497463; }
+.nb-chart .nb-chart-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.nb-chart-heading p { margin: 0; font-size: 11px; }
+.nb-chart-legend {
+  display: flex;
+  gap: 14px;
+  font-size: 9px;
+  color: #64717e;
+  flex: none;
+}
+.nb-chart-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.nb-chart-legend span::before {
+  content: "";
+  width: 12px;
+  border-top: 2px solid #5d87cf;
+}
+.nb-chart-legend span + span::before { border-top: 2px dashed #a1afbf; }
+.nb-chart .nb-chart-plot { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
+.nb-chart-axis { position: relative; color: #718090; font-size: 9px; }
+.nb-chart-axis span { position: absolute; left: 0; transform: translateY(-50%); }
+.nb-chart-axis span:first-child { top: 9.375%; }
+.nb-chart-axis span:nth-child(2) { top: 50%; }
+.nb-chart-axis span:last-child { top: 90.625%; }
+.nb-chart svg { height: 122px; }
+.nb-chart footer { padding-left: 40px; color: #718090; }
+@media (max-width: 1100px) {
+  .nb-chart .nb-chart-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+}
+@media (max-width: 600px) {
+  .nb-chart .nb-chart-heading { margin-bottom: 18px; }
+  .nb-chart svg { height: 110px; }
+  .nb-chart-legend { font-size: 9px; }
+  .nb-metrics strong { font-size: clamp(18px, 5.2vw, 24px); }
+}
+
+/* Give navigation comfortable hit areas without changing the visual labels. */
+.nb-nav > a { display: inline-flex; align-items: center; min-height: 44px; }
+.nb-desktop-links > button { min-height: 44px; min-width: 44px; }
+@media (hover: none) {
+  .nb-button:hover { transform: none; }
+}
+
+.nb-work-mark {
+  display: block;
+  width: 36px;
+  height: 23px;
+  overflow: hidden;
+  flex: none;
+  opacity: .85;
+}
+.nb-work-mark img { width: auto; height: 23px; max-width: none; }
+@media (max-width: 600px) {
+  .nb-work-mark { width: 31px; height: 20px; }
+  .nb-work-mark img { height: 20px; }
+}
+
+/* Reserve the longest intervention label so phase changes never move the page. */
+.nb-intervention { min-height: 82px; }
+@media (max-width: 600px) {
+  .nb-intervention { min-height: 96px; }
+}
