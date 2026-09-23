@@ -63,11 +63,13 @@ export function HeroA() {
               the box is already 19.17% wider than the viewport, the fill stays
               width-driven there too, so the same horizontal content still shows.
 
-              Vertically it anchors at 66%, not the centre and not the top. The
+              Vertically it anchors at 82%, not the centre and not the top. The
               land - horizon, village, foreshore - runs across roughly 45%-85%
               of the image, and the hero is shorter than the 1286 the frame
               draws, so a centred window pushes that band down past the fold and
-              the first screenful is only sky and sea. */}
+              the first screenful is only sky and sea. 82% is the ceiling: past
+              it the horizon rises above the CTA and the button sits on the
+              sea. */}
           <div className="absolute left-1/2 top-0 aspect-[1716/1286] w-[119.1667%] min-h-full -translate-x-1/2">
             <Photo
               src={IMG.aHeroBg}
@@ -77,7 +79,7 @@ export function HeroA() {
               height={1786}
               priority
               sizes="120vw"
-              className="h-full w-full object-cover object-[center_66%]"
+              className="h-full w-full object-cover object-[center_82%]"
               fallback="linear-gradient(180deg,#C6DAF0 0%,#DDE6EC 38%,#E9E4D9 72%,#DED4C2 100%)"
             />
           </div>
