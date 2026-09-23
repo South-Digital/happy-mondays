@@ -3,6 +3,7 @@ import { ToastProvider } from './components/Toast'
 import IndexPage from './routes/IndexPage'
 import ConceptA from './concepts/a/ConceptA'
 import ConceptB from './concepts/b/ConceptB'
+import RefinedSite from './refinement/RefinedSite'
 
 export default function App() {
   return (
@@ -12,6 +13,8 @@ export default function App() {
           <Route path="/" element={<IndexPage />} />
           <Route path="/concept-a" element={<ConceptA />} />
           <Route path="/concept-b" element={<ConceptB />} />
+          <Route path="/rejected/concept-a" element={<RefinedSite route="a" />} />
+          <Route path="/rejected/concept-b" element={<RefinedSite route="b" />} />
           <Route path="*" element={<IndexPage />} />
         </Routes>
       </ToastProvider>

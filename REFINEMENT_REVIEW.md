@@ -1,4 +1,6 @@
-# Happy Mondays — review handoff
+# Happy Mondays — rejected pass / recovery handoff
+
+**Status: rejected, not client-ready.** The previous recommendation is withdrawn. The original A/B components have been restored as the working baseline; the rejected pass is archived at `/rejected/concept-a` and `/rejected/concept-b`. Read [DESIGN_RESET.md](DESIGN_RESET.md) for the source review, diagnosis and correction sequence. The implementation and test history below describes the rejected pass, not an approved result.
 
 ## What changed
 
@@ -6,7 +8,7 @@ Two complete homepage review directions now develop Emmanuel's latest working br
 
 Both add the real founder early, explain account foundations and the post-click experience, replace the empty video treatment with a written Monday update, include a sourced client quote and finish with a deliberate booking invitation. Five service states are manually controlled and keyboard accessible. Booking remains explicitly mocked.
 
-My recommended direction is A: the emotional idea and commercial outcome are connected in the first composition. B is a credible, quieter alternative. Client taste and approval remain the next design decision; this handoff is not a claim that the final Framer delivery is complete.
+The earlier recommendation for A and assessment of B as a credible alternative have been withdrawn. Both departed materially from the brief.
 
 ## Review links
 
@@ -16,9 +18,10 @@ Vercel preview: https://happy-mondays-git-codex-concept-refinement-zac-santers-p
 
 Draft PR: https://github.com/South-Digital/happy-mondays/pull/3
 
-- `/`: overview and motion-reduced entry links.
-- `/concept-a`: A clearer outlook.
-- `/concept-b`: Room to grow.
+- `/`: recovery status and baseline comparison links.
+- `/concept-a`: Emmanuel’s original Landscape with depth baseline.
+- `/concept-b`: Emmanuel’s original Nature first baseline.
+- `/rejected/concept-a` and `/rejected/concept-b`: rejected pass retained for comparison.
 - Append `?motion=reduce` to render without entrance or transition motion. The system reduced-motion preference is also respected.
 
 ## Validation

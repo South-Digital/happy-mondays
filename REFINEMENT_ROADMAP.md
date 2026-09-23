@@ -1,4 +1,6 @@
-# Happy Mondays — refinement roadmap
+# Happy Mondays — rejected refinement record
+
+**Status: rejected by Zac on 23 September 2026. Not client-ready.** The checked items below record work performed, not accepted design outcomes. The earlier completion assessment is withdrawn. Follow [DESIGN_RESET.md](DESIGN_RESET.md) for the source-grounded correction sequence.
 
 Started 23 September 2026. Owner: Zac / Codex. Working branch: `codex/concept-refinement`, based on Emmanuel's `b8e6fa6`. This roadmap implements Zac's request for a substantially higher design standard. It deliberately develops beyond the earlier Figma-copying specification. Final delivery platform remains Framer; these are review prototypes.
 
@@ -113,4 +115,4 @@ Completion is based on the gates above and a final critical visual review. “Wo
 - Vercel branch preview: https://happy-mondays-git-codex-concept-refinement-zac-santers-projects.vercel.app
 - GitHub Vercel status: Success; authenticated Vercel CLI confirms target `preview`, status Ready. Existing production was not promoted or reconfigured.
 - Remote browser rendering is protected by Vercel account access. The in-app browser's account did not have access; switching accounts reached sign-in. No access request was sent and deployment protection was not changed. The verified local production build is available at `http://127.0.0.1:4178/` for immediate review.
-- Design/refinement roadmap complete for these two review prototypes. Final Framer delivery and launch inputs remain explicitly outside this prototype handoff.
+- The prior design-complete assessment was incorrect and has been withdrawn after Zac’s review. Design work remains incomplete; see DESIGN_RESET.md.

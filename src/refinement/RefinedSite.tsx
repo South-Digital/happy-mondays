@@ -995,7 +995,7 @@ function Footer({ route }: { route: Route }) {
       </a>
       <p>Google Ads. Shopify growth. Happy Mondays.</p>
       <a
-        href={`${route === 'a' ? '/concept-b' : '/concept-a'}${reduced ? '?motion=reduce' : ''}`}
+        href={`${route === 'a' ? '/rejected/concept-b' : '/rejected/concept-a'}${reduced ? '?motion=reduce' : ''}`}
         className="hm-review-switch"
       >
         View concept {route === 'a' ? 'B' : 'A'} <Arrow />
@@ -1040,7 +1040,7 @@ export default function RefinedSite({ route }: { route: Route }) {
       data-motion={reduced ? 'reduce' : 'full'}
     >
       <Seo
-        title={`Concept ${route.toUpperCase()} — ${route === 'a' ? 'A clearer outlook' : 'Room to grow'} · Happy Mondays`}
+        title={`Rejected concept ${route.toUpperCase()} — ${route === 'a' ? 'A clearer outlook' : 'Room to grow'} · Happy Mondays`}
       />
       <a className="hm-skip" href="#main-content">
         Skip to content
