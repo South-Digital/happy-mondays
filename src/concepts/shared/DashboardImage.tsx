@@ -34,12 +34,15 @@ export function DashboardImage({
           width={440}
           height={1318}
           priority
-          className="block h-auto overflow-hidden rounded-[18px]"
+          className="block h-auto overflow-hidden rounded-[calc(18px*var(--dash-scale,1))]"
           style={{ width: `${SIDEBAR_PCT}%` }}
           fallback="linear-gradient(180deg,#FBFBFA,#F4F4F3)"
         />
 
-        <div className="relative overflow-hidden rounded-[18px]" style={{ width: `${PANEL_PCT}%` }}>
+        <div
+          className="relative overflow-hidden rounded-[calc(18px*var(--dash-scale,1))]"
+          style={{ width: `${PANEL_PCT}%` }}
+        >
           <Photo
             src={IMG.dashPanel}
             alt="Shopify analytics: total sales $128,460, 1,842 orders, 3.4% conversion rate, 5.05 ROAS, and total sales over time for the week."
@@ -97,7 +100,7 @@ export function DashboardImageMobile({
   return (
     <div className={`dash-rim ${className}`}>
       <div
-        className="relative overflow-hidden rounded-[18px]"
+        className="relative overflow-hidden rounded-[calc(18px*var(--dash-scale,1))]"
         style={{ aspectRatio: `908 / ${Math.round(615 * crop)}` }}
       >
         <Photo

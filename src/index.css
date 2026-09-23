@@ -86,8 +86,13 @@
      Not the concentric 30/22 of .glass-rim-lg — the frame draws rim and cards
      at the same 18px radius. */
   .dash-rim {
-    padding: 8px;
-    border-radius: 18px;
+    /* The rim's padding and radii are the only fixed pixel values in the
+       window; everything else is a percentage of the 1136px row. Scaling them
+       from one property keeps concept B's copy the same object at 68% rather
+       than a relaid-out one. */
+    --dash-scale: 1;
+    padding: calc(8px * var(--dash-scale));
+    border-radius: calc(18px * var(--dash-scale));
     background: rgba(255, 255, 255, 0.36);
     border: 1px solid rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(24px);
