@@ -31,3 +31,9 @@ A explores the opening and brand credentials. B is a standalone nature-first her
 - Client output checked for absence of Markdown files and internal comparison/study labels.
 
 These are browser viewport checks, not a claim of testing every physical device. Live deployment verification is recorded in the task delivery.
+
+## Hero polish follow-up
+
+Both hero directions retain their established compositions. The follow-up harmonises the blue control finish, uses collapsed navigation through 900px, adds outside-click dismissal and retains Escape focus return. A has a tighter mobile client-logo signature, a genuine return-to-top logo link and consistent booking feedback. Both adapt their opening spacing on short landscape screens; B also adjusts the local image shade to keep the raised headline legible.
+
+Checked both routes at 320×568, 390×844, 600×740, 768×1024, 844×390, 900×800, 901×800, 1440×900 and 1920×1080. No page overflow, broken loaded images or desktop navigation collisions. Menu hit areas, reduced motion, Escape dismissal and booking feedback checked in-browser. Ordinary and client builds pass.

@@ -70,10 +70,12 @@ export function MockLink({
   children,
   className,
   label,
+  message,
 }: {
   children: ReactNode
   className?: string
   label?: string
+  message?: string
 }) {
   const { show } = useToast()
   return (
@@ -83,7 +85,7 @@ export function MockLink({
       aria-label={label}
       onClick={(e) => {
         e.preventDefault()
-        show()
+        show(message)
       }}
     >
       {children}

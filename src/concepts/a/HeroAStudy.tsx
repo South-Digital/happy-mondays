@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
 import { riseAt, usePrefersReducedMotion } from "../../lib/motion";
@@ -14,16 +14,25 @@ const links = ["Reviews", "Case Studies", "Pricing", "Blog", "Contact"];
 function StudyNav() {
   const menu = useRef<HTMLDetailsElement>(null);
   const { show } = useToast();
+  useEffect(() => {
+    const dismiss = (event: PointerEvent) => {
+      if (menu.current?.open && !menu.current.contains(event.target as Node)) {
+        menu.current.open = false;
+      }
+    };
+    document.addEventListener("pointerdown", dismiss);
+    return () => document.removeEventListener("pointerdown", dismiss);
+  }, []);
   return (
     <header className="ha-nav">
-      <MockLink label="Happy Mondays — home">
+      <a href="#ha-top" aria-label="Happy Mondays — home">
         <Wordmark size="lg" />
-      </MockLink>
+      </a>
       <nav aria-label="Main navigation" className="ha-nav-desktop">
         {links.map((link) => (
-          <MockLink key={link}>{link}</MockLink>
+          <MockLink key={link} message="Design preview — this page is not connected yet.">{link}</MockLink>
         ))}
-        <MockLink className="ha-button ha-nav-cta">Book a call</MockLink>
+        <MockLink className="ha-button ha-nav-cta" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
       </nav>
       <details
         className="ha-mobile-menu"
@@ -47,7 +56,9 @@ function StudyNav() {
                   menu.current.open = false;
                   menu.current.querySelector("summary")?.focus();
                 }
-                show("Design preview — this destination is not connected yet.");
+                show(link === "Book a call"
+                  ? "Design preview — the booking calendar will be connected before launch."
+                  : "Design preview — this page is not connected yet.");
               }}
             >
               {link}
@@ -96,6 +107,7 @@ export function HeroAStudy() {
   const proofOpacity = useTransform(proofProgress, [0, 1], [0.55, 1]);
   return (
     <section
+      id="ha-top"
       className="ha-study"
       data-motion={reduced ? "reduce" : "full"}
       aria-labelledby="ha-title"
@@ -121,7 +133,7 @@ export function HeroAStudy() {
           </motion.p>
         </div>
         <motion.div className="ha-hero-cta" {...riseAt(3, reduced)}>
-          <MockLink className="ha-button">Book a call</MockLink>
+          <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
         </motion.div>
         <motion.div
           className="ha-object"

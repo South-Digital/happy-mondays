@@ -33,6 +33,7 @@ function Book({
 function Navigation() {
   const [open, setOpen] = useState(false);
   const menu = useRef<HTMLButtonElement>(null);
+  const navigation = useRef<HTMLElement>(null);
   const { show } = useToast();
   useEffect(() => {
     if (!open) return;
@@ -42,8 +43,15 @@ function Navigation() {
         menu.current?.focus();
       }
     };
+    const dismiss = (event: PointerEvent) => {
+      if (!navigation.current?.contains(event.target as Node)) setOpen(false);
+    };
     window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
+    document.addEventListener("pointerdown", dismiss);
+    return () => {
+      window.removeEventListener("keydown", close);
+      document.removeEventListener("pointerdown", dismiss);
+    };
   }, [open]);
   const destination = () => {
     setOpen(false);
@@ -51,7 +59,7 @@ function Navigation() {
     show("Design preview — this page is not connected yet.");
   };
   return (
-    <header className="nb-nav">
+    <header className="nb-nav" ref={navigation}>
       <a href="#top" aria-label="Happy Mondays home">
         <Wordmark size="lg" />
       </a>
