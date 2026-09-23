@@ -50,25 +50,31 @@ export function BandOne({ className = '' }: { className?: string }) {
             {/* Soft blue wash, behind both objects (node 2166:4574) */}
             <div
               aria-hidden
-              className="absolute inset-x-0 -inset-y-20 -z-10 rounded-[120px] blur-3xl xl:hidden"
+              className="absolute inset-x-0 -inset-y-20 z-0 rounded-[120px] blur-3xl xl:hidden"
               style={{
                 background:
                   'radial-gradient(60% 60% at 30% 35%, rgba(37,99,235,.20) 0%, rgba(37,99,235,0) 70%),' +
                   'radial-gradient(55% 55% at 80% 70%, rgba(37,99,235,.14) 0%, rgba(37,99,235,0) 70%)',
               }}
             />
-            {/* At xl the wash takes the frame's own rectangle. */}
+            {/* The frame's wash (node 2166:4574, x220 y340 1100x520) extended
+                left and up so it passes under the window rather than starting
+                100px inside it. Concept A's rim frosts a photograph; with the
+                frame's rect the blur here had a near-flat page to sample and
+                the glass read as a plain white panel. Carried at a heavier
+                opacity and a tighter blur so there is real variance under it. */}
             <div
               aria-hidden
-              className="absolute -z-10 hidden rounded-[120px] blur-3xl xl:block"
+              className="absolute z-0 hidden rounded-[120px] blur-[36px] xl:block"
               style={{
-                left: pct(100, STAGE_W),
-                top: pct(40, STAGE_H),
-                width: pct(1100, STAGE_W),
-                height: pct(520, STAGE_H),
+                left: pct(-60, STAGE_W),
+                top: pct(-52, STAGE_H),
+                width: pct(1320, STAGE_W),
+                height: pct(640, STAGE_H),
                 background:
-                  'radial-gradient(60% 60% at 30% 35%, rgba(37,99,235,.20) 0%, rgba(37,99,235,0) 70%),' +
-                  'radial-gradient(55% 55% at 80% 70%, rgba(37,99,235,.14) 0%, rgba(37,99,235,0) 70%)',
+                  'radial-gradient(52% 58% at 20% 26%, rgba(37,99,235,.42) 0%, rgba(37,99,235,0) 72%),' +
+                  'radial-gradient(46% 52% at 68% 64%, rgba(14,165,233,.34) 0%, rgba(14,165,233,0) 74%),' +
+                  'radial-gradient(38% 44% at 52% 88%, rgba(99,102,241,.26) 0%, rgba(99,102,241,0) 70%)',
               }}
             />
 

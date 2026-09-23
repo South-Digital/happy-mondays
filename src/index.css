@@ -94,10 +94,22 @@
     padding: calc(8px * var(--dash-scale));
     border-radius: calc(18px * var(--dash-scale));
     background: rgba(255, 255, 255, 0.36);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 24px 56px rgba(28, 33, 48, 0.12);
+    /* Border, blur and shadow scale with everything else. Left absolute they
+       made concept B's 68% copy wear concept A's full-size edge: a border,
+       blur and shadow all 1.47x too heavy for the object, which is what stopped
+       the two reading as the same window. The border also added a fixed 2px to
+       both rims' heights where B should take 1.36px, which skewed B's aspect by
+       0.27% and showed up as a doubled chart line in the overlay. */
+    backdrop-filter: blur(calc(24px * var(--dash-scale)));
+    -webkit-backdrop-filter: blur(calc(24px * var(--dash-scale)));
+    /* The white edge is an inset ring rather than a real border. Chrome snaps
+       border-width to a whole device pixel, so a scaled border stayed at 1px on
+       B; and a border adds to the box, which put a fixed 2px into both rims'
+       heights where B should take 1.36px. As a ring it scales properly and the
+       rim's height is exactly sidebar + 2x padding, so both aspects match. */
+    box-shadow:
+      inset 0 0 0 calc(1px * var(--dash-scale)) rgba(255, 255, 255, 0.8),
+      0 calc(24px * var(--dash-scale)) calc(56px * var(--dash-scale)) rgba(28, 33, 48, 0.12);
   }
 
   /* Floating chip — overlaps a card edge */
