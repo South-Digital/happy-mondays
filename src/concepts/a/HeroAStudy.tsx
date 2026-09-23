@@ -147,7 +147,7 @@ export function HeroAStudy() {
         </motion.div>
       </div>
       <div className="ha-credentials">
-        <ProofRow />
+        <ProofRow clutchIcon />
         <LogoStrip className="ha-logos" />
       </div>
     </section>
