@@ -313,6 +313,7 @@
   color: #30363b;
 }
 .ha-store-heading {
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -324,51 +325,10 @@
   letter-spacing: -0.035em;
 }
 .ha-store-range {
-  position: relative;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid #e8ebed;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  color: #626b73;
-  padding: 0 8px;
-  height: 46px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.025);
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
-@media (hover: hover) {
-  .ha-store-range:hover {
-    background-color: #fff;
-    border-color: #cbd3dc;
-  }
-}
-.ha-store-range-value {
-  font-size: 10px;
+  color: #606d79;
+  font-size: 11px;
+  line-height: 1.5;
   white-space: nowrap;
-  min-width: 63px;
-  text-align: center;
-}
-/* Native select covers the whole control; 16px avoids focus zoom on iOS. */
-.ha-store-range select {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  font-family: inherit;
-  font-size: 16px;
-  cursor: pointer;
-  opacity: 0;
-}
-.ha-store-range:focus-within {
-  outline: 2px solid #2a63f5;
-  outline-offset: 3px;
-}
-.ha-store-range select:focus-visible {
-  outline: none;
 }
 .ha-store-metrics {
   display: grid;
@@ -851,18 +811,6 @@
   .ha-store-heading h2 {
     font-size: 15px;
   }
-  .ha-store-range {
-    height: 46px;
-    gap: 3px;
-    padding: 0 5px;
-  }
-  .ha-store-range > svg:first-of-type {
-    display: none;
-  }
-  .ha-store-range-value {
-    font-size: 11px;
-    min-width: 69px;
-  }
   .ha-store-metrics {
     grid-template-columns: 1.5fr 0.85fr 1.2fr;
     gap: 8px;
@@ -1007,7 +955,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ha-button,
-  .ha-store-range,
   .ha-mobile-menu summary > span {
     transition: none;
   }
@@ -1019,11 +966,6 @@
 .ha-scenery .ha-coast {
   mask-image: linear-gradient(180deg, transparent 0%, #000 32%);
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 32%);
-}
-@media (max-width: 700px) {
-  .ha-store-range {
-    height: 46px;
-  }
 }
 @media (max-width: 360px) {
   .ha-store-metrics strong {
@@ -1040,7 +982,6 @@
 }
 
 .ha-study[data-motion="reduce"] .ha-button,
-.ha-study[data-motion="reduce"] .ha-store-range,
 .ha-study[data-motion="reduce"] .ha-mobile-menu summary > span {
   transition: none;
 }

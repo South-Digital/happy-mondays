@@ -38,7 +38,7 @@ The exact generation prompt and method are in [the asset README](public/images/h
 - Production TypeScript/Vite build passes.
 - Browser visual review: 320 × 740, 390 × 844, 768 × 1024, 1440 × 1100, 1920 × 1080.
 - Additional DOM boundary checks at widths 700 and 1100. No document horizontal overflow or overlap between visible metric values across the seven checked widths. The later mobile placement pass moved the CTA directly under the copy.
-- Native date selector changes the example figures and chart from 7 to 30 days; the example remains labelled illustrative. This is an interaction demonstration, not a data connection.
+- The dashboard now presents a fixed seven-day example, with a plain date label. The selector, monthly data and date-change animations were removed at Zac’s request; the chart retains its entrance animation and illustrative accessibility description.
 - Mobile menu opens, Escape closes it and restores summary focus. Booking invokes the existing prototype feedback.
 - Reduced-motion review mode disables entrances/chart animation/drift. Actual OS settings were not changed.
 - Fresh built preview has no captured browser warnings/errors. Responsive scene images load as AVIF; source selection follows the actual rendered scene width, including its cropped phone composition.
@@ -62,3 +62,7 @@ Zac authorised a further polish pass against the client's repeated Apple referen
 - Added consistent keyboard focus treatment to navigation and menu controls, date-selector hover feedback, and a short mobile menu entrance with a rotating close indicator. Reduced motion disables the added motion.
 
 Validation: production build and whitespace checks pass; no captured browser warnings/errors. Browser layout checks at 320, 390, 700, 701, 768, 1101, 1440 and 1920px found no horizontal overflow, overflowing metrics or CTA/dashboard intersection. Visually inspected desktop, narrow-phone, mobile menu and proof grid. Verified both chart ranges, intermediate/final path geometry, and Escape restoring focus to the menu summary. At 390px with `?motion=reduce`, chart changes are immediate, glass opacity is 1 and the menu animation is disabled. This is browser QA, not physical-device or cross-browser certification.
+
+## Follow-up: static date label
+
+Removed the oversized date control at Zac’s request. “Last 7 days” is now plain secondary text aligned with Analytics, without calendar, chevron, border, shadow, focus target or interaction. Removed unused range state, monthly data, live announcements and path morphing. Desktop and 390px mobile visually checked; no focusable controls remain inside the store object. Build and whitespace validation pass.
