@@ -625,7 +625,7 @@
   max-width: 1250px;
   margin: auto;
 }
-.ha-credentials > div:first-child {
+.ha-proof-reveal > div:first-child {
   font-size: 12px;
   color: #59626c;
   gap: 20px;
@@ -924,12 +924,12 @@
   .ha-credentials {
     padding: 27px 16px 32px;
   }
-  .ha-credentials > div:first-child {
+  .ha-proof-reveal > div:first-child {
     gap: 8px 15px;
     font-size: 10px;
   }
-  .ha-credentials > div:first-child svg,
-  .ha-credentials > div:first-child img {
+  .ha-proof-reveal > div:first-child svg,
+  .ha-proof-reveal > div:first-child img {
     max-width: 14px;
     max-height: 14px;
   }
@@ -1020,4 +1020,11 @@
   .ha-scene {
     height: calc(1040px + (100vw - 1920px) * 0.18);
   }
+}
+
+.ha-dashboard-depth {
+  transform-origin: 50% 78%;
+}
+.ha-order-depth {
+  transform-origin: 30% 50%;
 }

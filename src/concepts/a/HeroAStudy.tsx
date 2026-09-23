@@ -7,6 +7,7 @@ import { riseAt, usePrefersReducedMotion } from "../../lib/motion";
 import { ProofRow } from "../shared/ProofRow";
 import { LogoStrip } from "../shared/LogoStrip";
 import { StorePreview, OrderPreview } from "./StorePreview";
+import { useHeroDepth } from "./useHeroDepth";
 import "./hero-a-study.css";
 
 const links = ["Reviews", "Case Studies", "Pricing", "Blog", "Contact"];
@@ -89,11 +90,14 @@ function Coast({ foreground = false }: { foreground?: boolean }) {
 export function HeroAStudy() {
   const reduced = usePrefersReducedMotion();
   const scene = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: scene,
-    offset: ["start start", "end start"],
+  const depth = useHeroDepth(scene);
+  const credentials = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: proofProgress } = useScroll({
+    target: credentials,
+    offset: ["start 100%", "start 90%"],
   });
-  const drift = useTransform(scrollYProgress, [0, 1], [0, 24]);
+  const proofY = useTransform(proofProgress, [0, 1], [12, 0]);
+  const proofOpacity = useTransform(proofProgress, [0, 1], [0.55, 1]);
   return (
     <section
       className="ha-study"
@@ -104,7 +108,7 @@ export function HeroAStudy() {
         <motion.div
           className="ha-scenery"
           aria-hidden="true"
-          style={reduced ? undefined : { y: drift }}
+          style={reduced ? undefined : { y: depth.seaY }}
         >
           <Coast />
         </motion.div>
@@ -136,19 +140,44 @@ export function HeroAStudy() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <StorePreview />
+          <motion.div
+            className="ha-dashboard-depth"
+            style={
+              reduced
+                ? undefined
+                : { y: depth.dashboardY, scale: depth.dashboardScale }
+            }
+          >
+            <StorePreview />
+          </motion.div>
         </motion.div>
-        <div className="ha-foreground" aria-hidden="true">
+        <motion.div
+          className="ha-foreground"
+          aria-hidden="true"
+          style={reduced ? undefined : { y: depth.foregroundY }}
+        >
           <Coast foreground />
-        </div>
+        </motion.div>
         <div className="ha-scene-fade" aria-hidden="true" />
         <motion.div className="ha-order-position" {...riseAt(7, reduced, 8)}>
-          <OrderPreview />
+          <motion.div
+            className="ha-order-depth"
+            style={
+              reduced ? undefined : { y: depth.orderY, scale: depth.orderScale }
+            }
+          >
+            <OrderPreview />
+          </motion.div>
         </motion.div>
       </div>
-      <div className="ha-credentials">
-        <ProofRow clutchIcon />
-        <LogoStrip className="ha-logos" />
+      <div className="ha-credentials" ref={credentials}>
+        <motion.div
+          className="ha-proof-reveal"
+          style={reduced ? undefined : { y: proofY, opacity: proofOpacity }}
+        >
+          <ProofRow clutchIcon />
+          <LogoStrip className="ha-logos" />
+        </motion.div>
       </div>
     </section>
   );

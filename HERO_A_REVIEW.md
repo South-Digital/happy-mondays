@@ -22,7 +22,7 @@ The [18 September call](https://docs.google.com/document/d/1QZw3pYGizFvJs8p1F_Ff
 - The photograph fades into the page above and below. The initial hard image seam and a sliver of water across the dashboard edge were caught in browser review and corrected.
 - A native Shopify-style analytics window replaces the raster object, retaining the recognisable store sidebar, analytics hierarchy, metrics and chart. Soft translucent rim, neutral white panels, ambient shadow and one new-order card.
 - Separate phone composition: no sidebar, three metrics, cropped chart, overlapping order card and the CTA below the scene. Short-phone adjustments put the CTA within a 320 × 740 viewport and prevent crowded metric values.
-- Small staggered entrances, a restrained chart reveal and 24 px maximum photographic drift. The foreground remains fixed. System reduced motion and the review query show settled content.
+- Small staggered entrances and a restrained chart reveal. Scroll now separates the sea, dashboard, foreground and order-card layers with responsive limits; the partner row gently settles into view. See SCROLL_DEPTH.md for movement limits and validation. System reduced motion and the review query show settled content.
 
 ## Image delivery
 
