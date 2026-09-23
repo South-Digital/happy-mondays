@@ -602,9 +602,11 @@
   margin-top: 3px;
 }
 .ha-credentials {
+  position: relative;
+  z-index: 1;
   padding: 29px 24px 46px;
   max-width: 1250px;
-  margin: auto;
+  margin: -48px auto 0;
 }
 .ha-proof-reveal > div:first-child {
   font-size: 12px;
@@ -856,6 +858,7 @@
     height: 155px;
   }
   .ha-credentials {
+    margin-top: -24px;
     padding: 27px 16px 32px;
   }
   .ha-proof-reveal > div:first-child {
