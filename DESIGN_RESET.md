@@ -46,3 +46,8 @@ The internal brief's instruction is explicit: “a sharpen, not a restart.” It
 ## Honest remaining gaps
 
 This pass re-read the full client call transcript, not its recording. It re-opened the identified Miro board, not a verified universe of all possible boards. Emmanuel's Loom audio and every reference animation have not been newly reviewed here. The Shopping animation needs its own source/reference review and clear storyboard before implementation. Those gaps must remain visible rather than being folded into a claim that everything has been exhausted.
+
+
+## Follow-up after Zac authorised proceeding
+
+A focused hero study is now available at `/concept-a`. The original is preserved at `/baseline/concept-a`; B remains the original at `/concept-b`. This supersedes the immediate-recovery route map above. The current implementation, source links, asset dimensions and validation are in [HERO_A_REVIEW.md](HERO_A_REVIEW.md). There is no client design approval and no claim that the homepage is complete.

@@ -61,3 +61,7 @@ The checkered product remains the supplied Figma export, used at a small display
 - The 5.0 Clutch treatment follows the current supplied direction; the old review-count claim was removed.
 - Current partner status, client-logo permissions, testimonial publication approval and the final booking event remain launch inputs.
 - The previous 60–70% split, 4–6-account capacity and weekly-Loom promises were removed.
+
+## Source-grounded Concept A hero study — 23 September
+
+The new hero uses `public/images/hero-a-v2/`. Its exact ImageGen prompt, original dimensions, Magnific 4× master dimensions and responsive export details are documented in that folder's `README.md` and `HERO_A_REVIEW.md`. This photograph replaces the earlier coastal image only in the new hero study; earlier generated assets remain attached to the rejected pass.
