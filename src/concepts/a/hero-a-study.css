@@ -216,6 +216,7 @@
 }
 .ha-store-interior {
   display: flex;
+  gap: 8px;
   min-height: 440px;
   overflow: hidden;
   border-radius: 19px;
@@ -229,7 +230,7 @@
     rgba(249, 250, 250, 0.94),
     rgba(244, 247, 247, 0.88)
   );
-  border-right: 1px solid rgba(223, 228, 231, 0.6);
+  border-radius: inherit;
   font-size: 11px;
   color: #646c70;
 }
@@ -290,6 +291,7 @@
 .ha-store-main {
   min-width: 0;
   flex: 1;
+  border-radius: inherit;
   padding: 25px 25px 20px;
   background: linear-gradient(
     160deg,
