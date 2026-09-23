@@ -104,4 +104,13 @@ Completion is based on the gates above and a final critical visual review. “Wo
 - Production validation: build/type check passes. All three page routes and all 25 refinement image files return successful responses with the expected content type from the built preview. Fresh production review entry has no console warnings/errors. JS approximately 100 kB gzip; CSS approximately 17 kB gzip. A's 1,440-wide AVIF is 140 kB; 3,840-wide is 831 kB. B's 1,440-wide AVIF is 634 kB. Lazy loading keeps lower imagery out of the critical opening requests. No throttled Lighthouse or field Core Web Vitals result is claimed.
 - Scope: existing production and Emmanuel's branch are untouched. Final booking selection, public proof permissions and the final Framer implementation remain the launch inputs documented in the handoff.
 
-- Built review preview verified at `http://127.0.0.1:4178/`. Overview-to-reduced-motion navigation, booking feedback, high-priority hero attribute and image loading pass in the fresh production preview with no console warnings/errors. Remote preview deployment is the next delivery step.
+- Built review preview verified at `http://127.0.0.1:4178/`. Overview-to-reduced-motion navigation, booking feedback, high-priority hero attribute and image loading pass in the fresh production preview with no console warnings/errors. Remote preview subsequently deployed successfully from GitHub; see delivery record below.
+
+## Delivery record
+
+- Implementation commit: `36ef825`, branch `codex/concept-refinement`.
+- Draft PR: https://github.com/South-Digital/happy-mondays/pull/3
+- Vercel branch preview: https://happy-mondays-git-codex-concept-refinement-zac-santers-projects.vercel.app
+- GitHub Vercel status: Success; authenticated Vercel CLI confirms target `preview`, status Ready. Existing production was not promoted or reconfigured.
+- Remote browser rendering is protected by Vercel account access. The in-app browser's account did not have access; switching accounts reached sign-in. No access request was sent and deployment protection was not changed. The verified local production build is available at `http://127.0.0.1:4178/` for immediate review.
+- Design/refinement roadmap complete for these two review prototypes. Final Framer delivery and launch inputs remain explicitly outside this prototype handoff.

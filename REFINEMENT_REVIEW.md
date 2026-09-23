@@ -10,6 +10,12 @@ My recommended direction is A: the emotional idea and commercial outcome are con
 
 ## Review links
 
+Local built review: http://127.0.0.1:4178/
+
+Vercel preview: https://happy-mondays-git-codex-concept-refinement-zac-santers-projects.vercel.app (Ready; owning Vercel account required).
+
+Draft PR: https://github.com/South-Digital/happy-mondays/pull/3
+
 - `/`: overview and motion-reduced entry links.
 - `/concept-a`: A clearer outlook.
 - `/concept-b`: Room to grow.
