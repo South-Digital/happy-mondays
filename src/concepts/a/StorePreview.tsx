@@ -46,8 +46,16 @@ export function StorePreview() {
   const fillId = useId().replace(/:/g, "");
   const reduced = usePrefersReducedMotion();
   return (
-    <div
+    // Fade the glass itself: fading an ancestor temporarily blocks its backdrop.
+    <motion.div
       className="ha-store"
+      initial={reduced ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: reduced ? 0 : 0.9,
+        delay: reduced ? 0 : 0.24,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       role="group"
       aria-label="Illustrative Shopify analytics"
     >
@@ -209,13 +217,23 @@ export function StorePreview() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export function OrderPreview() {
+  const reduced = usePrefersReducedMotion();
   return (
-    <div className="ha-order">
+    <motion.div
+      className="ha-order"
+      initial={reduced ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: reduced ? 0 : 0.7,
+        delay: reduced ? 0 : 0.49,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
       <span className="ha-order-icon">
         <img src="/images/icon-shopify.png" width="24" height="29" alt="" />
       </span>
@@ -224,6 +242,6 @@ export function OrderPreview() {
         <span>#1048 · $79.00</span>
       </div>
       <span className="ha-order-time">Just now</span>
-    </div>
+    </motion.div>
   );
 }

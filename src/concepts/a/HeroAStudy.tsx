@@ -126,8 +126,8 @@ export function HeroAStudy() {
         </motion.div>
         <motion.div
           className="ha-object"
-          initial={reduced ? false : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={reduced ? false : { y: 18 }}
+          animate={{ y: 0 }}
           transition={{
             duration: 0.9,
             delay: reduced ? 0 : 0.24,
@@ -153,7 +153,16 @@ export function HeroAStudy() {
           <Coast foreground />
         </motion.div>
         <div className="ha-scene-fade" aria-hidden="true" />
-        <motion.div className="ha-order-position" {...riseAt(7, reduced, 8)}>
+        <motion.div
+          className="ha-order-position"
+          initial={reduced ? false : { y: 8 }}
+          animate={{ y: 0 }}
+          transition={{
+            duration: reduced ? 0 : 0.7,
+            delay: reduced ? 0 : 0.49,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
           <motion.div
             className="ha-order-depth"
             style={

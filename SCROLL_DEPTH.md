@@ -35,3 +35,9 @@ A damped MotionValue smooths native scroll input. Travel is mapped over the avai
 - Final browser console: no captured warnings/errors. TypeScript/Vite build and whitespace validation pass. Added JavaScript is approximately 0.7KB gzip compared with the previous build.
 
 Browser-based verification; physical-device frame rates and real iOS/Android behavior were not profiled. The OS reduced-motion preference is wired through the existing shared hook; its explicit review override was exercised here.
+
+## Glass entrance correction
+
+The dashboard and order card now fade on their glass surfaces, while their positioning wrappers animate only translation. Previously, wrapper opacity below 1 created a backdrop root: the landscape blur appeared abruptly when that opacity reached 1. Keep opacity off ancestors of these glass surfaces. See [MDN's backdrop-root explanation](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/backdrop-filter#backdrop_root).
+
+Reload sampling verified intermediate glass opacity values through to 1 with wrapper opacity fixed at 1 and the dashboard's blur fixed at 18px. At 390×844 with `?motion=reduce`, both cards are immediately opaque with no horizontal overflow. Browser console remained clear; production build passed.
