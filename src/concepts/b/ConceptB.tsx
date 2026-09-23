@@ -152,7 +152,8 @@ function Hero() {
         <motion.div {...riseAt(3, reduced)}>
           <Book />
         </motion.div>
-        <div className="nb-hero-proof">
+      </div>
+      <div className="nb-hero-proof">
           {[
             ["/images/icon-clutch.svg", "5.0 on Clutch"],
             ["/images/icon-shopify.png", "Shopify Partner"],
@@ -173,7 +174,6 @@ function Hero() {
               <span>{label}</span>
             </motion.span>
           ))}
-        </div>
       </div>
     </section>
   );

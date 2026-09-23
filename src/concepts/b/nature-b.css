@@ -1721,3 +1721,24 @@
   box-shadow: none;
   font-size: 11px;
 }
+
+
+/* Credentials anchor the scene; the primary action has its own space. */
+.nb-hero-proof {
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(48px, 6svh, 64px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--nb-frame-width);
+  margin-top: 0;
+}
+.nb-proof-chip { border-color: transparent; }
+@media (max-width: 600px) {
+  .nb-hero-proof {
+    position: relative;
+    inset: auto;
+    transform: none;
+    margin: 24px auto 0;
+  }
+}
