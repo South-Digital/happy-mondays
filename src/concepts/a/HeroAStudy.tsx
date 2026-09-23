@@ -2,7 +2,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
-import { ArrowUpRight } from "../../components/icons";
 import { riseAt, usePrefersReducedMotion } from "../../lib/motion";
 import { ProofRow } from "../shared/ProofRow";
 import { LogoStrip } from "../shared/LogoStrip";
@@ -24,9 +23,7 @@ function StudyNav() {
         {links.map((link) => (
           <MockLink key={link}>{link}</MockLink>
         ))}
-        <MockLink className="ha-button ha-nav-cta">
-          Book a call <ArrowUpRight width={13} height={13} />
-        </MockLink>
+        <MockLink className="ha-button ha-nav-cta">Book a call</MockLink>
       </nav>
       <details
         className="ha-mobile-menu"
@@ -54,7 +51,6 @@ function StudyNav() {
               }}
             >
               {link}
-              <ArrowUpRight width={14} height={14} />
             </button>
           ))}
         </nav>
@@ -126,9 +122,7 @@ export function HeroAStudy() {
           </motion.p>
         </div>
         <motion.div className="ha-hero-cta" {...riseAt(3, reduced)}>
-          <MockLink className="ha-button">
-            Book a call <ArrowUpRight width={15} height={15} />
-          </MockLink>
+          <MockLink className="ha-button">Book a call</MockLink>
         </motion.div>
         <motion.div
           className="ha-object"
