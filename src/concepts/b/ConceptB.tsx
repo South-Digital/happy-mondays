@@ -273,22 +273,28 @@ const stages = [
   {
     label: "01 · The opportunity",
     title: "Great products. Waiting to be found.",
-    text: "The right product can still sit too far down the page. That’s where we start.",
+    text: "Understand what’s holding your store back—from how shoppers find you to what happens after the click.",
     status: "Before Happy Mondays",
   },
   {
     label: "02 · The work",
     title: "Better ads. A better path to purchase.",
-    text: "We connect campaign strategy, product feeds and the Shopify experience.",
+    text: "Product feeds, margin-aware campaigns and a Shopify experience that makes buying easier.",
     status: "Campaigns + product feeds + conversion",
   },
   {
     label: "03 · The possibility",
     title: "More visibility. More room to grow.",
-    text: "Help the right shoppers find you, then make it easier for them to buy.",
+    text: "Reach the right shoppers, remove friction and turn more of that interest into sales.",
     status: "Campaigns + feeds + conversion",
   },
 ];
+const otherProducts: Record<string, string> = {
+  a: "Studio grip socks",
+  b: "Ribbed crew socks",
+  c: "Everyday grip socks",
+  d: "Classic ankle socks",
+};
 function Shopping({ phase }: { phase: number }) {
   const reduced = usePrefersReducedMotion();
   const order =
@@ -341,7 +347,10 @@ function Shopping({ phase }: { phase: number }) {
               </>
             ) : (
               <>
-                <span className="nb-other-product" aria-hidden>
+                <span
+                  className={`nb-other-product nb-other-product-${id}`}
+                  aria-hidden
+                >
                   <svg viewBox="0 0 40 40" fill="none">
                     <path
                       d="M15 5h12v16l7 5c3 3-1 9-5 8L10 24c-3-2-3-5-1-7l6-4Z"
@@ -355,7 +364,7 @@ function Shopping({ phase }: { phase: number }) {
                   </svg>
                 </span>
                 <div>
-                  <strong>Everyday grip socks</strong>
+                  <strong>{otherProducts[id]}</strong>
                   <span>Another store</span>
                 </div>
               </>
@@ -368,22 +377,19 @@ function Shopping({ phase }: { phase: number }) {
 }
 function GrowthStory() {
   const reduced = usePrefersReducedMotion();
-  const shopping = useRef<HTMLDivElement>(null);
+  const intervention = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState(0);
-  const [replay, setReplay] = useState(0);
-  const seen = useInView(shopping, { once: true, amount: 0.7 });
-  // Start only when the example can actually be read. No pinned scrolling;
-  // a single finite sequence, with explicit replay for a design presentation.
+  const seen = useInView(intervention, { amount: 0.95 });
+  // Each step gets reading time while the intervention is visible. Leaving the
+  // viewport cancels the pending step; returning resumes from the current one.
   useEffect(() => {
-    if (!seen || reduced) return;
-    setPhase(0);
-    const work = window.setTimeout(() => setPhase(1), 1100);
-    const result = window.setTimeout(() => setPhase(2), 3200);
-    return () => {
-      window.clearTimeout(work);
-      window.clearTimeout(result);
-    };
-  }, [seen, reduced, replay]);
+    if (!seen || reduced || phase === 2) return;
+    const next = window.setTimeout(
+      () => setPhase((value) => Math.min(value + 1, 2)),
+      phase === 0 ? 1800 : 3200,
+    );
+    return () => window.clearTimeout(next);
+  }, [seen, reduced, phase]);
   const current = reduced ? 2 : phase;
   return (
     <section
@@ -391,7 +397,7 @@ function GrowthStory() {
       className="nb-story nb-container"
       aria-labelledby="nb-approach-title"
     >
-      <div className="nb-story-sticky">
+      <div className="nb-story-content">
         <div className="nb-section-intro">
           <div>
             <p className="nb-eyebrow">A clearer path to growth</p>
@@ -426,15 +432,28 @@ function GrowthStory() {
               <strong>One joined-up approach.</strong>
             </div>
           </div>
-          <div className="nb-shopping-scene" ref={shopping}>
+          <div className="nb-shopping-scene">
             <Shopping phase={current} />
-            <div className={`nb-intervention nb-intervention-${current}`}>
+            <div
+              ref={intervention}
+              className={`nb-intervention nb-intervention-${current}`}
+            >
               <span className="nb-work-mark" aria-hidden>
                 ✳
               </span>
               <div>
-                <strong>Happy Mondays</strong>
-                <span>{stages[current].status}</span>
+                <strong>
+                  {current === 0
+                    ? "Before Happy Mondays"
+                    : current === 1
+                      ? "Working with Happy Mondays"
+                      : "With Happy Mondays"}
+                </strong>
+                <span>
+                  {current === 0
+                    ? "A great product. Further down the page."
+                    : stages[current].status}
+                </span>
               </div>
               <span className="nb-position">
                 {current === 2
@@ -446,33 +465,23 @@ function GrowthStory() {
             </div>
           </div>
         </div>
-        <div className="nb-story-caption">
-          <div className="nb-stage-tracker" aria-hidden>
-            {stages.map((s, i) => (
-              <span key={s.label} className={i <= current ? "is-active" : ""} />
-            ))}
-          </div>
-          <div className="nb-stage-copy">
-            <span className="nb-eyebrow">{stages[current].label}</span>
-            <h3>{stages[current].title}</h3>
-            <p>{stages[current].text}</p>
-          </div>
-          <div className="nb-example-note">
-            <p>
-              An illustrative journey.
-              <br />
-              Placements and results vary.
-            </p>
-            {!reduced && (
-              <button
-                className="nb-replay"
-                onClick={() => setReplay((value) => value + 1)}
-              >
-                Replay example
-              </button>
-            )}
-          </div>
+        <div className="nb-example-controls">
+          <p>An illustrative journey. Placements and results vary.</p>
+          {!reduced && (
+            <button className="nb-replay" onClick={() => setPhase(0)}>
+              Replay example
+            </button>
+          )}
         </div>
+        <ol className="nb-story-steps" aria-label="How the approach works">
+          {stages.map((stage, index) => (
+            <li key={stage.label} className={index === current ? "is-current" : ""}>
+              <span className="nb-eyebrow">{stage.label}</span>
+              <h3>{stage.title}</h3>
+              <p>{stage.text}</p>
+            </li>
+          ))}
+        </ol>
         {reduced && (
           <p className="nb-reduced-story">
             Position 5 → campaign, feed and store improvements → position 1. An
