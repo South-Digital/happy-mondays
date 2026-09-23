@@ -147,7 +147,7 @@
   display: block;
 }
 .nb-hero-copy h1 span:first-child {
-  color: #edf3f8;
+  color: #b8cbdc;
 }
 .nb-hero-copy h1 span:last-child {
   font-weight: 600;
@@ -1677,6 +1677,6 @@
 }
 @media (min-width: 601px) and (max-height: 600px) {
   .nb-photo-shade {
-    background: linear-gradient(90deg, rgba(12,42,66,.43), rgba(12,42,66,.16) 56%, transparent 80%);
+    background: linear-gradient(90deg, rgba(12,42,66,.64), rgba(12,42,66,.54) 44%, rgba(12,42,66,.1) 72%, transparent);
   }
 }
