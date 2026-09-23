@@ -16,7 +16,7 @@ Scope: current `/concept-a` hero, navigation, store preview, proof row and logo 
 | Desktop breakpoint | 1100×800, 1101×800 |
 | Desktop / ultrawide | 1280×720, 1440×900, 1920×1080, 2560×1440 |
 
-Visual checks focused on 320px phones (top, menu and bottom), 390px reduced motion, 701px breakpoint, 820px tablet, 844px landscape and 2560px ultrawide. Page scrolling allows access to the full hero on short screens; the main phone CTA sits below the dashboard and is below the initial fold on small phones.
+Visual checks focused on 320px phones (top, menu and bottom), 390px reduced motion, 701px breakpoint, 820px tablet, 844px landscape and 2560px ultrawide. Page scrolling allows access to the full hero on short screens. Follow-up: the phone CTA now sits directly below the copy and above the dashboard in normal flow. Rechecked at widths 320, 375, 390, 430, 470, 568, 700, 701 and 1440px: no horizontal overflow; mobile gaps are 24px after copy and 32px before the dashboard at rest. At full scroll on 320px, depth motion preserves over 26px clearance.
 
 ## Fixes
 
