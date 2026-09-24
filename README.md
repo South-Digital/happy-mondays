@@ -1,7 +1,8 @@
 # Happy Mondays — interactive prototypes
 
-Two client-review prototypes of the new homepage, built to
-`Happy Mondays Illustrations.md` (the build spec).
+Two internal review prototypes of the new homepage. The original build spec is
+`Happy Mondays Illustrations.md`; later source review and Zac’s feedback govern the
+current refinements. Start with [REFINEMENT_REVIEW.md](REFINEMENT_REVIEW.md).
 
 - `/` — index, links to both concepts
 - `/concept-a` — **Landscape with depth** (preferred direction)
@@ -30,26 +31,18 @@ dev and preview servers in `vite.config.ts`), and `public/robots.txt`.
 
 ## Assets
 
-All §8 exports are committed and wired in, plus the Shopify window as three
-images — each as the supplied PNG and as the WebP the app serves. The only CSS
-fallback left is the pillar-3 video thumbnail, which is not part of §8.
-
-The window is the Figma export rather than the HTML recreation; that recreation
-is kept in the repo behind `USE_HTML_DASHBOARD` in `src/lib/flags.ts`. See
-`public/images/README.md` for filenames, node IDs and two notes about the
-exports themselves.
+Current routes use responsive photography plus HTML/SVG analytics. Asset provenance,
+master dimensions and export details are in `public/images/hero-a-v2/README.md`
+and `public/images/hero-b-v2/README.md`. Originals retain their supplied raster
+exports at `/baseline/concept-a` and `/baseline/concept-b`.
 
 ## Motion
 
-Every animation on both concepts is defined in `src/lib/motion.ts`: one easing
-family (`cubic-bezier(0.22, 1, 0.36, 1)` for entrances, `cubic-bezier(0.4, 0, 0.2, 1)`
-for state changes), durations grouped as micro / entrance / ambient, a 70ms
-stagger, and a 20%-visible viewport for scroll reveals that fire once. Only
-transform and opacity animate.
-
-Under `prefers-reduced-motion` everything renders in its final state: no drift,
-no parallax, the chart fully drawn, count-ups at their final values, and tab
-switches instant.
+Both current routes respect `prefers-reduced-motion` and `?motion=reduce`.
+A uses restrained, responsive scene depth; see `SCROLL_DEPTH.md`.
+B uses photographic parallax and a finite Shopping sequence that advances only
+while its intervention label is visible. All three explanatory stages remain
+readable at rest. See `CONCEPT_B_REVIEW.md` for timing and QA.
 
 ## Deployment
 

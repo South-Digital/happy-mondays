@@ -1,19 +1,35 @@
-import { useState } from 'react'
-import { GoogleAdsMark, ShopifyMark, Star } from '../../components/icons'
-import { IMG } from '../../lib/assets'
+import { useState } from "react";
+import { GoogleAdsMark, ShopifyMark, Star } from "../../components/icons";
+import { IMG } from "../../lib/assets";
 
 /**
  * §A1 proof row — "★ 5.0 on Clutch · Shopify Partner · Google Ads Partner".
  * Type and spacing from the Figma frame (2171:641): Manrope Regular 13/22 at
  * ink 80%, an 8px icon gap and 22px between the two partner items.
  */
-export function ProofRow({ className = '' }: { className?: string }) {
+export function ProofRow({
+  className = "",
+  clutchIcon = false,
+}: {
+  className?: string;
+  clutchIcon?: boolean;
+}) {
   return (
     <div
       className={`flex flex-wrap items-center justify-center gap-x-[22px] gap-y-2 text-[13px] leading-[22px] text-[rgba(34,32,28,0.8)] ${className}`}
     >
       <span className="flex items-center gap-[6px]">
-        <Star className="text-[#F5A623]" />
+        {clutchIcon ? (
+          <img
+            src="/images/icon-clutch.svg"
+            alt=""
+            width={16}
+            height={18}
+            className="shrink-0 object-contain"
+          />
+        ) : (
+          <Star className="text-[#F5A623]" />
+        )}
         5.0 on Clutch
       </span>
 
@@ -24,7 +40,9 @@ export function ProofRow({ className = '' }: { className?: string }) {
           src={IMG.shopifyPartner}
           width={16}
           height={19}
-          fallback={<ShopifyMark className="text-[#5E8E3E]" width={16} height={19} />}
+          fallback={
+            <ShopifyMark className="text-[#5E8E3E]" width={16} height={19} />
+          }
         />
         Shopify Partner
       </span>
@@ -34,12 +52,14 @@ export function ProofRow({ className = '' }: { className?: string }) {
           src={IMG.googleAdsPartner}
           width={18}
           height={18}
-          fallback={<GoogleAdsMark className="text-[#4285F4]" width={18} height={18} />}
+          fallback={
+            <GoogleAdsMark className="text-[#4285F4]" width={18} height={18} />
+          }
         />
         Google Ads Partner
       </span>
     </div>
-  )
+  );
 }
 
 /**
@@ -52,13 +72,13 @@ function PartnerIcon({
   height,
   fallback,
 }: {
-  src: string
-  width: number
-  height: number
-  fallback: React.ReactNode
+  src: string;
+  width: number;
+  height: number;
+  fallback: React.ReactNode;
 }) {
-  const [failed, setFailed] = useState(false)
-  if (failed) return <>{fallback}</>
+  const [failed, setFailed] = useState(false);
+  if (failed) return <>{fallback}</>;
   return (
     <img
       src={src}
@@ -69,7 +89,12 @@ function PartnerIcon({
       className="shrink-0 object-contain"
       onError={() => setFailed(true)}
     />
-  )
+  );
 }
 
-const Dot = () => <span aria-hidden className="hidden h-[3px] w-[3px] rounded-full bg-ink/25 sm:block" />
+const Dot = () => (
+  <span
+    aria-hidden
+    className="hidden h-[3px] w-[3px] rounded-full bg-ink/25 sm:block"
+  />
+);
