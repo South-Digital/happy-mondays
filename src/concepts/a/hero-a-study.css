@@ -95,7 +95,7 @@
   justify-content: center;
   min-width: 0;
   border: 1px solid rgba(20, 59, 169, 0.28);
-  border-radius: 14px;
+  border-radius: 999px;
   min-height: 52px;
   padding: 0 24px;
   background:
@@ -136,7 +136,7 @@
   min-width: 0;
   min-height: 44px;
   padding: 0 17px;
-  border-radius: 12px;
+  border-radius: 999px;
   border-color: #dce1e5;
   background: rgba(255, 255, 255, 0.7);
   color: #293440;
@@ -965,7 +965,7 @@
     gap: 20px;
     align-items: center;
     border: 1px solid #e3e6e7;
-    border-radius: 12px;
+    border-radius: 999px;
     min-height: 44px;
     padding: 0 17px;
     background: rgba(255, 255, 255, 0.6);
@@ -1024,7 +1024,7 @@
     justify-content: center;
     min-height: 44px;
     margin-top: 10px;
-    border-radius: 11px;
+    border-radius: 999px;
     background: linear-gradient(180deg, rgba(255,255,255,.07), transparent 70%), #2858d9;
     color: #fff;
     font-size: 14px;
