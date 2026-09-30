@@ -631,30 +631,19 @@ function PeopleClosing() {
           <span>Good people.</span>On your side.
         </h2>
         <p>
-          Four years inside Google. Now, on your side of the table.
-          <br className="cj-closing-break" /> Senior expertise, with a personal
-          stake in getting it right.
+          Work directly with a senior team that gets to know your products, your
+          customers and where you want to go.
         </p>
         <div className="cj-conversation">
-          <div className="cj-conversation-person">
-            <img
-              src="/images/refinement/keanu-480.webp"
-              alt="Keanu Fischell, founder of Happy Mondays"
-              width="76"
-              height="76"
-              loading="lazy"
-            />
-            <div>
-              <strong>Keanu Fischell</strong>
-              <span>Founder, Happy Mondays</span>
-            </div>
-          </div>
           <MockLink
             className="ha-button"
             message="Design preview — the booking calendar will be connected before launch."
           >
-            Book a call
+            Talk to the team
           </MockLink>
+          <p className="cj-founder-note">
+            Led by Keanu Fischell, with four years inside Google.
+          </p>
         </div>
       </motion.div>
     </section>
@@ -683,25 +672,9 @@ export function GrowthJourney() {
           </h2>
           <div className="cj-introduction-aside">
             <p>
-              Google Ads and Shopify. One joined-up approach, led by people who
-              get to know your business.
+              One team across Google Ads and Shopify, from how customers find
+              you to what happens after the click.
             </p>
-            <a className="cj-founder-link" href="#cj-people-heading">
-              <img
-                src="/images/refinement/keanu-480.webp"
-                width="48"
-                height="48"
-                alt=""
-                loading="lazy"
-              />
-              <span>
-                <strong>Senior people. Personally invested.</strong>
-                <span>Meet Keanu</span>
-              </span>
-              <span className="cj-founder-arrow" aria-hidden="true">
-                ↗
-              </span>
-            </a>
           </div>
         </motion.div>
         <section className="cj-row" aria-labelledby="cj-discovery-heading">
