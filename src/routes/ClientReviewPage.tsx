@@ -8,14 +8,14 @@ const directions = [
     name: "Landscape with depth.",
     image: "/images/hero-a-v2/coast-1440.webp",
     description: "Your store, in a better place. A recognisable Shopify dashboard sits within the coastal scene, with soft glass and a layered foreground bringing the opening to life.",
-    scope: "Explore the opening and brand credentials.",
+    scope: "Preferred direction · Refined opening, credentials and the first follow-on section.",
   },
   {
     route: "b",
     name: "Nature first.",
     image: "/images/hero-b-v2/terrace-1440.webp",
     description: "A little room to breathe. An immersive coastal landscape, a confident headline and soft details give the brand space to make its first impression.",
-    scope: "Explore the nature-first hero.",
+    scope: "Earlier alternative · Nature-first hero retained for comparison.",
   },
 ];
 
@@ -29,11 +29,11 @@ export default function ClientReviewPage() {
       </header>
       <section className="pb-10 pt-16 md:pb-12 md:pt-20">
         <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-6xl">
-          Two directions.<br />One Happy Mondays.
+          Landscape with depth.<br />Developed further.
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-72 md:text-lg">
-          Two expressions of the direction we discussed: natural warmth, soft materials,
-          familiar ecommerce details and a calmer, more confident first impression.
+          Following your feedback, Concept A now continues into a softer, warmer story:
+          from the first search to the Shopify store, with the work behind that journey made visible.
         </p>
       </section>
       <div className="grid gap-7 md:grid-cols-2">
@@ -56,16 +56,16 @@ export default function ClientReviewPage() {
         ))}
       </div>
       <section className="mt-12 border-t border-black/10 pt-8">
-        <h2 className="text-xl font-semibold tracking-tight">Which opening feels most like Happy Mondays?</h2>
+        <h2 className="text-xl font-semibold tracking-tight">What to look for in this pass</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-72">
-          Focus on the feeling, the balance of nature and ecommerce, and the way each direction
-          introduces the business. Your preferred opening will guide the next stage of the homepage.
+          The balance of coastal blue with sand and sage, the softness of the UI and shadows,
+          and how the motion connects each part of the story. Concept B remains here for reference.
         </p>
       </section>
       <footer className="mt-10 max-w-3xl pb-4 text-xs leading-relaxed text-ink-60">
         Interactive design previews. Booking and navigation are for demonstration;
-        Concept A’s store figures are illustrative. These links explore the hero direction,
-        rather than a finished website.
+        Concept A’s store figures and Shopping journey are illustrative. This is an opening
+        sequence for review, rather than a finished website.
       </footer>
     </main>
   );

@@ -1044,3 +1044,16 @@
   .ha-object { top: 390px; }
   .ha-order-position { top: 620px; }
 }
+
+/* Warm reflected light connects the coast to the natural palette below. */
+.ha-ambient-light {
+  position: absolute;
+  z-index: 0;
+  inset: 270px 0 auto;
+  height: 370px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 16% 50%, rgba(229,222,197,.22), transparent 56%), radial-gradient(ellipse at 89% 65%, rgba(211,224,208,.2), transparent 53%);
+}
+@media (max-width: 700px) {
+  .ha-ambient-light { top: 210px; height: 280px; opacity: .65; }
+}

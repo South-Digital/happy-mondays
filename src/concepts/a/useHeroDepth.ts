@@ -28,8 +28,7 @@ export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
     if (!element) return;
     const measure = () => {
       start.set(element.getBoundingClientRect().top + window.scrollY);
-      // The current study is only one scene. Still give short desktop pages a
-      // complete, restrained depth sequence without adding artificial scroll space.
+      // Keep the opening depth independent of how many sections follow.
       const available =
         document.documentElement.scrollHeight - window.innerHeight;
       distance.set(Math.max(160, Math.min(480, available)));

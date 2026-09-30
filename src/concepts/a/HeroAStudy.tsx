@@ -121,6 +121,7 @@ export function HeroAStudy() {
           <Coast />
         </motion.div>
         <div className="ha-sky-wash" aria-hidden="true" />
+        <div className="ha-ambient-light" aria-hidden="true" />
         <StudyNav />
         <div className="ha-intro">
           <h1 id="ha-title">
@@ -140,8 +141,8 @@ export function HeroAStudy() {
           initial={reduced ? false : { y: 18 }}
           animate={{ y: 0 }}
           transition={{
-            duration: 0.9,
-            delay: reduced ? 0 : 0.24,
+            duration: reduced ? 0 : 1.1,
+            delay: reduced ? 0 : 0.2,
             ease: [0.22, 1, 0.36, 1],
           }}
         >
