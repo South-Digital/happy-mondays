@@ -76,5 +76,5 @@ function SignatureScene({ story }: { story: typeof stories[number] }) {
 }
 export function SignatureGraphics() {
   const reduced = usePrefersReducedMotion();
-  return <section className="sg-section" aria-labelledby="sg-heading" data-motion={reduced ? "reduce" : "full"}><div className="sg-container"><motion.div className="sg-heading" {...sectionReveal(reduced)}><p>THE HAPPY MONDAYS APPROACH</p><h2>Considered details.<br/><span>A different kind of partnership.</span></h2></motion.div><div className="sg-grid">{stories.map(story=><SignatureScene key={story.id} story={story}/>)}</div></div></section>;
+  return <section className="sg-section" aria-labelledby="sg-heading" data-motion={reduced ? "reduce" : "full"}><div className="sg-container"><motion.div className="sg-heading" {...sectionReveal(reduced)}><p>THE HAPPY MONDAYS APPROACH</p><h2 id="sg-heading">Considered details.<br/><span>A different kind of partnership.</span></h2></motion.div><div className="sg-grid">{stories.map(story=><SignatureScene key={story.id} story={story}/>)}</div></div></section>;
 }
