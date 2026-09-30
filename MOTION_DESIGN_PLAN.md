@@ -10,7 +10,9 @@ Roadmap for this pass:
 - [x] Composition: sage and mist-blue blurred light on the outer cards; the existing pale stone, olive and sea photograph in the centre. Retain live type, rounded corners and the ocean-coloured booking CTA.
 - [x] Motion: a short sticky desktop stage, independent spring-driven centre expansion, side-card fade/recession, restrained photographic settling and a delayed contact reveal. Reverse on upward scroll, with separate open/close thresholds to avoid flickering at the boundary.
 - [x] Fallbacks: below 1080px wide or 700px high, use normal flow. Reduced motion also uses normal flow, showing both supporting points above the complete invitation; no information depends on animation.
-- [ ] Verify narrow and wide layouts, reverse/fast scroll, reduced motion and the booking preview; publish and check the live result.
+- [x] Verify narrow and wide layouts, reverse/fast scroll, reduced motion and the booking preview; publish and check the live result.
+
+Verification: production build and TypeScript checks passed. Browser review covered the 1280px three-card, intermediate and expanded compositions, 390px mobile presentation, 320px text bounds, the 1080px motion breakpoint and the 1440px reduced-motion flow. Normal reverse scroll restored the cards; a large scroll to the footer settled at full width. Booking still opens the existing design-preview message. The published page showed no console warnings or errors. Physical-device touch testing remains outside this browser check.
 
 The expansion starts after 24% of the sticky travel, and closes below 4%. Crossing the threshold chooses a state; it does not scrub the animation. A spring of stiffness 100, damping 19 and mass 1 gives a small settle without a conspicuous bounce. Supporting cards have no focusable controls that could disappear while focused. Their copy stays available to assistive technology. The booking action remains available throughout.
 
