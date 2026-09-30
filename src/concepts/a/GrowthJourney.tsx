@@ -584,14 +584,13 @@ function Copy({
       transition={{ duration: 1, ease: EASE.entrance }}
     >
       {kind === "discovery" ? (
-        <h2 id={id} aria-label="Good products. Meet the right people.">
+        <h2 id={id} aria-label="Good products. Get found.">
           <span className="cj-heading-soft cj-icon-line">
             <span>Good </span>
             <EditorialIcon kind="cart" />
           </span>
           <span className="cj-heading-soft">products. </span>
-          <span className="cj-heading-emphasis">Meet the </span>
-          <span>right people.</span>
+          <span className="cj-heading-emphasis">Get found.</span>
         </h2>
       ) : (
         <h2 id={id} aria-label="From looking to buying.">
@@ -690,10 +689,8 @@ export function GrowthJourney() {
           <Discovery />
           <Copy id="cj-discovery-heading" kind="discovery">
             <p>
-              <span className="cj-copy-thought">
-                Your range. Your margins. Your next customer.
-              </span>
-              Google Ads built around all three.
+              Put your products in front of people already looking. Google Ads
+              built around your range, your margins and your next customer.
             </p>
             <div className="cj-copy-actions">
               <JourneyLink href="/google-ads-for-shopify-brands">
