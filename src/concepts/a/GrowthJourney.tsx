@@ -5,7 +5,6 @@ import {
   useScroll,
   useSpring,
   useTransform,
-  useMotionValueEvent,
 } from "framer-motion";
 import { EASE, usePrefersReducedMotion } from "../../lib/motion";
 import { MockLink, useToast } from "../../components/Toast";
@@ -101,13 +100,9 @@ function useComposition(plate: string, base = IMG) {
       cancelled = true;
     };
   }, [nearby, loaded, plate, base]);
-  const [scrollFloor, setScrollFloor] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
-  });
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (!reduced) setScrollFloor(sceneDuration * segment(value, 0.48, 0.34));
   });
   const scene = useSceneTimeline(
     visible,
@@ -115,7 +110,6 @@ function useComposition(plate: string, base = IMG) {
     reduced,
     sceneDuration,
     60,
-    scrollFloor,
   );
   const depth = useSpring(scrollYProgress, {
     stiffness: 85,

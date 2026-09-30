@@ -48,7 +48,7 @@ function StudyNav() {
         <summary>
           Menu <span aria-hidden="true">+</span>
         </summary>
-        <nav aria-label="Mobile navigation">
+        <nav aria-label="Mobile navigation" data-lenis-prevent>
           {[...links, "Book a call"].map((link) => (
             <button
               key={link}

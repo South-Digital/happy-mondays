@@ -12,12 +12,8 @@ export function useSceneTimeline(
   reduced: boolean,
   duration = SCENE_DURATION,
   fps = 30,
-  scrollFloor = 0,
 ) {
   const elapsed = useRef(0);
-  const floor = useRef(scrollFloor);
-  floor.current = scrollFloor;
-  const replayFloor = useRef(0);
   const [time, setTime] = useState(0);
   const [paused, setPaused] = useState(false);
   const [revision, setRevision] = useState(0);
@@ -27,12 +23,6 @@ export function useSceneTimeline(
     document.addEventListener("visibilitychange", onVisibility);
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
-  useEffect(() => {
-    if (scrollFloor >= duration && !visible && !paused) {
-      elapsed.current = duration;
-      setTime(duration);
-    }
-  }, [scrollFloor, duration, visible, paused]);
   useEffect(() => {
     if (
       !visible ||
@@ -48,15 +38,8 @@ export function useSceneTimeline(
     let painted = previous;
     const tick = (now: number) => {
       const delta = Math.min(now - previous, 64);
-      // Forward scrolling can advance the story, but never snap the UI to a new
-      // state. Reading in place still completes it. Replay starts from zero.
-      const target = Math.max(0, floor.current - replayFloor.current);
-      elapsed.current = Math.min(
-        duration,
-        elapsed.current +
-          delta +
-          Math.max(0, target - elapsed.current) * (1 - Math.exp(-delta / 400)),
-      );
+      // Scene playback has its own clock: scroll only controls spatial depth.
+      elapsed.current = Math.min(duration, elapsed.current + delta);
       previous = now;
       // Count-up scenes default to 30fps; the hero entrance uses 60fps.
       if (now - painted >= 1000 / fps - 1 || elapsed.current === duration) {
@@ -70,7 +53,6 @@ export function useSceneTimeline(
   }, [visible, loaded, paused, hidden, reduced, revision, duration, fps]);
   const replay = () => {
     elapsed.current = 0;
-    replayFloor.current = floor.current;
     setTime(0);
     setPaused(false);
     setRevision((value) => value + 1);
