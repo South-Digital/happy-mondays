@@ -53,3 +53,16 @@ Do not equate engineering checks with aesthetic approval. Photographs are AI-cre
 - TypeScript/Vite regular and client-review builds pass; no dependency additions. Client JavaScript 321.33 kB / 104.19 kB gzip.
 - Hero A and Concept B source remain unchanged in this pass.
 - Published implementation commit `d91836c` through GitHub auto-deploy. The production alias renders both replacement sections; the old module is absent and all loaded images resolve. Deployment: `happy-mondays-design-review-hd2mj76au-zac-santers-projects.vercel.app`.
+
+## Coordinated scene motion — 30 September
+
+The first photography pass had entrance effects and parallax but no changing scene state. The follow-up now gives each product composition one finite 8.6-second timeline:
+
+- Discovery: the search query types in, a feed-ready confirmation arrives, product views and store visits count up while the graph draws, then the confirmation dissolves.
+- Shopify: sales and orders build; a new $48 order appears and contributes the final sales increment. The notification dissolves into the final state.
+- A soft passing light complements the existing bounded photograph/glass parallax. No continuous looping or scroll hijacking.
+- Playback starts only after the image has decoded and the metric panel has entered view. A shared clock stops offscreen, while the document is hidden, or when the visitor chooses Pause; Replay restarts the complete sequence.
+- Reduced motion presents the final figures and graph immediately, with no parallax or playback controls. Accessible metric descriptions remain stable rather than announcing every frame.
+- All figures are labelled illustrative and refer to concept products, not measured client results.
+
+Validation: normal and client-review production builds passed. Browser checks at 320, 390, 760, 761, 1024, 1440 and 1920px found no horizontal overflow or escaped scene overlays. Visually inspected desktop and phone compositions. Pause held at 269ms across separate observations; resume advanced; an offscreen sales scene held at 7384ms. Reduced mode showed 2,480 views / 186 visits and $1,888 / 39 orders with no photograph transforms. No browser warning/error logs.
