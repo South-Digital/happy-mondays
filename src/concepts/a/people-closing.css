@@ -1,11 +1,12 @@
 /* A shared sticky frame holds the tail of the buying scene above the cards. */
 .pc-sequence {
-  --pc-height: clamp(510px, calc(100svh - 160px), 720px);
+  --pc-section-gap: 120px;
+  --pc-height: clamp(450px, calc(100svh - var(--pc-section-gap) - 128px), 720px);
   position: relative;
   margin-bottom: 54px;
 }
 .pc-context > .cj-row { padding-bottom: 0; }
-.pc-journey { margin-top: 32px; position: relative; }
+.pc-journey { margin-top: var(--pc-section-gap); position: relative; }
 .pc-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .pc-reason, .pc-people {
   position: relative; isolation: isolate; border-radius: 32px; overflow: hidden;
@@ -97,10 +98,10 @@
 .pc-contact { position: absolute; left: 250px; bottom: 3px; white-space: nowrap; }
 .pc-contact img { flex-shrink: 0; }
 .pc-sequence[data-animated="true"] {
-  height: calc(var(--pc-context-height) + 32px + var(--pc-height) + 170svh);
+  height: calc(var(--pc-context-height) + var(--pc-section-gap) + var(--pc-height) + 170svh);
   /* Keep following content beyond the frame until the pin has released,
      including tall viewports where the card itself reaches its height cap. */
-  margin-bottom: max(54px, calc(100svh - var(--pc-height) - 106px));
+  margin-bottom: max(54px, calc(100svh - var(--pc-height) - var(--pc-section-gap) - 74px));
 }
 .pc-sequence[data-animated="true"] .pc-pin { position: sticky; top: var(--pc-pin-top); }
 .pc-sequence[data-animated="true"] .pc-stage { display: block; height: var(--pc-height); }
@@ -111,10 +112,14 @@
 .pc-sequence[data-animated="true"] .pc-people h2 {
   font-size: clamp(34px, calc(34px + (var(--pc-progress) - .25) * 53.333px), 66px);
 }
+/* Match the 62px bottom + 32px top spacing between the other mobile sections. */
+@media (max-width: 980px) {
+  .pc-sequence { --pc-section-gap: 94px; }
+}
 /* The fade completes before the narrowing copy becomes a column of words. */
 @media (max-width: 700px) {
   .pc-sequence { margin-bottom: 36px; }
-  .pc-journey { margin: 32px -8px 0; }
+  .pc-journey { margin: var(--pc-section-gap) -8px 0; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
   .pc-reason { min-height: 370px; padding: 32px; border-radius: 28px; }
   .pc-reason h2 { font-size: clamp(33px, 8vw, 42px); }
