@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionStyle } from "framer-motion";
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
+import { useCardTilt } from "./useCardTilt";
 import "./people-closing.css";
 
 const PEEK = 80;
@@ -62,6 +63,11 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const contactOpacity = useTransform(progress, [0.68, 0.88], [0, 1]);
   const contactY = useTransform(progress, [0.68, 0.88], [8, 0]);
 
+  const businessTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
+  const feeTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
+  const peopleTilt = useCardTilt(reduced);
+  const sidePointerEvents = useTransform(sideOpacity, value => value < 0.08 ? "none" : "auto");
+
   return (
     <motion.section ref={ref} className="pc-sequence" data-animated={animated}
       style={{ "--pc-pin-top": `${PEEK - contextHeight}px`, "--pc-context-height": `${contextHeight}px`, "--pc-progress": progress } as MotionStyle}>
@@ -69,8 +75,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
         <div className="pc-context" ref={context}>{children}</div>
         <section className="pc-journey" aria-label="Working with Happy Mondays">
           <div className="pc-stage">
-            <motion.article className="pc-reason pc-reason--business"
-              style={animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding } : undefined}>
+            <motion.article {...businessTilt} className="pc-reason pc-reason--business"
+              style={{ ...businessTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
                 <p>Your products, your margins, your ambitions. We get to know what matters before deciding what comes next.</p>
@@ -80,8 +86,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                 </div>
               </div>
             </motion.article>
-            <motion.article className="pc-reason pc-reason--fee"
-              style={animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding } : undefined}>
+            <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
+              style={{ ...feeTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
                 <p>Senior expertise. A fixed monthly fee. Know what we’re working on, what it costs and why it matters.</p>
@@ -91,8 +97,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                 </div>
               </div>
             </motion.article>
-            <motion.article className="pc-people" aria-labelledby="cj-people-heading"
-              style={animated ? { left: centreLeft, width: centreWidth } : undefined}>
+            <motion.article {...peopleTilt} className="pc-people" aria-labelledby="cj-people-heading"
+              style={{ ...peopleTilt.style, ...(animated ? { left: centreLeft, width: centreWidth } : {}) }}>
               <motion.picture className="pc-photo" aria-hidden="true" style={animated ? { scale: photoScale } : undefined}>
                 <img src="/images/page-atmosphere/terrace-coastal-1942.webp"
                   srcSet="/images/page-atmosphere/terrace-coastal-960.webp 960w, /images/page-atmosphere/terrace-coastal-1942.webp 1942w"
