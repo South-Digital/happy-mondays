@@ -1,3 +1,5 @@
+> Superseded: Zac rejected this continuation. See PRODUCT_STORY_REVIEW.md for the replacement and current verification.
+
 # Concept A — first continuation, 30 September 2026
 
 ## Brief and authority

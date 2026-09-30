@@ -8,7 +8,7 @@ const directions = [
     name: "Landscape with depth.",
     image: "/images/hero-a-v2/coast-1440.webp",
     description: "Your store, in a better place. A recognisable Shopify dashboard sits within the coastal scene, with soft glass and a layered foreground bringing the opening to life.",
-    scope: "Preferred direction · Refined opening, credentials and the first follow-on section.",
+    scope: "Preferred direction · Refined opening and two product-led follow-on sections.",
   },
   {
     route: "b",
@@ -32,8 +32,8 @@ export default function ClientReviewPage() {
           Landscape with depth.<br />Developed further.
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-72 md:text-lg">
-          Following your feedback, Concept A now continues into a softer, warmer story:
-          from the first search to the Shopify store, with the work behind that journey made visible.
+          Concept A pairs the coastal opening with two product-led sections, exploring how
+          considered photography, soft glass and scroll depth can carry the story further.
         </p>
       </section>
       <div className="grid gap-7 md:grid-cols-2">
@@ -58,13 +58,13 @@ export default function ClientReviewPage() {
       <section className="mt-12 border-t border-black/10 pt-8">
         <h2 className="text-xl font-semibold tracking-tight">What to look for in this pass</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink-72">
-          The balance of coastal blue with sand and sage, the softness of the UI and shadows,
-          and how the motion connects each part of the story. Concept B remains here for reference.
+          The scale and quality of the product imagery, the balance between photography and UI,
+          and the pace of the scroll. Concept B remains here for reference.
         </p>
       </section>
       <footer className="mt-10 max-w-3xl pb-4 text-xs leading-relaxed text-ink-60">
         Interactive design previews. Booking and navigation are for demonstration;
-        Concept A’s store figures and Shopping journey are illustrative. This is an opening
+        Concept A’s store figures and product concepts are illustrative. This is an opening
         sequence for review, rather than a finished website.
       </footer>
     </main>
