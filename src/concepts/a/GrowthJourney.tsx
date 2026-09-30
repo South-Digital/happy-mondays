@@ -585,18 +585,17 @@ function Copy({
     >
       {kind === "discovery" ? (
         <h2 id={id} aria-label="Good products. Meet the right people.">
-          <span className="cj-heading-soft">Good </span>
           <span className="cj-heading-soft cj-icon-line">
+            <span>Good </span>
             <EditorialIcon kind="cart" />
-            <span>products. </span>
           </span>
+          <span className="cj-heading-soft">products. </span>
           <span className="cj-heading-emphasis">Meet the </span>
           <span>right people.</span>
         </h2>
       ) : (
-        <h2 id={id} aria-label="From just looking. To checking out.">
-          <span className="cj-heading-soft">From just </span>
-          <span className="cj-heading-soft">looking. </span>
+        <h2 id={id} aria-label="From looking. To checking out.">
+          <span className="cj-heading-soft">From looking. </span>
           <span className="cj-heading-emphasis cj-icon-line">
             <span>To </span>
             <EditorialIcon kind="card" />
