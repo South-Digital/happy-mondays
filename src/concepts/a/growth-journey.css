@@ -28,7 +28,7 @@
   letter-spacing: var(--ca-display-tracking);
   font-weight: var(--ca-emphasis-weight);
   max-width: 470px;
-  margin: 0 0 30px;
+  margin: 0 0 28px;
   text-wrap: balance;
   white-space: pre-line;
 }
@@ -38,7 +38,8 @@
   line-height: var(--ca-body-leading);
   letter-spacing: var(--ca-body-tracking);
   margin: 0 0 20px;
-  max-width: 380px;
+  max-width: 390px;
+  text-wrap: pretty;
 }
 .cj-copy p:first-of-type {
   color: var(--ca-lead);
@@ -46,8 +47,78 @@
   font-weight: var(--ca-display-weight);
   line-height: 1.55;
 }
-.cj-copy .ha-button {
-  margin-top: 14px;
+.cj-copy-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 30px;
+}
+.cj-service-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 13px 24px;
+  border: 1px solid #dce1de;
+  border-radius: 999px;
+  background: linear-gradient(160deg, #fff, #f7f8f5);
+  box-shadow:
+    0 3px 8px -5px #24322930,
+    inset 0 1px 0 #fff;
+  color: var(--ca-ink);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: var(--ca-body-tracking);
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+.cj-text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  color: var(--ca-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: var(--ca-body-tracking);
+  text-decoration: underline;
+  text-decoration-color: #aeb5b0;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+}
+@media (hover: hover) {
+  .cj-service-link:hover {
+    border-color: #b6c1ba;
+    box-shadow:
+      0 5px 14px -7px #24322935,
+      inset 0 1px 0 #fff;
+  }
+  .cj-text-link:hover {
+    color: var(--ca-ink);
+  }
+}
+.cj-service-link:focus-visible,
+.cj-text-link:focus-visible {
+  outline: 2px solid #2855cf;
+  outline-offset: 5px;
+}
+.cj-story[data-motion="reduce"] .cj-service-link {
+  transition: none;
+}
+@media (max-width: 540px) {
+  .cj-copy-actions {
+    margin-top: 24px;
+    gap: 10px 20px;
+  }
+  .cj-service-link {
+    padding-inline: 20px;
+    font-size: 13px;
+  }
 }
 .cj-art {
   position: relative;

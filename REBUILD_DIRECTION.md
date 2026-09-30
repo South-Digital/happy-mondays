@@ -2,6 +2,20 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Homepage content roles — 30 September
+
+Reviewed the saved, answered content plan (`95-research/2026-09-23/doc-12DRCfA0w_32IYcG_u30bOXScNhf-dFMsEzeeFnwrmME.txt`, especially the positioning answer and flagship service/voice sections), the earlier content plan, and the source review of the September calls. The newer answer describes a growth partner specialising in Google Ads for Shopify, with attention to the account and to landing pages, conversion and pricing. The agreed destinations include `/google-ads-for-shopify-brands`, `/pricing` and `/revenue-leak-audit`.
+
+The two scenes are now entry points within the wider homepage, not explanatory captions for the artwork:
+
+- Discovery: “Your products. Their next find.” Specific feed/campaign work and margins; primary service-page link, quieter pricing link.
+- Purchase: “Make more of every visit.” The commercial reason for looking at product pages, pricing and checkout; Revenue Leak Audit link for a diagnostic next step.
+- Closing: the senior team and a personal contact remain the invitation to talk.
+
+In the full build, verified case studies should provide evidence, pricing should explain the flat-fee model, and the service hub should carry the detailed account/post-click/partnership story. Those belong to their own sections/routes; these two homepage blocks should stay concise. No new metrics, guarantees, audit price or turnaround promises were introduced.
+
+Copy uses the shared hero typography, a short lead, one compact supporting paragraph, rounded secondary actions and a quiet pricing link. No eyebrows or scene annotations. The new anchors carry the planned route paths, with a destination-specific preview notice on click until those pages are built. This does not represent completion of those routes. Checked all three notices, 1440/390/320 layouts, production build, lint and diff.
+
 ## Page typography continuity
 
 The hero and following sections now share editorial type tokens: 500-weight soft first lines, 600-weight ink emphasis, -.045em display tracking (-.04em on phones), and a consistent neutral body palette. Section body text follows the hero’s more open tracking; the closing title is subordinate to the hero. Sage, sand and amber remain in the photography and ambient backgrounds. Platform UI and concept-brand typography are unchanged. The introduction stays left-aligned with supporting copy directly below its heading.

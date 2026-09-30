@@ -8,7 +8,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { EASE, usePrefersReducedMotion } from "../../lib/motion";
-import { MockLink } from "../../components/Toast";
+import { MockLink, useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import "./growth-journey.css";
 
@@ -503,6 +503,38 @@ function Storefront() {
     </div>
   );
 }
+/** Future sitemap destinations are visible to reviewers; keep this concept in place on click. */
+function JourneyLink({
+  href,
+  children,
+  secondary = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  secondary?: boolean;
+}) {
+  const { show } = useToast();
+  const destinations: Record<string, string> = {
+    "/google-ads-for-shopify-brands": "Google Ads for Shopify brands",
+    "/revenue-leak-audit": "Revenue Leak Audit",
+    "/pricing": "Pricing",
+  };
+  return (
+    <a
+      href={href}
+      className={secondary ? "cj-text-link" : "cj-service-link"}
+      onClick={(event) => {
+        event.preventDefault();
+        show(
+          `${destinations[href]} — this page is part of the full site build.`,
+        );
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
 function Copy({
   title,
   children,
@@ -634,13 +666,21 @@ export function GrowthJourney() {
           <Discovery />
           <Copy
             id="cj-discovery-heading"
-            title={"Good products.\nIn the right places."}
+            title={"Your products.\nTheir next find."}
           >
-            <p>Your next customer is already looking. We help them find you.</p>
+            <p>Google Ads that make sense for your margins.</p>
             <p>
-              Thoughtful product feeds and margin-aware Google Ads put your
-              range in front of the people most likely to buy.
+              We get to know your range, improve your product feed and build
+              campaigns around the customers you want to reach.
             </p>
+            <div className="cj-copy-actions">
+              <JourneyLink href="/google-ads-for-shopify-brands">
+                Explore Google Ads
+              </JourneyLink>
+              <JourneyLink href="/pricing" secondary>
+                See pricing
+              </JourneyLink>
+            </div>
           </Copy>
         </section>
         <section
@@ -648,12 +688,16 @@ export function GrowthJourney() {
           aria-labelledby="cj-purchase-heading"
         >
           <Copy id="cj-purchase-heading" title={"Make more of\nevery visit."}>
-            <p>A click is only the beginning.</p>
+            <p>More revenue from the traffic you already have.</p>
             <p>
-              We look beyond the ad account. Clearer product pages, relevant
-              recommendations and a simpler path to checkout help turn interest
-              into sales.
+              Product pages, pricing, checkout. We look beyond the ad account to
+              find where customers hesitate and what to improve first.
             </p>
+            <div className="cj-copy-actions">
+              <JourneyLink href="/revenue-leak-audit">
+                Explore the Revenue Leak Audit
+              </JourneyLink>
+            </div>
           </Copy>
           <Storefront />
         </section>
