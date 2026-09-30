@@ -578,13 +578,13 @@ function Copy({
       transition={{ duration: 1, ease: EASE.entrance }}
     >
       {kind === "discovery" ? (
-        <h2 id={id} aria-label="Good products. Get found.">
+        <h2 id={id} aria-label="Your products. Their next find.">
           <span className="cj-heading-soft cj-icon-line">
-            <span>Good </span>
+            <span>Your </span>
             <EditorialIcon kind="cart" />
             <span>products.</span>
           </span>
-          <span className="cj-heading-emphasis">Get found.</span>
+          <span className="cj-heading-emphasis">Their next find.</span>
         </h2>
       ) : (
         <h2 id={id} aria-label="From looking to buying.">
