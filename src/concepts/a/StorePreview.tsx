@@ -10,7 +10,7 @@ import {
   ProductsIcon,
   ArrowUpRight,
 } from "../../components/icons";
-import { usePrefersReducedMotion } from "../../lib/motion";
+import { segment, settle } from "./useSceneTimeline";
 
 const nav = [
   { text: "Home", Icon: HomeIcon },
@@ -21,30 +21,30 @@ const nav = [
   { text: "Analytics", Icon: AnalyticsIcon },
 ];
 const sample = {
-  sales: "$128,460",
-  orders: "1,842",
-  rate: "3.4%",
-  roas: "5.05",
   line: "M0 152 C30 152 40 139 65 143 S108 128 132 134 S178 106 199 116 S234 112 265 101 S297 118 332 90 S365 87 398 63 S440 79 465 51 S498 61 530 31 S570 37 598 20",
   dates: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 };
 
 /** A presentational Shopify-style object. All data is illustrative. */
-export function StorePreview() {
+export function StorePreview({ time }: { time: number }) {
   const data = sample;
   const fillId = useId().replace(/:/g, "");
-  const reduced = usePrefersReducedMotion();
+  const entrance = settle(segment(time, 120, 1400));
+  const chart = settle(segment(time, 1350, 2750));
+  const newOrder = settle(segment(time, 3550, 650));
+  const sales = Math.round(128381 * settle(segment(time, 850, 2300)) + 79 * newOrder);
+  const orders = Math.round(1841 * settle(segment(time, 990, 2300))) + (newOrder > 0 ? 1 : 0);
+  const metrics = [
+    ["Total sales", "$" + sales.toLocaleString("en-US"), "24.8%"],
+    ["Orders", orders.toLocaleString("en-US"), "18.6%"],
+    ["Conversion rate", (3.4 * settle(segment(time, 1130, 2200))).toFixed(1) + "%", "0.6pt"],
+    ["ROAS", (5.05 * settle(segment(time, 1270, 2200))).toFixed(2) + "×", "0.42×"],
+  ];
   return (
     // Fade the glass itself: fading an ancestor temporarily blocks its backdrop.
     <motion.div
       className="ha-store"
-      initial={reduced ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: reduced ? 0 : 0.9,
-        delay: reduced ? 0 : 0.24,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      style={{ opacity: entrance, y: 26 * (1 - entrance), scale: .985 + .015 * entrance }}
       role="group"
       aria-label="Illustrative Shopify analytics"
     >
@@ -56,9 +56,10 @@ export function StorePreview() {
             <ChevronDown width={12} height={12} />
           </div>
           <div className="ha-store-menu">
-            {nav.map(({ text, Icon }) => (
+            {nav.map(({ text, Icon }, index) => (
               <div
                 key={text}
+                style={{ opacity: settle(segment(time, 350 + index * 65, 850)), transform: `translateY(${5 * (1 - settle(segment(time, 350 + index * 65, 850)))}px)` }}
                 className={text === "Analytics" ? "is-active" : ""}
               >
                 <Icon width={15} height={15} />
@@ -83,17 +84,12 @@ export function StorePreview() {
             <span className="ha-store-range">Last 7 days</span>
           </div>
           <div className="ha-store-metrics">
-            {[
-              ["Total sales", data.sales, "24.8%"],
-              ["Orders", data.orders, "18.6%"],
-              ["Conversion rate", data.rate, "0.6pt"],
-              ["ROAS", data.roas, ""],
-            ].map(([label, value, change]) => (
-              <div key={label}>
+            {metrics.map(([label, value, change], index) => (
+              <div key={label} aria-label={`${label}: ${["$128,460", "1,842", "3.4%", "5.05 times"][index]}. Illustrative.`}>
                 <span className="ha-metric-label">{label}</span>
-                <strong>{value}</strong>
+                <strong aria-hidden="true">{value}</strong>
                 {change && (
-                  <span className="ha-metric-change">
+                  <span className="ha-metric-change" style={{ opacity: settle(segment(time, 2300 + index * 110, 850)) }}>
                     <ArrowUpRight width={10} height={10} />
                     {change}
                   </span>
@@ -104,8 +100,8 @@ export function StorePreview() {
           <div className="ha-chart-title">
             <h3>Total sales over time</h3>
             <div>
-              <span>Selected period</span>
-              <span>Previous period</span>
+              <span>Last 7 days</span>
+              <span>Previous 7 days</span>
             </div>
           </div>
           <div
@@ -129,11 +125,12 @@ export function StorePreview() {
                     <stop offset="0%" stopColor="#6a97dd" stopOpacity=".16" />
                     <stop offset="100%" stopColor="#6a97dd" stopOpacity="0" />
                   </linearGradient>
+                  <clipPath id={`${fillId}-reveal`}><rect x="-3" y="-5" width={606 * chart} height="200" /></clipPath>
                 </defs>
                 <g stroke="#dfe3e8" strokeWidth=".7" strokeDasharray="2 5">
                   <path d="M0 12H600M0 96H600M0 180H600" />
                 </g>
-                <path d={`${data.line} L598 190H0Z`} fill={`url(#${fillId})`} />
+
                 <path
                   d="M0 166 C60 161 75 153 130 159 S201 139 265 146 S337 126 398 133 S456 107 529 117 S574 106 598 100"
                   stroke="#c5ced8"
@@ -141,20 +138,14 @@ export function StorePreview() {
                   strokeWidth="1.5"
                   strokeDasharray="3 5"
                 />
-                <motion.path
-                  d={data.line}
-                  fill="none"
-                  stroke="#5d87cf"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  initial={reduced ? false : { pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{
-                    duration: reduced ? 0 : 1.1,
-                    delay: reduced ? 0 : 0.5,
-                    ease: "easeOut",
-                  }}
-                />
+                <g clipPath={`url(#${fillId}-reveal)`}>
+                  <path d={`${data.line} L598 190H0Z`} fill={`url(#${fillId})`} />
+                  <path d={data.line} fill="none" stroke="#648dcc" strokeWidth="2.2" strokeLinecap="round" />
+                </g>
+                <g opacity={settle(segment(time, 3550, 650))}>
+                  <circle cx="598" cy="20" r="7" fill="#648dcc" opacity=".12" />
+                  <circle cx="598" cy="20" r="3" fill="#648dcc" stroke="white" strokeWidth="1.3" />
+                </g>
               </svg>
               <div className="ha-chart-dates">
                 {data.dates.map((d) => (
@@ -164,7 +155,7 @@ export function StorePreview() {
             </div>
           </div>
           <div className="ha-store-footer">
-            <span>Sales attributed to marketing</span>
+            <span>Compared with the previous 7 days</span>
             <span>
               View report <ArrowUpRight width={12} height={12} />
             </span>
@@ -175,27 +166,14 @@ export function StorePreview() {
   );
 }
 
-export function OrderPreview() {
-  const reduced = usePrefersReducedMotion();
+export function OrderPreview({ reveal }: { reveal: number }) {
   return (
-    <motion.div
-      className="ha-order"
-      initial={reduced ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: reduced ? 0 : 0.7,
-        delay: reduced ? 0 : 0.49,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
+    <motion.div className="ha-order" style={{ opacity: reveal, y: 16 * (1 - reveal), scale: .97 + .03 * reveal }} aria-hidden={reveal < 0.9}>
       <span className="ha-order-icon">
         <img src="/images/icon-shopify.png" width="24" height="29" alt="" />
       </span>
-      <div>
-        <strong>New order</strong>
-        <span>#1048 · $79.00</span>
-      </div>
-      <span className="ha-order-time">Just now</span>
+      <div><strong>New order</strong><span>#1048 · $79.00</span></div>
+      <span className="ha-order-time"><span className="ha-order-dot" />Just now</span>
     </motion.div>
   );
 }

@@ -66,3 +66,13 @@ The first photography pass had entrance effects and parallax but no changing sce
 - All figures are labelled illustrative and refer to concept products, not measured client results.
 
 Validation: normal and client-review production builds passed. Browser checks at 320, 390, 760, 761, 1024, 1440 and 1920px found no horizontal overflow or escaped scene overlays. Visually inspected desktop and phone compositions. Pause held at 269ms across separate observations; resume advanced; an offscreen sales scene held at 7384ms. Reduced mode showed 2,480 views / 186 visits and $1,888 / 39 orders with no photograph transforms. No browser warning/error logs.
+
+## Hero dashboard and entrance — 30 September
+
+The hero now uses a single 4.8-second clock, with the visible action settling by 4.3 seconds. Both coastal layers must decode before the scene begins. Dashboard playback waits until 35% of its frame is visible and suspends offscreen or in a hidden document. The existing bounded scroll depth remains independent of the entrance transforms.
+
+Sequence: coast and foreground crossfade together; the glass dashboard rises 26px and settles from 98.5% scale; sidebar rows resolve in a short stagger; four metrics count up; the chart line and its area reveal together; the order notification arrives and contributes $79 / one order to the final totals. No animated backdrop blur or full-area fill appearing ahead of its line. Reduced motion renders all final values immediately.
+
+The dashboard retains its sidebar/content gap. The refinement uses softer frame highlights, neutral white content, a sage Analytics selection, consistent tabular figures, subtle metric separators, quieter comparison labels and a restrained chart endpoint. The layout is compact enough to show more chart above the foreground wall. Date range remains presentational.
+
+Validation: regular/client builds; geometry at 320, 375, 390, 700, 701, 900, 1024, 1440 and 1920px. Fixed a 4px ROAS-column overflow at 701px; all metric columns fit afterward. Desktop, mobile and narrow-tablet screenshots reviewed. Sampled the actual load sequence: $70,216 at 1.38s; $127,367 with no order at 2.69s; $128,422 with the order entering at 3.69s; final $128,460 at 4.40s. Reduced motion has a fully drawn chart, final values, opacity 1 and no store transform. Browser warning/error logs are empty.

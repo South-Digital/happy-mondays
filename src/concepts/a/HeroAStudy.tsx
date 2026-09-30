@@ -1,11 +1,12 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
 import { riseAt, usePrefersReducedMotion } from "../../lib/motion";
 import { ProofRow } from "../shared/ProofRow";
 import { LogoStrip } from "../shared/LogoStrip";
 import { StorePreview, OrderPreview } from "./StorePreview";
+import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import { useHeroDepth } from "./useHeroDepth";
 import "./hero-a-study.css";
 
@@ -70,7 +71,7 @@ function StudyNav() {
   );
 }
 
-function Coast({ foreground = false }: { foreground?: boolean }) {
+function Coast({ foreground = false, onReady }: { foreground?: boolean; onReady: () => void }) {
   return (
     <picture
       className={foreground ? "ha-coast ha-coast-foreground" : "ha-coast"}
@@ -88,6 +89,8 @@ function Coast({ foreground = false }: { foreground?: boolean }) {
         height="3536"
         alt=""
         decoding="async"
+        onLoad={event => { event.currentTarget.decode().catch(() => {}).then(onReady); }}
+        onError={onReady}
         {...{ fetchpriority: foreground ? "auto" : "high" }}
       />
     </picture>
@@ -98,6 +101,14 @@ export function HeroAStudy() {
   const reduced = usePrefersReducedMotion();
   const scene = useRef<HTMLDivElement>(null);
   const depth = useHeroDepth(scene);
+  const dashboard = useRef<HTMLDivElement>(null);
+  const dashboardVisible = useInView(dashboard, { amount: 0.35 });
+  const [coastReady, setCoastReady] = useState(false);
+  const [wallReady, setWallReady] = useState(false);
+  const sceneReady = coastReady && wallReady;
+  const { time } = useSceneTimeline(dashboardVisible, sceneReady, reduced, 4800, 60);
+  const coastReveal = { opacity: sceneReady || reduced ? 1 : 0 };
+
   const credentials = useRef<HTMLDivElement>(null);
   const { scrollYProgress: proofProgress } = useScroll({
     target: credentials,
@@ -110,6 +121,7 @@ export function HeroAStudy() {
       id="ha-top"
       className="ha-study"
       data-motion={reduced ? "reduce" : "full"}
+      data-hero-time={Math.round(time)}
       aria-labelledby="ha-title"
     >
       <div className="ha-scene" ref={scene}>
@@ -117,8 +129,10 @@ export function HeroAStudy() {
           className="ha-scenery"
           aria-hidden="true"
           style={reduced ? undefined : { y: depth.seaY }}
+          initial={reduced ? false : { opacity: 0 }} animate={coastReveal}
+          transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Coast />
+          <Coast onReady={() => setCoastReady(true)} />
         </motion.div>
         <div className="ha-sky-wash" aria-hidden="true" />
         <div className="ha-ambient-light" aria-hidden="true" />
@@ -138,13 +152,7 @@ export function HeroAStudy() {
         </motion.div>
         <motion.div
           className="ha-object"
-          initial={reduced ? false : { y: 18 }}
-          animate={{ y: 0 }}
-          transition={{
-            duration: reduced ? 0 : 1.1,
-            delay: reduced ? 0 : 0.2,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          ref={dashboard}
         >
           <motion.div
             className="ha-dashboard-depth"
@@ -154,26 +162,22 @@ export function HeroAStudy() {
                 : { y: depth.dashboardY, scale: depth.dashboardScale }
             }
           >
-            <StorePreview />
+            <StorePreview time={time} />
           </motion.div>
         </motion.div>
         <motion.div
           className="ha-foreground"
           aria-hidden="true"
           style={reduced ? undefined : { y: depth.foregroundY }}
+          initial={reduced ? false : { opacity: 0 }} animate={coastReveal}
+          transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Coast foreground />
+          <Coast foreground onReady={() => setWallReady(true)} />
         </motion.div>
         <div className="ha-scene-fade" aria-hidden="true" />
         <motion.div
           className="ha-order-position"
-          initial={reduced ? false : { y: 8 }}
-          animate={{ y: 0 }}
-          transition={{
-            duration: reduced ? 0 : 0.7,
-            delay: reduced ? 0 : 0.49,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+
         >
           <motion.div
             className="ha-order-depth"
@@ -181,7 +185,7 @@ export function HeroAStudy() {
               reduced ? undefined : { y: depth.orderY, scale: depth.orderScale }
             }
           >
-            <OrderPreview />
+            <OrderPreview reveal={settle(segment(time, 3450, 850))} />
           </motion.div>
         </motion.div>
       </div>

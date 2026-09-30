@@ -5,7 +5,7 @@ export const segment = (time: number, start: number, duration: number) => Math.m
 export const settle = (value: number) => 1 - Math.pow(1 - value, 3);
 
 /** One clock owns the whole scene. Offscreen/hidden time never advances it. */
-export function useSceneTimeline(visible: boolean, loaded: boolean, reduced: boolean) {
+export function useSceneTimeline(visible: boolean, loaded: boolean, reduced: boolean, duration = SCENE_DURATION, fps = 30) {
   const elapsed = useRef(0);
   const [time, setTime] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -17,28 +17,28 @@ export function useSceneTimeline(visible: boolean, loaded: boolean, reduced: boo
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
   useEffect(() => {
-    if (!visible || !loaded || paused || hidden || reduced || elapsed.current >= SCENE_DURATION) return;
+    if (!visible || !loaded || paused || hidden || reduced || elapsed.current >= duration) return;
     let frame = 0;
     let previous = performance.now();
     let painted = previous;
     const tick = (now: number) => {
-      elapsed.current = Math.min(SCENE_DURATION, elapsed.current + Math.min(now - previous, 64));
+      elapsed.current = Math.min(duration, elapsed.current + Math.min(now - previous, 64));
       previous = now;
-      // Text is updated at 30fps; transforms still share exactly the same clock.
-      if (now - painted >= 32 || elapsed.current === SCENE_DURATION) {
+      // Count-up scenes default to 30fps; the hero entrance uses 60fps.
+      if (now - painted >= 1000 / fps - 1 || elapsed.current === duration) {
         setTime(elapsed.current);
         painted = now;
       }
-      if (elapsed.current < SCENE_DURATION) frame = requestAnimationFrame(tick);
+      if (elapsed.current < duration) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [visible, loaded, paused, hidden, reduced, revision]);
+  }, [visible, loaded, paused, hidden, reduced, revision, duration, fps]);
   const replay = () => {
     elapsed.current = 0;
     setTime(0);
     setPaused(false);
     setRevision(value => value + 1);
   };
-  return { time: reduced ? SCENE_DURATION : time, paused, toggle: () => setPaused(value => !value), replay };
+  return { time: reduced ? duration : time, paused, toggle: () => setPaused(value => !value), replay };
 }

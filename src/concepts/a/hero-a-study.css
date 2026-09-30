@@ -1057,3 +1057,53 @@
 @media (max-width: 700px) {
   .ha-ambient-light { top: 210px; height: 280px; opacity: .65; }
 }
+
+/* The dashboard is a calm product surface, with light held at the frame's edge. */
+.ha-store {
+  background: linear-gradient(135deg, #ffffff85, #eef5f94d 55%, #ffffff66);
+  box-shadow: 0 32px 80px -32px #17364d57, 0 8px 24px -14px #17364d33, inset 0 1px 0 #ffffffcc;
+  transform-origin: 50% 80%;
+}
+.ha-store-sidebar { background: linear-gradient(155deg, #fafcfbef, #edf2f1dc); }
+.ha-store-menu > div { border-radius: 11px; }
+.ha-store-menu .is-active { background: #e4ebe5a6; color: #344c40; box-shadow: inset 0 1px 0 #ffffff80; }
+.ha-store-main { background: linear-gradient(155deg, #fffffffc, #fffffffa 52%, #f4f8f9f2); padding-top: 23px; }
+.ha-store-heading h2 { font-size: 19px; font-weight: 550; }
+.ha-store-range { color: #79868c; font-size: 10px; }
+.ha-store-metrics { margin: 23px 0 20px; padding-bottom: 20px; gap: 14px; }
+.ha-store-metrics > div + div { border-left: 1px solid #e9edef; padding-left: 17px; }
+.ha-store-metrics strong { font-size: 25px; font-weight: 500; letter-spacing: -.045em; line-height: 1.25; }
+.ha-store-metrics > div:first-child strong { font-weight: 550; }
+.ha-metric-label { font-size: 9px; color: #79858c; margin-bottom: 9px; }
+.ha-metric-change { color: #648572; font-size: 9px; margin-top: 7px; }
+.ha-chart-title h3 { font-size: 11px; color: #455159; }
+.ha-chart-title > div { color: #88929b; }
+.ha-chart-scale, .ha-chart-dates { color: #8a969e; }
+.ha-store-footer { font-size: 8px; color: #87939a; }
+.ha-order { border-radius: 21px; background: linear-gradient(135deg, #fffffff0, #f5f8fbdb); box-shadow: 0 22px 48px -20px #19334b59, inset 0 1px 0 #fff; }
+.ha-order-time { display: flex; align-items: center; gap: 4px; }
+.ha-order-dot { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: #8ba489; }
+@media (min-width: 701px) and (max-width: 1100px) {
+  .ha-store-metrics { grid-template-columns: 1.4fr 1fr 1.2fr .9fr; }
+  .ha-store-metrics > div + div { padding-left: 10px; }
+  .ha-store-metrics strong { font-size: 22px; }
+}
+@media (max-width: 700px) {
+  .ha-store-main { padding-top: 17px; }
+  .ha-store-heading h2 { font-size: 16px; }
+  .ha-store-metrics { margin: 20px 0 17px; padding-bottom: 17px; gap: 9px; }
+  .ha-store-metrics > div + div { padding-left: 9px; }
+  .ha-store-metrics strong { font-size: 19px; line-height: 1.35; }
+  .ha-store-metrics > div:first-child strong { font-size: clamp(20px, 5.8vw, 25px); }
+  .ha-metric-label { font-size: 8px; margin-bottom: 6px; }
+  .ha-metric-change { font-size: 8px; }
+  .ha-order { border-radius: 17px; }
+  .ha-chart { margin-top: 15px; }
+}
+@media (max-width: 360px) {
+  .ha-store-metrics { gap: 6px; grid-template-columns: 1.4fr .85fr 1.15fr; }
+  .ha-store-metrics > div + div { padding-left: 6px; }
+  .ha-store-metrics strong { font-size: 17px; }
+  .ha-store-metrics > div:first-child strong { font-size: 19px; }
+  .ha-metric-label { font-size: 7px; }
+}
