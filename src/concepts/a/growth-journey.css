@@ -1,7 +1,7 @@
 /* Photographed environments + isolated products + live, optical UI planes. */
 .cj-story {
   background: #fafaf8;
-  color: #292e2b;
+  color: var(--ca-ink);
   padding: 0;
   overflow: clip;
 }
@@ -24,25 +24,26 @@
 }
 .cj-copy h2 {
   font-size: clamp(40px, 3.8vw, 58px);
-  line-height: 1.06;
-  letter-spacing: -0.055em;
-  font-weight: 400;
+  line-height: var(--ca-display-leading);
+  letter-spacing: var(--ca-display-tracking);
+  font-weight: var(--ca-emphasis-weight);
   max-width: 470px;
   margin: 0 0 30px;
   text-wrap: balance;
   white-space: pre-line;
 }
 .cj-copy p {
-  color: #74786f;
-  font-size: 17px;
-  line-height: 1.7;
-  letter-spacing: -0.022em;
+  color: var(--ca-body);
+  font-size: 18px;
+  line-height: var(--ca-body-leading);
+  letter-spacing: var(--ca-body-tracking);
   margin: 0 0 20px;
   max-width: 380px;
 }
 .cj-copy p:first-of-type {
-  color: #3b4239;
+  color: var(--ca-lead);
   font-size: 20px;
+  font-weight: var(--ca-display-weight);
   line-height: 1.55;
 }
 .cj-copy .ha-button {
@@ -610,7 +611,7 @@
     font-size: 39px;
   }
   .cj-copy p {
-    font-size: 15px;
+    font-size: 16px;
   }
   .cj-copy p:first-of-type {
     font-size: 18px;
@@ -640,7 +641,7 @@
   }
   .cj-copy p {
     font-size: 16px;
-    line-height: 1.65;
+    line-height: var(--ca-body-leading);
     max-width: 450px;
     margin-bottom: 15px;
   }
@@ -1129,21 +1130,22 @@
 .cj-introduction h2 {
   margin: 0;
   font-size: clamp(40px, 4.15vw, 64px);
-  font-weight: 400;
-  letter-spacing: -0.055em;
-  line-height: 1.08;
+  font-weight: var(--ca-emphasis-weight);
+  letter-spacing: var(--ca-display-tracking);
+  line-height: var(--ca-display-leading);
 }
 .cj-introduction h2 > span {
   display: block;
-  color: #8a8e83;
+  color: var(--ca-heading-soft);
+  font-weight: var(--ca-display-weight);
 }
 .cj-introduction > p {
   max-width: 560px;
   text-wrap: balance;
   font-size: 18px;
-  line-height: 1.6;
-  letter-spacing: -0.025em;
-  color: #676e64;
+  line-height: var(--ca-body-leading);
+  letter-spacing: var(--ca-body-tracking);
+  color: var(--ca-body);
   margin: 0;
 }
 .cj-row::before {
@@ -1171,11 +1173,12 @@
   display: block;
 }
 .cj-copy h2 > .cj-heading-soft {
-  color: #858b7e;
+  color: var(--ca-heading-soft);
+  font-weight: var(--ca-display-weight);
 }
 .cj-copy > p:first-of-type {
   max-width: 400px;
-  font-size: 21px;
+  font-size: 20px;
 }
 .cj-closing {
   position: relative;
@@ -1215,24 +1218,25 @@
 }
 .cj-closing h2 {
   margin: 0 0 26px;
-  font-size: clamp(54px, 6vw, 88px);
-  line-height: 1.04;
-  letter-spacing: -0.055em;
-  font-weight: 400;
-  color: #30362c;
+  font-size: clamp(48px, 4.5vw, 68px);
+  line-height: var(--ca-display-leading);
+  letter-spacing: var(--ca-display-tracking);
+  font-weight: var(--ca-emphasis-weight);
+  color: var(--ca-ink);
   scroll-margin-top: 90px;
 }
 .cj-closing h2 span {
   display: block;
-  color: #7d8172;
+  color: var(--ca-heading-soft);
+  font-weight: var(--ca-display-weight);
 }
 .cj-closing-content > p {
   max-width: 550px;
   margin: 0 auto 34px;
-  font-size: 17px;
-  line-height: 1.65;
-  color: #555d4e;
-  letter-spacing: -0.022em;
+  font-size: 18px;
+  line-height: var(--ca-body-leading);
+  color: var(--ca-body);
+  letter-spacing: var(--ca-body-tracking);
 }
 .cj-conversation {
   display: flex;
@@ -1272,11 +1276,11 @@
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.03em;
-  color: #30382c;
+  color: var(--ca-ink);
 }
 .cj-conversation-person span {
   font-size: 12px;
-  color: #79816f;
+  color: var(--ca-body);
 }
 .cj-conversation .ha-button {
   flex: none;

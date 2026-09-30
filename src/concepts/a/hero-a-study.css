@@ -1,7 +1,7 @@
 /* Scoped hero study. Sep 18 call + Hero Routes brief; no effect on the baseline. */
 .ha-study {
   --ha-ground: #fafaf8;
-  --ha-ink: #202730;
+  --ha-ink: var(--ca-ink);
   --ha-blue: #2a63f5;
   background: var(--ha-ground);
   color: var(--ha-ink);
@@ -169,8 +169,8 @@
 }
 .ha-intro h1 {
   font-size: 76px;
-  font-weight: 500;
-  letter-spacing: -0.045em;
+  font-weight: var(--ca-display-weight);
+  letter-spacing: var(--ca-display-tracking);
   line-height: 1.045;
   margin: 0;
 }
@@ -178,25 +178,25 @@
   display: block;
 }
 .ha-intro h1 span:first-child {
-  color: #7b838d;
+  color: var(--ca-heading-soft);
 }
 .ha-intro h1 span:last-child {
-  color: #202730;
-  font-weight: 600;
+  color: var(--ca-ink);
+  font-weight: var(--ca-emphasis-weight);
 }
 .ha-intro p {
   margin: 23px auto 0;
   font-size: 18px;
   line-height: 1.55;
-  color: #515b65;
-  letter-spacing: -0.015em;
+  color: var(--ca-body);
+  letter-spacing: var(--ca-body-tracking);
 }
 .ha-intro p span {
   display: block;
 }
 .ha-intro p span:first-child {
-  color: #343e48;
-  font-weight: 500;
+  color: var(--ca-lead);
+  font-weight: var(--ca-display-weight);
 }
 .ha-hero-cta {
   position: relative;

@@ -1,0 +1,18 @@
+/* Shared editorial type; platform and concept-brand UI retain their own fonts. */
+.ca-direction {
+  --ca-ink: #202730;
+  --ca-body: #515b65;
+  --ca-lead: #343e48;
+  --ca-heading-soft: #7b838d;
+  --ca-display-weight: 500;
+  --ca-emphasis-weight: 600;
+  --ca-display-tracking: -0.045em;
+  --ca-display-leading: 1.08;
+  --ca-body-tracking: -0.015em;
+  --ca-body-leading: 1.6;
+}
+@media (max-width: 700px) {
+  .ca-direction {
+    --ca-display-tracking: -0.04em;
+  }
+}

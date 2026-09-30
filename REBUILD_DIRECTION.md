@@ -2,6 +2,12 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Page typography continuity
+
+The hero and following sections now share editorial type tokens: 500-weight soft first lines, 600-weight ink emphasis, -.045em display tracking (-.04em on phones), and a consistent neutral body palette. Section body text follows the hero’s more open tracking; the closing title is subordinate to the hero. Sage, sand and amber remain in the photography and ambient backgrounds. Platform UI and concept-brand typography are unchanged. The introduction stays left-aligned with supporting copy directly below its heading.
+
+Verified production build, TypeScript lint and diff checks; visually reviewed desktop, 1024px, 390px and 320px layouts with no horizontal overflow. Keanu’s single closing contact card and team positioning remain intact.
+
 ## Contact-card clarification
 
 Restore Keanu’s original portrait/name contact card only in “Good people. On your side.” The agency introduction stays free of the founder profile link; the senior-team paragraph and “Talk to the team” CTA remain. Remove the redundant founder credential beneath the CTA. This supersedes the closing-card removal below.
