@@ -1,5 +1,19 @@
 # Happy Mondays — motion direction
 
+## Implementation update — responsive playback and a simpler opening
+
+The user’s subsequent feedback replaces the fixed-rate scene rule with bounded, scroll-responsive playback. The spatial parallax and closing spring remain separate from this clock.
+
+- Establish a scene at 12% visibility. Hold after its first second until 42% of the graphic has been in view, so entering early does not spend the story below the fold.
+- Measure actual page movement in viewport heights per second, including the effect of Lenis. Smooth velocity over 100ms; ease toward playback speed over 200ms when accelerating and 380ms when settling.
+- At rest use 1× playback. Deliberate movement can ease toward 0.9×; fast movement and forward exit pressure can accelerate toward 1.9×. Neither direction rewinds actions or seeks through visible frames.
+- Shorten commerce interface entrances to 950ms. Discovery reaches its final detail at 3.9 authored seconds; purchase confirmation completes at 5.2 seconds. The overall clock ends at 5.8 seconds, including a brief final hold.
+- Once a composition is completely above the viewport, resolve its final state offscreen. Returning to a skipped section shows the finished composition. Hidden tabs and offscreen scenes otherwise pause. Reduced motion renders completed states directly.
+- Hero type appears together with an 8px lift over 650ms, without masks, line staggering or blur. Supporting text has a 5px lift; the booking CTA is available immediately. Section copy enters over 600ms at 15% visibility.
+- The basket subtotal changes discretely when the second item is added, matching its item count rather than counting through fictitious intermediate prices.
+
+Validation includes six deterministic timing-policy tests (resting pace, maximum velocity, gradual deceleration, reverse movement, delayed frames, and completed-state stability), plus browser verification of visibility gating, real-scroll rate changes and reduced motion.
+
 ## Implementation update — three reasons, one invitation
 
 The closing now develops from three cards into the existing coastal team invitation. This is a focused addition; the proposed hero and commerce choreography below remains separate work.

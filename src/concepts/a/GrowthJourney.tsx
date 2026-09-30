@@ -64,13 +64,14 @@ function Bag() {
 }
 const IMG = "/images/morrow/";
 const FRAGRANCE = "/images/serein/";
-const sceneDuration = 7600;
+const sceneDuration = 5800;
 
 /** One coordinated entrance; scroll subsequently moves the optical planes at
  * different depths. The photographed product and its supporting stone stay together. */
 function useComposition(plate: string, base = IMG) {
   const ref = useRef<HTMLDivElement>(null);
-  const visible = useInView(ref, { amount: 0.3 });
+  const visible = useInView(ref, { amount: 0.12 });
+  const storyReady = useInView(ref, { amount: 0.42, once: true });
   const nearby = useInView(ref, { margin: "400px 0px 400px 0px", once: true });
   const reduced = usePrefersReducedMotion();
   const [loaded, setLoaded] = useState(false);
@@ -111,6 +112,8 @@ function useComposition(plate: string, base = IMG) {
     reduced,
     sceneDuration,
     60,
+    scrollYProgress,
+    storyReady,
   );
   const depth = useSpring(scrollYProgress, {
     stiffness: 85,
@@ -158,27 +161,28 @@ function Discovery() {
   const { ref, reduced, scene, backY, frontY, loaded } =
     useComposition("courtyard");
   const t = scene.time;
-  const enter = settle(segment(t, 120, 1800));
-  const focus = settle(segment(t, 2000, 1700));
-  const position = settle(segment(t, 1800, 1700));
-  const detail = settle(segment(t, 3300, 1900));
+  const enter = settle(segment(t, 60, 950));
+  const focus = settle(segment(t, 1400, 1200));
+  const position = settle(segment(t, 1200, 1400));
+  const detail = settle(segment(t, 2600, 1300));
   return (
     <div
       className="cj-art"
       ref={ref}
       data-scene="discovery"
       data-scene-phase={
-        t < 1800
+        t < 1200
           ? "arriving"
-          : t < 2600
+          : t < 1800
             ? "sorting"
-            : t < 3500
+            : t < 2600
               ? "focusing"
-              : t < 5200
+              : t < 3900
                 ? "revealing"
                 : "settled"
       }
       data-scene-time={Math.round(t)}
+      data-scene-rate={scene.rate.toFixed(2)}
     >
       <div
         className="cj-stage cj-stage--discovery"
@@ -342,28 +346,29 @@ function Storefront() {
     FRAGRANCE,
   );
   const t = scene.time;
-  const enter = settle(segment(t, 100, 1700));
-  const recommendation = settle(segment(t, 2000, 1600));
-  const added = settle(segment(t, 4100, 1300));
-  const confirmation = settle(segment(t, 5100, 1600));
-  const total = (68 + 42 * added).toFixed(2);
+  const enter = settle(segment(t, 60, 950));
+  const recommendation = settle(segment(t, 1350, 1150));
+  const added = settle(segment(t, 2950, 950));
+  const confirmation = settle(segment(t, 4050, 1150));
+  const total = added > 0.5 ? "110.00" : "68.00";
   return (
     <div
       className="cj-art"
       ref={ref}
       data-scene="purchase"
       data-scene-phase={
-        t < 2000
+        t < 1350
           ? "arriving"
-          : t < 4100
+          : t < 2950
             ? "recommending"
-            : t < 5100
+            : t < 4050
               ? "adding"
-              : t < 6700
+              : t < 5200
                 ? "confirming"
                 : "settled"
       }
       data-scene-time={Math.round(t)}
+      data-scene-rate={scene.rate.toFixed(2)}
     >
       <div
         className="cj-stage cj-stage--purchase cj-stage--fragrance"
@@ -573,10 +578,10 @@ function Copy({
   return (
     <motion.div
       className={`cj-copy cj-copy--${kind}`}
-      initial={reduced ? false : { opacity: 0, y: 18 }}
+      initial={reduced ? false : { opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 1, ease: EASE.entrance }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, ease: EASE.entrance }}
     >
       {kind === "discovery" ? (
         <h2 id={id} aria-label="Your products. Their next find.">

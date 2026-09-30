@@ -2,7 +2,7 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
-import { riseAt, usePrefersReducedMotion } from "../../lib/motion";
+import { usePrefersReducedMotion } from "../../lib/motion";
 import { ProofRow } from "../shared/ProofRow";
 import { LogoStrip } from "../shared/LogoStrip";
 import { StorePreview, OrderPreview } from "./StorePreview";
@@ -102,11 +102,16 @@ export function HeroAStudy() {
   const scene = useRef<HTMLDivElement>(null);
   const depth = useHeroDepth(scene);
   const dashboard = useRef<HTMLDivElement>(null);
-  const dashboardVisible = useInView(dashboard, { amount: 0.35 });
+  const dashboardVisible = useInView(dashboard, { amount: 0.12 });
+  const dashboardStoryReady = useInView(dashboard, { amount: 0.42, once: true });
+  const { scrollYProgress: dashboardProgress } = useScroll({
+    target: dashboard,
+    offset: ["start end", "end start"],
+  });
   const [coastReady, setCoastReady] = useState(false);
   const [wallReady, setWallReady] = useState(false);
   const sceneReady = coastReady && wallReady;
-  const { time } = useSceneTimeline(dashboardVisible, sceneReady, reduced, 4800, 60);
+  const { time, rate } = useSceneTimeline(dashboardVisible, sceneReady, reduced, 4800, 60, dashboardProgress, dashboardStoryReady);
   const coastReveal = { opacity: sceneReady || reduced ? 1 : 0 };
 
   const credentials = useRef<HTMLDivElement>(null);
@@ -122,6 +127,7 @@ export function HeroAStudy() {
       className="ha-study"
       data-motion={reduced ? "reduce" : "full"}
       data-hero-time={Math.round(time)}
+      data-hero-rate={rate.toFixed(2)}
       aria-labelledby="ha-title"
     >
       <div className="ha-scene" ref={scene}>
@@ -138,15 +144,27 @@ export function HeroAStudy() {
         <div className="ha-ambient-light" aria-hidden="true" />
         <StudyNav />
         <div className="ha-intro">
-          <h1 id="ha-title">
-            {["Open Shopify.", "Smile."].map((line, index) => <span className="ha-heading-mask" key={line}><motion.span initial={reduced ? false : { y: "110%" }} animate={{ y: 0 }} transition={{ duration: reduced ? 0 : 1.25, delay: .1 + index * .14, ease: [.22, 1, .36, 1] }}>{line}</motion.span></span>)}
-          </h1>
-          <motion.p {...riseAt(2, reduced)}>
+          <motion.h1 id="ha-title"
+            initial={reduced ? false : { opacity: 0.3, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduced ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span>Open Shopify.</span><span>Smile.</span>
+          </motion.h1>
+          <motion.p
+            initial={reduced ? false : { opacity: 0.4, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
+          >
             <span>Google Ads for Shopify brands.</span>
             <span>Senior expertise. A flat monthly fee.</span>
           </motion.p>
         </div>
-        <motion.div className="ha-hero-cta" {...riseAt(3, reduced)}>
+        <motion.div className="ha-hero-cta"
+          initial={reduced ? false : { opacity: 0.65 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduced ? 0 : 0.45 }}
+        >
           <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
         </motion.div>
         <motion.div

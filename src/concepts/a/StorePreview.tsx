@@ -29,11 +29,11 @@ const sample = {
 export function StorePreview({ time }: { time: number }) {
   const data = sample;
   const fillId = useId().replace(/:/g, "");
-  const entrance = settle(segment(time, 120, 1400));
+  const entrance = settle(segment(time, 60, 900));
   const chart = settle(segment(time, 1350, 2750));
   const newOrder = settle(segment(time, 3550, 650));
-  const sales = Math.round(128381 * settle(segment(time, 850, 2300)) + 79 * newOrder);
-  const orders = Math.round(1841 * settle(segment(time, 990, 2300))) + (newOrder > 0 ? 1 : 0);
+  const sales = Math.round(128381 * settle(segment(time, 1100, 2050)) + 79 * newOrder);
+  const orders = Math.round(1841 * settle(segment(time, 1140, 2150))) + (newOrder > 0 ? 1 : 0);
   const metrics = [
     ["Total sales", "$" + sales.toLocaleString("en-US"), "24.8%"],
     ["Orders", orders.toLocaleString("en-US"), "18.6%"],
@@ -44,7 +44,7 @@ export function StorePreview({ time }: { time: number }) {
     // Fade the glass itself: fading an ancestor temporarily blocks its backdrop.
     <motion.div
       className="ha-store"
-      style={{ opacity: entrance, y: 58 * (1 - entrance), scale: .965 + .035 * entrance }}
+      style={{ opacity: entrance, y: 30 * (1 - entrance), scale: .985 + .015 * entrance }}
       role="group"
       aria-label="Illustrative Shopify analytics"
     >
@@ -59,7 +59,7 @@ export function StorePreview({ time }: { time: number }) {
             {nav.map(({ text, Icon }, index) => (
               <div
                 key={text}
-                style={{ opacity: settle(segment(time, 350 + index * 65, 850)), transform: `translateY(${5 * (1 - settle(segment(time, 350 + index * 65, 850)))}px)` }}
+                style={{ opacity: settle(segment(time, 200 + index * 45, 450)), transform: `translateY(${3 * (1 - settle(segment(time, 200 + index * 45, 450)))}px)` }}
                 className={text === "Analytics" ? "is-active" : ""}
               >
                 <Icon width={15} height={15} />
