@@ -10,7 +10,9 @@ User feedback: the layered result looks good, but repeating socks misses the req
 2. [x] Build a distinct warm walnut/plaster/bronze composition, store behind the collection and basket at front-right. Keep Morrow Studio's discovery scene unchanged.
 3. [x] Update native store, complementary product, $68 + $42 subtotal and illustrative-brand notice together.
 4. [x] Review desktop, tablet and handheld composition; verify asset decoding, reduced motion and finite animation. Pause held 4194ms / $76.50 across separate checks; final subtotal is $110.
-5. [ ] Publish and inspect the live review revision.
+5. [x] Publish and inspect the live review revision.
+
+Published application commit `3097304`, deployment `dpl_BCWcnud8ngzezjoRjAfDuZ35tF9J`. Canonical review serves `index-lhhUfuPn.js`; all Serein images load, final subtotal $110, no observed browser errors or page overflow. Desktop widths 1024/1440/1920 and stacked widths 320/390/768 visually reviewed. Build, lint and diff checks pass. Live capture: parent workspace `output/happy-mondays-serein-2026-09-30/live-serein.png`.
 
 Asset provenance and exact built-in imagegen prompts: `public/images/serein/README.md` and `prompts.json`. Older same-product notes below describe the previous revision, superseded by this category-variety follow-up.
 
