@@ -137,3 +137,11 @@
 @media (max-width: 1100px) { .ps-product-card { padding: 18px 18px 6px; } .ps-metric strong { font-size: 32px; } .ps-activity-heading { gap: 9px; } .ps-activity-heading .ps-card-title { font-size: 14px; } .ps-scene-signal { right: 18px; bottom: 120px; } }
 @media (max-width: 760px) { .ps-visual { padding-bottom: 156px; } .ps-scene-signal { bottom: 100px; right: 20px; padding: 11px 13px; font-size: 11px; } .ps-activity-body { margin-top: 16px; } .ps-product-card { padding: 18px 18px 6px; } .ps-activity-chart { height: 75px; } }
 @media (max-width: 370px) { .ps-product-card { padding: 16px 14px 4px; } .ps-activity-heading .ps-product-icon { display: none; } .ps-metric strong { font-size: 30px; } .ps-scene-footer { font-size: 8px; gap: 4px; } .ps-scene-signal { right: 14px; bottom: 90px; } }
+/* Recognisable platform surfaces replace decorative badges and glass rims. */
+.ps-product-card { border:1px solid #e0e3e5; border-radius:16px; background:#fffffffa; box-shadow:0 12px 30px -18px #283c4b40; }
+.ps-activity-heading .ps-product-icon { background:none; border-radius:0; width:24px; }
+.ps-activity-heading .ps-card-title { font-size:16px; font-weight:550; color:#303134; }
+.ps-visual--discovery .ps-product-card { font-family:Arial,sans-serif; }
+.ps-visual--discovery .ps-activity-chart { color:#4285f4; }
+.ps-visual--conversion .ps-activity-chart { color:#8063cf; }
+.ps-close h2 { margin:0; }

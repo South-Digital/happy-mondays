@@ -15,9 +15,6 @@ function GoogleMark() {
 function Plus({ open = false }: { open?: boolean }) {
   return <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><path d="M4 10h12" />{!open && <path d="M10 4v12" />}</svg>;
 }
-function Bag() {
-  return <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></svg>;
-}
 function ProductPhoto({ name, alt, onReady }: { name: "jewellery" | "ritual"; alt: string; onReady: () => void }) {
   // The beauty image reserves resolution for its detail view before interaction.
   const sizes = name === "ritual" ? "(max-width: 760px) 150vw, (max-width: 1100px) 75vw, 980px" : "(max-width: 760px) calc(100vw - 40px), (max-width: 1100px) 50vw, 660px";
@@ -67,9 +64,9 @@ function ProductScene({ type }: { type: "discovery" | "conversion" }) {
     </div>
     <motion.div className="ps-floating" ref={activityRef} style={reduced ? undefined : { y: cardY }}>
       <motion.div className="ps-product-card ps-glass" initial={reduced ? false : { opacity: 0, y: 24 }} animate={ready || reduced ? entrance : undefined} transition={{ duration: reduced ? 0 : 1, delay: reduced ? 0 : 0.35, ease: EASE.entrance }}>
-        <div className="ps-activity-heading"><span className="ps-product-icon" aria-hidden="true">{discovery ? <SearchIcon /> : <Bag />}</span><div><p className="ps-card-eyebrow">{discovery ? "Google Shopping" : "Your Shopify store"}</p><p className="ps-card-title">{discovery ? "The everyday hoops" : "The daily ritual"}</p></div><span className="ps-example-label">Illustrative</span></div>
-        <div className="ps-activity-body" role="img" aria-label={discovery ? "Illustrative product activity: 2,480 product views and 186 store visits. Not client results." : "Illustrative store activity: $1,888 in sales and 39 orders. Not client results."}>
-          <div className="ps-metric" aria-hidden="true"><span>{discovery ? "Product views" : "Total sales"}</span><strong>{discovery ? Math.round(2480 * settle(segment(time, 2700, 4600))).toLocaleString("en-US") : "$" + Math.round(1840 * settle(segment(time, 1600, 4400)) + 48 * settle(segment(time, 6600, 1100))).toLocaleString("en-US")}</strong><small>{discovery ? Math.round(186 * settle(segment(time, 3200, 4300))) + " store visits" : Math.round(38 * settle(segment(time, 1600, 4400)) + settle(segment(time, 6600, 1100))) + " orders"}</small></div>
+        <div className="ps-activity-heading"><span className="ps-product-icon" aria-hidden="true">{discovery ? <GoogleMark /> : <img src="/images/icon-shopify.png" width="19" height="23" alt=""/>}</span><div><p className="ps-card-title">{discovery ? "Merchant Center" : "Analytics"}</p></div></div>
+        <div className="ps-activity-body" role="img" aria-label={discovery ? "Illustrative product activity: 2,480 impressions and 186 clicks. Not client results." : "Illustrative store activity: $1,888 in sales and 39 orders. Not client results."}>
+          <div className="ps-metric" aria-hidden="true"><span>{discovery ? "Impressions" : "Total sales"}</span><strong>{discovery ? Math.round(2480 * settle(segment(time, 2700, 4600))).toLocaleString("en-US") : "$" + Math.round(1840 * settle(segment(time, 1600, 4400)) + 48 * settle(segment(time, 6600, 1100))).toLocaleString("en-US")}</strong><small>{discovery ? Math.round(186 * settle(segment(time, 3200, 4300))) + " clicks" : Math.round(38 * settle(segment(time, 1600, 4400)) + settle(segment(time, 6600, 1100))) + " orders"}</small></div>
           <svg className="ps-activity-chart" viewBox="0 0 240 90" aria-hidden="true">
             <defs><linearGradient id={`${graphId}-fill`} x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="currentColor" stopOpacity=".2" /><stop offset="100%" stopColor="currentColor" stopOpacity="0" /></linearGradient><clipPath id={`${graphId}-clip`}><rect width={240 * settle(segment(time, discovery ? 2700 : 1600, discovery ? 4600 : 6100))} height="90" /></clipPath></defs>
             <path d="M0 25H240M0 55H240M0 85H240" stroke="currentColor" strokeOpacity=".12" strokeDasharray="2 5" fill="none" />
@@ -117,17 +114,14 @@ export function GrowthJourney() {
       <div className="ps-row ps-row--discovery">
         <ProductScene type="discovery" />
         <motion.div className="ps-copy" {...sectionReveal(reduced)}>
-          <p className="ps-eyebrow"><span>01</span> Google Ads & product feeds</p>
           <h2><span>Great products.</span><br />Worth discovering.</h2>
           <p className="ps-description">You’ve put care into every detail. We help the right people find it—with considered campaigns and product feeds that do your products justice.</p>
           <ServiceDetail type="discovery" />
-          <div className="ps-person"><img src="/images/refinement/keanu-480.webp" alt="Keanu Fischell" width="44" height="44" loading="lazy" /><div><strong>Senior people. Personally invested.</strong><span>Keanu Fischell · Founder, Happy Mondays</span></div></div>
         </motion.div>
       </div>
       <div className="ps-row ps-row--conversion">
         <ProductScene type="conversion" />
         <motion.div className="ps-copy" {...sectionReveal(reduced)}>
-          <p className="ps-eyebrow"><span>02</span> Your Shopify experience</p>
           <h2><span>A better journey.</span><br />From click<br className="ps-desktop-break" /> to customer.</h2>
           <p className="ps-description">The click is only the beginning. We look beyond the ad account to make your store easier to explore, your products easier to choose, and the next step easier to take.</p>
           <ServiceDetail type="conversion" />
@@ -135,7 +129,7 @@ export function GrowthJourney() {
       </div>
       <SignatureGraphics />
       <div className="ps-close">
-        <div><p className="ps-eyebrow">Good people. On your side.</p><h2>Your next chapter.<br /><span>Let’s make it a good one.</span></h2></div>
+        <div><h2>Your next chapter.<br /><span>Let’s make it a good one.</span></h2></div>
         <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
       </div>
       <p className="ps-concept-note">Product imagery and store examples are concepts for illustration.</p>

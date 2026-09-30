@@ -76,3 +76,7 @@ Sequence: coast and foreground crossfade together; the glass dashboard rises 26p
 The dashboard retains its sidebar/content gap. The refinement uses softer frame highlights, neutral white content, a sage Analytics selection, consistent tabular figures, subtle metric separators, quieter comparison labels and a restrained chart endpoint. The layout is compact enough to show more chart above the foreground wall. Date range remains presentational.
 
 Validation: regular/client builds; geometry at 320, 375, 390, 700, 701, 900, 1024, 1440 and 1920px. Fixed a 4px ROAS-column overflow at 701px; all metric columns fit afterward. Desktop, mobile and narrow-tablet screenshots reviewed. Sampled the actual load sequence: $70,216 at 1.38s; $127,367 with no order at 2.69s; $128,422 with the order entering at 3.69s; final $128,460 at 4.40s. Reduced motion has a fully drawn chart, final values, opacity 1 and no store transform. Browser warning/error logs are empty.
+
+## 30 September — platform authenticity pass
+
+Removed decorative pre-headings from both product rows and the closing invitation. Removed the repeated founder teaser. Simplified activity card surfaces and identified them as Merchant Center / Analytics, with Google blue and Shopify purple charts. The new approach section now uses recognisable platform layouts, actual Lucky Honey product photography and Keanu’s portrait; see GRAPHIC_STYLE_REVIEW.md. Earlier generated product-study photographs remain concept assets.

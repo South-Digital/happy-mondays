@@ -1,26 +1,27 @@
-# Concept A — graphic language refinement
+# Concept A — platform graphic refinement
 
-30 September 2026. A design proposal for review, not client sign-off.
-
-The supplied screenshot matches the older baseline Pillars component, which is not rendered on the current Concept A. A placement question was offered; in the absence of a reply, the new interpretation is added after the two current product stories and before the closing invitation. The historical baseline remains available locally for comparison.
+30 September 2026. Supersedes the rejected catalogue, orbit diagram and waveform proposal.
 
 ## Direction
 
-The previous set repeated a white rounded rectangle, checklist and corner badge three times. The replacement uses three distinct silhouettes with shared material treatment:
+The user identified two problems: graphics did not resemble the platforms they represented, and decorative eyebrow headings made the page feel generic. This pass removes those headings from the rendered Concept A continuation and replaces the three approach graphics.
 
-- Product expertise: photographic catalogue layers fan out and settle; a restrained Google/search layer follows. High-resolution existing concept jewellery imagery keeps the ecommerce context tangible.
-- Connected approach: four softly lit nodes link through a translucent central Shopify object. Tracks draw as the scene assembles. The diagram describes connected work rather than asserting an unverified percentage of wins.
-- Personal partnership: Keanu’s actual photograph and name establish the person behind the service. A separate update/waveform composition arrives afterward. It is a presentational illustration, without a fake video player or invented recording duration.
+- Google Shopping: search field, navigation tabs, sponsored product listings, product titles, prices and merchant names. Uses existing actual Lucky Honey product photography, not generated jewellery imagery.
+- Shopify: charcoal admin header, grey workspace, bordered white metric cards and a purple analytics chart. The numbers and chart reveal once on entering the viewport; these remain illustrative figures, not a client result.
+- People: Keanu’s actual portrait and a plain name/caption. No invented player, waveform, recording duration or floating update badge. The duplicated founder teaser in the first product row is removed.
 
-Sand, sage and slate-blue light tie the scenes to the coast and photographic continuation. CSS/SVG layers remain resolution-independent; the portrait and product photograph use responsive sources. Motion runs once for 4.6 seconds, suspends offscreen/when hidden, and waits for photographs to decode. Reduced motion presents the finished composition immediately.
+Typography, colours and surfaces follow each platform’s conventions rather than applying the same glass treatment to every graphic. These are simplified illustrative previews, not exact screenshots of current accounts. Reference structure checked against Google Shopping ad guidance and Shopify Analytics documentation:
 
-## Review and verification
+- https://support.google.com/google-ads/answer/6275294?hl=en-uk
+- https://help.shopify.com/en/manual/reports-and-analytics/shopify-reports/overview-dashboard/index
 
-- Reviewed desktop, phone and tablet layouts in-browser.
-- Reworked the portrait crop and layer spacing so no text is obscured by foreground panels.
-- Moved to a single column at 1000px and below; avoided three tiny tablet illustrations.
-- Corrected minimum-aspect-ratio overflow at 320px. Final checks at 320, 390, 760, 1000, 1001, 1440 and 1920px show no horizontal overflow, with portrait captions clear of the foreground panel.
-- Sampled actual animation at 0.5, 1.8, 3.2 and 4.5 seconds: catalogue arrives before the search layer; nodes/tracks assemble; portrait precedes update panel and waveform.
-- Regular and client-review TypeScript/Vite builds pass. No new dependencies. Browser warning/error logs empty.
+The two preceding product-story rows retain their existing generated concept photography, with provenance recorded in public/images/product-studies/README.md. Their UI overlays now use clearer Merchant Center / Analytics identity and plainer platform-specific surfaces. This pass does not claim to replace all generated photography on the page.
 
-The source call/board interpretation remains documented in PRODUCT_STORY_REVIEW.md and DESIGN_RESET.md. This is a visible art-direction proposal; functional verification does not establish aesthetic approval.
+## Motion and verification
+
+- Finite 3.4-second sequence; count-ups and chart reveal stop at their final state. Existing shared timeline suspends offscreen and in hidden tabs. Reduced motion shows the completed state.
+- Observed normal playback from zero through intermediate $12,692 / 182 orders to final $12,846 / 184; final chart clipping width is 300.
+- Visual review on desktop and 390px phone. Geometry checks at 320, 390, 760, 1000, 1001, 1100, 1440 and 1920px: no page horizontal overflow, no inner frame vertical clipping, and zero remaining decorative eyebrow elements.
+- Regular and client-review TypeScript/Vite builds pass; no new dependencies; browser warning/error logs empty during local review.
+
+The section remains after the two product-story rows and before the closing invitation. Historical baseline components remain untouched. Functional checks do not establish client aesthetic approval.
