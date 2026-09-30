@@ -1216,7 +1216,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, #fffefa4d, #fffefa66 52%, transparent 81%);
+  background: linear-gradient(90deg, #fffffc94, #fffffca6 52%, #fffffc75 70%, transparent 84%);
 }
 .cj-closing-content {
   position: relative;
