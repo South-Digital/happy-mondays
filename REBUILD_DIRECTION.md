@@ -244,3 +244,17 @@ This is a fresh review of the main design call, board, video, briefs and current
 - Normal scenes stay at 0ms offscreen, begin on entry (observed 288ms), and finish at 4200ms. Reduced-motion route reports both scenes at 4200ms with complete opacity and identity transforms.
 - Removed the rejected SignatureGraphics component and stylesheet, not just their visible output.
 - Booking and nav remain existing design-preview interactions; illustrative product/store UI is exposed as an image to assistive technology, not fake functional commerce controls.
+
+
+## 30 September — approved editorial integration
+
+User approved the recent icon and foreground concepts and requested their implementation together. This supersedes the older restrictions above against concept brands: Morrow Studio and Serein are now the accepted illustrative product scenes.
+
+- Retained the live layered shopping/store sequences, independent depth, finite timelines and reduced-motion states.
+- Rebuilt the accompanying copy as large two-tone editorial headlines with transparent blue-glass cart and payment-card assets, subtle entrance and bounded scroll movement. Shorter copy and shared ocean-blue pill actions connect them to the hero.
+- Removed the repeated search-to-sale introduction, so the client logos lead directly into the discovery scene. Planned service links retain their destination-specific preview notices.
+- Replaced the cool white hero wall with warm travertine, restrained olive detail and the same coastal setting. Magnific Precision 2x master supplies responsive AVIF/WebP assets. Sea and foreground remain separate layers around the live dashboard.
+- Integrated the approved restored Keanu portrait into the single closing contact card; team-first positioning remains. Concept B is unchanged.
+- Asset sources and processing are recorded in public/images/editorial/PROVENANCE.txt and public/images/hero-a-terrace/PROVENANCE.txt.
+
+Validation: client-review build and TypeScript lint pass; no horizontal overflow at 320, 390, 768, 1024, 1440, 1920 and 2560px. Visual checks covered the hero, both editorial sections and closing card; normal and reduced motion, scene completion, reverse scroll, foreground overlap and image loading were checked. No browser warnings/errors observed.

@@ -1,6 +1,11 @@
 /* Shared editorial type; platform and concept-brand UI retain their own fonts. */
 .ca-direction {
   --ca-ink: #202730;
+  --ca-action: #28536b;
+  --ca-action-top: #35627a;
+  --ca-action-bottom: #244b62;
+  --ca-action-border: #20475e;
+  --ca-action-hover: #20495f;
   --ca-body: #515b65;
   --ca-lead: #343e48;
   --ca-heading-soft: #7b838d;

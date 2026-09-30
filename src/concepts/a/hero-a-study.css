@@ -38,7 +38,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.88) sepia(0.08) brightness(1.02) contrast(0.985);
+  filter: saturate(0.9) brightness(1.015);
 }
 .ha-sky-wash {
   position: absolute;
@@ -96,12 +96,11 @@
   align-items: center;
   justify-content: center;
   min-width: 0;
-  border: 1px solid rgba(20, 59, 169, 0.28);
+  border: 1px solid var(--ca-action-border);
   border-radius: 999px;
   min-height: 52px;
   padding: 0 24px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 70%), #2858d9;
+  background: linear-gradient(175deg, var(--ca-action-top), var(--ca-action) 55%, var(--ca-action-bottom));
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -117,7 +116,7 @@
 }
 @media (hover: hover) {
   .ha-button:hover {
-    background-color: #214fc9;
+    background: var(--ca-action-hover);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.24),
       0 1px 2px rgba(20, 42, 89, 0.18),
@@ -125,13 +124,13 @@
   }
 }
 .ha-button:active {
-  background-color: #1d47bb;
+  background: #1a4055;
   box-shadow: inset 0 1px 3px rgba(12, 31, 79, 0.2);
 }
 .ha-study a:focus-visible,
 .ha-mobile-menu summary:focus-visible,
 .ha-mobile-menu button:focus-visible {
-  outline: 2px solid #2858d9;
+  outline: 2px solid var(--ca-action);
   outline-offset: 4px;
 }
 .ha-nav-cta {
@@ -446,49 +445,17 @@
 }
 .ha-coast-foreground {
   clip-path: polygon(
-    0% 90.53%,
-    2.5% 89.966%,
-    5% 89.402%,
-    7.5% 88.952%,
-    10% 88.501%,
-    12.5% 87.937%,
-    15% 87.486%,
-    17.5% 86.922%,
-    20% 86.471%,
-    22.5% 86.02%,
-    25% 85.457%,
-    27.5% 84.893%,
-    30% 84.442%,
-    32.5% 83.878%,
-    35% 83.427%,
-    37.5% 82.864%,
-    40% 82.413%,
-    42.5% 81.849%,
-    45% 81.285%,
-    47.5% 80.722%,
-    50% 80.045%,
-    52.5% 79.481%,
-    55% 78.805%,
-    57.5% 78.129%,
-    60% 77.565%,
-    62.5% 76.776%,
-    65% 76.099%,
-    67.5% 75.423%,
-    70% 74.634%,
-    72.5% 73.844%,
-    75% 73.055%,
-    77.5% 72.266%,
-    80% 71.477%,
-    82.5% 70.688%,
-    85% 69.899%,
-    87.5% 69.109%,
-    90% 68.207%,
-    92.5% 67.531%,
-    95% 66.629%,
-    97.5% 65.727%,
-    100% 64.825%,
-    100% 100%,
-    0 100%
+    0% 90.417%, 2.5% 89.853%, 5% 89.402%, 7.5% 88.952%,
+    10% 88.388%, 12.5% 87.937%, 15% 87.260%, 17.5% 86.809%,
+    20% 86.246%, 22.5% 85.682%, 25% 85.118%, 27.5% 84.667%,
+    30% 84.104%, 32.5% 83.427%, 35% 82.976%, 37.5% 82.413%,
+    40% 81.736%, 42.5% 81.172%, 45% 80.609%, 47.5% 79.932%,
+    50% 79.369%, 52.5% 78.692%, 55% 78.016%, 57.5% 77.339%,
+    60% 76.663%, 62.5% 76.099%, 65% 75.423%, 67.5% 74.746%,
+    70% 74.070%, 72.5% 73.393%, 75% 72.604%, 77.5% 71.928%,
+    80% 71.251%, 82.5% 70.462%, 85% 69.786%, 87.5% 68.884%,
+    90% 68.207%, 92.5% 67.418%, 95% 66.516%, 97.5% 65.727%,
+    100% 64.938%, 100% 100%, 0 100%
   );
 }
 /* A ground-colour wash lifts the wall's shade without washing out the sea. */
@@ -496,9 +463,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(145deg, rgba(249, 239, 214, 0.25), rgba(250, 247, 238, 0.08) 65%),
-    rgba(250, 250, 248, 0.26);
+  background: rgba(250, 250, 248, 0.06);
   pointer-events: none;
 }
 /* Smoothstep opacity avoids abrupt changes in the fade's slope. */
@@ -506,7 +471,7 @@
   position: absolute;
   z-index: 4;
   inset: auto 0 -1px;
-  height: 190px;
+  height: 130px;
   pointer-events: none;
   background: linear-gradient(
     180deg,
@@ -859,7 +824,7 @@
     );
   }
   .ha-scene-fade {
-    height: 155px;
+    height: 120px;
   }
   .ha-credentials {
     margin-top: -24px;
@@ -1029,7 +994,7 @@
     min-height: 44px;
     margin-top: 10px;
     border-radius: 999px;
-    background: linear-gradient(180deg, rgba(255,255,255,.07), transparent 70%), #2858d9;
+    background: linear-gradient(175deg, var(--ca-action-top), var(--ca-action-bottom));
     color: #fff;
     font-size: 14px;
     font-weight: 600;

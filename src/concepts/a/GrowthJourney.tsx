@@ -535,34 +535,75 @@ function JourneyLink({
   );
 }
 
+/** Small physical objects sit inside live type; no bitmap lettering. */
+function EditorialIcon({ kind }: { kind: "cart" | "card" }) {
+  const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const y = useTransform(progress, [0, 1], [4, -4]);
+  const rotate = useTransform(progress, [0, 1], [-2, 2]);
+  return (
+    <motion.span
+      ref={ref}
+      className={`cj-editorial-icon cj-editorial-icon--${kind}`}
+      style={reduced ? undefined : { y, rotate }}
+      aria-hidden="true"
+    >
+      <motion.img
+        src={`/images/editorial/${kind}.webp`}
+        width="600"
+        height={kind === "cart" ? 494 : 353}
+        alt=""
+        loading="lazy"
+        initial={reduced ? false : { opacity: 0, y: 10, rotate: -5 }}
+        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 1.2, delay: 0.18, ease: EASE.entrance }}
+      />
+    </motion.span>
+  );
+}
+
 function Copy({
-  title,
+  kind,
   children,
   id,
 }: {
-  title: string;
+  kind: "discovery" | "purchase";
   children: React.ReactNode;
   id: string;
 }) {
   const reduced = usePrefersReducedMotion();
   return (
     <motion.div
-      className="cj-copy"
-      initial={reduced ? false : { opacity: 0, y: 22 }}
+      className={`cj-copy cj-copy--${kind}`}
+      initial={reduced ? false : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 1, ease: EASE.entrance }}
     >
-      <h2 id={id}>
-        {title.split("\n").map((line, index) => (
-          <span
-            key={line}
-            className={index === 0 ? "cj-heading-soft" : undefined}
-          >
-            {line}
+      {kind === "discovery" ? (
+        <h2 id={id} aria-label="Good products. Meet the right people.">
+          <span className="cj-heading-soft">Good </span>
+          <span className="cj-heading-soft cj-icon-line">
+            <EditorialIcon kind="cart" />
+            <span>products. </span>
           </span>
-        ))}
-      </h2>
+          <span className="cj-heading-emphasis">Meet the </span>
+          <span>right people.</span>
+        </h2>
+      ) : (
+        <h2 id={id} aria-label="From just looking. To checking out.">
+          <span className="cj-heading-soft">From just </span>
+          <span className="cj-heading-soft">looking. </span>
+          <span className="cj-heading-emphasis cj-icon-line">
+            <span>To </span>
+            <EditorialIcon kind="card" />
+          </span>
+          <span>checking out.</span>
+        </h2>
+      )}
       {children}
     </motion.div>
   );
@@ -614,7 +655,7 @@ function PeopleClosing() {
         <div className="cj-conversation">
           <div className="cj-conversation-person">
             <img
-              src="/images/refinement/keanu-480.webp"
+              src="/images/editorial/keanu-480.webp"
               alt="Keanu Fischell, founder of Happy Mondays"
               width="76"
               height="76"
@@ -647,31 +688,14 @@ export function GrowthJourney() {
       aria-label="From product discovery to your Shopify store"
     >
       <div className="cj-wrap">
-        <motion.div
-          className="cj-introduction"
-          initial={reduced ? false : { opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.1, ease: EASE.entrance }}
-        >
-          <h2>
-            <span>From the first search.</span>To the next sale.
-          </h2>
-          <p>
-            One team across Google Ads and Shopify, from how customers find you
-            to what happens after the click.
-          </p>
-        </motion.div>
         <section className="cj-row" aria-labelledby="cj-discovery-heading">
           <Discovery />
-          <Copy
-            id="cj-discovery-heading"
-            title={"Your products.\nTheir next find."}
-          >
-            <p>Google Ads that make sense for your margins.</p>
+          <Copy id="cj-discovery-heading" kind="discovery">
             <p>
-              We get to know your range, improve your product feed and build
-              campaigns around the customers you want to reach.
+              <span className="cj-copy-thought">
+                Your range. Your margins. Your next customer.
+              </span>
+              Google Ads built around all three.
             </p>
             <div className="cj-copy-actions">
               <JourneyLink href="/google-ads-for-shopify-brands">
@@ -687,11 +711,10 @@ export function GrowthJourney() {
           className="cj-row cj-row--reverse"
           aria-labelledby="cj-purchase-heading"
         >
-          <Copy id="cj-purchase-heading" title={"Make more of\nevery visit."}>
-            <p>More revenue from the traffic you already have.</p>
+          <Copy id="cj-purchase-heading" kind="purchase">
             <p>
-              Product pages, pricing, checkout. We look beyond the ad account to
-              find where customers hesitate and what to improve first.
+              A clearer product page. A better basket. An easier checkout. We find
+              what stands between interest and an order.
             </p>
             <div className="cj-copy-actions">
               <JourneyLink href="/revenue-leak-audit">
