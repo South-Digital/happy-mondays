@@ -1,6 +1,6 @@
 # Concept A — corrected source review · 30 September 2026
 
-**Status: layered replacement implemented and locally reviewed; publishing for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
+**Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
 ## Active rebuild — preserve the approved photographic composition
 
@@ -16,9 +16,9 @@ Direct call evidence, 18 September 34:17–35:14: Zac proposed concept brands an
 4. [x] Choreograph depth and a meaningful search-to-product sequence. Product remains grounded; interfaces resolve at different depths. No floating-rock novelty, continual success loops or generic checklist panel.
 5. [x] Extend the material language to a distinct second composition, with the same concept product and a clearer purchase journey.
 6. [x] Review still and intermediate frames, scroll reversal, reduced motion, mobile recomposition, legibility, asset sharpness and load behaviour. Iterate on visual shortcomings rather than treating builds as aesthetic approval.
-7. [ ] Deploy only after the browser retains the endorsed composition; verify live and save review captures.
+7. [x] Deploy only after the browser retains the endorsed composition; verify live and save review captures.
 
-The previous implementation record below is retained as history, not approval. Its visual outcome was rejected. The current active goal remains open until these gates are met.
+The previous implementation record below is retained as history, not approval. Its visual outcome was rejected. The gates below are now met for this review revision; this is not a claim of client approval.
 
 ### Implemented composition and motion
 
@@ -28,6 +28,15 @@ The previous implementation record below is retained as history, not approval. I
 - The scene settles with a 3.5% camera move. UI planes enter separately and respond at different depths to scrolling. A continuous Shopping strip brings Morrow into prominence without cards crossing through one another. Each finite 7.6-second sequence supports pause and replay, stops offscreen/when hidden, and stays complete on reverse scrolling.
 - All scene images decode before the entrance; glass blur remains constant rather than snapping on after load. Reduced motion renders the completed state with no camera transition or replay controls.
 - Product thumbnails are individual transparent assets. The initial contact sheet produced stray neighbouring fragments and was replaced rather than masked into the final build.
+
+### Published revision
+
+Application commit `b1c211f`, Vercel deployment `dpl_9NoJMCT5XQDszLGUXYJ1PkrnAVAa`.
+
+- Review: https://happy-mondays-design-review.vercel.app/concept-a
+- Immutable deployment: https://happy-mondays-design-review-jilp3n53u-zac-santers-projects.vercel.app/concept-a
+- Canonical page and new courtyard asset return HTTP 200 with noindex/nofollow headers. Live browser loads bundle `index-C58iWNHF.js`, the 1920px courtyard and completed native scene. No observed console warnings/errors or horizontal overflow.
+- Screenshots saved from the deployed page in the parent workspace's `output/happy-mondays-layered-rebuild-2026-09-30` directory.
 
 ### Local verification
 
