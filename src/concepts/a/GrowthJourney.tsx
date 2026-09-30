@@ -588,8 +588,8 @@ function Copy({
           <span className="cj-heading-soft cj-icon-line">
             <span>Good </span>
             <EditorialIcon kind="cart" />
+            <span>products.</span>
           </span>
-          <span className="cj-heading-soft">products. </span>
           <span className="cj-heading-emphasis">Get found.</span>
         </h2>
       ) : (
