@@ -4,7 +4,7 @@
 
 ## Implementation pass — 30 September, following the source correction
 
-Status: rebuilt and locally checked; Vercel verification pending. This is a review revision, not client approval.
+Status: rebuilt, checked locally and verified on the Vercel review site. This is a review revision, not client approval.
 
 - [x] Explore one full-section mockup using built-in imagegen. Adopt layered natural lighting and composition; reject its invented product/reviews and translucent Google interface.
 - [x] Build two native React/CSS scenes around actual Lucky Honey photography, with real competitor assets in the Shopping example. Google retains a white surface and platform-specific typography.
@@ -13,7 +13,7 @@ Status: rebuilt and locally checked; Vercel verification pending. This is a revi
 - [x] Coordinate internal changes using a finite clock, eased advancement with forward scrolling, independent foreground/light depth, pause/replay and a complete reduced-motion state. Passed scenes settle rather than replaying on reverse scroll.
 - [x] Recompose mobile: two larger Shopping results; product photograph above purchase details. Do not merely shrink the desktop UI.
 - [x] Check 320, 390, 768, 1024, 1440 and 1920 widths. No page or heading overflow; visual reviews at all except 1920, which received geometry checks. Verify loaded images, pause stability, replay, normal and reduced motion, and clean browser logs.
-- [ ] Publish and verify the Vercel review revision.
+- [x] Publish and verify the Vercel review revision. Deployment `dpl_6mbgz2pJVhgomWV2n6odQym8yahy`, application commit `8179359`. Canonical Concept A route and new product asset return HTTP 200 with noindex headers. Live browser confirms new copy, complete scenes, loaded images and no observed console errors. Closing booking button shows the intended preview message; back-to-top returns to `#ha-top` at scroll 0.
 
 The selected coastal hero and Concept B retain their designs. The shared scene clock keeps its existing defaults for the hero. Booking and main navigation remain explicitly described design-preview interactions, not completed production integrations.
 
