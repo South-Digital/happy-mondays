@@ -54,14 +54,22 @@
   margin-top: 30px;
 }
 .cj-service-link {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 50px;
   padding: 13px 24px;
-  border: 1px solid #8b9da6;
+  border: 1px solid #8b9da682;
   border-radius: 999px;
-  background: transparent;
+  background: linear-gradient(165deg, #ffffffb8, #ffffff40 48%, #dce8ee70);
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -1px 1px #6e879a29,
+    0 6px 16px -10px #29475870;
   color: var(--ca-action);
   font-size: 14px;
   font-weight: 600;
@@ -73,6 +81,16 @@
     background-color 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease;
+}
+.cj-service-link::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: inherit;
+  border-top: 1px solid #ffffffc7;
+  background: radial-gradient(ellipse at 25% 0%, #ffffffb3, transparent 65%);
+  pointer-events: none;
 }
 .cj-text-link {
   display: inline-flex;
@@ -89,8 +107,12 @@
 }
 @media (hover: hover) {
   .cj-service-link:hover {
-    border-color: var(--ca-action);
-    background: #ffffffb3;
+    border-color: #708995a6;
+    background-color: #ffffff8a;
+    box-shadow:
+      inset 0 1px 0 #fff,
+      inset 0 -1px 1px #6e879a29,
+      0 8px 20px -10px #29475870;
   }
   .cj-text-link:hover {
     color: var(--ca-ink);
@@ -1194,7 +1216,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, #fbf9f22e, #faf7ef4d 52%, transparent);
+  background: linear-gradient(90deg, #fffefa4d, #fffefa66 52%, transparent 81%);
 }
 .cj-closing-content {
   position: relative;
@@ -1408,7 +1430,11 @@
   font-weight: 400;
   line-height: 1.6;
 }
-.cj-service-link:active { background: #e4edf1; border-color: var(--ca-action); }
+.cj-service-link:active {
+  background-color: #dce8eeb3;
+  border-color: #708995a6;
+  box-shadow: inset 0 1px 3px #2947581f, 0 2px 6px -4px #29475850;
+}
 @media (max-width: 1100px) {
   .cj-copy > p:first-of-type { font-size: 17px; }
 }
