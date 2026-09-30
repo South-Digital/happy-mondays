@@ -7,9 +7,10 @@ import {
   useTransform,
 } from "framer-motion";
 import { EASE, usePrefersReducedMotion } from "../../lib/motion";
-import { MockLink, useToast } from "../../components/Toast";
+import { useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import "./growth-journey.css";
+import { PeopleClosing } from "./PeopleClosing";
 
 function GoogleMark() {
   return (
@@ -598,75 +599,6 @@ function Copy({
       )}
       {children}
     </motion.div>
-  );
-}
-function PeopleClosing() {
-  const reduced = usePrefersReducedMotion();
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const progress = useSpring(scrollYProgress, { stiffness: 80, damping: 30 });
-  const y = useTransform(progress, [0, 1], [-14, 14]);
-  return (
-    <section
-      className="cj-closing"
-      ref={ref}
-      aria-labelledby="cj-people-heading"
-    >
-      <motion.picture
-        className="cj-closing-photo"
-        style={{ y: reduced ? 0 : y }}
-        aria-hidden="true"
-      >
-        <img
-          src="/images/page-atmosphere/terrace-coastal-1942.webp"
-          srcSet="/images/page-atmosphere/terrace-coastal-960.webp 960w, /images/page-atmosphere/terrace-coastal-1942.webp 1942w"
-          sizes="(max-width: 980px) 100vw, 1440px"
-          alt=""
-          width="1942"
-          height="809"
-          loading="lazy"
-        />
-      </motion.picture>
-      <motion.div
-        className="cj-closing-content"
-        initial={reduced ? false : { opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.2, ease: EASE.entrance }}
-      >
-        <h2 id="cj-people-heading">
-          <span>Good people.</span>On your side.
-        </h2>
-        <p>
-          Work directly with a senior team that gets to know your products, your
-          customers and where you want to go.
-        </p>
-        <div className="cj-conversation">
-          <MockLink
-            className="ha-button"
-            message="Design preview — the booking calendar will be connected before launch."
-          >
-            Let’s talk about your store
-          </MockLink>
-          <div className="cj-conversation-person">
-            <img
-              src="/images/editorial/keanu-480.webp"
-              alt="Keanu Fischell, founder of Happy Mondays"
-              width="48"
-              height="48"
-              loading="lazy"
-            />
-            <div>
-              <strong>Your first chat with Keanu</strong>
-              <span>Founder, Happy Mondays</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </section>
   );
 }
 

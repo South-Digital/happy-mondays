@@ -1,5 +1,19 @@
 # Happy Mondays — motion direction
 
+## Implementation update — three reasons, one invitation
+
+The closing now develops from three cards into the existing coastal team invitation. This is a focused addition; the proposed hero and commerce choreography below remains separate work.
+
+Roadmap for this pass:
+
+- [x] Content: business understanding, direct senior collaboration, and a flat monthly fee. Keep Keanu as the first contact, with the agency/team as the subject.
+- [x] Composition: sage and mist-blue blurred light on the outer cards; the existing pale stone, olive and sea photograph in the centre. Retain live type, rounded corners and the ocean-coloured booking CTA.
+- [x] Motion: a short sticky desktop stage, independent spring-driven centre expansion, side-card fade/recession, restrained photographic settling and a delayed contact reveal. Reverse on upward scroll, with separate open/close thresholds to avoid flickering at the boundary.
+- [x] Fallbacks: below 1080px wide or 700px high, use normal flow. Reduced motion also uses normal flow, showing both supporting points above the complete invitation; no information depends on animation.
+- [ ] Verify narrow and wide layouts, reverse/fast scroll, reduced motion and the booking preview; publish and check the live result.
+
+The expansion starts after 24% of the sticky travel, and closes below 4%. Crossing the threshold chooses a state; it does not scrub the animation. A spring of stiffness 100, damping 19 and mass 1 gives a small settle without a conspicuous bounce. Supporting cards have no focusable controls that could disappear while focused. Their copy stays available to assistive technology. The booking action remains available throughout.
+
 1 October 2026. Original planning deliverable; see the implementation update below.
 
 ## Implementation update — Lenis foundation

@@ -1188,64 +1188,6 @@
   max-width: 400px;
   font-size: 20px;
 }
-.cj-closing {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  border-radius: 36px;
-  min-height: 610px;
-  display: grid;
-  place-items: center;
-  margin: 16px 0 54px;
-  background: #e9e4d9;
-  box-shadow: 0 25px 70px -44px #4c4b3545;
-}
-.cj-closing-photo {
-  position: absolute;
-  inset: -18px 0;
-  z-index: -2;
-}
-.cj-closing-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 52% 50%;
-}
-.cj-closing::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(90deg, #fffffc94, #fffffca6 52%, #fffffc75 70%, transparent 84%);
-}
-.cj-closing-content {
-  position: relative;
-  text-align: center;
-  width: 100%;
-  padding: 72px 32px 86px;
-}
-.cj-closing h2 {
-  margin: 0 0 26px;
-  font-size: clamp(48px, 4.5vw, 68px);
-  line-height: var(--ca-display-leading);
-  letter-spacing: var(--ca-display-tracking);
-  font-weight: var(--ca-emphasis-weight);
-  color: var(--ca-ink);
-  scroll-margin-top: 90px;
-}
-.cj-closing h2 span {
-  display: block;
-  color: var(--ca-heading-soft);
-  font-weight: var(--ca-display-weight);
-}
-.cj-closing-content > p {
-  max-width: 550px;
-  margin: 0 auto 34px;
-  font-size: 18px;
-  line-height: var(--ca-body-leading);
-  color: var(--ca-body);
-  letter-spacing: var(--ca-body-tracking);
-}
 .cj-conversation {
   display: flex;
   flex-direction: column;
@@ -1306,21 +1248,6 @@
   .cj-copy > p:first-of-type {
     font-size: 18px;
   }
-  .cj-closing {
-    min-height: 580px;
-    border-radius: 28px;
-    margin: 12px -8px 32px;
-  }
-  .cj-closing-photo img {
-    object-position: 44% center;
-  }
-  .cj-closing-content {
-    padding: 62px 26px;
-  }
-  .cj-closing-content > p {
-    max-width: 380px;
-    font-size: 16px;
-  }
   .cj-conversation-person span {
     font-size: 11px;
   }
@@ -1332,15 +1259,6 @@
   }
 }
 @media (max-width: 540px) {
-  .cj-closing-content {
-    padding: 48px 22px;
-  }
-  .cj-closing h2 {
-    font-size: clamp(43px, 11.5vw, 58px);
-  }
-  .cj-closing-content > p {
-    font-size: 15px;
-  }
   .cj-conversation {
     gap: 20px;
   }
