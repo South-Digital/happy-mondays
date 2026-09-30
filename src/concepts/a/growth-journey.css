@@ -1393,8 +1393,8 @@
   height: auto;
   max-width: none;
 }
-.cj-editorial-icon--cart { width: 1.29em; margin-left: -.035em; }
-.cj-editorial-icon--card { width: 1.78em; margin-left: .08em; }
+.cj-editorial-icon--cart { width: 1.1em; margin-left: -.035em; }
+.cj-editorial-icon--card { width: 1.51em; margin-left: .08em; }
 .cj-copy > p:first-of-type {
   max-width: 430px;
   color: var(--ca-body);
