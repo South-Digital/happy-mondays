@@ -63,11 +63,12 @@ function Bag() {
   );
 }
 const IMG = "/images/morrow/";
+const FRAGRANCE = "/images/serein/";
 const sceneDuration = 7600;
 
 /** One coordinated entrance; scroll subsequently moves the optical planes at
  * different depths. The photographed product and its supporting stone stay together. */
-function useComposition(plate: string) {
+function useComposition(plate: string, base = IMG) {
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, { amount: 0.3 });
   const nearby = useInView(ref, { margin: "400px 0px 400px 0px", once: true });
@@ -77,16 +78,20 @@ function useComposition(plate: string) {
     if (!nearby || loaded) return;
     let cancelled = false;
     // Decode the entire composition before its entrance, including the individual catalogue cutouts.
-    const assets = [
-      plate,
-      "grip-sock",
-      "product-0",
-      "product-1",
-      "product-2",
-      "product-3",
-    ].map((name) => {
+    const names =
+      base === FRAGRANCE
+        ? [plate, "collection", "product-0", "product-1"]
+        : [
+            plate,
+            "grip-sock",
+            "product-0",
+            "product-1",
+            "product-2",
+            "product-3",
+          ];
+    const assets = names.map((name) => {
       const image = new Image();
-      image.src = `${IMG}${name}.webp`;
+      image.src = `${base}${name}.webp`;
       return image.decode().catch(() => undefined);
     });
     Promise.all(assets).then(() => {
@@ -95,7 +100,7 @@ function useComposition(plate: string) {
     return () => {
       cancelled = true;
     };
-  }, [nearby, loaded, plate]);
+  }, [nearby, loaded, plate, base]);
   const [scrollFloor, setScrollFloor] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -170,14 +175,16 @@ function SceneControls({
 function Product({
   variant = 0,
   className = "",
+  base = IMG,
 }: {
+  base?: string;
   variant?: number;
   className?: string;
 }) {
   return (
     <img
       className={`cj-product ${className}`}
-      src={`${IMG}product-${variant}.webp`}
+      src={`${base}product-${variant}.webp`}
       alt=""
       width="660"
       height="900"
@@ -185,11 +192,11 @@ function Product({
     />
   );
 }
-function ScenePhoto({ name }: { name: string }) {
+function ScenePhoto({ name, base = IMG }: { name: string; base?: string }) {
   return (
     <img
       className="cj-photo"
-      src={`${IMG}${name}.webp`}
+      src={`${base}${name}.webp`}
       alt=""
       width="1254"
       height="1254"
@@ -385,14 +392,16 @@ function Discovery() {
   );
 }
 function Storefront() {
-  const { ref, reduced, scene, backY, frontY, loaded } =
-    useComposition("studio");
+  const { ref, reduced, scene, backY, frontY, loaded } = useComposition(
+    "atelier",
+    FRAGRANCE,
+  );
   const t = scene.time;
   const enter = settle(segment(t, 100, 1700));
   const recommendation = settle(segment(t, 2000, 1600));
   const added = settle(segment(t, 4100, 1300));
   const confirmation = settle(segment(t, 5100, 1600));
-  const total = (28 + 22.4 * added).toFixed(2);
+  const total = (68 + 42 * added).toFixed(2);
   return (
     <div
       className="cj-art"
@@ -412,9 +421,9 @@ function Storefront() {
       data-scene-time={Math.round(t)}
     >
       <div
-        className="cj-stage cj-stage--purchase"
+        className="cj-stage cj-stage--purchase cj-stage--fragrance"
         role="img"
-        aria-label="Morrow Studio's concept Shopify store, with product photography, a complementary sage pair, and a two-pair order confirmation. An illustrative shopping journey."
+        aria-label="Serein's concept Shopify store, with amber-glass Fig & Cedar candle photography, a complementary reed diffuser, and a $110 order confirmation. An illustrative shopping journey."
       >
         <div
           className="cj-camera"
@@ -423,7 +432,7 @@ function Storefront() {
             transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})`,
           }}
         >
-          <ScenePhoto name="studio" />
+          <ScenePhoto name="atelier" base={FRAGRANCE} />
           <motion.div
             className="cj-store-depth"
             style={{ y: reduced ? 0 : backY }}
@@ -437,35 +446,28 @@ function Storefront() {
               }}
             >
               <div className="cj-store-nav">
-                <span className="cj-store-wordmark">
-                  morrow<span>studio</span>
-                </span>
-                <span>For every move.</span>
+                <span className="cj-store-wordmark">SEREIN</span>
+                <span>Objects for slower living.</span>
                 <Bag />
               </div>
               <div className="cj-store-body">
                 <div className="cj-store-photo">
-                  <Product />
-                  <span>01 / 04</span>
+                  <Product base={FRAGRANCE} />
+                  <span>01 / 03</span>
                 </div>
                 <div className="cj-store-copy">
-                  <h3>
-                    Everyday
-                    <br />
-                    Grip Sock
-                  </h3>
-                  <strong>$28.00</strong>
+                  <h3>Fig &amp; Cedar</h3>
+                  <strong>$68.00</strong>
                   <p>
-                    Soft where it matters.
+                    A quieter kind of luxury.
                     <br />
-                    Support with every step.
+                    Fig leaf. Cedar. A little stillness.
                   </p>
-                  <div className="cj-swatches">
-                    <i />
-                    <i />
-                    <i />
+                  <div className="cj-fragrance-notes">
+                    <span>Fig leaf</span>
+                    <span>Cedarwood</span>
                   </div>
-                  <span className="cj-store-size">One size · UK 3–8</span>
+                  <span className="cj-store-size">Scented candle · 280 g</span>
                   <div className="cj-add-to-bag">
                     {added > 0.95 ? "Added to bag" : "Add to bag"}
                     {added > 0.95 ? <Check /> : <span>+</span>}
@@ -477,7 +479,7 @@ function Storefront() {
           <div className="cj-contact-shadow" aria-hidden="true" />
           <img
             className="cj-physical-product"
-            src={`${IMG}grip-sock.webp`}
+            src={`${FRAGRANCE}collection.webp`}
             alt=""
             width="1254"
             height="1254"
@@ -502,24 +504,24 @@ function Storefront() {
               </div>
               <div className="cj-cart-line">
                 <div className="cj-cart-product">
-                  <Product />
+                  <Product base={FRAGRANCE} />
                 </div>
                 <div>
-                  <b>Everyday Grip Sock</b>
-                  <span>Oat / Burgundy</span>
+                  <b>Fig & Cedar candle</b>
+                  <span>Amber glass · 280 g</span>
                 </div>
-                <strong>$28.00</strong>
+                <strong>$68.00</strong>
               </div>
               <div
                 className="cj-cart-line cj-cart-line--extra"
                 style={{ opacity: 0.45 + 0.55 * added }}
               >
                 <div className="cj-cart-product">
-                  <Product variant={1} />
+                  <Product variant={1} base={FRAGRANCE} />
                 </div>
                 <div>
-                  <b>Better as a pair.</b>
-                  <span>Add Sage. Save 10% on both.</span>
+                  <b>Layer the fragrance.</b>
+                  <span>Fig & Cedar diffuser · $42</span>
                 </div>
                 <span
                   className={`cj-recommend-check ${added > 0.5 ? "is-added" : ""}`}
@@ -533,7 +535,7 @@ function Storefront() {
               </div>
               <div className="cj-cart-status">
                 <span style={{ opacity: 1 - confirmation }}>
-                  Ready for your next class.
+                  A little stillness, delivered.
                 </span>
                 <span
                   className="cj-cart-success"
@@ -551,7 +553,7 @@ function Storefront() {
       <SceneControls
         scene={scene}
         reduced={reduced}
-        label="From your product to their everyday"
+        label="From a considered store to a completed order"
       />
     </div>
   );
@@ -617,8 +619,8 @@ export function GrowthJourney() {
           <Storefront />
         </section>
         <p className="cj-illustration-note">
-          Morrow Studio is a concept brand. Shopping journeys and figures are
-          illustrative.
+          Morrow Studio and Serein are concept brands. Shopping journeys and
+          figures are illustrative.
         </p>
         <section className="cj-people" aria-labelledby="cj-people-heading">
           <div className="cj-person">

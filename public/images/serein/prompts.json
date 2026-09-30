@@ -1,0 +1,25 @@
+{
+  "master": "Use case: product-mockup. Create an exceptionally refined photorealistic luxury home-fragrance campaign still life, square high resolution. Fictional brand SEREIN. A substantial thick-walled deep amber glass candle with ivory cotton-paper label reading precisely 'SEREIN' and below 'FIG & CEDAR', dark bronze lid leaning nearby, and tall ivory textured rigid packaging box subtly debossed SEREIN. Candle unlit, beautiful wax visible. Small matching amber glass reed diffuser with a few elegant dark reeds behind the candle. Composition: product group in lower LEFT half, candle centered x30% y72%, box behind at x18% y58%, reeds up to y35%. All products fully inside image, no cropping. Environment: sculptural pale limestone shelf across lower fifth, softly folded natural linen lower right, softly sunlit warm plaster wall, deep walnut architectural recess on right, long gentle afternoon shadows. Upper right two thirds uncluttered negative space, will carry native ecommerce UI later. Authentic luxury editorial photography, real material imperfections, crisp elegant glass refractions, tactile paper, restrained warm highlights, rich brown not orange, no CGI/plastic/AI gloss. 85mm lens, sophisticated tonal depth. NO UI, no screens, no floating cards, no other text, no plants, no socks.",
+  "derivatives": [
+    [
+      "plate",
+      "Use case: precise-object-edit. Edit this reference photo to remove ONLY all products: candle, lid, box, diffuser and reeds. Reconstruct the empty plaster wall and limestone shelf behind them seamlessly. Preserve exactly the camera, square framing, warm sunlight, walnut recess on right, shelf edges, linen on bottom right and texture. No objects, no text, no UI. This is the empty background plate for an animation, do not change the scene or lighting.",
+      false
+    ],
+    [
+      "foreground",
+      "Use case: background-extraction. Extract ALL the SEREIN products from this photo together: candle, leaning bronze lid, ivory box and diffuser with reeds. Remove everything else to genuine transparency. Preserve EXACT original square canvas 1254x1254, placement, scale, camera and lighting of each product; keep products at original coordinates lower left, do not recenter or enlarge. No wall, shelf, fabric or environment. Preserve fine reed edges, amber glass details, labels, highlights. This layer will overlay the matching empty photograph.",
+      true
+    ],
+    [
+      "candle",
+      "Use case: product-mockup. Reference image is exact SEREIN product identity. Isolate just the amber glass candle, no lid, no box, no diffuser, onto genuine transparent background. Preserve same candle proportions, thick base, ivory cotton paper label precisely 'SEREIN' and 'FIG & CEDAR', visible unlit wax. Front three-quarter high-end catalogue photography, gentle light from upper left, entire candle centered fills 85% square canvas, no cast floor shadow, crisp texture, no new text.",
+      true
+    ],
+    [
+      "diffuser",
+      "Use case: product-mockup. Reference image is exact SEREIN product identity. Isolate just the amber glass reed diffuser with five dark reeds and bronze neck, no candle, no lid, no box, onto genuine transparent background. Preserve same bottle proportions and ivory paper label reading SEREIN, FIG & CEDAR. Front high-end catalogue photography, gentle light from upper left, whole product including reeds fully inside square canvas, centered fills 90% height, no floor shadow. No extra text.",
+      true
+    ]
+  ]
+}

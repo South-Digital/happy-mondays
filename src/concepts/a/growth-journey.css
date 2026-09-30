@@ -1003,3 +1003,159 @@
 .cj-story[data-motion="reduce"] .cj-camera {
   transition: none;
 }
+
+/* Serein uses a separate material palette and composition: the still life sits
+   on the stone, the store behind it, and the completed basket nearest us. */
+.cj-stage--fragrance .cj-store-depth {
+  left: 27%;
+  top: 7%;
+  width: 68%;
+}
+.cj-stage--fragrance .cj-store {
+  color: #392d24;
+  background: linear-gradient(135deg, #fffaf2ed, #f4ebded4);
+}
+.cj-stage--fragrance .cj-store-wordmark {
+  font-size: 3.1cqw;
+  letter-spacing: 0.18em;
+}
+.cj-stage--fragrance .cj-store-nav {
+  padding: 2.9cqw 3cqw;
+}
+.cj-stage--fragrance .cj-store-nav > span:nth-child(2) {
+  font-size: 1.2cqw;
+  color: #7b6a58;
+}
+.cj-stage--fragrance .cj-store-body {
+  grid-template-columns: 0.92fr 1fr;
+  gap: 2.5cqw;
+}
+.cj-stage--fragrance .cj-store-photo {
+  height: 27cqw;
+  padding: 2.6cqw 1.7cqw;
+  background: #e5dac86b;
+}
+.cj-stage--fragrance .cj-store-copy h3 {
+  font-size: 3.5cqw;
+  letter-spacing: -0.05em;
+  margin-bottom: 1.7cqw;
+}
+.cj-stage--fragrance .cj-store-copy p {
+  color: #746657;
+}
+.cj-fragrance-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7cqw;
+  font-size: 1.1cqw;
+  color: #736451;
+}
+.cj-fragrance-notes span {
+  border-bottom: 1px solid #b7a18480;
+  padding-bottom: 0.4cqw;
+}
+.cj-stage--fragrance .cj-store-size {
+  color: #796b5a;
+}
+.cj-stage--fragrance .cj-add-to-bag,
+.cj-stage--fragrance .cj-cart-status {
+  background: #493829;
+}
+.cj-stage--fragrance .cj-physical-product {
+  left: 0;
+  top: 9%;
+  width: 82%;
+  height: 82%;
+  filter: drop-shadow(2px 7px 5px #24120730);
+}
+.cj-stage--fragrance .cj-contact-shadow {
+  left: 4%;
+  top: 85%;
+  width: 48%;
+  height: 4%;
+  transform: none;
+  opacity: 0.42;
+}
+.cj-stage--fragrance .cj-cart-depth {
+  left: 48%;
+  top: 58%;
+  width: 47%;
+}
+.cj-stage--fragrance .cj-cart {
+  color: #493b2d;
+  background: linear-gradient(125deg, #fffaf1ed, #eee1cfd9);
+}
+.cj-stage--fragrance .cj-cart-line div span,
+.cj-stage--fragrance .cj-cart-heading > span {
+  color: #877661;
+}
+.cj-stage--fragrance .cj-recommend-check.is-added {
+  background: #786249;
+}
+.cj-stage--fragrance .cj-cart-product {
+  width: 5cqw;
+  height: 6.1cqw;
+}
+@media (max-width: 980px) {
+  .cj-stage--fragrance .cj-store-depth {
+    left: 21%;
+    width: 74%;
+    top: 7%;
+  }
+  .cj-stage--fragrance .cj-store-copy h3 {
+    font-size: 4.2cqw;
+  }
+  .cj-stage--fragrance .cj-store-photo {
+    height: 30cqw;
+  }
+  .cj-stage--fragrance .cj-store-copy p {
+    font-size: 1.7cqw;
+  }
+  .cj-stage--fragrance .cj-fragrance-notes {
+    font-size: 1.5cqw;
+  }
+  .cj-stage--fragrance .cj-store-size {
+    font-size: 1.5cqw;
+  }
+  .cj-stage--fragrance .cj-physical-product {
+    left: 0;
+    top: 13%;
+    width: 84%;
+    height: 84%;
+  }
+  .cj-stage--fragrance .cj-contact-shadow {
+    left: 1%;
+    top: 91%;
+    width: 50%;
+  }
+  .cj-stage--fragrance .cj-cart-depth {
+    left: 42%;
+    top: 58%;
+    width: 53%;
+  }
+}
+
+@media (max-width: 600px) {
+  .cj-stage--fragrance .cj-store-copy h3 {
+    font-size: 4.6cqw;
+  }
+  .cj-stage--fragrance .cj-store-copy > strong {
+    font-size: 2.4cqw;
+  }
+  .cj-stage--fragrance .cj-store-copy p {
+    display: none;
+  }
+  .cj-stage--fragrance .cj-fragrance-notes {
+    font-size: 1.8cqw;
+    margin-top: 2.4cqw;
+  }
+  .cj-stage--fragrance .cj-add-to-bag {
+    font-size: 1.9cqw;
+  }
+  .cj-stage--fragrance .cj-cart-line {
+    padding: 1cqw 0;
+  }
+  .cj-stage--fragrance .cj-cart-product {
+    height: 5.5cqw;
+  }
+}

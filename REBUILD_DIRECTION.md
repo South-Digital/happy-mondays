@@ -2,6 +2,18 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Current follow-up — category variety
+
+User feedback: the layered result looks good, but repeating socks misses the request for different high-end products. Preserve the approved discovery scene and replace the purchase scene with a distinct home-fragrance concept.
+
+1. [x] Create coherent Serein candle/diffuser/packaging photography and separate transparent foreground/catalogue assets.
+2. [x] Build a distinct warm walnut/plaster/bronze composition, store behind the collection and basket at front-right. Keep Morrow Studio's discovery scene unchanged.
+3. [x] Update native store, complementary product, $68 + $42 subtotal and illustrative-brand notice together.
+4. [x] Review desktop, tablet and handheld composition; verify asset decoding, reduced motion and finite animation. Pause held 4194ms / $76.50 across separate checks; final subtotal is $110.
+5. [ ] Publish and inspect the live review revision.
+
+Asset provenance and exact built-in imagegen prompts: `public/images/serein/README.md` and `prompts.json`. Older same-product notes below describe the previous revision, superseded by this category-variety follow-up.
+
 ## Active rebuild — preserve the approved photographic composition
 
 The user rejected the 8179359 implementation and explicitly endorsed the original generated composition. The following overrides earlier interpretations forbidding concept brands or frosted platform treatments.
