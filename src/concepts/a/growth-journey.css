@@ -1376,7 +1376,7 @@
 }
 .cj-copy h2 {
   /* Scale to the text column, including the stacked tablet composition. */
-  font-size: clamp(38px, 15.5cqw, 100px);
+  font-size: clamp(36px, 12.8cqw, 82px);
 }
 .cj-copy h2 > .cj-icon-line {
   display: flex;
@@ -1415,12 +1415,12 @@
   .cj-copy > p:first-of-type { font-size: 17px; }
 }
 @media (max-width: 980px) {
-  .cj-copy h2 { font-size: clamp(38px, 15.5cqw, 80px); }
+  .cj-copy h2 { font-size: clamp(36px, 12.8cqw, 66px); }
   .cj-copy > p:first-of-type { font-size: 17px; max-width: 440px; }
   .cj-copy-actions { margin-top: 24px; }
 }
 @media (max-width: 540px) {
-  .cj-copy h2 { font-size: clamp(36px, 15.5cqw, 72px); }
+  .cj-copy h2 { font-size: clamp(36px, 12.8cqw, 58px); }
   .cj-copy > p:first-of-type { font-size: 16px; }
   .cj-row { gap: 32px; }
 }
