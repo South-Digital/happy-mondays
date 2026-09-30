@@ -10,7 +10,11 @@ The user still finds the overall page bare and below the reference standard. Re-
 2. [x] Introduce the search-to-sale narrative on desktop, with an early link to the real founder. On stacked layouts retain only the founder link to avoid two text-heavy introductions before the first product scene.
 3. [x] Carry restrained sage/sand light outside the scene boundaries, add ambient image shadows and coherent two-tone display typography. Preserve both approved native commerce scenes and their choreography.
 4. [x] Replace the third split row with a panoramic photographic closing section, large centered typography and a frosted conversation panel using Keanu's original photograph. Responsive portrait, copy and CTA stay native; decorative terrace has subtle scroll depth and a still reduced-motion state.
-5. [ ] Complete responsive, motion and navigation checks; publish and inspect live.
+5. [x] Complete responsive, motion and navigation checks; publish and inspect live.
+
+Published application commit `e19bac4`; deployment `dpl_4uoJ8SFKWXCXZ64qVKJvhMmXPPKp`. Live review loads `index-ieiaytOc.js` and the 1942px terrace asset. Full-page and closing captures saved to parent workspace `output/happy-mondays-page-polish-2026-09-30/`.
+
+Verification: production build, TypeScript lint and clean diff. Visual checks at 320, 390, 768, 1024 and 1440 widths, geometry at 1920; no horizontal overflow. Confirmed founder anchor and back-to-top navigation, unchanged booking-preview notice, both finite scenes reaching 7600ms, closing entrance reaching full opacity and bounded background motion. Reduced motion has static background, completed scenes and no replay controls. Live browser showed no console errors or warnings.
 
 Built-in imagegen asset and exact prompt: `public/images/page-atmosphere/README.md`. The generated setting is decorative, not presented as a real agency location. No added testimonials, results or client claims.
 
