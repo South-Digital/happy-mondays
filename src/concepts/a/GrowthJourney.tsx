@@ -1,4 +1,4 @@
-import { useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   motion,
   useInView,
@@ -34,20 +34,7 @@ function GoogleMark() {
     </svg>
   );
 }
-function SearchIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      aria-hidden="true"
-    >
-      <circle cx="10.5" cy="10.5" r="6" />
-      <path d="m15 15 5 5" />
-    </svg>
-  );
-}
+
 function Check() {
   return (
     <svg
@@ -75,23 +62,47 @@ function Bag() {
     </svg>
   );
 }
-const IMG = "/images/commerce-scenes/";
-const sceneDuration = 6200;
+const IMG = "/images/morrow/";
+const sceneDuration = 7600;
 
-/** A single finite clock coordinates the work, response and outcome. Scroll gives
- * the light and foreground separate depth; it never traps or advances the page. */
-function useComposition() {
+/** One coordinated entrance; scroll subsequently moves the optical planes at
+ * different depths. The photographed product and its supporting stone stay together. */
+function useComposition(plate: string) {
   const ref = useRef<HTMLDivElement>(null);
-  const visible = useInView(ref, { amount: 0.32 });
+  const visible = useInView(ref, { amount: 0.3 });
+  const nearby = useInView(ref, { margin: "400px 0px 400px 0px", once: true });
   const reduced = usePrefersReducedMotion();
   const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    if (!nearby || loaded) return;
+    let cancelled = false;
+    // Decode the entire composition before its entrance, including the individual catalogue cutouts.
+    const assets = [
+      plate,
+      "grip-sock",
+      "product-0",
+      "product-1",
+      "product-2",
+      "product-3",
+    ].map((name) => {
+      const image = new Image();
+      image.src = `${IMG}${name}.webp`;
+      return image.decode().catch(() => undefined);
+    });
+    Promise.all(assets).then(() => {
+      if (!cancelled) setLoaded(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [nearby, loaded, plate]);
   const [scrollFloor, setScrollFloor] = useState(0);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (!reduced) setScrollFloor(sceneDuration * segment(value, 0.36, 0.46));
+    if (!reduced) setScrollFloor(sceneDuration * segment(value, 0.48, 0.34));
   });
   const scene = useSceneTimeline(
     visible,
@@ -102,21 +113,13 @@ function useComposition() {
     scrollFloor,
   );
   const depth = useSpring(scrollYProgress, {
-    stiffness: 110,
+    stiffness: 85,
     damping: 30,
-    mass: 0.3,
+    mass: 0.35,
   });
-  const lightY = useTransform(depth, [0, 1], [-28, 28]);
-  const planeY = useTransform(depth, [0, 1], [20, -20]);
-  return {
-    ref,
-    reduced,
-    visible,
-    scene,
-    lightY,
-    planeY,
-    onReady: () => setLoaded(true),
-  };
+  const backY = useTransform(depth, [0, 1], [8, -8]);
+  const frontY = useTransform(depth, [0, 1], [18, -18]);
+  return { ref, reduced, scene, backY, frontY, loaded };
 }
 function SceneControls({
   scene,
@@ -127,20 +130,17 @@ function SceneControls({
   reduced: boolean;
   label: string;
 }) {
+  const done = scene.time >= sceneDuration;
   return (
     <div className="cj-scene-controls">
       <span>{label}</span>
       {!reduced && (
         <button
           type="button"
-          onClick={scene.time >= sceneDuration ? scene.replay : scene.toggle}
-          aria-label={`${scene.time >= sceneDuration ? "Replay" : scene.paused ? "Play" : "Pause"} ${label.toLowerCase()}`}
+          onClick={done ? scene.replay : scene.toggle}
+          aria-label={`${done ? "Replay" : scene.paused ? "Play" : "Pause"} ${label.toLowerCase()}`}
         >
-          {scene.time >= sceneDuration
-            ? "Replay"
-            : scene.paused
-              ? "Play"
-              : "Pause"}
+          {done ? "Replay" : scene.paused ? "Play" : "Pause"}
           <svg
             viewBox="0 0 16 16"
             fill="none"
@@ -148,7 +148,7 @@ function SceneControls({
             strokeWidth="1.3"
             aria-hidden="true"
           >
-            {scene.time >= sceneDuration ? (
+            {done ? (
               <>
                 <path d="M3 5a5 5 0 1 1-.3 5" />
                 <path d="M3 1v4h4" />
@@ -166,352 +166,392 @@ function SceneControls({
     </div>
   );
 }
-function WorkSignature({ complete }: { complete: boolean }) {
+/** Original concept products; all platform lettering and surfaces are live HTML. */
+function Product({
+  variant = 0,
+  className = "",
+}: {
+  variant?: number;
+  className?: string;
+}) {
   return (
-    <div className="cj-work-signature">
-      <img src="/images/logo-hm.webp" alt="" />
-      <span>
-        {complete ? (
-          <>
-            Feed + campaigns aligned <Check />
-          </>
-        ) : (
-          "Working on your growth"
-        )}
-      </span>
-    </div>
+    <img
+      className={`cj-product ${className}`}
+      src={`${IMG}product-${variant}.webp`}
+      alt=""
+      width="660"
+      height="900"
+      loading="lazy"
+    />
+  );
+}
+function ScenePhoto({ name }: { name: string }) {
+  return (
+    <img
+      className="cj-photo"
+      src={`${IMG}${name}.webp`}
+      alt=""
+      width="1254"
+      height="1254"
+      loading="lazy"
+    />
   );
 }
 function Discovery() {
-  const { ref, reduced, scene, lightY, planeY, onReady } = useComposition();
+  const { ref, reduced, scene, backY, frontY, loaded } =
+    useComposition("courtyard");
   const t = scene.time;
-  const enter = settle(segment(t, 0, 1100));
-  const work = settle(segment(t, 1000, 900));
-  const reorder = settle(segment(t, 3500, 1250));
-  const emphasis = settle(segment(t, 4500, 1100));
-  const collapse = settle(segment(t, 4100, 1200));
-  const items = [
-    {
-      image: "pointe",
-      name: "Bullseye Crew Grip Sock",
-      brand: "Pointe Studio",
-      price: "$20.00",
-      from: 0,
-      to: 1,
-    },
-    {
-      image: "move",
-      name: "Crew Grip Socks",
-      brand: "MoveActive",
-      price: "A$22.95",
-      from: 1,
-      to: 2,
-    },
-    {
-      image: "juliet",
-      name: "The Juliet Grip Sock",
-      brand: "Lucky Honey",
-      price: "$18.00",
-      from: 2,
-      to: 0,
-    },
-  ];
+  const enter = settle(segment(t, 120, 1800));
+  const focus = settle(segment(t, 2000, 1700));
+  const position = settle(segment(t, 1800, 1700));
+  const detail = settle(segment(t, 3300, 1900));
   return (
     <div
       className="cj-art"
       ref={ref}
       data-scene="discovery"
+      data-scene-phase={
+        t < 1800
+          ? "arriving"
+          : t < 2600
+            ? "sorting"
+            : t < 3500
+              ? "focusing"
+              : t < 5200
+                ? "revealing"
+                : "settled"
+      }
       data-scene-time={Math.round(t)}
     >
-      <div className="cj-stage cj-stage--sage">
-        <div className="cj-light-mask">
-          <motion.img
-            className="cj-light"
-            src={`${IMG}light-field.webp`}
+      <div
+        className="cj-stage cj-stage--discovery"
+        role="img"
+        aria-label="A concept Pilates brand comes into view in Google Shopping, with tactile cream and burgundy knitwear layered in front of a sunlit olive courtyard."
+      >
+        <div
+          className="cj-camera"
+          style={{
+            opacity: loaded ? 1 : 0,
+            transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})`,
+          }}
+        >
+          <ScenePhoto name="courtyard" />
+          <motion.div
+            className="cj-search-depth"
+            style={{ y: reduced ? 0 : backY }}
+            aria-hidden="true"
+          >
+            <div
+              className="cj-search cj-glass"
+              style={{
+                opacity: enter,
+                transform: `translateY(${3 * (1 - enter)}cqw) scale(${0.975 + 0.025 * enter})`,
+              }}
+            >
+              <div className="cj-search-header">
+                <GoogleMark />
+                <div className="cj-search-field">
+                  <span>pilates grip socks</span>
+                  <span className="cj-search-clear">×</span>
+                  <svg viewBox="0 0 18 24" aria-hidden="true">
+                    <rect
+                      x="6"
+                      y="1"
+                      width="6"
+                      height="13"
+                      rx="3"
+                      fill="#4285f4"
+                    />
+                    <path
+                      d="M3 10v2a6 6 0 0 0 12 0v-2"
+                      fill="none"
+                      stroke="#ea4335"
+                      strokeWidth="2.5"
+                    />
+                    <path d="M9 18v5" stroke="#34a853" strokeWidth="2.5" />
+                  </svg>
+                </div>
+              </div>
+              <div className="cj-search-tabs">
+                <span>All</span>
+                <b>Shopping</b>
+                <span>Images</span>
+                <span>Videos</span>
+                <span>More</span>
+              </div>
+              <div className="cj-search-results">
+                <div
+                  className="cj-results-track"
+                  style={{ "--advance": position } as CSSProperties}
+                >
+                  {[2, 3, 0, 1, 2, 3, 0, 1].map((variant, index) => {
+                    const [brand, name, price] = [
+                      ["Morrow Studio", "Everyday Grip Sock", "$28.00"],
+                      ["Form Studio", "Soft Rib Grip Sock", "$28.00"],
+                      ["Sunday Movement", "Studio Grip Sock", "$26.00"],
+                      ["Aster Studio", "Classic Grip Sock", "$24.00"],
+                    ][variant];
+                    return (
+                      <div
+                        className={`cj-search-result ${variant === 0 ? "is-featured" : ""}`}
+                        data-variant={variant}
+                        key={index}
+                        style={{
+                          opacity: variant === 0 ? 1 : 1 - 0.24 * focus,
+                        }}
+                      >
+                        <div className="cj-search-product">
+                          <Product variant={variant} />
+                        </div>
+                        <div className="cj-search-caption">
+                          <b>{brand}</b>
+                          <span>{name}</span>
+                          <strong>{price}</strong>
+                          {variant === 0 && (
+                            <span className="cj-stars">
+                              ★★★★★ <small>(127)</small>
+                            </span>
+                          )}
+                        </div>
+                        {variant === 0 && (
+                          <span
+                            className="cj-feature-outline"
+                            style={{ opacity: focus }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          <div className="cj-contact-shadow" aria-hidden="true" />
+          <img
+            className="cj-physical-product"
+            src={`${IMG}grip-sock.webp`}
             alt=""
             width="1254"
             height="1254"
             loading="lazy"
-            style={reduced ? undefined : { y: lightY }}
+            aria-hidden="true"
           />
-        </div>
-        <motion.div
-          className="cj-google-plane"
-          style={reduced ? undefined : { y: planeY }}
-        >
-          <div
-            className="cj-google"
-            role="img"
-            aria-label="Illustrative Google Shopping scene. Lucky Honey appears alongside other brands. Happy Mondays improves the product feed and campaigns, then Lucky Honey moves into focus. Placements are illustrative."
-            style={{
-              opacity: enter,
-              transform: `translateY(${26 * (1 - enter)}px) scale(${0.98 + 0.02 * enter})`,
-            }}
+          <motion.div
+            className="cj-detail-depth"
+            style={{ y: reduced ? 0 : frontY }}
+            aria-hidden="true"
           >
-            <div aria-hidden="true">
-              <div className="cj-google-search">
-                <GoogleMark />
-                <span>pilates grip socks</span>
-                <SearchIcon />
+            <div
+              className="cj-detail cj-glass"
+              style={{
+                opacity: detail,
+                transform: `translateY(${3.5 * (1 - detail)}cqw) scale(${0.96 + 0.04 * detail})`,
+              }}
+            >
+              <div className="cj-detail-brand">
+                <span className="cj-monogram">m.</span>
+                <div>
+                  <b>Morrow Studio</b>
+                  <span>morrow.studio</span>
+                </div>
+                <span className="cj-more">⋮</span>
               </div>
-              <div className="cj-google-tabs">
-                <span>All</span>
-                <span className="is-selected">Shopping</span>
-                <span>Images</span>
-                <span>Videos</span>
-              </div>
-              <div className="cj-google-label">Sponsored products</div>
-              <div className="cj-results">
-                {items.map((item) => (
-                  <div
-                    key={item.image}
-                    className={`cj-result ${item.image === "juliet" ? "cj-result--brand" : ""}`}
-                    style={
-                      {
-                        left: `${(item.from + (item.to - item.from) * reorder) * 34}%`,
-                        "--mobile-position":
-                          item.image === "juliet" ? 1 - reorder : reorder,
-                        opacity:
-                          item.image === "juliet" ? 1 : 1 - 0.25 * emphasis,
-                        transform: `translateY(${item.image === "juliet" ? -5 * emphasis - 20 * Math.sin(Math.PI * reorder) : 0}px)`,
-                        zIndex: item.image === "juliet" ? 2 : 1,
-                        boxShadow:
-                          item.image === "juliet"
-                            ? `0 12px 22px -10px rgba(35, 45, 32, ${0.24 * Math.sin(Math.PI * reorder)})`
-                            : undefined,
-                      } as CSSProperties
-                    }
-                  >
-                    <div className="cj-result-image">
-                      <img
-                        src={`${IMG}${item.image}.webp`}
-                        alt=""
-                        width="1000"
-                        height="1250"
-                        loading="lazy"
-                        onLoad={item.image === "juliet" ? onReady : undefined}
-                        onError={item.image === "juliet" ? onReady : undefined}
-                      />
-                    </div>
-                    <span className="cj-result-name">{item.name}</span>
-                    <span className="cj-result-price">{item.price}</span>
-                    <span className="cj-result-brand">{item.brand}</span>
-                  </div>
-                ))}
+              <div className="cj-detail-body">
+                <div className="cj-detail-product">
+                  <Product />
+                </div>
+                <div className="cj-detail-copy">
+                  <b>Everyday Grip Sock</b>
+                  <strong>$28.00</strong>
+                  <span className="cj-stars">★★★★★</span>
+                  <p>
+                    A little support.
+                    <br />
+                    For every move.
+                  </p>
+                  <span className="cj-detail-colour">Oat / Burgundy</span>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-        <div
-          className="cj-work cj-glass"
-          aria-hidden="true"
-          style={{
-            opacity: settle(segment(t, 1000, 360)),
-            transform: `translateY(${30 * (1 - work)}px)`,
-          }}
-        >
-          <WorkSignature complete={t > 4600} />
-          <div
-            className="cj-work-body"
-            style={{
-              maxHeight: `${32 * (1 - collapse)}cqw`,
-              opacity: 1 - collapse,
-            }}
-          >
-            <div className="cj-work-line">
-              <span>Product feed</span>
-              <span className="cj-work-status">
-                {t > 2300 ? (
-                  <>
-                    <Check /> Refined
-                  </>
-                ) : (
-                  "Refining…"
-                )}
-              </span>
-            </div>
-            <div className="cj-feed-title">
-              The Juliet Grip Sock
-              <span>Ribbed grip socks for Pilates & barre</span>
-            </div>
-            <div className="cj-work-line cj-work-line--last">
-              <span>Shopping campaigns</span>
-              <span className="cj-work-status">
-                {t > 3300 ? (
-                  <>
-                    <Check /> Aligned
-                  </>
-                ) : (
-                  "Aligning…"
-                )}
-              </span>
-            </div>
-            <div className="cj-work-track">
-              <span
-                style={{
-                  transform: `scaleX(${settle(segment(t, 1500, 1900))})`,
-                }}
-              />
-            </div>
-          </div>
+          </motion.div>
         </div>
-        <span className="cj-scene-footnote">Illustrative placements</span>
       </div>
       <SceneControls
         scene={scene}
         reduced={reduced}
-        label="From search to discovery"
+        label="From a search to your product"
       />
     </div>
   );
 }
 function Storefront() {
-  const { ref, reduced, scene, lightY, planeY, onReady } = useComposition();
+  const { ref, reduced, scene, backY, frontY, loaded } =
+    useComposition("studio");
   const t = scene.time;
-  const enter = settle(segment(t, 0, 1000));
-  const detail = settle(segment(t, 1100, 900));
-  const bundle = settle(segment(t, 2500, 800));
-  const order = settle(segment(t, 4400, 1000));
-  const total = 18 + Math.round(18 * settle(segment(t, 3400, 900)));
+  const enter = settle(segment(t, 100, 1700));
+  const recommendation = settle(segment(t, 2000, 1600));
+  const added = settle(segment(t, 4100, 1300));
+  const confirmation = settle(segment(t, 5100, 1600));
+  const total = (28 + 22.4 * added).toFixed(2);
   return (
     <div
       className="cj-art"
       ref={ref}
       data-scene="purchase"
+      data-scene-phase={
+        t < 2000
+          ? "arriving"
+          : t < 4100
+            ? "recommending"
+            : t < 5100
+              ? "adding"
+              : t < 6700
+                ? "confirming"
+                : "settled"
+      }
       data-scene-time={Math.round(t)}
     >
-      <div className="cj-stage cj-stage--sand">
-        <div className="cj-light-mask">
-          <motion.img
-            className="cj-light"
-            src={`${IMG}light-field.webp`}
-            alt=""
-            width="1254"
-            height="1254"
-            loading="lazy"
-            style={reduced ? undefined : { y: lightY }}
-          />
-        </div>
-        <motion.div
-          className="cj-store-plane"
-          style={reduced ? undefined : { y: planeY }}
+      <div
+        className="cj-stage cj-stage--purchase"
+        role="img"
+        aria-label="Morrow Studio's concept Shopify store, with product photography, a complementary sage pair, and a two-pair order confirmation. An illustrative shopping journey."
+      >
+        <div
+          className="cj-camera"
+          style={{
+            opacity: loaded ? 1 : 0,
+            transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})`,
+          }}
         >
-          <div
-            className="cj-store"
-            role="img"
-            aria-label="Illustrative Lucky Honey product page. Clear product details, a complementary colour and an easier buying journey lead to an example two-item order of 36 dollars. This is not an actual order or campaign result."
-            style={{
-              opacity: enter,
-              transform: `translateY(${26 * (1 - enter)}px)`,
-            }}
+          <ScenePhoto name="studio" />
+          <motion.div
+            className="cj-store-depth"
+            style={{ y: reduced ? 0 : backY }}
+            aria-hidden="true"
           >
-            <div aria-hidden="true">
+            <div
+              className="cj-store cj-glass"
+              style={{
+                opacity: enter,
+                transform: `translateY(${3 * (1 - enter)}cqw) scale(${0.975 + 0.025 * enter})`,
+              }}
+            >
               <div className="cj-store-nav">
-                <SearchIcon />
-                <img src="/images/refinement/logo-luckyhoney.webp" alt="" />
+                <span className="cj-store-wordmark">
+                  morrow<span>studio</span>
+                </span>
+                <span>For every move.</span>
                 <Bag />
               </div>
               <div className="cj-store-body">
-                <div className="cj-product-photo">
-                  <img
-                    src={`${IMG}juliet.webp`}
-                    alt=""
-                    width="1000"
-                    height="1295"
-                    loading="lazy"
-                    onLoad={onReady}
-                    onError={onReady}
-                  />
+                <div className="cj-store-photo">
+                  <Product />
+                  <span>01 / 04</span>
                 </div>
-                <div className="cj-product-detail">
-                  <span className="cj-store-crumb">Grip socks / Juliet</span>
+                <div className="cj-store-copy">
                   <h3>
-                    The Juliet
+                    Everyday
                     <br />
                     Grip Sock
                   </h3>
-                  <span className="cj-price">$18.00</span>
-                  <div className="cj-colours">
-                    <i />
-                    <i />
-                    <i />
-                    <span>Mahogany</span>
-                  </div>
-                  <p
-                    className="cj-product-description"
-                    style={{
-                      opacity: detail,
-                      transform: `translateY(${10 * (1 - detail)}px)`,
-                    }}
-                  >
-                    Soft ribbed texture.
+                  <strong>$28.00</strong>
+                  <p>
+                    Soft where it matters.
                     <br />
-                    Signature honeycomb grip.
-                    <br />
-                    Made for your next class.
+                    Support with every step.
                   </p>
-                  <div
-                    className="cj-pair"
-                    style={{
-                      opacity: bundle,
-                      transform: `translateY(${14 * (1 - bundle)}px)`,
-                    }}
-                  >
-                    <img
-                      src="/images/refinement/product-juliet.webp"
-                      alt=""
-                      width="1000"
-                      height="1294"
-                    />
-                    <div>
-                      <b>A second colour?</b>
-                      <span>Juliet · Baby Blue</span>
-                      <span>$18.00</span>
-                    </div>
-                    <span className="cj-pair-check">
-                      <Check />
-                    </span>
+                  <div className="cj-swatches">
+                    <i />
+                    <i />
+                    <i />
                   </div>
-                  <div className="cj-store-add">
-                    {t > 4400 ? (
-                      <>
-                        <Check /> Added to bag
-                      </>
-                    ) : (
-                      "Add to bag"
-                    )}
-                    <span>${total}.00</span>
+                  <span className="cj-store-size">One size · UK 3–8</span>
+                  <div className="cj-add-to-bag">
+                    {added > 0.95 ? "Added to bag" : "Add to bag"}
+                    {added > 0.95 ? <Check /> : <span>+</span>}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-        <div
-          className="cj-order cj-glass"
-          aria-hidden="true"
-          style={{
-            opacity: order,
-            transform: `translateY(${32 * (1 - order)}px) scale(${0.97 + 0.03 * order})`,
-          }}
-        >
-          <div className="cj-order-icon">
-            <img src="/images/icon-shopify.png" alt="" />
-          </div>
-          <div>
-            <span className="cj-order-title">A little more in the bag.</span>
-            <span className="cj-order-meta">2 items · $36.00</span>
-          </div>
-          <span className="cj-order-tick">
-            <Check />
-          </span>
+          </motion.div>
+          <div className="cj-contact-shadow" aria-hidden="true" />
+          <img
+            className="cj-physical-product"
+            src={`${IMG}grip-sock.webp`}
+            alt=""
+            width="1254"
+            height="1254"
+            loading="lazy"
+            aria-hidden="true"
+          />
+          <motion.div
+            className="cj-cart-depth"
+            style={{ y: reduced ? 0 : frontY }}
+            aria-hidden="true"
+          >
+            <div
+              className="cj-cart cj-glass"
+              style={{
+                opacity: recommendation,
+                transform: `translateY(${3 * (1 - recommendation)}cqw) scale(${0.97 + 0.03 * recommendation})`,
+              }}
+            >
+              <div className="cj-cart-heading">
+                <b>Your bag</b>
+                <span>{added > 0.5 ? "2 items" : "1 item"}</span>
+              </div>
+              <div className="cj-cart-line">
+                <div className="cj-cart-product">
+                  <Product />
+                </div>
+                <div>
+                  <b>Everyday Grip Sock</b>
+                  <span>Oat / Burgundy</span>
+                </div>
+                <strong>$28.00</strong>
+              </div>
+              <div
+                className="cj-cart-line cj-cart-line--extra"
+                style={{ opacity: 0.45 + 0.55 * added }}
+              >
+                <div className="cj-cart-product">
+                  <Product variant={1} />
+                </div>
+                <div>
+                  <b>Better as a pair.</b>
+                  <span>Add Sage. Save 10% on both.</span>
+                </div>
+                <span
+                  className={`cj-recommend-check ${added > 0.5 ? "is-added" : ""}`}
+                >
+                  {added > 0.5 ? <Check /> : "+"}
+                </span>
+              </div>
+              <div className="cj-cart-total">
+                <span>Subtotal</span>
+                <strong>${total}</strong>
+              </div>
+              <div className="cj-cart-status">
+                <span style={{ opacity: 1 - confirmation }}>
+                  Ready for your next class.
+                </span>
+                <span
+                  className="cj-cart-success"
+                  style={{ opacity: confirmation }}
+                >
+                  <img src="/images/icon-shopify.png" alt="" />
+                  Order received
+                  <Check />
+                </span>
+              </div>
+            </div>
+          </motion.div>
         </div>
-        <span className="cj-scene-footnote">Illustrative shopping journey</span>
       </div>
       <SceneControls
         scene={scene}
         reduced={reduced}
-        label="From interest to purchase"
+        label="From your product to their everyday"
       />
     </div>
   );
@@ -577,7 +617,8 @@ export function GrowthJourney() {
           <Storefront />
         </section>
         <p className="cj-illustration-note">
-          Real products. Illustrative journeys, not campaign results.
+          Morrow Studio is a concept brand. Shopping journeys and figures are
+          illustrative.
         </p>
         <section className="cj-people" aria-labelledby="cj-people-heading">
           <div className="cj-person">

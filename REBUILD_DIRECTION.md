@@ -1,8 +1,44 @@
 # Concept A — corrected source review · 30 September 2026
 
-**Status: the published continuation was rejected.** This correction supersedes the editorial-rebuild decisions preserved below. It records research and a corrected direction, not a completed replacement. Build and responsive checks did not establish visual quality or brief alignment.
+**Status: layered replacement implemented and locally reviewed; publishing for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
-## Implementation pass — 30 September, following the source correction
+## Active rebuild — preserve the approved photographic composition
+
+The user rejected the 8179359 implementation and explicitly endorsed the original generated composition. The following overrides earlier interpretations forbidding concept brands or frosted platform treatments.
+
+Direct call evidence, 18 September 34:17–35:14: Zac proposed concept brands and striking custom imagery; Keanu agreed. At 38:56–41:05 the clients explicitly endorse soft transitions, glass, subtle shadows and coloured scenes on white. Familiarity must come from interface structure, not an obligation to reproduce an opaque screenshot.
+
+### Roadmap and acceptance gates
+
+1. [x] Re-read the concept-brand discussion and glass/layering feedback; inspect the supplied screenshot and motion reference again.
+2. [x] Reconstruct the endorsed scene as separate photographic background, tactile foreground product and native translucent interface layers. Keep the oversized product, stone, lighting and overlap; do not reduce it to a catalogue card.
+3. [x] Build one full scene and compare its browser screenshot directly with the endorsed mockup. Check composition before animation. Use a clearly identified concept brand, without implying generated products or reviews belong to actual clients.
+4. [x] Choreograph depth and a meaningful search-to-product sequence. Product remains grounded; interfaces resolve at different depths. No floating-rock novelty, continual success loops or generic checklist panel.
+5. [x] Extend the material language to a distinct second composition, with the same concept product and a clearer purchase journey.
+6. [x] Review still and intermediate frames, scroll reversal, reduced motion, mobile recomposition, legibility, asset sharpness and load behaviour. Iterate on visual shortcomings rather than treating builds as aesthetic approval.
+7. [ ] Deploy only after the browser retains the endorsed composition; verify live and save review captures.
+
+The previous implementation record below is retained as history, not approval. Its visual outcome was rejected. The current active goal remains open until these gates are met.
+
+### Implemented composition and motion
+
+- Morrow Studio concept brand with original cream/burgundy, sage, charcoal and navy product imagery; no generated product or rating is attributed to a real client.
+- Scene one follows the endorsed crop: olive courtyard, translucent Shopping plane behind a large tactile sock, product detail card in front. Separate photographic assets and live HTML preserve overlap and allow independent movement.
+- Scene two carries the same product into warm plaster, travertine and linen. A live store panel sits behind the product; a foreground basket shows the complementary pair, counts the subtotal from $28 to $50.40 (two $28 pairs with 10% off), then confirms the illustrative order.
+- The scene settles with a 3.5% camera move. UI planes enter separately and respond at different depths to scrolling. A continuous Shopping strip brings Morrow into prominence without cards crossing through one another. Each finite 7.6-second sequence supports pause and replay, stops offscreen/when hidden, and stays complete on reverse scrolling.
+- All scene images decode before the entrance; glass blur remains constant rather than snapping on after load. Reduced motion renders the completed state with no camera transition or replay controls.
+- Product thumbnails are individual transparent assets. The initial contact sheet produced stray neighbouring fragments and was replaced rather than masked into the final build.
+
+### Local verification
+
+- Viewed both scenes against the target composition; inspected initial, intermediate and final browser frames. Corrected card collisions during movement, obscured purchase controls, mobile bottom spacing, a stacking regression found during cleanup, and the physical product's ground contact.
+- Visually checked 320, 390, 768, 1024, 1440 and 1920 CSS-pixel widths. No horizontal page overflow. Tablet stacks the scene and copy; handheld layouts retain three results and enlarge key interface details. Cart remains inside the stage with breathing room.
+- Pause held purchase time at 4119ms and subtotal $28.97 across separate checks; resume/replay completed at $50.40. Reverse scroll retained both completed timelines at 7600ms. Reduced motion produced complete scenes, full camera opacity and zero scene-control buttons.
+- TypeScript lint, production client-review build and `git diff --check` pass. Browser console showed no observed warnings/errors. Hidden/offscreen lazy thumbnails are not treated as image failures.
+- Source assets and provenance: `public/images/morrow/README.md`. Local review captures: `output/happy-mondays-layered-rebuild-2026-09-30` in the parent workspace. The selected hero, shared scene-clock defaults and Concept B are unchanged in this revision.
+
+
+## Previous implementation pass — rejected by the user
 
 Status: rebuilt, checked locally and verified on the Vercel review site. This is a review revision, not client approval.
 
