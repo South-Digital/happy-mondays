@@ -635,15 +635,25 @@ function PeopleClosing() {
           customers and where you want to go.
         </p>
         <div className="cj-conversation">
+          <div className="cj-conversation-person">
+            <img
+              src="/images/refinement/keanu-480.webp"
+              alt="Keanu Fischell, founder of Happy Mondays"
+              width="76"
+              height="76"
+              loading="lazy"
+            />
+            <div>
+              <strong>Keanu Fischell</strong>
+              <span>Founder, Happy Mondays</span>
+            </div>
+          </div>
           <MockLink
             className="ha-button"
             message="Design preview — the booking calendar will be connected before launch."
           >
             Talk to the team
           </MockLink>
-          <p className="cj-founder-note">
-            Led by Keanu Fischell, with four years inside Google.
-          </p>
         </div>
       </motion.div>
     </section>

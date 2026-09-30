@@ -2,6 +2,10 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Contact-card clarification
+
+Restore Keanu’s original portrait/name contact card only in “Good people. On your side.” The agency introduction stays free of the founder profile link; the senior-team paragraph and “Talk to the team” CTA remain. Remove the redundant founder credential beneath the CTA. This supersedes the closing-card removal below.
+
 ## Current correction — agency and team, not founder-led presentation
 
 User clarified that Happy Mondays should read as a team/agency, with only a little emphasis on Keanu. Removed the introductory founder avatar/profile link and closing profile card. Introduction now describes one team across Google Ads and Shopify; the closing invitation is “Talk to the team”. Keanu appears once, in a small supporting credential beneath the CTA. No invented team portraits or team-member claims added.
