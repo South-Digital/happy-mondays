@@ -1248,30 +1248,20 @@
 }
 .cj-conversation {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  max-width: 500px;
+  gap: 22px;
   margin: auto;
-  padding: 12px 14px 12px 12px;
-  border-radius: 999px;
-  border: 1px solid #ffffffdb;
-  background: linear-gradient(120deg, #fffffff2, #f5f8fae0);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow:
-    0 10px 30px -13px #39352336,
-    inset 0 1px 0 #fff8;
 }
 .cj-conversation-person {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   text-align: left;
 }
 .cj-conversation-person img {
-  width: 68px;
-  height: 68px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1281,7 +1271,7 @@
   gap: 5px;
 }
 .cj-conversation-person strong {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.03em;
   color: var(--ca-ink);
@@ -1292,7 +1282,8 @@
 }
 .cj-conversation .ha-button {
   flex: none;
-  min-height: 48px;
+  min-height: 54px;
+  padding-inline: 28px;
 }
 .cj-footer-brand {
   display: flex;
@@ -1330,20 +1321,6 @@
     max-width: 380px;
     font-size: 16px;
   }
-  .cj-conversation {
-    gap: 16px;
-    max-width: 420px;
-  }
-  .cj-conversation-person {
-    gap: 12px;
-  }
-  .cj-conversation-person img {
-    width: 56px;
-    height: 56px;
-  }
-  .cj-conversation-person strong {
-    font-size: 14px;
-  }
   .cj-conversation-person span {
     font-size: 11px;
   }
@@ -1365,13 +1342,7 @@
     font-size: 15px;
   }
   .cj-conversation {
-    flex-direction: column;
-    border-radius: 28px;
-    padding: 18px;
-    gap: 18px;
-  }
-  .cj-conversation .ha-button {
-    width: 100%;
+    gap: 20px;
   }
   .cj-footer-brand {
     flex-direction: column;

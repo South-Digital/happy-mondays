@@ -650,25 +650,25 @@ function PeopleClosing() {
           customers and where you want to go.
         </p>
         <div className="cj-conversation">
-          <div className="cj-conversation-person">
-            <img
-              src="/images/editorial/keanu-480.webp"
-              alt="Keanu Fischell, founder of Happy Mondays"
-              width="76"
-              height="76"
-              loading="lazy"
-            />
-            <div>
-              <strong>Keanu Fischell</strong>
-              <span>Founder, Happy Mondays</span>
-            </div>
-          </div>
           <MockLink
             className="ha-button"
             message="Design preview — the booking calendar will be connected before launch."
           >
-            Talk to the team
+            Let’s talk about your store
           </MockLink>
+          <div className="cj-conversation-person">
+            <img
+              src="/images/editorial/keanu-480.webp"
+              alt="Keanu Fischell, founder of Happy Mondays"
+              width="48"
+              height="48"
+              loading="lazy"
+            />
+            <div>
+              <strong>Your first chat with Keanu</strong>
+              <span>Founder, Happy Mondays</span>
+            </div>
+          </div>
         </div>
       </motion.div>
     </section>
