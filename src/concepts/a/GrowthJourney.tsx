@@ -2,6 +2,7 @@ import { useId, useRef, useState } from "react";
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 import { EASE, sectionReveal, usePrefersReducedMotion } from "../../lib/motion";
 import { SCENE_DURATION, segment, settle, useSceneTimeline } from "./useSceneTimeline";
+import { SignatureGraphics } from "./SignatureGraphics";
 import { MockLink } from "../../components/Toast";
 import "./growth-journey.css";
 
@@ -132,6 +133,7 @@ export function GrowthJourney() {
           <ServiceDetail type="conversion" />
         </motion.div>
       </div>
+      <SignatureGraphics />
       <div className="ps-close">
         <div><p className="ps-eyebrow">Good people. On your side.</p><h2>Your next chapter.<br /><span>Let’s make it a good one.</span></h2></div>
         <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
