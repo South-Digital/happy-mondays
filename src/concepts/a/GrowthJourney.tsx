@@ -126,51 +126,6 @@ function useComposition(plate: string, base = IMG) {
   const frontY = useTransform(depth, [0, 1], [18, -18]);
   return { ref, reduced, scene, backY, frontY, loaded };
 }
-function SceneControls({
-  scene,
-  reduced,
-  label,
-}: {
-  scene: ReturnType<typeof useSceneTimeline>;
-  reduced: boolean;
-  label: string;
-}) {
-  const done = scene.time >= sceneDuration;
-  return (
-    <div className="cj-scene-controls">
-      <span>{label}</span>
-      {!reduced && (
-        <button
-          type="button"
-          onClick={done ? scene.replay : scene.toggle}
-          aria-label={`${done ? "Replay" : scene.paused ? "Play" : "Pause"} ${label.toLowerCase()}`}
-        >
-          {done ? "Replay" : scene.paused ? "Play" : "Pause"}
-          <svg
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.3"
-            aria-hidden="true"
-          >
-            {done ? (
-              <>
-                <path d="M3 5a5 5 0 1 1-.3 5" />
-                <path d="M3 1v4h4" />
-              </>
-            ) : scene.paused ? (
-              <path d="m5 3 7 5-7 5Z" />
-            ) : (
-              <>
-                <path d="M5 3v10M11 3v10" />
-              </>
-            )}
-          </svg>
-        </button>
-      )}
-    </div>
-  );
-}
 /** Original concept products; all platform lettering and surfaces are live HTML. */
 function Product({
   variant = 0,
@@ -383,11 +338,6 @@ function Discovery() {
           </motion.div>
         </div>
       </div>
-      <SceneControls
-        scene={scene}
-        reduced={reduced}
-        label="From a search to your product"
-      />
     </div>
   );
 }
@@ -550,11 +500,6 @@ function Storefront() {
           </motion.div>
         </div>
       </div>
-      <SceneControls
-        scene={scene}
-        reduced={reduced}
-        label="From a considered store to a completed order"
-      />
     </div>
   );
 }
@@ -712,10 +657,6 @@ export function GrowthJourney() {
           </Copy>
           <Storefront />
         </section>
-        <p className="cj-illustration-note">
-          Morrow Studio and Serein are concept brands. Shopping journeys and
-          figures are illustrative.
-        </p>
         <PeopleClosing />
         <footer className="cj-footer">
           <div className="cj-footer-brand">
