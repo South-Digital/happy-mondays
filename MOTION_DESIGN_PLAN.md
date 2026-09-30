@@ -1,5 +1,15 @@
 # Happy Mondays — motion direction
 
+## Implementation update — scroll-led closing in a shared frame
+
+The closing no longer opens at a threshold. The user now owns the whole transition through 1.7 viewport heights of scroll, with a damped follower (stiffness 105, damping 27, mass 0.55) smoothing input. The first 12% holds the three-card composition; expansion reaches full width at 90%, followed by a short final hold. Reversing scroll reverses the composition.
+
+The real purchase section and closing share one sticky wrapper. Its measured top offset leaves an 80px slice of the purchase scene visible, then a 32px gap above the closing. Both remain at those coordinates during the sequence. The document continues scrolling normally; wheel, touch and keyboard input are not locked. The following footer stays below the viewport until the pin releases, including on tall screens.
+
+All three cards start with top-left headings and supporting copy directly below. The centre booking action occupies the same lower slot as the outer-card signatures. As it opens, the headline grows from 34px to 66px, padding from 36px to 62px, and a bounded text column leaves the landscape open on the right. Keanu’s introduction joins the button toward the end.
+
+Outer cards actually narrow, with padding reducing from 36px to 24px to accommodate a natural wrap. They retain full opacity through 27% of travel, then fade by 44%, before their content becomes crowded. Their shallow vertical inset adds recession without scaling the lettering. Mobile, short viewports and reduced motion retain a regular-flow layout with all content present.
+
 ## Implementation update — responsive playback and a simpler opening
 
 The user’s subsequent feedback replaces the fixed-rate scene rule with bounded, scroll-responsive playback. The spatial parallax and closing spring remain separate from this clock.

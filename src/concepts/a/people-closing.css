@@ -1,32 +1,23 @@
-/* Three reasons resolve into one invitation. Colour comes from soft light,
-   with the same stone, sea and foliage palette as the photographic scenes. */
-.pc-journey {
-  --pc-height: clamp(510px, calc(100svh - 150px), 650px);
-  margin: 24px 0 54px;
+/* A shared sticky frame holds the tail of the buying scene above the cards. */
+.pc-sequence {
+  --pc-height: clamp(510px, calc(100svh - 160px), 720px);
   position: relative;
+  margin-bottom: 54px;
 }
-.pc-stage {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+.pc-context > .cj-row { padding-bottom: 0; }
+.pc-journey { margin-top: 32px; position: relative; }
+.pc-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .pc-reason, .pc-people {
-  position: relative;
-  isolation: isolate;
-  border-radius: 32px;
-  overflow: hidden;
+  position: relative; isolation: isolate; border-radius: 32px; overflow: hidden;
   box-shadow: inset 0 1px 0 #ffffffad, 0 24px 46px -40px #34453866;
 }
 .pc-reason {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(26px, 2.8vw, 40px);
+  padding: 36px;
   min-height: 420px;
   color: #273c35;
   background: #e0e7db;
 }
+.pc-reason-inner { display: flex; flex-direction: column; height: 100%; min-width: 0; }
 .pc-reason::before, .pc-reason::after {
   content: "";
   pointer-events: none;
@@ -57,109 +48,82 @@
   border-radius: inherit;
   box-shadow: inset 0 0 0 1px #ffffff73;
 }
-.pc-reason h2 {
+
+.pc-reason h2, .pc-people h2 {
   margin: 0;
-  font-size: clamp(30px, 2.7vw, 39px);
+  font-size: 34px;
   line-height: 1.1;
   font-weight: var(--ca-display-weight);
   letter-spacing: var(--ca-display-tracking);
 }
 .pc-reason h2 > span { color: #52665c; }
 .pc-reason--fee h2 > span { color: #5a707d; }
-.pc-reason-bottom { margin-top: 74px; }
-.pc-reason p {
+.pc-reason p, .pc-people-content > p {
   font-size: 17px;
   line-height: 1.55;
   letter-spacing: var(--ca-body-tracking);
-  max-width: 30ch;
-  margin: 0 0 30px;
+  margin: 26px 0 32px;
 }
-.pc-signature {
+.pc-signature, .pc-invitation {
   border-top: 1px solid #40595026;
   padding-top: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  font-size: 13px;
-  line-height: 1.4;
-  letter-spacing: -.02em;
+  margin-top: auto;
+  min-height: 77px;
+}
+.pc-signature {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 7px; font-size: 13px; line-height: 1.4; letter-spacing: -.02em;
 }
 .pc-signature > span:first-child { font-size: 15px; font-weight: 500; }
 .pc-signature > span:last-child { opacity: .8; }
 .pc-plus { padding: 0 7px; opacity: .6; }
-.pc-people {
-  grid-column: 1 / -1;
-  min-height: 580px;
-  display: grid;
-  place-items: center;
-  background: #eeeae1;
-  container-type: inline-size;
-  z-index: 2;
-}
+.pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
 .pc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; }
 .pc-people::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(90deg, #fffffc94, #fffffca6 52%, #fffffc75 70%, transparent 84%);
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(90deg, #fffffcb8, #fffffca6 48%, #fffffc50 70%, transparent 84%);
 }
 .pc-people-content {
-  width: 100%;
-  text-align: center;
-  padding: 46px 26px 34px;
+  width: 100%; height: 100%; min-height: inherit;
+  display: flex; flex-direction: column; align-items: flex-start;
+  text-align: left; padding: 62px;
 }
-.pc-people h2 {
-  margin: 0 0 24px;
-  font-size: clamp(33px, 9.4cqw, 66px);
-  line-height: var(--ca-display-leading);
-  letter-spacing: var(--ca-display-tracking);
-  font-weight: var(--ca-emphasis-weight);
-  color: var(--ca-ink);
-}
+.pc-people h2 { font-size: clamp(42px, 4.8vw, 66px); color: var(--ca-ink); font-weight: var(--ca-emphasis-weight); }
 .pc-people h2 > span { display: block; color: var(--ca-heading-soft); font-weight: var(--ca-display-weight); }
-.pc-people-content > p {
-  max-width: 540px;
-  margin: 0 auto 32px;
-  font-size: clamp(15px, 4cqw, 18px);
-  line-height: 1.6;
-  color: var(--ca-body);
-  letter-spacing: var(--ca-body-tracking);
-  text-wrap: pretty;
+.pc-people-content > p { max-width: 445px; color: var(--ca-body); }
+.pc-invitation { width: 100%; max-width: 570px; position: relative; }
+.pc-invitation .ha-button { font-size: 14px; min-height: 54px; padding-inline: 24px; white-space: nowrap; }
+.pc-contact { position: absolute; left: 250px; bottom: 3px; white-space: nowrap; }
+.pc-contact img { flex-shrink: 0; }
+.pc-sequence[data-animated="true"] {
+  height: calc(var(--pc-context-height) + 32px + var(--pc-height) + 170svh);
+  /* Keep following content beyond the frame until the pin has released,
+     including tall viewports where the card itself reaches its height cap. */
+  margin-bottom: max(54px, calc(100svh - var(--pc-height) - 106px));
 }
-.pc-people .ha-button { font-size: 14px; padding-inline: 24px; }
-.pc-people .cj-conversation-person { min-height: 48px; }
-.pc-journey[data-animated="true"] { height: calc(var(--pc-height) + 90svh); }
-.pc-journey[data-animated="true"] .pc-stage {
-  display: block;
-  height: var(--pc-height);
-  position: sticky;
-  top: max(40px, calc((100svh - var(--pc-height)) / 2));
+.pc-sequence[data-animated="true"] .pc-pin { position: sticky; top: var(--pc-pin-top); }
+.pc-sequence[data-animated="true"] .pc-stage { display: block; height: var(--pc-height); }
+.pc-sequence[data-animated="true"] .pc-reason { position: absolute; min-height: 0; }
+.pc-sequence[data-animated="true"] .pc-reason--business { left: 0; }
+.pc-sequence[data-animated="true"] .pc-reason--fee { right: 0; }
+.pc-sequence[data-animated="true"] .pc-people { position: absolute; inset-block: 0; min-height: 0; }
+.pc-sequence[data-animated="true"] .pc-people h2 {
+  font-size: clamp(34px, calc(34px + (var(--pc-progress) - .25) * 53.333px), 66px);
 }
-.pc-journey[data-animated="true"] .pc-reason {
-  position: absolute;
-  inset-block: 0;
-  width: calc((100% - 40px) / 3);
-  min-height: 0;
-}
-.pc-journey[data-animated="true"] .pc-reason--business { left: 0; }
-.pc-journey[data-animated="true"] .pc-reason--fee { right: 0; }
-.pc-journey[data-animated="true"] .pc-people {
-  position: absolute;
-  inset-block: 0;
-  min-height: 0;
-}
+/* The fade completes before the narrowing copy becomes a column of words. */
 @media (max-width: 700px) {
-  .pc-journey { margin: 8px -8px 36px; }
+  .pc-sequence { margin-bottom: 36px; }
+  .pc-journey { margin: 32px -8px 0; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
-  .pc-reason { min-height: 340px; padding: 32px; border-radius: 28px; }
+  .pc-reason { min-height: 370px; padding: 32px; border-radius: 28px; }
   .pc-reason h2 { font-size: clamp(33px, 8vw, 42px); }
-  .pc-reason-bottom { margin-top: 46px; }
-  .pc-reason p { font-size: 16px; max-width: 34ch; }
-  .pc-people { min-height: 560px; border-radius: 28px; }
-  .pc-people-content { padding: 48px 22px; }
-  .pc-people h2 { font-size: clamp(39px, 11cqw, 60px); }
+  .pc-reason p { font-size: 16px; }
+  .pc-people { min-height: 590px; border-radius: 28px; }
+  .pc-people-content { padding: 38px 28px; }
+  .pc-people h2 { font-size: clamp(36px, 10vw, 48px); }
   .pc-photo img { object-position: 45% center; }
   .pc-people-content > p { font-size: 16px; max-width: 32ch; }
+  .pc-contact { position: static; margin-top: 22px; white-space: normal; }
+  .pc-invitation .ha-button { padding-inline: 20px; }
 }

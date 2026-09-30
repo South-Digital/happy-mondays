@@ -634,6 +634,7 @@ export function GrowthJourney() {
             </div>
           </Copy>
         </section>
+        <PeopleClosing>
         <section
           className="cj-row cj-row--reverse"
           aria-labelledby="cj-purchase-heading"
@@ -651,7 +652,7 @@ export function GrowthJourney() {
           </Copy>
           <Storefront />
         </section>
-        <PeopleClosing />
+        </PeopleClosing>
         <footer className="cj-footer">
           <div className="cj-footer-brand">
             <img
