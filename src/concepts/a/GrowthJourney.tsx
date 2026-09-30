@@ -680,12 +680,10 @@ export function GrowthJourney() {
           <h2>
             <span>From the first search.</span>To the next sale.
           </h2>
-          <div className="cj-introduction-aside">
-            <p>
-              One team across Google Ads and Shopify, from how customers find
-              you to what happens after the click.
-            </p>
-          </div>
+          <p>
+            One team across Google Ads and Shopify, from how customers find you
+            to what happens after the click.
+          </p>
         </motion.div>
         <section className="cj-row" aria-labelledby="cj-discovery-heading">
           <Discovery />
