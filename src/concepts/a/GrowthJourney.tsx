@@ -588,8 +588,8 @@ function PeopleClosing() {
         aria-hidden="true"
       >
         <img
-          src="/images/page-atmosphere/terrace-1942.webp"
-          srcSet="/images/page-atmosphere/terrace-960.webp 960w, /images/page-atmosphere/terrace-1942.webp 1942w"
+          src="/images/page-atmosphere/terrace-coastal-1942.webp"
+          srcSet="/images/page-atmosphere/terrace-coastal-960.webp 960w, /images/page-atmosphere/terrace-coastal-1942.webp 1942w"
           sizes="(max-width: 980px) 100vw, 1440px"
           alt=""
           width="1942"
