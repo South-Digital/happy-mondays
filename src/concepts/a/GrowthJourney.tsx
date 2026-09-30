@@ -576,11 +576,91 @@ function Copy({
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 1, ease: EASE.entrance }}
     >
-      <h2 id={id}>{title}</h2>
+      <h2 id={id}>
+        {title.split("\n").map((line, index) => (
+          <span
+            key={line}
+            className={index === 0 ? "cj-heading-soft" : undefined}
+          >
+            {line}
+          </span>
+        ))}
+      </h2>
       {children}
     </motion.div>
   );
 }
+function PeopleClosing() {
+  const reduced = usePrefersReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const progress = useSpring(scrollYProgress, { stiffness: 80, damping: 30 });
+  const y = useTransform(progress, [0, 1], [-14, 14]);
+  return (
+    <section
+      className="cj-closing"
+      ref={ref}
+      aria-labelledby="cj-people-heading"
+    >
+      <motion.picture
+        className="cj-closing-photo"
+        style={{ y: reduced ? 0 : y }}
+        aria-hidden="true"
+      >
+        <img
+          src="/images/page-atmosphere/terrace-1942.webp"
+          srcSet="/images/page-atmosphere/terrace-960.webp 960w, /images/page-atmosphere/terrace-1942.webp 1942w"
+          sizes="(max-width: 980px) 100vw, 1440px"
+          alt=""
+          width="1942"
+          height="809"
+          loading="lazy"
+        />
+      </motion.picture>
+      <motion.div
+        className="cj-closing-content"
+        initial={reduced ? false : { opacity: 0, y: 22 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1.2, ease: EASE.entrance }}
+      >
+        <h2 id="cj-people-heading">
+          <span>Good people.</span>On your side.
+        </h2>
+        <p>
+          Four years inside Google. Now, on your side of the table.
+          <br className="cj-closing-break" /> Senior expertise, with a personal
+          stake in getting it right.
+        </p>
+        <div className="cj-conversation">
+          <div className="cj-conversation-person">
+            <img
+              src="/images/refinement/keanu-480.webp"
+              alt="Keanu Fischell, founder of Happy Mondays"
+              width="76"
+              height="76"
+              loading="lazy"
+            />
+            <div>
+              <strong>Keanu Fischell</strong>
+              <span>Founder, Happy Mondays</span>
+            </div>
+          </div>
+          <MockLink
+            className="ha-button"
+            message="Design preview — the booking calendar will be connected before launch."
+          >
+            Book a call
+          </MockLink>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
 export function GrowthJourney() {
   const reduced = usePrefersReducedMotion();
   return (
@@ -591,6 +671,39 @@ export function GrowthJourney() {
       aria-label="From product discovery to your Shopify store"
     >
       <div className="cj-wrap">
+        <motion.div
+          className="cj-introduction"
+          initial={reduced ? false : { opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.1, ease: EASE.entrance }}
+        >
+          <h2>
+            <span>From the first search.</span>To the next sale.
+          </h2>
+          <div className="cj-introduction-aside">
+            <p>
+              Google Ads and Shopify. One joined-up approach, led by people who
+              get to know your business.
+            </p>
+            <a className="cj-founder-link" href="#cj-people-heading">
+              <img
+                src="/images/refinement/keanu-480.webp"
+                width="48"
+                height="48"
+                alt=""
+                loading="lazy"
+              />
+              <span>
+                <strong>Senior people. Personally invested.</strong>
+                <span>Meet Keanu</span>
+              </span>
+              <span className="cj-founder-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </div>
+        </motion.div>
         <section className="cj-row" aria-labelledby="cj-discovery-heading">
           <Discovery />
           <Copy
@@ -622,39 +735,17 @@ export function GrowthJourney() {
           Morrow Studio and Serein are concept brands. Shopping journeys and
           figures are illustrative.
         </p>
-        <section className="cj-people" aria-labelledby="cj-people-heading">
-          <div className="cj-person">
-            <img
-              src="/images/refinement/keanu-960.webp"
-              srcSet="/images/refinement/keanu-480.webp 480w, /images/refinement/keanu-960.webp 960w"
-              sizes="(max-width: 760px) 90vw, 380px"
-              alt="Keanu Fischell, founder of Happy Mondays"
-              loading="lazy"
-              width="960"
-              height="960"
-            />
-            <div>
-              <strong>Keanu Fischell</strong>
-              <span>Founder, Happy Mondays</span>
-            </div>
-          </div>
-          <Copy id="cj-people-heading" title={"Good people.\nOn your side."}>
-            <p>Four years inside Google. Now, on your side of the table.</p>
-            <p>
-              Keanu and the team get to know your products, your customers and
-              where you want to go. Senior expertise, with a personal stake in
-              getting it right.
-            </p>
-            <MockLink
-              className="ha-button"
-              message="Design preview — the booking calendar will be connected before launch."
-            >
-              Book a call
-            </MockLink>
-          </Copy>
-        </section>
+        <PeopleClosing />
         <footer className="cj-footer">
-          <span>Better Mondays start here.</span>
+          <div className="cj-footer-brand">
+            <img
+              src="/images/logo-hm.webp"
+              alt="Happy Mondays"
+              width="170"
+              height="44"
+            />
+            <span>Better Mondays start here.</span>
+          </div>
           <a href="#ha-top">Back to top ↑</a>
         </footer>
       </div>

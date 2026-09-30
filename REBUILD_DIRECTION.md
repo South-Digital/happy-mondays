@@ -2,6 +2,18 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Current follow-up — page-level quality
+
+The user still finds the overall page bare and below the reference standard. Re-reviewed the 18 September call decisions, dated Miro capture and supplied Synex recording contact sheet. The important gap is page hierarchy and variation, not more repetitive cards or arbitrary motion.
+
+1. [x] Review the entire current page: hero, proof, two identical-scale split rows, third portrait split and minimal footer.
+2. [x] Introduce the search-to-sale narrative on desktop, with an early link to the real founder. On stacked layouts retain only the founder link to avoid two text-heavy introductions before the first product scene.
+3. [x] Carry restrained sage/sand light outside the scene boundaries, add ambient image shadows and coherent two-tone display typography. Preserve both approved native commerce scenes and their choreography.
+4. [x] Replace the third split row with a panoramic photographic closing section, large centered typography and a frosted conversation panel using Keanu's original photograph. Responsive portrait, copy and CTA stay native; decorative terrace has subtle scroll depth and a still reduced-motion state.
+5. [ ] Complete responsive, motion and navigation checks; publish and inspect live.
+
+Built-in imagegen asset and exact prompt: `public/images/page-atmosphere/README.md`. The generated setting is decorative, not presented as a real agency location. No added testimonials, results or client claims.
+
 ## Current follow-up — category variety
 
 User feedback: the layered result looks good, but repeating socks misses the request for different high-end products. Preserve the approved discovery scene and replace the purchase scene with a distinct home-fragrance concept.
