@@ -25,3 +25,7 @@ The two preceding product-story rows retain their existing generated concept pho
 - Regular and client-review TypeScript/Vite builds pass; no new dependencies; browser warning/error logs empty during local review.
 
 The section remains after the two product-story rows and before the closing invitation. Historical baseline components remain untouched. Functional checks do not establish client aesthetic approval.
+
+## Motion follow-up
+
+The latest pass replaces the 3.4-second sequence described above with a 4.2-second background/interface/data choreography and independent bounded scroll travel. See MOTION_REFERENCE_REVIEW.md. The platform styling and real image assets are unchanged.

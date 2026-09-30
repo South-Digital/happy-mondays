@@ -145,3 +145,12 @@
 .ps-visual--discovery .ps-activity-chart { color:#4285f4; }
 .ps-visual--conversion .ps-activity-chart { color:#8063cf; }
 .ps-close h2 { margin:0; }
+
+/* Scene entrances: image first, foreground interface second, then data. */
+.ps-image-frame { transform-origin:50% 70%; }
+.ps-photograph { transform-origin:50% 50%; }
+.ps-copy h2 .ps-heading-mask { display:block; overflow:hidden; padding-bottom:.09em; margin-bottom:-.09em; color:inherit; }
+.ps-copy h2 .ps-heading-mask:first-child { color:#7f868c; }
+.ps-heading-mask > span { display:block; }
+.ps-row--conversion .ps-copy h2 { max-width:390px; }
+@media (prefers-reduced-motion:reduce) { .ps-image-frame { clip-path:none !important; } }

@@ -1107,3 +1107,7 @@
   .ha-store-metrics > div:first-child strong { font-size: 19px; }
   .ha-metric-label { font-size: 7px; }
 }
+
+/* Headline lines resolve through a clean mask; no blur on fine letterforms. */
+.ha-intro h1 > .ha-heading-mask { overflow:hidden; padding-bottom:.09em; margin-bottom:-.09em; }
+.ha-intro h1 > .ha-heading-mask > span { color:inherit; font-weight:inherit; }

@@ -6,9 +6,8 @@ import type { Transition, Variants } from 'framer-motion'
  * so the whole site shares one easing family, one set of durations and one
  * stagger. Premium restraint: calm, precise, no spring, no overshoot, no bounce.
  *
- * Only transform and opacity are animated, with two deliberate exceptions noted
- * at their call sites: button fill brightening (a paint-only background change,
- * which the brief asks for) and the tab crossfade's opacity.
+ * Shared defaults animate transform and opacity. Concept A also uses bounded
+ * image masks and SVG chart clipping for its independently coordinated scenes.
  */
 
 /** One easing family. Entrances decelerate; state changes are symmetric. */

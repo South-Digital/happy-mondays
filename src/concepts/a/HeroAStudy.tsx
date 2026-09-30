@@ -139,8 +139,7 @@ export function HeroAStudy() {
         <StudyNav />
         <div className="ha-intro">
           <h1 id="ha-title">
-            <motion.span {...riseAt(0, reduced)}>Open Shopify.</motion.span>
-            <motion.span {...riseAt(1, reduced)}>Smile.</motion.span>
+            {["Open Shopify.", "Smile."].map((line, index) => <span className="ha-heading-mask" key={line}><motion.span initial={reduced ? false : { y: "110%" }} animate={{ y: 0 }} transition={{ duration: reduced ? 0 : 1.25, delay: .1 + index * .14, ease: [.22, 1, .36, 1] }}>{line}</motion.span></span>)}
           </h1>
           <motion.p {...riseAt(2, reduced)}>
             <span>Google Ads for Shopify brands.</span>

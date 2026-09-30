@@ -54,10 +54,10 @@ export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
 
   const depth = useTransform(() => progress.get() * strength.get());
   return {
-    seaY: useTransform(depth, [0, 1], [0, 28]),
+    seaY: useTransform(depth, [0, 1], [0, 44]),
     foregroundY: useTransform(depth, [0, 1], [0, -10]),
-    dashboardY: useTransform(depth, [0, 1], [0, -10]),
-    dashboardScale: useTransform(depth, [0, 1], [1, 1.01]),
+    dashboardY: useTransform(depth, [0, 1], [0, -24]),
+    dashboardScale: useTransform(depth, [0, 1], [1, 1.022]),
     orderY: useTransform(() => progress.get() * orderTravel.get()),
     orderScale: useTransform(depth, [0, 1], [1, 1.018]),
   };

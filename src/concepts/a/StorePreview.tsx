@@ -44,7 +44,7 @@ export function StorePreview({ time }: { time: number }) {
     // Fade the glass itself: fading an ancestor temporarily blocks its backdrop.
     <motion.div
       className="ha-store"
-      style={{ opacity: entrance, y: 26 * (1 - entrance), scale: .985 + .015 * entrance }}
+      style={{ opacity: entrance, y: 58 * (1 - entrance), scale: .965 + .035 * entrance }}
       role="group"
       aria-label="Illustrative Shopify analytics"
     >

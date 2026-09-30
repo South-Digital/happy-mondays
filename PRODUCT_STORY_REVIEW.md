@@ -80,3 +80,7 @@ Validation: regular/client builds; geometry at 320, 375, 390, 700, 701, 900, 102
 ## 30 September — platform authenticity pass
 
 Removed decorative pre-headings from both product rows and the closing invitation. Removed the repeated founder teaser. Simplified activity card surfaces and identified them as Merchant Center / Analytics, with Google blue and Shopify purple charts. The new approach section now uses recognisable platform layouts, actual Lucky Honey product photography and Keanu’s portrait; see GRAPHIC_STYLE_REVIEW.md. Earlier generated product-study photographs remain concept assets.
+
+## 30 September — motion reference follow-up
+
+The latest motion pass supersedes the earlier 8.6-second timing and minimal parallax specification. Product sequences now last 5.2 seconds, with an image-first entrance, independently arriving UI and stronger bounded camera travel. Hero typography uses masks and its dashboard entrance has greater travel. The approach scenes assemble background, interface and data over 4.2 seconds. See MOTION_REFERENCE_REVIEW.md for source observations, roadmap and validation.

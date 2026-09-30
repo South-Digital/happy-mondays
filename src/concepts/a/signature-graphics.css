@@ -59,3 +59,12 @@
 .sg-admin-metrics strong { line-height:1.2; }
 .sg-admin-chart > strong { display:block; }
 .sg-admin-chart svg { height:72px; }
+
+/* Backdrop, interface and data arrive as separate parts of one sequence. */
+.sg-scene { background:transparent; isolation:isolate; }
+.sg-scene-background { position:absolute; inset:-24px 0; z-index:-1; background:radial-gradient(ellipse at 25% 20%,#f7f5ef 0%,#eeede8 65%); }
+.sg-scene--shopify .sg-scene-background { background:radial-gradient(ellipse at 70% 15%,#f0f3ec 0%,#e2e7df 65%); }
+.sg-scene--people .sg-scene-background { background:#ededeb; }
+.sg-surface-depth,.sg-surface { height:100%; }
+.sg-scene--people .sg-surface-depth { height:100%; }
+.sg-scene--people .sg-surface { height:100%; }
