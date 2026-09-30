@@ -13,3 +13,7 @@ Composition: expansive open pale blue sky in the upper 40 percent, very distant 
 Lighting and mood: clear gentle early morning Mediterranean light, luminous high-key, very soft shadows, premium serene atmosphere. Light blue sky almost ivory at the top, cool rich blue water, chalk white plaster, subtle haze. Sea has fine realistic ripples without glitter. Moderate natural photographic contrast, not flat or fogged, no HDR.
 Camera: full-frame architectural photograph, clean perspective, natural fine texture, distant land softer than crisp foreground, no artificial tilt-shift blur, no grain filter.
 Constraints: no text, UI, logos, people, boats, chairs, pools, palm trees, olive branches, dramatic sunset, rocks in foreground, illustrations or 3D-render look. A real, minimal, luxurious natural photograph. Highest available output resolution.
+
+## Coastal-light refinement — 30 September 2026
+
+Retains the existing high-resolution AVIF/WebP photograph and exact foreground mask. A static CSS colour treatment is shared by both image layers (`saturate(.88) sepia(.08) brightness(1.02) contrast(.985)`), with a restrained warm wall wash and soft sand/sage reflected light. Dashboard frame, sidebar and notification use warmer whites and neutral contact shadows to connect with the product scenes below. No image regeneration, resampling or additional asset download; the treatment is present from first paint and is not animated. Reviewed at 1440px and 390px with reduced motion; production build, TypeScript lint and diff checks pass.
