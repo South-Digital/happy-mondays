@@ -598,6 +598,7 @@ function Copy({
           <span className="cj-heading-emphasis cj-icon-line">
             <span>To </span>
             <EditorialIcon kind="card" />
+            <span>buying.</span>
           </span>
         </h2>
       )}
