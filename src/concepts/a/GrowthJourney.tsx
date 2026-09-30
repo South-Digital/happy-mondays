@@ -594,13 +594,12 @@ function Copy({
           <span>right people.</span>
         </h2>
       ) : (
-        <h2 id={id} aria-label="From looking. To checking out.">
+        <h2 id={id} aria-label="From looking to buying.">
           <span className="cj-heading-soft">From looking. </span>
           <span className="cj-heading-emphasis cj-icon-line">
             <span>To </span>
             <EditorialIcon kind="card" />
           </span>
-          <span>checking out.</span>
         </h2>
       )}
       {children}
