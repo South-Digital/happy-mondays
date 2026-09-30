@@ -37,7 +37,7 @@ Keep the two photographs related by lighting and material softness, differentiat
 - [x] Inspect image details at final export scale; produce responsive variants.
 - [x] Check widths 320–1920, scene boundaries, paragraph measure and tap targets.
 - [x] Check scroll, detail controls, disclosures, keyboard and reduced motion.
-- [ ] Production build, publish review branch, verify live alias.
+- [x] Production build, publish review branch, verify live alias.
 
 Do not equate engineering checks with aesthetic approval. Photographs are AI-created concepts, not real client products. No new performance metrics or endorsements.
 
@@ -52,4 +52,4 @@ Do not equate engineering checks with aesthetic approval. Photographs are AI-cre
 - No broken loaded images or browser console warnings/errors. Responsive AVIF sources confirmed in the browser, WebP fallback provided.
 - TypeScript/Vite regular and client-review builds pass; no dependency additions. Client JavaScript 321.33 kB / 104.19 kB gzip.
 - Hero A and Concept B source remain unchanged in this pass.
-- Production publishing and alias verification follow the final commit.
+- Published implementation commit `d91836c` through GitHub auto-deploy. The production alias renders both replacement sections; the old module is absent and all loaded images resolve. Deployment: `happy-mondays-design-review-hd2mj76au-zac-santers-projects.vercel.app`.
