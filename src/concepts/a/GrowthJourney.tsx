@@ -15,7 +15,7 @@ import atelierPreview from "./assets/atelier-preview.webp";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
 import { sceneImage } from "./sceneImages";
-import { ClientStory, GettingStarted } from "./AgencyStory";
+import { ClientStory } from "./AgencyStory";
 
 function GoogleMark() {
   return (
@@ -665,7 +665,6 @@ export function GrowthJourney() {
           <Storefront />
         </section>
         </PeopleClosing>
-        <GettingStarted />
       </div>
     </section>
   );

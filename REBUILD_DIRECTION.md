@@ -2,6 +2,10 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — audit section removed at user request
+
+Removed the homepage audit spread and its four FAQs from the rendered page. The team invitation now leads directly to the footer with existing section spacing. Keep the component available for reconsideration; do not reintroduce it during ongoing refinement without a new user request. Service and audit links elsewhere remain unchanged. Build, lint and browser verification pass.
+
 ## Detail pass — 1 October 2026
 
 ### Purchase-state continuity
