@@ -170,7 +170,9 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   <motion.div className="cj-conversation-person pc-contact"
                     style={{ "--pc-contact-opacity": contactOpacity, "--pc-contact-y": contactY } as MotionStyle}
                     aria-hidden={animated && !contactVisible}>
-                    <img src="/images/editorial/keanu-480.webp" alt="Keanu Fischell, founder of Happy Mondays" width="48" height="48" loading="lazy" />
+                    <img src="/images/editorial/keanu-480.webp"
+                      srcSet="/images/editorial/keanu-480-96.webp 96w, /images/editorial/keanu-480-192.webp 192w, /images/editorial/keanu-480.webp 480w"
+                      sizes="48px" alt="Keanu Fischell, founder of Happy Mondays" width="48" height="48" loading="lazy" />
                     <div><strong>Your first chat with Keanu</strong><span>Founder, Happy Mondays</span></div>
                   </motion.div>
                 </motion.div>

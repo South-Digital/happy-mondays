@@ -550,6 +550,10 @@ function EditorialIcon({ kind }: { kind: "cart" | "card" }) {
     >
       <motion.img
         src={`/images/editorial/${kind}.webp`}
+        srcSet={[128, 256, 384].map(width => `/images/editorial/${kind}-${width}.webp ${width}w`).concat(`/images/editorial/${kind}.webp 600w`).join(", ")}
+        sizes={kind === "cart"
+          ? "(max-width: 540px) 55px, (max-width: 980px) 63px, 76px"
+          : "(max-width: 540px) 75px, (max-width: 980px) 87px, 104px"}
         width="600"
         height={kind === "cart" ? 494 : 353}
         alt=""

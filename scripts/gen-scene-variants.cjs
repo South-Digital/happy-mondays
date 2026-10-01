@@ -18,6 +18,17 @@ const scenes = {
       }
     }
   }
+  // Small editorial placements keep the original files for high-density views.
+  for (const [name, widths] of Object.entries({ cart: [128, 256, 384], card: [128, 256, 384], 'keanu-480': [96, 192] })) {
+    for (const width of widths) {
+      const output = `public/images/editorial/${name}-${width}.webp`;
+      await sharp(`public/images/editorial/${name}.webp`)
+        .resize({ width, withoutEnlargement: true })
+        .webp({ quality: 90, alphaQuality: 100 })
+        .toFile(output);
+      console.log(`${output}: ${Math.round(statSync(output).size / 1024)} KB`);
+    }
+  }
   // Delivery-only encodes: preserve the approved coastal composition and WebP fallback.
   for (const width of [960, 1942]) {
     const output = `public/images/page-atmosphere/terrace-coastal-${width}.avif`;

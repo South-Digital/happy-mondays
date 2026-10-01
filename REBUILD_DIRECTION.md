@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Editorial icon and portrait delivery
+
+- The cart/card header icons were each delivered at 600px despite their maximum CSS widths being approximately 76/104px; the 48px contact portrait always used its 480px source. Added responsive WebP encodes (quality 90, full alpha quality) and conservative size hints based on the existing heading caps. Original files remain available at the top of each source set, and the generator records the additional variants.
+- At the tested 1× display, the browser selects 128px icon files and a 96px portrait: 12,946 combined bytes instead of 150,626 (91.4% less for these three assets, not the whole page). Higher-density variants remain available; this browser's viewport control does not emulate pixel density, so no claim is made of a device-matrix test.
+- Visually reviewed the icons at 1440px and 390px, including transparent edges, alignment with the live heading text and the selected source URLs. All three loaded successfully. Heading CSS, icon placement, portrait treatment, lazy loading and motion are unchanged. Build, lint and diff checks pass.
+
 ### Live motion-preference regression review
 
 - Tested the actual Concept A components in a temporary development harness that dispatches preference-change events through a controlled `matchMedia` implementation. This exercises live hook updates without changing the user's operating-system preference. The harness is local-only and is not part of the production build.
