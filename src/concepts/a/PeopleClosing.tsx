@@ -20,6 +20,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const context = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
+  const heading = useRef<HTMLHeadingElement>(null);
   const [wideContent, setWideContent] = useState(false);
   const [contextHeight, setContextHeight] = useState(0);
   const [pinTop, setPinTop] = useState(0);
@@ -109,6 +110,16 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const businessTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
   const feeTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
   const peopleTilt = useCardTilt(reduced);
+  useLayoutEffect(() => {
+    if (!animated || sideVisible) return;
+    const focused = document.activeElement;
+    if (businessTilt.ref.current?.contains(focused) || feeTilt.ref.current?.contains(focused)) {
+      // A scroll-driven fade must not strand focus in an invisible card.
+      // Land on the surviving scene without activating a different action or
+      // asking the browser to scroll an already-centred composition again.
+      heading.current?.focus({ preventScroll: true });
+    }
+  }, [animated, sideVisible, businessTilt.ref, feeTilt.ref]);
   // Keep animated geometry in custom properties. Static layouts do not read
   // them, so Framer cannot retain a shrinking width after a breakpoint change.
   const sideLayout = {
@@ -159,7 +170,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   alt="" width="1942" height="809" loading="lazy" decoding="async" />
               </motion.picture>
               <motion.div ref={content} className="pc-people-content" data-wide={wideContent} style={{ "--pc-inner-padding": padding } as MotionStyle}>
-                <h2 id="cj-people-heading">
+                <h2 id="cj-people-heading" ref={heading} tabIndex={-1}>
                   <span>Good people.</span>On your side.
                 </h2>
                 <motion.p layout={layoutReady ? "position" : false} transition={rowTransition}>Work directly with a senior team that gets to know your products, your customers and where you want to go.</motion.p>

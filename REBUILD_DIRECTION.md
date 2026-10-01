@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Focus continuity through the expanding cards
+
+- Reproduced a keyboard/pointer crossover defect: after focusing Explore pricing and scrolling to 76.3% of the team transition, focus remained inside the now-hidden fee card. Its `tabIndex=-1` prevented new tab entry but did not release existing focus.
+- When a side card becomes hidden, move focus to the surviving team heading only if focus is currently inside either disappearing card. Use `preventScroll`, leave the heading outside sequential tab order, and give its compact text bounds the established blue focus outline. The next Tab reaches the visible team action; no different action is automatically activated.
+- Browser verification: the same scroll sequence still ends at y=4247, now with focus on the visible heading and no hidden ancestor; Tab reaches the team action without moving the page. Ordinary scrolling from body focus retains body focus. Reverse scrolling restores the pricing link's tab stop. The 390px static layout retains its two-line heading, visible contact and zero horizontal overflow. Build, lint and diff checks pass.
+
 ### Live media completeness
 
 - Visited the live hero, both product compositions, team invitation and footer at 1440×900. All 38 image elements report successful completion and nonzero intrinsic width after their sections were visited, including the AVIF scenery, eight client marks, platform icons, product layers, responsive editorial icons and portrait. The live stylesheet list includes the local font stylesheet and current application CSS.

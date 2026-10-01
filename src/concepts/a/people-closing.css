@@ -99,7 +99,8 @@
   display: flex; flex-direction: column; align-items: flex-start;
   text-align: left; padding: 62px;
 }
-.pc-people h2 { font-size: clamp(42px, 4.8vw, 66px); color: var(--ca-ink); font-weight: var(--ca-emphasis-weight); }
+.pc-people h2 { width: fit-content; font-size: clamp(42px, 4.8vw, 66px); color: var(--ca-ink); font-weight: var(--ca-emphasis-weight); }
+.pc-people h2:focus-visible { outline: 2px solid var(--ca-action); outline-offset: 6px; }
 .pc-people h2 > span { display: block; color: var(--ca-heading-soft); font-weight: var(--ca-display-weight); }
 .pc-people-content > p { max-width: 445px; color: var(--ca-body); }
 .pc-invitation { align-self: flex-end; width: 100%; max-width: 570px; position: relative; min-height: 95px; }
