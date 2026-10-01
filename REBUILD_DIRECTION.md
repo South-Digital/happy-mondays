@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Team photograph delivery and crop resolution
+
+- At 390px / 1×, the 366×540px team card selected a 960px-wide panorama based on the screen-width hint. `object-fit: cover` actually scales that panorama to 1296px wide, so the chosen source was being enlarged. Updated the shared picture sizing hint to account for the photograph’s ratio and the card heights, including tablet and expanded desktop views.
+- Added AVIF delivery encodes of the existing approved photograph, with the existing WebP sources retained as fallback. Composition, crop position, lighting and colour treatment are unchanged. The 1942px AVIF is 112,135 bytes versus 240,414 for the same-size WebP (53% smaller). Compared with the previously undersized mobile 960px WebP, the sharper selected source costs 34,361 additional bytes; this is a deliberate quality tradeoff, not a mobile transfer reduction claim. The image remains lazy-loaded.
+- Verified the 1942px AVIF selection and unchanged card geometry in phone and full-width views, including the stone, shadow and sea detail. Build, lint and diff checks pass. Delivery encodes are reproducible through `scripts/gen-scene-variants.cjs`; original assets are retained.
+
 ### Editorial proof in the page journey
 
 - Reviewed the whole mobile reading sequence. The testimonial introduced its author and a separate large quote mark before the endorsement, splitting attention at the hand-off between the two product scenes.

@@ -18,4 +18,13 @@ const scenes = {
       }
     }
   }
+  // Delivery-only encodes: preserve the approved coastal composition and WebP fallback.
+  for (const width of [960, 1942]) {
+    const output = `public/images/page-atmosphere/terrace-coastal-${width}.avif`;
+    await sharp('public/images/page-atmosphere/terrace-coastal-1942.webp')
+      .resize({ width })
+      .avif({ quality: 65, effort: 6, chromaSubsampling: '4:4:4' })
+      .toFile(output);
+    console.log(`${output}: ${Math.round(statSync(output).size / 1024)} KB`);
+  }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -8,6 +8,9 @@ import "./people-closing.css";
 
 const TRAVEL = 1.7;
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
+// object-fit: cover scales the panorama by card height, not its narrow width.
+// 540/580/720px card heights × the original 1942:809 image ratio.
+const terraceSizes = "(max-width: 700px) 1297px, (max-width: 980px) 1393px, 1730px";
 
 /** Pin the real preceding scene and the cards together. The reader controls
  * progress; a damped follower softens wheel steps without a timed takeover. */
@@ -128,9 +131,13 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
             <motion.article {...peopleTilt} className="pc-people" aria-labelledby="cj-people-heading"
               style={{ ...peopleTilt.style, ...(animated ? { left: centreLeft, width: centreWidth } : {}) }}>
               <motion.picture className="pc-photo" aria-hidden="true" style={animated ? { scale: photoScale } : undefined}>
+                <source type="image/avif"
+                  srcSet="/images/page-atmosphere/terrace-coastal-960.avif 960w, /images/page-atmosphere/terrace-coastal-1942.avif 1942w"
+                  sizes={terraceSizes} />
                 <img src="/images/page-atmosphere/terrace-coastal-1942.webp"
                   srcSet="/images/page-atmosphere/terrace-coastal-960.webp 960w, /images/page-atmosphere/terrace-coastal-1942.webp 1942w"
-                  sizes="(max-width: 980px) 100vw, 1320px" alt="" width="1942" height="809" loading="lazy" />
+                  sizes={terraceSizes}
+                  alt="" width="1942" height="809" loading="lazy" decoding="async" />
               </motion.picture>
               <motion.div ref={content} className="pc-people-content" data-wide={wideContent} style={animated ? { padding } : undefined}>
                 <h2 id="cj-people-heading">
