@@ -28,6 +28,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   );
   const [contactVisible, setContactVisible] = useState(false);
   const [sideVisible, setSideVisible] = useState(true);
+  const [layoutReady, setLayoutReady] = useState(false);
   const start = useMotionValue(0);
   const distance = useMotionValue(1);
   const { scrollY } = useScroll();
@@ -47,7 +48,17 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     return () => observer.disconnect();
   }, []);
 
-  const rowTransition = { layout: { duration: reduced ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] as const } };
+  // Let the restored width and its container measurement settle before FLIP
+  // starts tracking changes. Otherwise the CTA can enter from below the card.
+  useLayoutEffect(() => {
+    let nextFrame = 0;
+    const firstFrame = requestAnimationFrame(() => {
+      nextFrame = requestAnimationFrame(() => setLayoutReady(true));
+    });
+    return () => { cancelAnimationFrame(firstFrame); cancelAnimationFrame(nextFrame); };
+  }, []);
+
+  const rowTransition = { layout: { duration: reduced || !layoutReady ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] as const } };
 
   useEffect(() => {
     const query = window.matchMedia("(min-width: 1080px) and (min-height: 700px)");
@@ -70,12 +81,15 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
       distance.set(window.innerHeight * TRAVEL);
     };
     measure();
+    // History restoration can mount us halfway through the pinned sequence.
+    // Start there immediately; only subsequent scrolling should be spring-led.
+    progress.jump(clamp((window.scrollY - start.get()) / distance.get()));
     const observer = new ResizeObserver(measure);
     observer.observe(context.current);
     observer.observe(stage.current);
     window.addEventListener("resize", measure);
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); };
-  }, [animated, distance, start]);
+  }, [animated, distance, start, progress]);
 
   useMotionValueEvent(progress, "change", value => setContactVisible(value > 0.68));
   // First: read. Then: narrow while still legible. Last: finish opening and hold.
@@ -95,7 +109,12 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const businessTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
   const feeTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
   const peopleTilt = useCardTilt(reduced);
-  const sidePointerEvents = useTransform(sideOpacity, value => value < 0.08 ? "none" : "auto");
+  // Keep animated geometry in custom properties. Static layouts do not read
+  // them, so Framer cannot retain a shrinking width after a breakpoint change.
+  const sideLayout = {
+    "--pc-side-width": sideWidth, "--pc-side-opacity": sideOpacity,
+    "--pc-side-inset": sideInset, "--pc-side-padding": sidePadding,
+  } as MotionStyle;
 
   return (
     <motion.section ref={ref} className="pc-sequence" data-animated={animated}
@@ -106,7 +125,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
           <div className="pc-stage" ref={stage}>
             <motion.article {...businessTilt} className="pc-reason pc-reason--business"
               aria-hidden={animated && !sideVisible}
-              style={{ ...businessTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
+              style={{ ...businessTilt.style, ...sideLayout }}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
                 <p>Your products, your margins, your ambitions. We get to know what matters before deciding what comes next.</p>
@@ -118,7 +137,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
             </motion.article>
             <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
               aria-hidden={animated && !sideVisible}
-              style={{ ...feeTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
+              style={{ ...feeTilt.style, ...sideLayout }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
                 <p>Senior expertise. A fixed fee within your spend band. Know what we’re working on, what it costs and why it matters.</p>
@@ -129,8 +148,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               </div>
             </motion.article>
             <motion.article {...peopleTilt} className="pc-people" aria-labelledby="cj-people-heading"
-              style={{ ...peopleTilt.style, ...(animated ? { left: centreLeft, width: centreWidth } : {}) }}>
-              <motion.picture className="pc-photo" aria-hidden="true" style={animated ? { scale: photoScale } : undefined}>
+              style={{ ...peopleTilt.style, "--pc-centre-left": centreLeft, "--pc-centre-width": centreWidth } as MotionStyle}>
+              <motion.picture className="pc-photo" aria-hidden="true" style={{ "--pc-photo-scale": photoScale } as MotionStyle}>
                 <source type="image/avif"
                   srcSet="/images/page-atmosphere/terrace-coastal-960.avif 960w, /images/page-atmosphere/terrace-coastal-1942.avif 1942w"
                   sizes={terraceSizes} />
@@ -139,17 +158,17 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   sizes={terraceSizes}
                   alt="" width="1942" height="809" loading="lazy" decoding="async" />
               </motion.picture>
-              <motion.div ref={content} className="pc-people-content" data-wide={wideContent} style={animated ? { padding } : undefined}>
+              <motion.div ref={content} className="pc-people-content" data-wide={wideContent} style={{ "--pc-inner-padding": padding } as MotionStyle}>
                 <h2 id="cj-people-heading">
                   <span>Good people.</span>On your side.
                 </h2>
-                <motion.p layout="position" transition={rowTransition}>Work directly with a senior team that gets to know your products, your customers and where you want to go.</motion.p>
-                <motion.div className="pc-invitation" layout="position" transition={rowTransition}>
+                <motion.p layout={layoutReady ? "position" : false} transition={rowTransition}>Work directly with a senior team that gets to know your products, your customers and where you want to go.</motion.p>
+                <motion.div className="pc-invitation" layout={layoutReady ? "position" : false} transition={rowTransition}>
                   <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">
                     Let’s talk about your store
                   </MockLink>
                   <motion.div className="cj-conversation-person pc-contact"
-                    style={animated ? { opacity: contactOpacity, y: contactY } : undefined}
+                    style={{ "--pc-contact-opacity": contactOpacity, "--pc-contact-y": contactY } as MotionStyle}
                     aria-hidden={animated && !contactVisible}>
                     <img src="/images/editorial/keanu-480.webp" alt="Keanu Fischell, founder of Happy Mondays" width="48" height="48" loading="lazy" />
                     <div><strong>Your first chat with Keanu</strong><span>Founder, Happy Mondays</span></div>

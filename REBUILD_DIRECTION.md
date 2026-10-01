@@ -4,6 +4,13 @@
 
 ## Detail pass — 1 October 2026
 
+### Team scene continuity on refresh and resize
+
+- Reproduced two visible continuity defects: refreshing at 36.6% of the pinned transition briefly restored the closed three-card layout, and resizing an animated desktop page to 390px retained an obsolete animated card width (109px), padding and hidden contact opacity. The latter persisted after scrolling settled.
+- Initialise the spring at the measured restored scroll position. Delay layout-position tracking until the first two animation frames have established the actual card width, preventing the CTA from animating upward through the clipped card edge on mount. Ordinary scroll and reverse-scroll retain the existing spring and timing.
+- Move animated card geometry into scoped CSS custom properties, applied only by the animated layout. Static phone, short-window and reduced-motion layouts use their own CSS geometry without retaining Framer's previous inline widths, padding, photo scale or contact opacity. Hover transforms remain independent; hidden side cards remain excluded from pointer and keyboard interaction.
+- Browser verification: refresh at 29.8% preserves the exact progress, 630.05px centre width and CTA position; refresh near 89.5% preserves the expanded row. Reverse scrolling restores side cards and their accessibility state. Desktop→390px now gives a 366px card, 38px/28px inner padding, visible contact and zero horizontal overflow. Returning to desktop restores the animated layout; 1440×650 releases to full-width static geometry with 62px padding, and a reduced-motion visit retains the static composition. Build and ten existing playback/readiness tests pass; the restoration/resize regression is verified in-browser rather than by those pure-policy tests.
+
 ### First-load typography delivery
 
 - The initial document depended on a remote Google Fonts stylesheet, followed by cross-origin font requests. Vendored the same Manrope, Inter and DM Mono WOFF2 files, retaining the original weight declarations, unicode subsets and `font-display: swap`. The main Manrope Latin font (24,576 bytes) is preloaded directly from the document head; the two Google origin preconnects and remote stylesheet are removed.
