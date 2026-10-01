@@ -4,6 +4,13 @@
 
 ## Detail pass — 1 October 2026
 
+### Route delivery weight
+
+- The initial Concept A stylesheet also contained Concept B and archived refinement CSS. Kept Concept A eager, made the alternative route load its own assets on demand, and placed internal lazy imports behind the client-review build flag. The client build now emits only the entry files and Concept B files; archived route assets are absent from that build.
+- Initial CSS falls from 161,312 to 91,310 bytes (43% smaller). Using the same local gzip calculation, initial JS+CSS falls from 150,161 to 136,819 bytes (8.9% smaller). These are build-file comparisons, not measured connection speed, LCP or total-page transfer claims.
+- Compared geometry, font family and colour for eight major Concept A sections at 1440px; values were identical before/after and after visiting B then returning to A. Verified B's own stylesheet loads on navigation, mobile A has no overflow and loads only the entry stylesheet, and all four archived routes still render in the internal build. Client-review archive paths retain the review-page fallback.
+- Both client and internal builds and TypeScript lint pass. No new entrance delay was added to Concept A; the alternative route has a simple accessible loading fallback while its files arrive.
+
 ### Keyboard reading structure
 
 - Browser inspection confirmed the footer had no content-info landmark because it lived inside the main content. Moved it outside `main` while retaining its shared width container, colours and reduced-motion handling. The 1440px footer rectangle is unchanged (1320×247px at the same document position); at 390px it remains 350px wide.
