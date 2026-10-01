@@ -4,7 +4,7 @@ import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { ProofRow } from "../shared/ProofRow";
-import { LogoStrip } from "../shared/LogoStrip";
+import { ClientLogos } from "./ClientLogos";
 import { StorePreview, OrderPreview } from "./StorePreview";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import { useHeroDepth } from "./useHeroDepth";
@@ -212,7 +212,7 @@ export function HeroAStudy() {
           style={reduced ? undefined : { y: proofY, opacity: proofOpacity }}
         >
           <ProofRow clutchIcon />
-          <LogoStrip className="ha-logos" staticMobile />
+          <ClientLogos />
         </motion.div>
       </div>
     </section>
