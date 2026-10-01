@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionStyle } from "framer-motion";
+import { motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionStyle } from "framer-motion";
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
@@ -9,7 +9,7 @@ import "./people-closing.css";
 const TRAVEL = 1.7;
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 // object-fit: cover scales the panorama by card height, not its narrow width.
-// 540/580/720px card heights × the original 1942:809 image ratio.
+// Select enough source detail for the tallest static terrace.
 const terraceSizes = "(max-width: 700px) 1297px, (max-width: 980px) 1393px, 1730px";
 
 /** Pin the real preceding scene and the cards together. The reader controls
@@ -19,6 +19,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const context = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const artworkSeen = useInView(stage, { once: true, amount: 0.4 });
   const content = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const [wideContent, setWideContent] = useState(false);
@@ -100,9 +101,12 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const centreWidth = useTransform(opening, value => `calc(${100 - (1 - value) * 200 / 3}% - ${(1 - value) * 40 / 3}px)`);
   const sideOpacity = useTransform(progress, [0, 0.27, 0.44, 1], [1, 1, 0, 0]);
   useMotionValueEvent(sideOpacity, "change", value => setSideVisible(value >= 0.08));
-  const sidePadding = useTransform(progress, [0.12, 0.4], [36, 24]);
+  const sidePadding = useTransform(progress, [0.12, 0.4], [28, 22]);
   const sideInset = useTransform(progress, [0.12, 0.57], [0, 14]);
-  const padding = useTransform(progress, [0.25, 0.85], [36, 62]);
+  const padding = useTransform(progress, [0.25, 0.85], [28, 52]);
+  const photoPosition = useTransform(opening, [0, 1], ["72% center", "52% center"]);
+  const artY = useTransform(opening, [0, 0.5], [0, -18]);
+  const artRotate = useTransform(opening, [0, 0.5], [0, -5]);
   const photoScale = useTransform(opening, [0, 1], [1.06, 1]);
   const contactOpacity = useTransform(progress, [0.68, 0.88], [0, 1]);
   const contactY = useTransform(progress, [0.68, 0.88], [8, 0]);
@@ -139,7 +143,18 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={{ ...businessTilt.style, ...sideLayout }}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
-                <p>Your products, your margins, your ambitions. We get to know what matters before deciding what comes next.</p>
+                <motion.div className="pc-art pc-art--platforms" aria-hidden="true" style={animated ? { y: artY, rotate: artRotate } : undefined}>
+                  <motion.div className="pc-art-settle" initial={false}
+                    animate={{ y: reduced || artworkSeen ? 0 : 12, rotate: reduced || artworkSeen ? 0 : -3, scale: reduced || artworkSeen ? 1 : 0.95 }}
+                    transition={{ duration: reduced ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}>
+                  <img className="pc-art-object" src="/images/partnership/connected-platforms-640.webp"
+                    srcSet="/images/partnership/connected-platforms-640.webp 640w, /images/partnership/connected-platforms-960.webp 960w"
+                    sizes="(max-width: 700px) 85vw, 400px" width="1536" height="1024" alt="" loading="lazy" />
+                  <img className="pc-platform pc-platform--shopify" src="/images/partnership/shopify-bag.svg" alt="" width="72" height="72" />
+                  <img className="pc-platform pc-platform--google" src="/images/icon-google-ads.svg" alt="" width="72" height="72" />
+                  </motion.div>
+                </motion.div>
+                <p>Your products. Your margins. Your ambitions. We get to know your business, then join the dots.</p>
                 <div className="pc-signature" aria-label="Google Ads and Shopify, one team">
                   <span>Google Ads <span className="pc-plus">+</span> Shopify</span>
                   <span>One team. The whole picture.</span>
@@ -151,9 +166,17 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={{ ...feeTilt.style, ...sideLayout }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <p>A fixed monthly fee within your spend band. You know what to budget, without paying a percentage of your ad spend.</p>
+                <motion.div className="pc-art pc-art--calendar" aria-hidden="true" style={animated ? { y: artY, rotate: artRotate } : undefined}>
+                  <motion.div className="pc-art-settle" initial={false}
+                    animate={{ y: reduced || artworkSeen ? 0 : 16, rotate: reduced || artworkSeen ? 0 : 3, scale: reduced || artworkSeen ? 1 : 0.95 }}
+                    transition={{ duration: reduced ? 0 : 0.9, ease: [0.22, 1, 0.36, 1] }}>
+                  <img className="pc-art-object" src="/images/partnership/monthly-plan-640.webp"
+                    srcSet="/images/partnership/monthly-plan-640.webp 640w, /images/partnership/monthly-plan-960.webp 960w"
+                    sizes="(max-width: 700px) 85vw, 400px" width="1536" height="1024" alt="" loading="lazy" />
+                  </motion.div>
+                </motion.div>
+                <p>A fixed monthly fee within your spend band. Clear priorities, close collaboration. No percentage of ad spend.</p>
                 <div className="pc-signature">
-                  <span>Clear scope. Close collaboration.</span>
                   <StoryLink href="/pricing" tabIndex={animated && !sideVisible ? -1 : undefined}>Explore pricing <span aria-hidden="true">↗</span></StoryLink>
                 </div>
               </div>
@@ -164,7 +187,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                 <source type="image/avif"
                   srcSet="/images/page-atmosphere/terrace-coastal-960.avif 960w, /images/page-atmosphere/terrace-coastal-1942.avif 1942w"
                   sizes={terraceSizes} />
-                <img src="/images/page-atmosphere/terrace-coastal-1942.webp"
+                <motion.img style={animated ? { objectPosition: photoPosition } : undefined} src="/images/page-atmosphere/terrace-coastal-1942.webp"
                   srcSet="/images/page-atmosphere/terrace-coastal-960.webp 960w, /images/page-atmosphere/terrace-coastal-1942.webp 1942w"
                   sizes={terraceSizes}
                   alt="" width="1942" height="809" loading="lazy" decoding="async" />

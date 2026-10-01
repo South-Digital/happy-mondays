@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-02",
+  "purpose": "Concept A partnership artwork; decorative conceptual objects, not product or customer evidence",
+  "assets": [
+    {
+      "file": "connected-platforms-{640,960}.webp",
+      "master": "exec-854fffd0-899a-4198-853a-fb2ca00be976.png",
+      "source": "OpenAI imagegen",
+      "brief": "Transparent cutout of two overlapping thick frosted-glass circular medallions connected by a clear curved glass ribbon. Pearl-white blank faces, softly blue edges, warm daylight. No logos, text, scene or floor. Official platform marks are separate HTML images."
+    },
+    {
+      "file": "monthly-plan-{640,960}.webp",
+      "master": "exec-6385131f-6554-4e14-b95a-eeabb5ba4765.png",
+      "source": "OpenAI imagegen",
+      "brief": "Transparent cutout of three gently fanned pearl-white calendar sculptures. Soft blue edges, embossed blank date squares, one tiny blue check. No numbers, text, prices or software UI. Same warm daylight and tactile material family as the glass assembly."
+    },
+    {
+      "file": "shopify-bag.svg",
+      "source": "https://cdn.shopify.com/static/brand-assets/shopify-shopping-bag.zip",
+      "archive_path": "02 - Glyph/svg/shopify_glyph.svg",
+      "brand_page": "https://www.shopify.com/brand-assets",
+      "notes": "Unmodified official SVG. Replaces the pre-existing 32px PNG in the larger artwork only."
+    }
+  ],
+  "encoding": "WebP quality 88, alpha quality 100, widths 640 and 960; generated masters remain in the session image directory."
+}

@@ -1,8 +1,8 @@
 /* Centre the cards within a shared sticky frame with the preceding scene. */
 .pc-sequence {
   --pc-section-gap: 120px;
-  --pc-small-title: clamp(28px, 2.5vw, 34px);
-  --pc-height: clamp(490px, calc(100svh - var(--pc-section-gap) - 128px), 720px);
+  --pc-small-title: clamp(26px, 2.3vw, 32px);
+  --pc-height: clamp(530px, 62svh, 580px);
   position: relative;
   margin-bottom: 54px;
 }
@@ -17,8 +17,8 @@
 }
 .pc-reason {
   display: flex;
-  padding: 36px;
-  min-height: 420px;
+  padding: 28px;
+  min-height: 520px;
   color: #273c35;
   background: #e0e7db;
 }
@@ -30,24 +30,12 @@
   inset: -15%;
   z-index: -1;
 }
-.pc-reason--business::before {
-  background:
-    radial-gradient(ellipse at 5% 8%, #fffffff5, transparent 55%),
-    radial-gradient(ellipse at 100% 68%, #92aba4b3, transparent 58%),
-    radial-gradient(ellipse at 0% 95%, #d1c99ecc, transparent 62%);
-  filter: blur(24px);
-}
+
 .pc-reason--fee {
   color: #2c414b;
   background: #dce6ea;
 }
-.pc-reason--fee::before {
-  background:
-    radial-gradient(ellipse at 15% 0%, #fffffff0, transparent 53%),
-    radial-gradient(ellipse at 90% 64%, #8cb2c5a3, transparent 61%),
-    radial-gradient(ellipse at 12% 100%, #ebd5b4e0, transparent 60%);
-  filter: blur(24px);
-}
+
 .pc-reason::after {
   inset: 0;
   border-radius: inherit;
@@ -67,23 +55,50 @@
   font-size: 17px;
   line-height: 1.55;
   letter-spacing: var(--ca-body-tracking);
-  margin: auto 0 32px;
-  padding-top: 26px;
+  margin: auto 0 22px;
+  padding-top: 12px;
 }
 .pc-signature, .pc-invitation {
   border-top: 1px solid #40595026;
-  padding-top: 22px;
+  padding-top: 16px;
   margin-top: 0;
   min-height: 77px;
 }
 .pc-signature {
   display: flex; flex-direction: column; justify-content: center;
-  min-height: 95px; flex-shrink: 0;
+  min-height: 70px; flex-shrink: 0;
   gap: 7px; font-size: 13px; line-height: 1.4; letter-spacing: -.02em;
 }
 .pc-signature .as-link { font-size: 13px; min-height: 44px; }
 .pc-signature > span:first-child { font-size: 15px; font-weight: 500; }
 .pc-signature > span:last-child { opacity: .8; }
+/* Physical objects sit in the same soft daylight as the photographic centre.
+   Their aspect ratio stays intact while the card's layout narrows around them. */
+.pc-art {
+  position: relative; flex: 1 1 190px; min-height: 150px;
+  width: min(100%, 360px); align-self: center;
+  margin: 8px -10px 4px; pointer-events: none;
+}
+.pc-art-settle { position: absolute; inset: 0; }
+.pc-art-object { position: absolute; width: 100%; height: 100%; object-fit: contain; }
+.pc-art--platforms { aspect-ratio: 3 / 2; flex: 0 0 auto; }
+.pc-art--calendar { aspect-ratio: 3 / 2; flex: 0 0 auto; }
+.pc-platform { position: absolute; width: 18%; height: 27%; object-fit: contain;  }
+.pc-platform--shopify { left: 20.5%; top: 24%;  }
+.pc-platform--google { left: 61%; top: 48%;  }
+.pc-reason--business { background: #dce5d6; }
+.pc-reason--business::before {
+  background: radial-gradient(ellipse at 10% 0%, #ffffffeb, transparent 55%),
+    radial-gradient(ellipse at 100% 62%, #7e9b90b0, transparent 62%),
+    radial-gradient(ellipse at 0% 100%, #d3c998df, transparent 55%);
+  filter: blur(24px);
+}
+.pc-reason--fee::before {
+  background: radial-gradient(ellipse at 5% 0%, #ffffffed, transparent 52%),
+    radial-gradient(ellipse at 100% 48%, #80adc8bf, transparent 66%),
+    radial-gradient(ellipse at 0% 100%, #e8d8b9cf, transparent 60%);
+  filter: blur(24px);
+}
 .pc-plus { padding: 0 7px; opacity: .6; }
 .pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
@@ -103,9 +118,9 @@
 .pc-people h2:focus-visible { outline: 2px solid var(--ca-action); outline-offset: 6px; }
 .pc-people h2 > span { display: block; color: var(--ca-heading-soft); font-weight: var(--ca-display-weight); }
 .pc-people-content > p { max-width: 445px; color: var(--ca-body); }
-.pc-invitation { align-self: flex-end; width: 100%; max-width: 570px; position: relative; min-height: 95px; }
+.pc-invitation { align-self: flex-end; width: 100%; max-width: 570px; position: relative; min-height: 70px; }
 .pc-invitation .ha-button { font-size: 14px; min-height: 54px; padding-inline: 24px; white-space: nowrap; }
-.pc-contact { position: absolute; left: 250px; top: 25px; white-space: nowrap; }
+.pc-contact { position: absolute; left: 250px; top: 18px; white-space: nowrap; }
 .pc-contact img { flex-shrink: 0; }
 /* Once the opening card has room, the copy and invitation share one lower row. */
 .pc-people-content[data-wide="true"] {
@@ -159,7 +174,7 @@
   .pc-sequence { --pc-section-gap: 94px; }
 }
 @media (min-width: 701px) and (max-width: 980px) {
-  .pc-reason { padding: 28px; min-height: 380px; }
+  .pc-reason { padding: 28px; min-height: 520px; }
   .pc-reason h2 { font-size: 28px; }
   .pc-reason p { font-size: 16px; }
   .pc-people-content { padding: 48px 36px; }
@@ -170,7 +185,7 @@
   .pc-sequence { margin-bottom: 36px; }
   .pc-journey { margin: var(--pc-section-gap) -8px 0; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
-  .pc-reason { min-height: 370px; padding: 32px; border-radius: 28px; }
+  .pc-reason { min-height: 510px; padding: 32px; border-radius: 28px; }
   .pc-reason h2 { font-size: clamp(33px, 8vw, 42px); }
   .pc-reason p { font-size: 16px; }
   .pc-people { min-height: 540px; border-radius: 28px; }
@@ -181,3 +196,18 @@
   .pc-contact { position: static; margin-top: 22px; white-space: normal; }
   .pc-invitation .ha-button { padding-inline: 20px; }
 }
+
+@media (min-width: 1080px) {
+  .pc-sequence[data-animated="true"] .pc-reason-inner { min-width: 196px; }
+  .pc-sequence[data-animated="true"] .pc-art { width: min(100%, 330px); margin-block: 4px 0; }
+  .pc-sequence[data-animated="true"] .pc-reason p,
+  .pc-sequence[data-animated="true"] .pc-people-content > p { font-size: 16px; line-height: 1.5; }
+  .pc-sequence[data-animated="true"] .pc-signature { min-height: 71px; }
+}
+@media (max-width: 700px) {
+  .pc-art { width: min(100%, 330px); margin-block: 10px; }
+  .pc-reason p { margin-bottom: 20px; }
+}
+
+.pc-people-content:not([data-wide="true"]) > p { max-width: min(32ch, 100%); }
+.pc-sequence[data-animated="true"] .pc-people-content:not([data-wide="true"]) > p { max-width: min(32ch, calc(100% - 20px)); }

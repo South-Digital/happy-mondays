@@ -2,6 +2,29 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — visual reset (active priority)
+
+The user rejected the previous pass as visually unchanged. Technical verification is a delivery requirement, not the design roadmap. The following work supersedes the earlier “no visual defect” conclusions.
+
+### Roadmap
+
+1. **Partnership scene — implemented, browser-reviewed:** replace empty space with custom physical artwork, shorten the desktop row, preserve the centred scroll opening. Connected glass platform medallions for the business card; a pearl-white calendar sculpture for predictable monthly fees. Keep the coastal team scene and understated personal contact. Review opening, narrowing, expanded and mobile compositions.
+2. **Commerce storytelling — next:** make the agency's intervention apparent in the discovery journey, rather than merely sliding a product carousel. Plan the before / intervention / after beats from the September call, with the actual ecommerce UI still recognisable. Keep copy available throughout; bound playback speed and motion distance.
+3. **Whole-page art direction:** judge hero → credentials → discovery → open testimonial → purchase → partnership as a sequence. Preserve open sections; do not turn the whole page into cards. Improve visual transitions and differentiated depth rather than adding text-heavy modules. The removed audit/FAQ spread stays removed.
+4. **Delivery review:** compare real browser renders with the chosen references, including intermediate scroll positions and phone compositions. Publish cohesive visual increments. Do not equate passing tests with client approval.
+
+### First visual increment: verification
+
+The desktop stage is now 530–580px rather than 490–720px (558px rather than 652px at 1440×900). The supporting objects have their own gentle one-time settling motion and move with the scroll-driven contraction. Platform marks remain separate real assets; the enlarged Shopify mark is the official vector from Shopify's brand kit. Tested opening, 26% narrowing and expanded compositions at 1440×900, opening at 1080×700, and the static phone layout at 390×844. No horizontal page overflow or console errors were observed. The existing centred start, reverse-scroll behaviour, focus handoff and reduced-motion path are retained. Build, lint and ten playback/readiness tests pass. Local proof images are in `output/happy-mondays-visual-reset-2026-10-02` in the parent workspace. This is a visible design increment, not a claim of final client acceptance.
+
+### Source findings rechecked this pass
+
+- Live Figma frame 2721:296: deliberate graphic regions and soft material surfaces are useful; the old checklist / performance-number / capacity-card content is not the direction to copy.
+- Live Miro board: Solidroad paired platform graphics (image 3458764683975495634) and the GoFlower product composition (3458764683972932707); the former puts recognisable logos inside the scene, rather than adding badges to an empty card. Synex reference video contact sheet re-viewed for layered reveals.
+- 18 September design review, 17–41 minutes: premium photographic nature plus software familiarity, integrated depth, restrained soft gradients and frosted materials; not a new SaaS interface, not vector landscapes. 42–56 minutes: ecommerce interactions as a subtle nod, gentle scroll transitions and white/off-white contrast. The reference's literal rocks/branches are not requirements.
+- Live client Slack, 24 September: Concept A preferred; gradients and animation still below the reference. Blue should be an accent with natural colours, rounded buttons and subtle shadows. The 30 September conversation requests progress/timing, not a change in visual direction.
+- Archived introduction, August follow-up, kickoff agenda, answered content plan and Miro capture consulted. This is not an assertion that every historical comment has been re-read in full.
+
 ## 2 October — audit section removed at user request
 
 Removed the homepage audit spread and its four FAQs from the rendered page. The team invitation now leads directly to the footer with existing section spacing. Keep the component available for reconsideration; do not reintroduce it during ongoing refinement without a new user request. Service and audit links elsewhere remain unchanged. Build, lint and browser verification pass.
