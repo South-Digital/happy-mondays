@@ -33,9 +33,9 @@
 .as-audit-chapter h3 { font-size: clamp(32px,3vw,43px); font-weight: 500; line-height: 1.12; letter-spacing: -.045em; margin: 0 0 20px; }
 .as-chapter-question { font-size: 19px; line-height: 1.5; color: #476576; margin: 0 0 35px; max-width: 380px; }
 .as-audit-chapter dl { margin: 0; }
-.as-audit-chapter dl > div { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px; border-top: 1px solid #26333b20; padding: 22px 0; font-size: 14px; line-height: 1.5; }
-.as-audit-chapter dt { color: #26333b; font-weight: 500; }
-.as-audit-chapter dd { color: #66737a; margin: 0; }
+.as-audit-chapter dl > div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.8fr); align-items: baseline; gap: 28px; border-top: 1px solid #26333b20; padding: 22px 0; line-height: 1.5; }
+.as-audit-chapter dt { color: var(--ca-body); font-size: 14px; font-weight: 400; }
+.as-audit-chapter dd { color: var(--ca-ink); font-size: 17px; letter-spacing: -.02em; margin: 0; }
 @keyframes as-chapter-enter { from { opacity: .4; transform: translateY(7px); } to { opacity: 1; transform: none; } }
 .as-questions { display: grid; grid-template-columns: 1fr 1fr; align-items: start; column-gap: 7%; margin-top: 84px; }
 .as-questions details { border-top: 1px solid #20273024; }
@@ -63,7 +63,7 @@
   .as-audit-folio { padding-left: 0; }
   .as-folio-tabs { gap: 12px; }
   .as-folio-tabs button { font-size: 13px; }
-  .as-audit-chapter dl > div { gap: 16px; font-size: 13px; }
+  .as-audit-chapter dl > div { gap: 16px; }
 }
 /* Match the commerce section's single-column container, not just phone width. */
 @media (max-width:980px) {
@@ -82,7 +82,6 @@
   .as-audit-invitation > .as-link { display: inline-flex; margin: 0 0 0 20px; }
   .as-audit-pages { min-height: 355px; }
   .as-folio-tabs { margin-bottom: 34px; }
-  .as-audit-chapter dl > div { font-size: 14px; }
   .as-questions { margin-top: 50px; grid-template-columns: 1fr; }
   .as-questions summary { min-height: 76px; }
   .as-footer { grid-template-columns: 1fr 1fr; gap: 28px; padding-inline: 0; }
@@ -96,7 +95,8 @@
   .as-folio-tabs button { font-size: 12px; }
   .as-audit-chapter h3 { font-size: 32px; }
   .as-chapter-question { font-size: 18px; }
-  .as-audit-chapter dl > div { font-size: 13px; gap: 18px; }
+  .as-audit-chapter dl > div { grid-template-columns: 1fr; gap: 6px; padding: 19px 0; }
+  .as-audit-chapter dt { font-size: 13px; }
 }
 @media (prefers-reduced-motion:reduce) {
   .as-audit-chapter[data-active="true"] { animation: none; }

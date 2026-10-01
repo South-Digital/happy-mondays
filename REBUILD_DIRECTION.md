@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Audit reading hierarchy
+
+- Reviewed the quote → purchase scene and expanded team → audit → footer sequence. Kept those open layouts and their existing section spacing; the quieter lower page provides a useful contrast to the large photographic compositions.
+- The diagnostic questions were visually subordinate to their category labels, set at 13–14px and squeezed into narrow mobile columns. Questions now use 17px ink text and receive a larger share of desktop row width; labels remain quieter. Below 480px, each label sits directly above its question, preserving comfortable type size rather than compressing both into a table.
+- Verified the longest labels at 1024px and the complete desktop spread at 1440px. At 320px, all chapters reserve the same 450.67px height and the FAQ position stays unchanged when switching chapters with the keyboard. No horizontal overflow observed. No additional card surfaces, images, claims or motion were introduced.
+
 ### Motion continuity
 
 - Checked the normal-motion journey at 1440×900 with real wheel scrolling. Discovery paused at 878ms when only its bottom edge remained visible, resumed when returned to view and retained its completed composition afterwards.
