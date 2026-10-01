@@ -10,6 +10,8 @@ import { EASE, usePrefersReducedMotion } from "../../lib/motion";
 import { useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import { useSceneReadiness } from "./useSceneReadiness";
+import courtyardPreview from "./assets/courtyard-preview.webp";
+import atelierPreview from "./assets/atelier-preview.webp";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
 import { sceneImage } from "./sceneImages";
@@ -150,9 +152,13 @@ function Product({
   );
 }
 function ScenePhoto({ name, base = IMG }: { name: string; base?: string }) {
+  const [ready, setReady] = useState(false);
   return (
     <img
       className="cj-photo"
+      data-ready={ready}
+      onLoad={event => { event.currentTarget.decode().catch(() => {}).then(() => setReady(true)); }}
+      onError={() => setReady(false)}
       {...sceneImage(base, name)}
       alt=""
       loading="lazy"
@@ -188,9 +194,13 @@ function Discovery() {
     >
       <div
         className="cj-stage cj-stage--discovery"
+        style={{ backgroundImage: `url(${courtyardPreview})` }}
         role="img"
         aria-label="A concept Pilates brand comes into view in Google Shopping, with tactile cream and burgundy knitwear layered in front of a sunlit olive courtyard."
       >
+        <div className="cj-backdrop" style={{ transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})` }}>
+          <ScenePhoto name="courtyard" />
+        </div>
         <div
           className="cj-camera"
           style={{
@@ -198,7 +208,6 @@ function Discovery() {
             transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})`,
           }}
         >
-          <ScenePhoto name="courtyard" />
           <motion.div
             className="cj-search-depth"
             style={{ y: reduced ? 0 : backY }}
@@ -372,9 +381,13 @@ function Storefront() {
     >
       <div
         className="cj-stage cj-stage--purchase cj-stage--fragrance"
+        style={{ backgroundImage: `url(${atelierPreview})` }}
         role="img"
         aria-label="Serein's concept Shopify store, with amber-glass Fig & Cedar candle photography, a complementary reed diffuser, and a $110 order confirmation. An illustrative shopping journey."
       >
+        <div className="cj-backdrop" style={{ transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})` }}>
+          <ScenePhoto name="atelier" base={FRAGRANCE} />
+        </div>
         <div
           className="cj-camera"
           style={{
@@ -382,7 +395,6 @@ function Storefront() {
             transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})`,
           }}
         >
-          <ScenePhoto name="atelier" base={FRAGRANCE} />
           <motion.div
             className="cj-store-depth"
             style={{ y: reduced ? 0 : backY }}

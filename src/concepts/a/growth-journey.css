@@ -148,7 +148,7 @@
   isolation: isolate;
   container-type: inline-size;
   overflow: hidden;
-  background: #989782;
+  background: #989782 center / cover no-repeat;
 }
 .cj-stage:after {
   content: "";
@@ -166,7 +166,10 @@
   height: 100%;
   object-fit: cover;
   user-select: none;
+  opacity: 0;
+  transition: opacity 600ms ease;
 }
+.cj-photo[data-ready="true"] { opacity: 1; }
 .cj-glass {
   background: linear-gradient(130deg, #fffffff0, #f4f7f9d9);
   border: 1px solid #ffffffdb;
@@ -446,7 +449,7 @@
 }
 /* The store lives behind the actual product, with the order in the closest plane. */
 .cj-stage--purchase {
-  background: #d9cbb7;
+  background-color: #d9cbb7;
 }
 .cj-store-depth {
   position: absolute;
@@ -852,7 +855,7 @@
   }
 }
 
-.cj-camera {
+.cj-backdrop, .cj-camera {
   position: absolute;
   inset: 0;
   transform-origin: 50% 82%;
@@ -998,7 +1001,7 @@
   }
 }
 
-.cj-story[data-motion="reduce"] .cj-camera {
+.cj-story[data-motion="reduce"] :is(.cj-camera, .cj-photo) {
   transition: none;
 }
 

@@ -4,12 +4,19 @@
 
 ## Detail pass — 1 October 2026
 
+### Independent commerce backdrops
+
+- A local ten-second delay on catalogue thumbnails reproduced an unnecessarily empty state in both commerce scenes: the full photograph was decoded, but the shared camera opacity still hid everything until the smallest product assets arrived.
+- Separated the photographic backdrop from the coordinated object plane while keeping their identical camera scale/origin. The setting now sharpens independently; Google/Shopify panels, photographed products and contact shadows retain their existing shared readiness gate and narrative timings. Added inline soft previews for the two background plates (3,022 and 1,482 bytes) so a delayed plate also retains its composition. Renamed the shared generation script to `gen-loading-previews.cjs`.
+- Browser checks at 1440px confirmed each backdrop becomes visible while its object camera remains at opacity 0 and its narrative time remains 0 under delayed catalogue responses. Both eventually reach 5800ms with full photography and the original final composition. Corrected the purchase background shorthand during review so it preserves cover/no-repeat sizing rather than tiling the preview.
+- At 390px with reduced motion, both photos report ready/opacity 1, zero-second transitions, completed scene clocks and zero page overflow. Text and service destinations remain outside the media gate. Build, lint and diff checks pass. This controlled delay test does not establish aggregate network throughput or real-device performance.
+
 ### Progressive hero scenery
 
 - Reproduced a blank first impression with a local server delaying both coastal image requests by ten seconds: the headline and action appeared, but the entire scene remained absent until both photographs decoded. This is a controlled asset-delay test, not a measured mobile-network benchmark.
 - Added two 192px soft previews derived from the approved photographs (860 and 1,202 bytes). Vite embeds them in the application bundle, so there is no additional image request. Each uses the same crop/container as its full image. The full layers sharpen together with the existing 1.4-second fade once both have settled; the dashboard still follows the existing readiness gate. Reduced motion switches immediately when ready. No finished-state photography, geometry or headline timing changed.
 - Failed photographs remain transparent over their preview rather than revealing a broken image. A later successful responsive source clears that failure state. Verified both requests returning HTTP 503 on a 390px reduced-motion view: the scene retains its colour, the dashboard resolves to 4800ms and the page has no horizontal overflow. Verified successful phone images return to opacity 1, and delayed desktop images resolve to full quality and completed dashboard playback.
-- Initial 96px/low-quality previews showed compression blocks at desktop scale; replaced them with softly filtered 192px derivatives. Generator is `scripts/gen-hero-previews.cjs`. Build, lint, diff checks and ten existing playback/readiness policy tests pass; actual media loading was verified in-browser. Temporary delay/failure servers and harness are local-only. Screenshot: `hero-delayed-preview.png` in the task output.
+- Initial 96px/low-quality previews showed compression blocks at desktop scale; replaced them with softly filtered 192px derivatives. Generator is `scripts/gen-loading-previews.cjs`. Build, lint, diff checks and ten existing playback/readiness policy tests pass; actual media loading was verified in-browser. Temporary delay/failure servers and harness are local-only. Screenshot: `hero-delayed-preview.png` in the task output.
 
 ### Wide-screen composition review
 
