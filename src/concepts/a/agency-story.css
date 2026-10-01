@@ -1,15 +1,15 @@
 /* Open editorial proof and an explorable audit. Contained scenes live elsewhere. */
 .as-link { color: var(--ca-ink); display: inline-flex; align-items: center; gap: 18px; min-height: 44px; width: fit-content; font-size: 14px; font-weight: 500; text-decoration: underline; text-decoration-color: #65747a70; text-underline-offset: 6px; }
 .as-link > span, .as-back-top > span { display: inline-block; transition: transform .24s ease; }
-.as-proof { display: grid; grid-template-columns: 1fr 2.7fr; gap: 7%; align-items: end; margin: 12px 0 120px; padding: 50px 30px 58px; border-block: 1px solid #20273018; }
-.as-proof-source { align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; }
+.as-proof { margin: 12px 0 120px; padding: 50px 30px 58px; border-block: 1px solid #20273018; }
+.as-proof-source { grid-column: 1; grid-row: 1; align-self: stretch; display: flex; flex-direction: column; }
 .as-quote-mark { display: block; font-family: Georgia, serif; color: #a6c3d1; font-size: 116px; line-height: 1; height: 76px; }
-.as-proof-source p { font-size: 15px; line-height: 1.5; margin: 24px 0 8px; }
+.as-proof-source p { font-size: 15px; line-height: 1.5; margin: 16px 0 8px; }
 .as-proof-source p > span { display: block; color: var(--ca-body); font-size: 13px; margin-top: 7px; }
-.as-proof figure { margin: 0; }
-.as-proof blockquote { margin: 0; font-size: clamp(27px, 2.85vw, 41px); line-height: 1.27; letter-spacing: -.04em; font-weight: 400; text-wrap: pretty; }
+.as-proof figure { display: grid; grid-template-columns: 1fr 2.7fr; gap: 7%; align-items: center; margin: 0; }
+.as-proof blockquote { grid-column: 2; grid-row: 1; margin: 0; font-size: clamp(27px, 2.85vw, 41px); line-height: 1.27; letter-spacing: -.04em; font-weight: 400; text-wrap: pretty; }
 .as-proof blockquote em { font-style: normal; color: #375969; }
-.as-proof figcaption { margin-top: 22px; }
+.as-proof-source .as-link { font-size: 13px; }
 .as-start { padding: 64px 12px 80px; border-top: 1px solid #20273018; }
 .as-audit-spread { display: grid; grid-template-columns: 1fr 1.12fr; gap: 7%; align-items: center; }
 .as-audit-copy h2 { font-size: clamp(42px,3.8vw,56px); font-weight: 500; letter-spacing: -.048em; line-height: 1.08; margin: 0 0 28px; max-width: 540px; text-wrap: pretty; }
@@ -67,9 +67,11 @@
 }
 /* Match the commerce section's single-column container, not just phone width. */
 @media (max-width:980px) {
-  .as-proof { grid-template-columns: 1fr; gap: 24px; padding: 38px 0 42px; margin-bottom: 78px; }
-  .as-proof-source { flex-direction: row; align-items: center; justify-content: flex-start; gap: 24px; }
-  .as-quote-mark { font-size: 90px; height: 65px; }
+  .as-proof { padding: 38px 0 42px; margin-bottom: 78px; }
+  .as-proof figure { grid-template-columns: 1fr; gap: 28px; }
+  .as-proof blockquote { grid-column: 1; }
+  .as-proof-source { grid-column: 1; grid-row: 2; flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
+  .as-quote-mark { display: none; }
   .as-proof-source p { margin: 0; }
   .as-proof-source p > span { font-size: 12px; margin-top: 2px; }
   .as-proof-source br { display: block; }

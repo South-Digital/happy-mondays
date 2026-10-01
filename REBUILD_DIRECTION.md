@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Editorial proof in the page journey
+
+- Reviewed the whole mobile reading sequence. The testimonial introduced its author and a separate large quote mark before the endorsement, splitting attention at the hand-off between the two product scenes.
+- Made the endorsement the first item in its figure, with its attribution in a real figcaption. On mobile/tablet, the author and story link sit together below the quote; the redundant decorative mark is hidden. Desktop retains the open two-column treatment, grouping the story link with its source rather than separating it below the quote.
+- The supplied quotation and attribution are unchanged. No new claims, imagery, cards or animation. Checked 320, 390, 900 and 1440px layouts, the caption’s 28px separation on tablet, 44px story-link target, and its existing preview behaviour. No horizontal overflow observed; build, lint and diff checks pass.
+
 ### Reachable scene entrances
 
 - Reproduced a stalled discovery scene at 1920×300: the scene is 715.11px tall, so its fixed 42% visibility requirement exceeds the available viewport. Even while filling the view, its clock remained at 1000ms and never reached its meaningful story beats.

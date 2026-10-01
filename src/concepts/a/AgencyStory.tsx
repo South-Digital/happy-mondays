@@ -17,10 +17,13 @@ export function StoryLink({ href, children, className = "as-link", tabIndex }: {
 export function ClientStory() {
   return (
     <section className="as-proof" id="client-stories" tabIndex={-1} aria-label="A word from The Diamond Store">
-      <div className="as-proof-source"><span className="as-quote-mark" aria-hidden="true">“</span><p>Gary Ingram<span>Co-Founder<br />The Diamond Store</span></p></div>
       <figure>
         <blockquote>“Their knowledge of Google Ads is second to none and they are <em>constantly finding new ways to scale and grow.</em>”</blockquote>
-        <figcaption><StoryLink href="/case-studies/the-diamond-store">Read their story <span aria-hidden="true">↗</span></StoryLink></figcaption>
+        <figcaption className="as-proof-source">
+          <span className="as-quote-mark" aria-hidden="true">“</span>
+          <p>Gary Ingram<span>Co-Founder<br />The Diamond Store</span></p>
+          <StoryLink href="/case-studies/the-diamond-store">Read their story <span aria-hidden="true">↗</span></StoryLink>
+        </figcaption>
       </figure>
     </section>
   );
