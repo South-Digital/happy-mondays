@@ -21,8 +21,16 @@ function StudyNav() {
         menu.current.open = false;
       }
     };
+    const desktop = window.matchMedia("(min-width: 901px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches && menu.current) menu.current.open = false;
+    };
     document.addEventListener("pointerdown", dismiss);
-    return () => document.removeEventListener("pointerdown", dismiss);
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.removeEventListener("pointerdown", dismiss);
+      desktop.removeEventListener("change", closeOnDesktop);
+    };
   }, []);
   return (
     <header className="ha-nav">
@@ -38,6 +46,13 @@ function StudyNav() {
       <details
         className="ha-mobile-menu"
         ref={menu}
+        onBlur={(event) => {
+          // A disclosure should release keyboard focus naturally, then close
+          // before the next page control is obscured by its panel.
+          if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget)) {
+            event.currentTarget.open = false;
+          }
+        }}
         onKeyDown={(e) => {
           if (e.key === "Escape" && menu.current) {
             menu.current.open = false;

@@ -213,3 +213,17 @@ Heading, team paragraph and invitation settle in a compact sequence of roughly 0
 - Record timings/frame behavior rather than claiming “60fps” from a screenshot. Check on a physical phone if available; browser viewport emulation does not establish device performance.
 
 The implementation order is deliberate: prove the hardest storytelling scene first, then extend its motion language. Another broad animation pass before that proof would repeat the previous problem.
+
+## Continuing refinement — October 2026
+
+Active request: continue improving the established Concept A page. Make changes against observed problems, preserve approved content and composition, and publish cohesive verified iterations.
+
+1. **Idle motion efficiency (verified):** remove the three permanent card-hover frame callbacks. Recalculate on pointer, scroll, resize and visibility changes; preserve the existing bounded tilt through expansion. Check enter, leave, stationary-pointer resizing and reduced motion.
+2. **Asset delivery audit:** inspect the actual hero and scene resources requested at desktop and mobile sizes. Address redundant decoding or unsuitable resolutions only where measurements show a problem.
+3. **Navigation and accessibility:** verify keyboard focus across the pinned sequence, mobile menu dismissal, route changes and reduced-motion preference changes. Keep concept-only destinations explicit.
+4. **Motion pacing review:** revisit normal, rapid and reverse scroll with the full sequence. Fix skipped or abrupt states without adding competing entrances.
+5. **Visual consistency:** review short/tall screens and breakpoint boundaries; keep typography, section rhythm, logo balance and CTA treatment coherent.
+
+Completed before this continuation: continuous warm-white hero transition; optically sized client marks; compact two-row mobile proof; removal of the extra proof panel and white margin seam. Build, lint and browser checks passed; published as commit 6b60a0e.
+
+October verification: build and TypeScript checks pass; all six scene playback tests pass. At 1280 × 720 the card hover resets on leave, follows a stationary pointer through expansion, stays bounded on the fully expanded card, and stays still in reduced motion. At 390 × 844 the mobile disclosure now closes when keyboard focus leaves it; Escape returns focus to the summary. Crossing the 901px desktop breakpoint also clears its open state. Asset inspection found existing hero responsive sources working; further asset changes remain deferred pending a demonstrated benefit.
