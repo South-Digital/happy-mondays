@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Readable service-copy entrances
+
+- On direct entry to the approach section, measured the parent copy at 0.876 opacity while its inline cart was only 0.098. The icon's independent 1.2-second entrance plus 180ms delay left a visible hole in the heading after the words were already readable. Both offscreen copy blocks also began entirely transparent.
+- Kept service copy at full opacity throughout, with a restrained 6px/450ms settling movement. Removed the icon's separate timed fade/rotation; the existing outer scroll movement (±4px and ±2°) remains. This makes sentence, illustration and action available together without changing type scale, layout, image loading or the product-scene narrative.
+- On immediate desktop reload into `#the-approach`, both copy blocks and icon images report opacity 1 while the discovery copy is still at its initial 5.82px offset. After a quick 0.65-page scroll, the entering purchase copy and icon remain fully opaque. At 390px with reduced motion, both copy blocks and icon planes report no transform and no page overflow. Build, lint and diff checks pass.
+
 ### Independent commerce backdrops
 
 - A local ten-second delay on catalogue thumbnails reproduced an unnecessarily empty state in both commerce scenes: the full photograph was decoded, but the shared camera opacity still hid everything until the smallest product assets arrived.

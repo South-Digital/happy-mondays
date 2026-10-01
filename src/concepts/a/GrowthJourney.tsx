@@ -560,7 +560,7 @@ function EditorialIcon({ kind }: { kind: "cart" | "card" }) {
       style={reduced ? undefined : { y, rotate }}
       aria-hidden="true"
     >
-      <motion.img
+      <img
         src={`/images/editorial/${kind}.webp`}
         srcSet={[128, 256, 384].map(width => `/images/editorial/${kind}-${width}.webp ${width}w`).concat(`/images/editorial/${kind}.webp 600w`).join(", ")}
         sizes={kind === "cart"
@@ -570,10 +570,6 @@ function EditorialIcon({ kind }: { kind: "cart" | "card" }) {
         height={kind === "cart" ? 494 : 353}
         alt=""
         loading="lazy"
-        initial={reduced ? false : { opacity: 0, y: 10, rotate: -5 }}
-        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 1.2, delay: 0.18, ease: EASE.entrance }}
       />
     </motion.span>
   );
@@ -592,10 +588,10 @@ function Copy({
   return (
     <motion.div
       className={`cj-copy cj-copy--${kind}`}
-      initial={reduced ? false : { opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduced ? false : { y: 6 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.6, ease: EASE.entrance }}
+      transition={{ duration: reduced ? 0 : 0.45, ease: EASE.entrance }}
     >
       {kind === "discovery" ? (
         <h2 id={id} aria-label="Your products. Their next find.">
