@@ -16,7 +16,7 @@
 .as-audit-copy > p { max-width: 410px; font-size: 21px; line-height: 1.5; color: var(--ca-body); letter-spacing: -.025em; margin: 0; }
 .as-audit-invitation { border-top: 1px solid #20273020; padding-top: 26px; margin-top: 34px; max-width: 430px; }
 .as-audit-invitation > p { font-size: 15px; line-height: 1.7; color: var(--ca-body); margin: 0 0 24px; max-width: 380px; }
-.as-audit-invitation > .cj-service-link { display: inline-flex; font-size: 14px; gap: 22px; }
+.as-audit-invitation > .ha-button { gap: 22px; text-decoration: none; }
 .as-audit-invitation > .as-link { display: flex; margin-top: 13px; font-size: 13px; }
 .as-audit-folio { min-width: 0; padding-left: 26px; }
 .as-folio-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin: 0 0 44px; border-bottom: 1px solid #b8c8ce; }

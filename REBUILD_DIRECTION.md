@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Whole-page rhythm and closing-action hierarchy
+
+- Reviewed the desktop journey by scrolling through the terrace/credentials hand-off, both commerce scenes, the testimonial, centred team cards, narrowing side cards, expanded team composition and the final audit. The existing open testimonial and audit sections provide useful contrast with the photographic scenes; retained their spacing and avoided adding further containers. At the observed release point, the team expansion had completed before the audit entered the viewport, with 130px between the card bottom and audit border.
+- The final booking link used the pale glass treatment intended for service exploration, giving it the same emphasis as secondary destinations. Reused the existing blue primary button and aligned its label with the hero: “Start with an audit.” “Inside the audit” remains the quieter supporting link. No new button colour, component, imagery or promise was introduced.
+- Reviewed the closing composition at 1440, 390 and 320px. The booking target is 52px high on desktop and 50px on phone, has a visible keyboard outline, retains its audit-booking destination and opens the existing booking-preview notice. The narrowest view has zero horizontal overflow. Build, lint and diff checks pass; the calendar remains an intentionally unconnected concept destination.
+
 ### Compact navigation continuity
 
 - At 844×320, keyboard navigation correctly scrolls the menu panel to its last item, but closing and reopening preserved a 68px scroll offset, hiding the first link. Reset the panel to its top whenever the disclosure opens; the page itself is not scrolled by this reset.

@@ -75,7 +75,7 @@ export function GettingStarted() {
         <div className="as-audit-copy">
           <h2 id="as-start-title">Where does the next sale get stuck?</h2>
           <p>The Revenue Leak Audit follows the journey from first search to checkout.</p>
-          <div className="as-audit-invitation"><p>We start with a 15-minute conversation. Then a closer look at your account and store, with a personal video to make sense of it all.</p><StoryLink href="/book-a-call?type=audit" className="cj-service-link">Start with your store <span aria-hidden="true">↗</span></StoryLink><StoryLink href="/revenue-leak-audit">Inside the audit <span aria-hidden="true">↗</span></StoryLink></div>
+          <div className="as-audit-invitation"><p>We start with a 15-minute conversation. Then a closer look at your account and store, with a personal video to make sense of it all.</p><StoryLink href="/book-a-call?type=audit" className="ha-button">Start with an audit <span aria-hidden="true">↗</span></StoryLink><StoryLink href="/revenue-leak-audit">Inside the audit <span aria-hidden="true">↗</span></StoryLink></div>
         </div>
         <AuditFolio />
       </div>
