@@ -10,6 +10,8 @@ import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import { useSceneReadiness } from "./useSceneReadiness";
 import { useHeroDepth } from "./useHeroDepth";
 import { StoryLink } from "./AgencyStory";
+import coastPreview from "./assets/coast-preview.webp";
+import terracePreview from "./assets/terrace-preview.webp";
 import "./hero-a-study.css";
 
 const links = [
@@ -101,17 +103,22 @@ function StudyNav() {
   );
 }
 
-function Coast({ foreground = false, onReady }: { foreground?: boolean; onReady: () => void }) {
+function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: boolean; ready: boolean; reduced: boolean; onReady: () => void }) {
+  const [failed, setFailed] = useState(false);
   return (
     <picture
       className={foreground ? "ha-coast ha-coast-foreground" : "ha-coast"}
+      style={{ backgroundImage: `url(${foreground ? terracePreview : coastPreview})` }}
     >
       <source
         type="image/avif"
         srcSet={foreground ? "/images/hero-a-terrace-extended/coast-800.avif 800w, /images/hero-a-terrace-extended/coast-1440.avif 1440w, /images/hero-a-terrace-extended/coast-1586.avif 1586w" : "/images/hero-a-terrace/coast-800.avif 800w, /images/hero-a-terrace/coast-1440.avif 1440w, /images/hero-a-terrace/coast-2400.avif 2400w, /images/hero-a-terrace/coast-3548.avif 3548w"}
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
       />
-      <img
+      <motion.img
+        initial={{ opacity: 0 }}
+        animate={{ opacity: ready && !failed ? 1 : 0 }}
+        transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
         src={foreground ? "/images/hero-a-terrace-extended/coast-1440.webp" : "/images/hero-a-terrace/coast-1440.webp"}
         srcSet={foreground ? "/images/hero-a-terrace-extended/coast-800.webp 800w, /images/hero-a-terrace-extended/coast-1440.webp 1440w, /images/hero-a-terrace-extended/coast-1586.webp 1586w" : "/images/hero-a-terrace/coast-800.webp 800w, /images/hero-a-terrace/coast-1440.webp 1440w, /images/hero-a-terrace/coast-2400.webp 2400w, /images/hero-a-terrace/coast-3548.webp 3548w"}
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
@@ -119,8 +126,8 @@ function Coast({ foreground = false, onReady }: { foreground?: boolean; onReady:
         height={foreground ? 992 : 1774}
         alt=""
         decoding="async"
-        onLoad={event => { event.currentTarget.decode().catch(() => {}).then(onReady); }}
-        onError={onReady}
+        onLoad={event => { setFailed(false); event.currentTarget.decode().catch(() => {}).then(onReady); }}
+        onError={() => { setFailed(true); onReady(); }}
         {...{ fetchpriority: foreground ? "auto" : "high" }}
       />
     </picture>
@@ -142,7 +149,6 @@ export function HeroAStudy() {
   const [wallReady, setWallReady] = useState(false);
   const sceneReady = coastReady && wallReady;
   const { time, rate } = useSceneTimeline(dashboardVisible, sceneReady, reduced, 4800, 60, dashboardProgress, dashboardStoryReady);
-  const coastReveal = { opacity: sceneReady || reduced ? 1 : 0 };
 
   const credentials = useRef<HTMLDivElement>(null);
   const { scrollYProgress: proofProgress } = useScroll({
@@ -166,10 +172,8 @@ export function HeroAStudy() {
           className="ha-scenery"
           aria-hidden="true"
           style={reduced ? undefined : { y: depth.seaY }}
-          initial={reduced ? false : { opacity: 0 }} animate={coastReveal}
-          transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Coast onReady={() => setCoastReady(true)} />
+          <Coast ready={sceneReady} reduced={reduced} onReady={() => setCoastReady(true)} />
         </motion.div>
         <div className="ha-sky-wash" aria-hidden="true" />
         <div className="ha-ambient-light" aria-hidden="true" />
@@ -217,10 +221,8 @@ export function HeroAStudy() {
           className="ha-foreground"
           aria-hidden="true"
           style={reduced ? undefined : { y: depth.foregroundY }}
-          initial={reduced ? false : { opacity: 0 }} animate={coastReveal}
-          transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Coast foreground onReady={() => setWallReady(true)} />
+          <Coast foreground ready={sceneReady} reduced={reduced} onReady={() => setWallReady(true)} />
         </motion.div>
         <div className="ha-scene-fade" aria-hidden="true" />
         <motion.div

@@ -4,6 +4,13 @@
 
 ## Detail pass — 1 October 2026
 
+### Progressive hero scenery
+
+- Reproduced a blank first impression with a local server delaying both coastal image requests by ten seconds: the headline and action appeared, but the entire scene remained absent until both photographs decoded. This is a controlled asset-delay test, not a measured mobile-network benchmark.
+- Added two 192px soft previews derived from the approved photographs (860 and 1,202 bytes). Vite embeds them in the application bundle, so there is no additional image request. Each uses the same crop/container as its full image. The full layers sharpen together with the existing 1.4-second fade once both have settled; the dashboard still follows the existing readiness gate. Reduced motion switches immediately when ready. No finished-state photography, geometry or headline timing changed.
+- Failed photographs remain transparent over their preview rather than revealing a broken image. A later successful responsive source clears that failure state. Verified both requests returning HTTP 503 on a 390px reduced-motion view: the scene retains its colour, the dashboard resolves to 4800ms and the page has no horizontal overflow. Verified successful phone images return to opacity 1, and delayed desktop images resolve to full quality and completed dashboard playback.
+- Initial 96px/low-quality previews showed compression blocks at desktop scale; replaced them with softly filtered 192px derivatives. Generator is `scripts/gen-hero-previews.cjs`. Build, lint, diff checks and ten existing playback/readiness policy tests pass; actual media loading was verified in-browser. Temporary delay/failure servers and harness are local-only. Screenshot: `hero-delayed-preview.png` in the task output.
+
 ### Wide-screen composition review
 
 - Reviewed the actual built page at 1920×1080 (opening and discovery) and 2560×1440 (team opening, compression, expansion, audit and footer). The 1440px content cap keeps readable line lengths rather than stretching copy across the whole display. No horizontal page overflow was observed.

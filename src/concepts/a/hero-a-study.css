@@ -33,6 +33,9 @@
   transform: translateX(-50%);
   aspect-ratio: 2/1;
   display: block;
+  /* An inline preview holds the composition while the full photograph decodes. */
+  background-size: cover;
+  background-position: center;
 }
 /* Grade both copies identically so the clipped wall keeps its exact seam. */
 .ha-coast img {
