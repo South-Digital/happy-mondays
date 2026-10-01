@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Purchase-state continuity
+
+- Found a causal mismatch in the Serein sequence: the candle appeared in the bag while its product button still said “Add to bag”; that label only updated when the complementary diffuser was added. The candle button now switches when the bag first becomes visible, independently of the later diffuser addition.
+- Observed the actual built sequence through a temporary DOM recorder: at 0ms the bag is hidden and the button says Add to bag; at 1351ms the one-item bag appears with Added to bag; at 3151ms the bag changes to two items while the candle remains added. Saved `commerce-state-continuity.json` in the task output. The served recorder was removed after verification.
+- At 390px with reduced motion, the completed scene reports Added to bag, two items and 5800ms, with zero page overflow. Build, lint and diff checks pass. Existing layout, photography, totals, scene duration and recommendation timing are unchanged.
+
 ### Idle scene behaviour
 
 - Reviewed the clock, scroll springs and pointer-tilt lifecycle. Scene clocks stop when invisible, unloaded, paused, hidden, reduced or complete; the readiness hold also stops scheduling. Tilt measurement only schedules while a pointer needs measuring. No perpetual decorative CSS animation was found in Concept A.

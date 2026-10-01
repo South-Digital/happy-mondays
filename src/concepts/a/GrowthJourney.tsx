@@ -431,8 +431,8 @@ function Storefront() {
                   </div>
                   <span className="cj-store-size">Scented candle · 280 g</span>
                   <div className="cj-add-to-bag">
-                    {added > 0.95 ? "Added to bag" : "Add to bag"}
-                    {added > 0.95 ? <Check /> : <span>+</span>}
+                    {recommendation > 0 ? "Added to bag" : "Add to bag"}
+                    {recommendation > 0 ? <Check /> : <span>+</span>}
                   </div>
                 </div>
               </div>
