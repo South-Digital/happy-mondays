@@ -81,7 +81,7 @@
   min-height: 95px; flex-shrink: 0;
   gap: 7px; font-size: 13px; line-height: 1.4; letter-spacing: -.02em;
 }
-.pc-signature .as-link { font-size: 13px; min-height: 28px; }
+.pc-signature .as-link { font-size: 13px; min-height: 44px; }
 .pc-signature > span:first-child { font-size: 15px; font-weight: 500; }
 .pc-signature > span:last-child { opacity: .8; }
 .pc-plus { padding: 0 7px; opacity: .6; }

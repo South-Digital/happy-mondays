@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Supporting controls and reading contrast
+
+- Inspected editorial text and controls separately: direct button text beside a child span needs its own contrast check. The audit’s inactive labels measured 4.46:1 on the warm `#fafaf8` page; its small chapter numbers were lighter still. Both now use a restrained blue-grey at 4.96:1. Main editorial colours and the photographic scenes retain their established palette.
+- The flat-fee card’s pricing link was the only visible mobile control below a 44px target height (28px). Increased its actual hit area to 44px, preserving the 370px mobile card and both 95px footer areas. A tap in the newly added area correctly opens the existing preview notice.
+- Verified 390px mobile spacing and zero internal/card or page overflow; inspected the 1080×700 animated opening and the narrowing/fading side cards for text collisions. Reviewed the audit at 1440px. Build, TypeScript lint and diff checks pass. Contrast measurements cover plain editorial surfaces, not a blanket accessibility certification of every photographic pixel or decorative platform label.
+
 ### Short landscape opening
 
 - At 844×320, the hero action ended at y=356.63, below the opening viewport. The existing landscape rule covered taller phones/tablets but did not sufficiently compress the shortest view.
