@@ -4,6 +4,13 @@
 
 ## Detail pass — 1 October 2026
 
+### Navigation and scene delivery follow-through
+
+- Reproduced a keyboard handoff problem: activating Our approach scrolled the page but left focus in the header; the next Tab selected Pricing. The existing anchor destinations now accept programmatic/native anchor focus without adding tab stops. Verified Our approach → Explore Google Ads, Client stories → Read their story, and Back to top → the hero landmark. Mobile disclosure closes and transfers focus correctly in reduced motion as well.
+- A direct mobile jump exposed a blank scene while the original asset set decoded. Added responsive WebP variants for the two commerce compositions, including individual catalogue cutouts. The predecoder and rendered images share one srcset/sizes definition, avoiding a redundant full-resolution preload. Originals remain untouched and available for larger/high-density displays. Corrected intrinsic dimensions for square Serein catalogue images.
+- At the verified 1× browser resolution, the discovery asset set falls from 1,129,102 to 164,750 bytes (85% less); the Serein set falls from 558,000 to 120,638 bytes (78% less). These are selected image-file totals, not a claim about whole-page transfer or measured load-time improvement. Desktop and mobile visual review retains the approved composition and texture.
+- Remaining: continue inspecting normal scroll/reversal and the overall narrative. Client acceptance and deeper routes remain open; this is not a claim of full-site completion.
+
 Browser inspection found and corrected several small but visible inconsistencies:
 
 - At 900px, focusing the flat-fee link scrolled its card internally by 57px and cut off the heading. Oversized gradient pseudo-elements were expanding the scrollable area. `overflow: clip` now preserves rounded edges without creating an internal scroll container. Keyboard activation verifies zero internal scroll.

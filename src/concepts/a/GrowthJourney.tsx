@@ -11,6 +11,7 @@ import { useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
+import { sceneImage } from "./sceneImages";
 import { AgencyFooter, ClientStory, GettingStarted } from "./AgencyStory";
 
 function GoogleMark() {
@@ -93,7 +94,10 @@ function useComposition(plate: string, base = IMG) {
           ];
     const assets = names.map((name) => {
       const image = new Image();
-      image.src = `${base}${name}.webp`;
+      const source = sceneImage(base, name);
+      image.sizes = source.sizes;
+      image.srcset = source.srcSet;
+      image.src = source.src;
       return image.decode().catch(() => undefined);
     });
     Promise.all(assets).then(() => {
@@ -138,10 +142,8 @@ function Product({
   return (
     <img
       className={`cj-product ${className}`}
-      src={`${base}product-${variant}.webp`}
+      {...sceneImage(base, `product-${variant}`)}
       alt=""
-      width="660"
-      height="900"
       loading="lazy"
     />
   );
@@ -150,10 +152,8 @@ function ScenePhoto({ name, base = IMG }: { name: string; base?: string }) {
   return (
     <img
       className="cj-photo"
-      src={`${base}${name}.webp`}
+      {...sceneImage(base, name)}
       alt=""
-      width="1254"
-      height="1254"
       loading="lazy"
     />
   );
@@ -291,10 +291,8 @@ function Discovery() {
           <div className="cj-contact-shadow" aria-hidden="true" />
           <img
             className="cj-physical-product"
-            src={`${IMG}grip-sock.webp`}
+            {...sceneImage(IMG, "grip-sock")}
             alt=""
-            width="1254"
-            height="1254"
             loading="lazy"
             aria-hidden="true"
           />
@@ -430,10 +428,8 @@ function Storefront() {
           <div className="cj-contact-shadow" aria-hidden="true" />
           <img
             className="cj-physical-product"
-            src={`${FRAGRANCE}collection.webp`}
+            {...sceneImage(FRAGRANCE, "collection")}
             alt=""
-            width="1254"
-            height="1254"
             loading="lazy"
             aria-hidden="true"
           />
@@ -614,6 +610,7 @@ export function GrowthJourney() {
     <section
       className="cj-story"
       id="the-approach"
+      tabIndex={-1}
       data-motion={reduced ? "reduce" : "full"}
       aria-label="From product discovery to your Shopify store"
     >

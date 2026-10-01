@@ -16,7 +16,7 @@ export function StoryLink({ href, children, className = "as-link", tabIndex }: {
 
 export function ClientStory() {
   return (
-    <section className="as-proof" id="client-stories" aria-label="A word from The Diamond Store">
+    <section className="as-proof" id="client-stories" tabIndex={-1} aria-label="A word from The Diamond Store">
       <div className="as-proof-source"><span className="as-quote-mark" aria-hidden="true">“</span><p>Gary Ingram<span>Co-Founder<br />The Diamond Store</span></p></div>
       <figure>
         <blockquote>“Their knowledge of Google Ads is second to none and they are <em>constantly finding new ways to scale and grow.</em>”</blockquote>
@@ -67,7 +67,7 @@ const questions = [
 
 export function GettingStarted() {
   return (
-    <section className="as-start" id="getting-started" aria-labelledby="as-start-title">
+    <section className="as-start" id="getting-started" tabIndex={-1} aria-labelledby="as-start-title">
       <div className="as-audit-spread">
         <div className="as-audit-copy">
           <h2 id="as-start-title">Where does the next sale get stuck?</h2>

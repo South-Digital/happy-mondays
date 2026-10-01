@@ -148,6 +148,7 @@ export function HeroAStudy() {
   return (
     <section
       id="ha-top"
+      tabIndex={-1}
       className="ha-study"
       data-motion={reduced ? "reduce" : "full"}
       data-hero-time={Math.round(time)}

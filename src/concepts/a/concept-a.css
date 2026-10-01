@@ -22,6 +22,11 @@
   outline: 2px solid var(--ca-action);
   outline-offset: 5px;
 }
+/* Anchor destinations receive focus so Tab continues in the chosen section.
+   They are landmarks, not controls; avoid outlining the entire scene. */
+.ca-direction section[id][tabindex="-1"]:focus {
+  outline: none;
+}
 @media (max-width: 700px) {
   .ca-direction {
     --ca-display-tracking: -0.04em;
