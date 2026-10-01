@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### First-load typography delivery
+
+- The initial document depended on a remote Google Fonts stylesheet, followed by cross-origin font requests. Vendored the same Manrope, Inter and DM Mono WOFF2 files, retaining the original weight declarations, unicode subsets and `font-display: swap`. The main Manrope Latin font (24,576 bytes) is preloaded directly from the document head; the two Google origin preconnects and remote stylesheet are removed.
+- Kept all supplied language subsets available on demand so other prototype routes retain their coverage. Added the three SIL Open Font License notices and a source/hash manifest; no font was modified or renamed internally. The 15 distinct files total 308,116 bytes on disk; browsers still request only the relevant subsets. This is dependency removal, not a measured LCP or transfer-size improvement claim.
+- Browser comparison before/after at 390×844 and 1440×900: all 12 measured heading, quote, intro, CTA and dashboard geometries match exactly, as does total document height. The page head now references only local font assets and the browser reports no warnings/errors. Build, lint, WOFF2/header/hash validation and diff checks pass.
+
 ### Intermediate-width and disclosure review
 
 - Reviewed the hero-to-commerce transition at 1101px and 800px. The eight-column laptop logo row and four-column tablet layout retain clear spacing; the partner line and client marks remain visually separate without adding another container. No layout change was justified by these views.
