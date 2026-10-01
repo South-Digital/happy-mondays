@@ -53,6 +53,11 @@ function StudyNav() {
       <details
         className="ha-mobile-menu"
         ref={menu}
+        onToggle={(event) => {
+          if (event.currentTarget.open) {
+            event.currentTarget.querySelector("nav")?.scrollTo({ top: 0, behavior: "instant" });
+          }
+        }}
         onBlur={(event) => {
           // A disclosure should release keyboard focus naturally, then close
           // before the next page control is obscured by its panel.

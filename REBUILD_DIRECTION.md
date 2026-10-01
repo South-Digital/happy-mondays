@@ -4,6 +4,11 @@
 
 ## Detail pass — 1 October 2026
 
+### Compact navigation continuity
+
+- At 844×320, keyboard navigation correctly scrolls the menu panel to its last item, but closing and reopening preserved a 68px scroll offset, hiding the first link. Reset the panel to its top whenever the disclosure opens; the page itself is not scrolled by this reset.
+- Verified with real Tab/Return/Escape input: the last item remains reachable, reopening restores a zero panel offset, and selecting Client stories closes the menu, moves focus to the section and aligns it within 0.06px of the viewport top. At 390×844 with reduced motion, all five links fit; tabbing past the last item closes the disclosure and focuses the hero action. Existing appearance, entrance timing and native disclosure semantics are retained. Build, lint and diff checks pass.
+
 ### Editorial icon and portrait delivery
 
 - The cart/card header icons were each delivered at 600px despite their maximum CSS widths being approximately 76/104px; the 48px contact portrait always used its 480px source. Added responsive WebP encodes (quality 90, full alpha quality) and conservative size hints based on the existing heading caps. Original files remain available at the top of each source set, and the generator records the additional variants.
