@@ -4,6 +4,11 @@
 
 ## Detail pass — 1 October 2026
 
+### Live media completeness
+
+- Visited the live hero, both product compositions, team invitation and footer at 1440×900. All 38 image elements report successful completion and nonzero intrinsic width after their sections were visited, including the AVIF scenery, eight client marks, platform icons, product layers, responsive editorial icons and portrait. The live stylesheet list includes the local font stylesheet and current application CSS.
+- Saved the selected image URLs and decode states to the task output (`live-asset-inventory.json`). This checks the chosen live sources in this browser, not every unused format/density fallback or a cleared-cache network test. No missing media or new artwork change was justified by this pass.
+
 ### Production-build motion sampling
 
 - Used a temporary local HTML harness around the actual built bundle to collect eight-second requestAnimationFrame intervals and Long Tasks API entries. The recorder only updates its visible result after recording. Reviewed the initial desktop opening, discovery entrance, purchase entrance, scroll through team expansion and a 390px phone-layout opening. The harness is excluded from Git and deployment; its served copy was removed after use.
