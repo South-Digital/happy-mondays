@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Tablet narrative rhythm
+
+- Full-page and 900px review exposed mismatched layout breakpoints: the commerce wrapper became a single 580px column at 980px, but the editorial sections kept desktop columns until 800px. The audit copy was only 249px wide and its folio 279px wide; the quote and footer were similarly compressed.
+- Moved the editorial stacking breakpoint to 980px to match the enclosing commerce layout. At 900px, the audit copy and folio each use the full 580px width, actions sit together, FAQs form one reading column and the footer uses two columns. No new containers or decorative cards.
+- Verified 980px (stacked) and 981px (two-column audit with 400px/448px columns), plus tab selection and keyboard FAQ expansion. The desktop composition and phone rules are unchanged. This corrects responsive composition rather than reducing font sizes to fit a cramped grid.
+
 ### Navigation and scene delivery follow-through
 
 - Reproduced a keyboard handoff problem: activating Our approach scrolled the page but left focus in the header; the next Tab selected Pricing. The existing anchor destinations now accept programmatic/native anchor focus without adding tab stops. Verified Our approach → Explore Google Ads, Client stories → Read their story, and Back to top → the hero landmark. Mobile disclosure closes and transfers focus correctly in reduced motion as well.

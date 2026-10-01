@@ -65,7 +65,8 @@
   .as-folio-tabs button { font-size: 13px; }
   .as-audit-chapter dl > div { gap: 16px; font-size: 13px; }
 }
-@media (max-width:800px) {
+/* Match the commerce section's single-column container, not just phone width. */
+@media (max-width:980px) {
   .as-proof { grid-template-columns: 1fr; gap: 24px; padding: 38px 0 42px; margin-bottom: 78px; }
   .as-proof-source { flex-direction: row; align-items: center; justify-content: flex-start; gap: 24px; }
   .as-quote-mark { font-size: 90px; height: 65px; }
