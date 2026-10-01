@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Wide-screen composition review
+
+- Reviewed the actual built page at 1920×1080 (opening and discovery) and 2560×1440 (team opening, compression, expansion, audit and footer). The 1440px content cap keeps readable line lengths rather than stretching copy across the whole display. No horizontal page overflow was observed.
+- At 2560×1440, the team stage is 720px high with its top at 360.12px while pinned: vertically centred to rounding precision. At progress 0.323, both side cards remain 345px wide and 0.686 opacity, with readable paragraphs and separated footers. At progress 1, the supporting paragraph and invitation share the lower row and the audit remains below the stage with a 366px separation. That taller release gap preserves the requested frozen-frame illusion on a tall viewport; reducing it would reveal the following section during the pin.
+- Retained the current proportions and type caps. This review found no concrete visual defect requiring a new CSS override. Saved `wide-screen-audit-review.png` in the task output. These are local browser observations, not client approval or a new deployment.
+
 ### More specific partnership copy
 
 - Re-read the answered content plan (document `12DRCfA0w_32IYcG_u30bOXScNhf-dFMsEzeeFnwrmME`, opening questions 5–6 and homepage answers). The confirmed fee substance is a fixed monthly charge within a spend band, no percentage of ad spend, with predictable owner cash flow as a stated reason. Replaced the fee card's repeated “senior expertise” and general working-process sentence with that concrete explanation. Spend bands remain explicit; no numeric pricing table, forever-fixed-fee promise or unapproved exclusivity claim was added.
@@ -164,8 +170,10 @@ This supersedes the detailed pricing and three-step audit treatment below. The u
 1. [x] Remove detailed homepage pricing and retain clear route signposts.
 2. [x] Open the audit and proof layouts; check the transition from the team scene.
 3. [x] Verify 320, 390, 1024 and 1440px layouts, all audit selections, keyboard FAQ activation, reduced-motion rendering and hidden-card focus state.
-4. [ ] Reassess the complete narrative against client review; acceptance remains unproven after the earlier rejection. Keep further changes grounded in a concrete visual or content problem.
-5. [ ] Complete deeper service, pricing, case-study and booking destinations in the full site build. Current links explicitly retain preview feedback.
+4. [x] Reassess homepage content against the four available call transcripts, rough draft and answered plan; findings and subsequent copy corrections are recorded below and in the detail pass above. This records source review, not acceptance.
+5. [ ] Obtain user/client visual acceptance of the current whole-page narrative. Earlier rejection remains part of the record; browser checks cannot satisfy this gate.
+6. [ ] Verify cold-network loading and representative lower-powered mobile hardware before launch; desktop callback samples and phone-width emulation do not establish these outcomes.
+7. [ ] Complete deeper service, pricing, case-study and booking destinations in the full site build. Current links explicitly retain preview feedback.
 
 Validation for this iteration: client-review build, TypeScript lint, all six scene-playback tests and clean diff. No horizontal overflow at checked widths or browser warnings/errors in the current normal-motion session. Browser screenshots saved in the parent workspace `output/happy-mondays-editorial-pass-2026-10-01/`. These checks establish implementation behaviour, not client design acceptance.
 
