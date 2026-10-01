@@ -2,6 +2,18 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Detail pass — 1 October 2026
+
+Browser inspection found and corrected several small but visible inconsistencies:
+
+- At 900px, focusing the flat-fee link scrolled its card internally by 57px and cut off the heading. Oversized gradient pseudo-elements were expanding the scrollable area. `overflow: clip` now preserves rounded edges without creating an internal scroll container. Keyboard activation verifies zero internal scroll.
+- Matched side-card footer space and body baselines. Removed unnecessary percentage inner height, scaled initial titles for narrower desktop widths, and increased the shortest animated stage from 450px to 490px so the opening frame has enough room. Preserved the centred start and user-controlled expansion.
+- Aligned the contact portrait with the button at intermediate widths as well as the wide final row.
+- At 320px, the audit's Buying chapter shifted the FAQs by 16px. All panels now share a grid cell, reserving the tallest natural height without hard-coded text heights. Inactive panels are hidden visually and from assistive technology. Native tab semantics support arrows, Home and End, with one active tab stop.
+- Removed a global focus radius that changed pill-shaped buttons to rectangles. Focus outlines remain visible; component silhouettes stay intact.
+
+Checked mobile opening at 390px, audit height/keyboard stability at 320px, static card alignment at 900px, and the 1080×700 animated opening, narrowing and expanded states. No observed page overflow or broken loaded images. Build, lint and six scene-playback tests pass. These are targeted detail improvements; the wider continuous visual/motion review remains active.
+
 ## Homepage focus correction — 1 October 2026
 
 This supersedes the detailed pricing and three-step audit treatment below. The user rejected the templated feel, cautioned against too many cards, and questioned whether a pricing instrument belongs on the homepage. The homepage should establish relevance, demonstrate the search-to-sale approach, supply credible evidence and invite a conversation. Detailed comparisons belong on deeper routes.

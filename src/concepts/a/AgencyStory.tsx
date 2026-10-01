@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useToast } from "../../components/Toast";
 import { Wordmark } from "../../components/Brand";
 import "./agency-story.css";
@@ -34,17 +34,26 @@ const auditPages = [
 
 function AuditFolio() {
   const [active, setActive] = useState(0);
-  const page = auditPages[active];
+  const tabs = useRef<Array<HTMLButtonElement | null>>([]);
+  const navigate = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const next = event.key === "ArrowRight" ? (index + 1) % auditPages.length
+      : event.key === "ArrowLeft" ? (index + auditPages.length - 1) % auditPages.length
+      : event.key === "Home" ? 0 : event.key === "End" ? auditPages.length - 1 : null;
+    if (next === null) return;
+    event.preventDefault();
+    setActive(next);
+    tabs.current[next]?.focus();
+  };
   return <div className="as-audit-folio">
-    <div className="as-folio-tabs" role="group" aria-label="Explore what the audit examines">
-      {auditPages.map((item, index) => <button type="button" key={item.title} aria-pressed={index === active} aria-controls="as-audit-pages" onClick={() => setActive(index)}><span aria-hidden="true">0{index + 1}</span>{item.tab}</button>)}
+    <div className="as-folio-tabs" role="tablist" aria-label="Explore what the audit examines">
+      {auditPages.map((item, index) => <button type="button" role="tab" key={item.title} id={`as-audit-tab-${index}`} ref={node => { tabs.current[index] = node; }} aria-selected={index === active} tabIndex={index === active ? 0 : -1} aria-controls={`as-audit-panel-${index}`} onKeyDown={event => navigate(event, index)} onClick={() => setActive(index)}><span aria-hidden="true">0{index + 1}</span>{item.tab}</button>)}
     </div>
-    <div className="as-audit-pages" id="as-audit-pages" aria-live="polite">
-      <article key={page.title} className="as-audit-chapter">
+    <div className="as-audit-pages">
+      {auditPages.map((page, index) => <article key={page.title} role="tabpanel" id={`as-audit-panel-${index}`} aria-labelledby={`as-audit-tab-${index}`} aria-hidden={active !== index} tabIndex={active === index ? 0 : -1} className="as-audit-chapter" data-active={active === index}>
         <h3>{page.title}</h3>
         <p className="as-chapter-question">{page.question}</p>
         <dl>{page.rows.map(([label, question]) => <div key={label}><dt>{label}</dt><dd>{question}</dd></div>)}</dl>
-      </article>
+      </article>)}
     </div>
   </div>;
 }
