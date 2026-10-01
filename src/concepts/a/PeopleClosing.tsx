@@ -113,7 +113,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={{ ...feeTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <p>Senior expertise. A fixed monthly fee. Know what we’re working on, what it costs and why it matters.</p>
+                <p>Senior expertise. A fixed fee within your spend band. Know what we’re working on, what it costs and why it matters.</p>
                 <div className="pc-signature">
                   <span>Clear scope. Close collaboration.</span>
                   <span>More confidence in what comes next.</span>

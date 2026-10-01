@@ -11,6 +11,7 @@ import { useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
+import { AgencyFooter, ClearPricing, ClientStory, GettingStarted } from "./AgencyStory";
 
 function GoogleMark() {
   return (
@@ -634,6 +635,7 @@ export function GrowthJourney() {
             </div>
           </Copy>
         </section>
+        <ClientStory />
         <PeopleClosing>
         <section
           className="cj-row cj-row--reverse"
@@ -653,18 +655,9 @@ export function GrowthJourney() {
           <Storefront />
         </section>
         </PeopleClosing>
-        <footer className="cj-footer">
-          <div className="cj-footer-brand">
-            <img
-              src="/images/logo-hm.webp"
-              alt="Happy Mondays"
-              width="170"
-              height="44"
-            />
-            <span>Better Mondays start here.</span>
-          </div>
-          <a href="#ha-top">Back to top ↑</a>
-        </footer>
+        <ClearPricing />
+        <GettingStarted />
+        <AgencyFooter />
       </div>
     </section>
   );

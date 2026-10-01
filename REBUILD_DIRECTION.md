@@ -2,6 +2,23 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Call-grounded homepage content — 1 October 2026
+
+Re-read all four available client calls (17 August, 24 August, 1 September and 18 September), Ellie's rough draft, and the newer answered content plan. The latter is authoritative where the earlier draft contains questions or conflicting assumptions.
+
+Sources:
+- [Ellie's rough content draft](https://docs.google.com/document/d/1diPyV-4s6ICYvUqRF2Axy882DXz6pW66/edit)
+- [Answered content plan](https://docs.google.com/document/d/12DRCfA0w_32IYcG_u30bOXScNhf-dFMsEzeeFnwrmME/edit)
+- Gary Ingram quote: supplied `babydoc-audit.pdf`, page 56; attribution and exact excerpt visually verified.
+
+Implemented the wider agency story around the approved scenes: a restrained client quote between discovery and purchase; explicit spend-band pricing after the team scene; a three-step, conversation-first audit journey with four practical FAQs; and a useful footer. Hero now leads to the audit and describes a growth partner. Navigation links to the real homepage sections; planned deeper routes retain preview feedback.
+
+Key corrections: fees stay fixed within an agreed spend band, not at every spend forever. USD/GBP use the stated local-currency bands and fees, not an exchange-rate conversion. A single busy month does not automatically move the fee. Start with a 15-minute conversation before requesting account access. Reporting, audit outputs and client fit follow the answered plan. No unresolved case-study figures, audit price, guarantee or turnaround promise have been published.
+
+Keep the established hero, depth scenes and scroll-controlled team expansion. New content stays readable without entrance delays; native FAQ disclosures and currency controls provide useful interaction. Avoid duplicating the pin-release spacing before pricing.
+
+Verification: client-review TypeScript/Vite build, lint, six scene-playback tests and clean diff. Visual review at 320, 390, 768, 1024 and 1440 CSS pixels; no horizontal overflow or broken loaded images. Currency switching, native FAQ mouse/keyboard interaction, mobile menu anchors and normal/reduced-motion journeys checked. No browser warnings or errors observed.
+
 ## Homepage content roles — 30 September
 
 Reviewed the saved, answered content plan (`95-research/2026-09-23/doc-12DRCfA0w_32IYcG_u30bOXScNhf-dFMsEzeeFnwrmME.txt`, especially the positioning answer and flagship service/voice sections), the earlier content plan, and the source review of the September calls. The newer answer describes a growth partner specialising in Google Ads for Shopify, with attention to the account and to landing pages, conversion and pricing. The agreed destinations include `/google-ads-for-shopify-brands`, `/pricing` and `/revenue-leak-audit`.

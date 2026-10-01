@@ -131,7 +131,7 @@
 }
 .ha-study a:focus-visible,
 .ha-mobile-menu summary:focus-visible,
-.ha-mobile-menu button:focus-visible {
+.ha-mobile-menu a:focus-visible {
   outline: 2px solid var(--ca-action);
   outline-offset: 4px;
 }
@@ -954,7 +954,7 @@
   .ha-mobile-menu[open] nav {
     animation: ha-menu-enter 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .ha-mobile-menu nav button {
+  .ha-mobile-menu nav a {
     width: 100%;
     display: flex;
     align-items: center;
@@ -963,11 +963,11 @@
     font-size: 15px;
     border-bottom: 1px solid #e9ecee;
   }
-  .ha-mobile-menu nav button:last-child {
+  .ha-mobile-menu nav a:last-child {
     border: 0;
     color: #2a63f5;
   }
-  .ha-mobile-menu nav button:active {
+  .ha-mobile-menu nav a:active {
     color: #2858d9;
   }
   .ha-mobile-menu nav { max-height: calc(100svh - 112px); overflow-y: auto; overscroll-behavior: contain; }
@@ -990,7 +990,7 @@
 }
 
 @media (max-width: 900px) {
-  .ha-mobile-menu nav button:last-child {
+  .ha-mobile-menu nav a:last-child {
     justify-content: center;
     min-height: 44px;
     margin-top: 10px;

@@ -8,9 +8,15 @@ import { ClientLogos } from "./ClientLogos";
 import { StorePreview, OrderPreview } from "./StorePreview";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import { useHeroDepth } from "./useHeroDepth";
+import { StoryLink } from "./AgencyStory";
 import "./hero-a-study.css";
 
-const links = ["Reviews", "Case Studies", "Pricing", "Blog", "Contact"];
+const links = [
+  { label: "Client stories", href: "#client-stories" },
+  { label: "Our approach", href: "#the-approach" },
+  { label: "Pricing", href: "#fees" },
+  { label: "Blog", href: "/articles" },
+];
 
 function StudyNav() {
   const menu = useRef<HTMLDetailsElement>(null);
@@ -38,9 +44,9 @@ function StudyNav() {
         <Wordmark size="lg" />
       </a>
       <nav aria-label="Main navigation" className="ha-nav-desktop">
-        {links.map((link) => (
-          <MockLink key={link} message="Design preview — this page is not connected yet.">{link}</MockLink>
-        ))}
+        {links.map(link => link.href.startsWith("#")
+          ? <a key={link.label} href={link.href}>{link.label}</a>
+          : <StoryLink key={link.label} href={link.href} className="">{link.label}</StoryLink>)}
         <MockLink className="ha-button ha-nav-cta" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
       </nav>
       <details
@@ -64,21 +70,24 @@ function StudyNav() {
           Menu <span aria-hidden="true">+</span>
         </summary>
         <nav aria-label="Mobile navigation" data-lenis-prevent>
-          {[...links, "Book a call"].map((link) => (
-            <button
-              key={link}
-              onClick={() => {
+          {[...links, { label: "Book a call", href: "/book-a-call" }].map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={event => {
                 if (menu.current) {
                   menu.current.open = false;
                   menu.current.querySelector("summary")?.focus();
                 }
-                show(link === "Book a call"
+                if (link.href.startsWith("#")) return;
+                event.preventDefault();
+                show(link.label === "Book a call"
                   ? "Design preview — the booking calendar will be connected before launch."
                   : "Design preview — this page is not connected yet.");
               }}
             >
-              {link}
-            </button>
+              {link.label}
+            </a>
           ))}
         </nav>
       </details>
@@ -172,7 +181,7 @@ export function HeroAStudy() {
             transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
             <span>Google Ads for Shopify brands.</span>
-            <span>Senior expertise. A flat monthly fee.</span>
+            <span>A growth partner. A flat monthly fee.</span>
           </motion.p>
         </div>
         <motion.div className="ha-hero-cta"
@@ -180,7 +189,7 @@ export function HeroAStudy() {
           animate={{ opacity: 1 }}
           transition={{ duration: reduced ? 0 : 0.45 }}
         >
-          <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
+          <StoryLink href="/book-a-call?type=audit" className="ha-button">Start with an audit</StoryLink>
         </motion.div>
         <motion.div
           className="ha-object"
