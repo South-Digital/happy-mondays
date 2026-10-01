@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastProvider } from "./components/Toast";
 import IndexPage from "./routes/IndexPage";
@@ -20,7 +21,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <ToastProvider>
-        <Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#fafaf8] text-ink" aria-busy="true"><p role="status">Loading…</p></main>}>
+        <Suspense fallback={
+          <main className="grid min-h-screen place-items-center bg-[#fafaf8] text-ink" aria-busy="true">
+            <p role="status">Loading…</p>
+          </main>
+        }>
           <Routes>
             <Route path="/" element={clientReview ? <ClientReviewPage /> : <IndexPage />} />
             <Route path="/concept-a" element={<ConceptA />} />
@@ -40,4 +45,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-import { lazy, Suspense } from "react";
