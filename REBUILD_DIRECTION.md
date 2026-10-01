@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Production-build motion sampling
+
+- Used a temporary local HTML harness around the actual built bundle to collect eight-second requestAnimationFrame intervals and Long Tasks API entries. The recorder only updates its visible result after recording. Reviewed the initial desktop opening, discovery entrance, purchase entrance, scroll through team expansion and a 390px phone-layout opening. The harness is excluded from Git and deployment; its served copy was removed after use.
+- On this machine, desktop initial load recorded one 51ms long task and one 66.7ms callback interval. The four subsequent samples recorded no long tasks and no callback intervals over 33.5ms; their 95th percentile intervals were 9.8–9.9ms. Both commerce stories reached their final 5800ms state and the team journey reached progress 1. All samples remained document-visible. Ten existing playback/readiness policy tests also pass.
+- These are callback cadence measurements in an unthrottled browser with its existing cache. They do not establish GPU presentation rate, cold-network loading, low-end phone behaviour or field performance. No timing or visual simplification was justified by this evidence. Raw samples are saved in the task output as `motion-rendering-samples.json`; a local-only harness snapshot remains in `.dev/motion-review.html`.
+
 ### Whole-page rhythm and closing-action hierarchy
 
 - Reviewed the desktop journey by scrolling through the terrace/credentials hand-off, both commerce scenes, the testimonial, centred team cards, narrowing side cards, expanded team composition and the final audit. The existing open testimonial and audit sections provide useful contrast with the photographic scenes; retained their spacing and avoided adding further containers. At the observed release point, the team expansion had completed before the audit entered the viewport, with 130px between the card bottom and audit border.
