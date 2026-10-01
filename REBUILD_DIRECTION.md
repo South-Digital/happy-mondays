@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Reachable scene entrances
+
+- Reproduced a stalled discovery scene at 1920×300: the scene is 715.11px tall, so its fixed 42% visibility requirement exceeds the available viewport. Even while filling the view, its clock remained at 1000ms and never reached its meaningful story beats.
+- Added a shared, once-only readiness hook for the dashboard and commerce scenes. The ordinary 42% threshold remains; oversized scenes cap the required visible area at 75% of what the viewport can show. Measurements update on resize and stop after the first reveal, with no per-frame layout reads or additional scroll listeners. Timing, speed limits and scene artwork are unchanged.
+- Browser verification: the previously stalled scene reached its completed 5800ms frame without further scrolling. At 1440×900, about 20% visibility still holds at 1000ms; scrolling far enough into view allows completion. Added four geometry-policy tests alongside the existing six playback tests. Build, lint and all ten tests pass.
+
 ### Supporting controls and reading contrast
 
 - Inspected editorial text and controls separately: direct button text beside a child span needs its own contrast check. The audit’s inactive labels measured 4.46:1 on the warm `#fafaf8` page; its small chapter numbers were lighter still. Both now use a restrained blue-grey at 4.96:1. Main editorial colours and the photographic scenes retain their established palette.

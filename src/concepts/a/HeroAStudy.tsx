@@ -7,6 +7,7 @@ import { ProofRow } from "../shared/ProofRow";
 import { ClientLogos } from "./ClientLogos";
 import { StorePreview, OrderPreview } from "./StorePreview";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
+import { useSceneReadiness } from "./useSceneReadiness";
 import { useHeroDepth } from "./useHeroDepth";
 import { StoryLink } from "./AgencyStory";
 import "./hero-a-study.css";
@@ -127,7 +128,7 @@ export function HeroAStudy() {
   const depth = useHeroDepth(scene);
   const dashboard = useRef<HTMLDivElement>(null);
   const dashboardVisible = useInView(dashboard, { amount: 0.12 });
-  const dashboardStoryReady = useInView(dashboard, { amount: 0.42, once: true });
+  const dashboardStoryReady = useSceneReadiness(dashboard);
   const { scrollYProgress: dashboardProgress } = useScroll({
     target: dashboard,
     offset: ["start end", "end start"],

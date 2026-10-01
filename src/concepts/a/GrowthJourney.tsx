@@ -9,6 +9,7 @@ import {
 import { EASE, usePrefersReducedMotion } from "../../lib/motion";
 import { useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
+import { useSceneReadiness } from "./useSceneReadiness";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
 import { sceneImage } from "./sceneImages";
@@ -73,7 +74,7 @@ const sceneDuration = 5800;
 function useComposition(plate: string, base = IMG) {
   const ref = useRef<HTMLDivElement>(null);
   const visible = useInView(ref, { amount: 0.12 });
-  const storyReady = useInView(ref, { amount: 0.42, once: true });
+  const storyReady = useSceneReadiness(ref);
   const nearby = useInView(ref, { margin: "400px 0px 400px 0px", once: true });
   const reduced = usePrefersReducedMotion();
   const [loaded, setLoaded] = useState(false);
