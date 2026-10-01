@@ -1,0 +1,9 @@
+Extended terrace foreground, generated with the built-in image_gen tool on 2026-10-01.
+Source: existing hero-a-terrace/coast-1440.webp, itself an AI-generated coastal scene.
+Generation: exec-e9c194bd-1e79-43e0-9b7a-436e61129c61.png, native 1586 x 992.
+Master retained at output/happy-mondays-integrated-build/terrace-extended-master.png in the parent workspace.
+
+Direction: preserve the existing coastal scene and low travertine ledge in the upper 80% of an 8:5 composition; extend the terrace downward with sunlit ivory limestone, subtle joints and soft olive-leaf shadows. No UI, text, furniture or new objects. The additional floor lets the foreground finish naturally before the page transition.
+
+Delivery variants: 800, 1440 and native 1586 pixels wide, WebP quality 90 / AVIF quality 78. Downsize and encoding only; no conventional upsampling.
+Used only as a clipped foreground layer. The existing 3548-pixel coastal background remains behind the live dashboard. CSS follows the new ledge contour and adds the exact aspect-ratio difference to the scene height, preserving the sea framing.

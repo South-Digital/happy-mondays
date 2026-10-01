@@ -78,15 +78,15 @@ function Coast({ foreground = false, onReady }: { foreground?: boolean; onReady:
     >
       <source
         type="image/avif"
-        srcSet="/images/hero-a-terrace/coast-800.avif 800w, /images/hero-a-terrace/coast-1440.avif 1440w, /images/hero-a-terrace/coast-2400.avif 2400w, /images/hero-a-terrace/coast-3548.avif 3548w"
+        srcSet={foreground ? "/images/hero-a-terrace-extended/coast-800.avif 800w, /images/hero-a-terrace-extended/coast-1440.avif 1440w, /images/hero-a-terrace-extended/coast-1586.avif 1586w" : "/images/hero-a-terrace/coast-800.avif 800w, /images/hero-a-terrace/coast-1440.avif 1440w, /images/hero-a-terrace/coast-2400.avif 2400w, /images/hero-a-terrace/coast-3548.avif 3548w"}
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
       />
       <img
-        src="/images/hero-a-terrace/coast-1440.webp"
-        srcSet="/images/hero-a-terrace/coast-800.webp 800w, /images/hero-a-terrace/coast-1440.webp 1440w, /images/hero-a-terrace/coast-2400.webp 2400w, /images/hero-a-terrace/coast-3548.webp 3548w"
+        src={foreground ? "/images/hero-a-terrace-extended/coast-1440.webp" : "/images/hero-a-terrace/coast-1440.webp"}
+        srcSet={foreground ? "/images/hero-a-terrace-extended/coast-800.webp 800w, /images/hero-a-terrace-extended/coast-1440.webp 1440w, /images/hero-a-terrace-extended/coast-1586.webp 1586w" : "/images/hero-a-terrace/coast-800.webp 800w, /images/hero-a-terrace/coast-1440.webp 1440w, /images/hero-a-terrace/coast-2400.webp 2400w, /images/hero-a-terrace/coast-3548.webp 3548w"}
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
-        width="3548"
-        height="1774"
+        width={foreground ? 1586 : 3548}
+        height={foreground ? 992 : 1774}
         alt=""
         decoding="async"
         onLoad={event => { event.currentTarget.decode().catch(() => {}).then(onReady); }}
