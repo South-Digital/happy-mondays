@@ -170,24 +170,27 @@ function Discovery() {
     useComposition("courtyard");
   const t = scene.time;
   const enter = settle(segment(t, 60, 950));
-  const focus = settle(segment(t, 1400, 1200));
-  const position = settle(segment(t, 1200, 1400));
-  const detail = settle(segment(t, 2600, 1300));
+  // Establish the original catalogue, refine its data, then show discovery.
+  // The movement follows the intervention rather than implying a random rank jump.
+  const detail = settle(segment(t, 700, 800));
+  const refine = settle(segment(t, 1650, 800));
+  const attributes = settle(segment(t, 2050, 650));
+  const ready = settle(segment(t, 2650, 450));
+  const position = settle(segment(t, 2850, 1300));
+  const focus = settle(segment(t, 3100, 1050));
   return (
     <div
       className="cj-art"
       ref={ref}
       data-scene="discovery"
       data-scene-phase={
-        t < 1200
-          ? "arriving"
-          : t < 1800
-            ? "sorting"
-            : t < 2600
-              ? "focusing"
-              : t < 3900
-                ? "revealing"
-                : "settled"
+        t < 1650
+          ? "catalogue"
+          : t < 2850
+            ? "refining"
+            : t < 4150
+              ? "matching"
+              : "settled"
       }
       data-scene-time={Math.round(t)}
       data-scene-rate={scene.rate.toFixed(2)}
@@ -196,7 +199,7 @@ function Discovery() {
         className="cj-stage cj-stage--discovery"
         style={{ backgroundImage: `url(${courtyardPreview})` }}
         role="img"
-        aria-label="A concept Pilates brand comes into view in Google Shopping, with tactile cream and burgundy knitwear layered in front of a sunlit olive courtyard."
+        aria-label="An illustrative product-feed journey: Happy Mondays adds clearer Pilates product titles, material and colour details, then the concept Morrow Studio product comes into focus in Google Shopping. No ranking guarantee or client result is depicted."
       >
         <div className="cj-backdrop" style={{ transform: `scale(${1.035 - 0.035 * settle(segment(t, 0, 4400))})` }}>
           <ScenePhoto name="courtyard" />
@@ -277,7 +280,7 @@ function Discovery() {
                         </div>
                         <div className="cj-search-caption">
                           <b>{brand}</b>
-                          <span>{name}</span>
+                          <span>{variant === 0 && t >= 2650 ? "Pilates Grip Socks" : name}</span>
                           <strong>{price}</strong>
                           {variant === 0 && (
                             <span className="cj-stars">
@@ -312,7 +315,7 @@ function Discovery() {
             aria-hidden="true"
           >
             <div
-              className="cj-detail cj-glass"
+              className="cj-detail cj-feed cj-glass"
               style={{
                 opacity: detail,
                 transform: `translateY(${3.5 * (1 - detail)}cqw) scale(${0.96 + 0.04 * detail})`,
@@ -322,7 +325,7 @@ function Discovery() {
                 <span className="cj-monogram">m.</span>
                 <div>
                   <b>Morrow Studio</b>
-                  <span>morrow.studio</span>
+                  <span>Product feed</span>
                 </div>
                 <span className="cj-more">⋮</span>
               </div>
@@ -331,16 +334,20 @@ function Discovery() {
                   <Product />
                 </div>
                 <div className="cj-detail-copy">
-                  <b>Everyday Grip Sock</b>
+                  <div className="cj-feed-title">
+                    <b style={{ opacity: 1 - refine, transform: `translateY(${-4 * refine}px)` }}>Everyday Grip Sock</b>
+                    <b style={{ opacity: refine, transform: `translateY(${4 * (1 - refine)}px)` }}>Pilates Grip Socks</b>
+                  </div>
                   <strong>$28.00</strong>
-                  <span className="cj-stars">★★★★★</span>
-                  <p>
-                    A little support.
-                    <br />
-                    For every move.
-                  </p>
-                  <span className="cj-detail-colour">Oat / Burgundy</span>
+                  <div className="cj-feed-attributes" style={{ opacity: attributes, transform: `translateY(${5 * (1 - attributes)}px)` }}>
+                    <span><small>Material</small>Cotton</span>
+                    <span><small>Colour</small>Oat / Burgundy</span>
+                  </div>
                 </div>
+              </div>
+              <div className="cj-feed-status" data-ready={t >= 2850}>
+                <span className="cj-feed-status-mark" style={{ "--ready": ready } as CSSProperties}><Check /></span>
+                <span>{t < 2850 ? "Refining product details" : "Feed refined by Happy Mondays"}</span>
               </div>
             </div>
           </motion.div>

@@ -9,13 +9,19 @@ The user rejected the previous pass as visually unchanged. Technical verificatio
 ### Roadmap
 
 1. **Partnership scene — implemented, browser-reviewed:** replace empty space with custom physical artwork, shorten the desktop row, preserve the centred scroll opening. Connected glass platform medallions for the business card; a pearl-white calendar sculpture for predictable monthly fees. Keep the coastal team scene and understated personal contact. Review opening, narrowing, expanded and mobile compositions.
-2. **Commerce storytelling — next:** make the agency's intervention apparent in the discovery journey, rather than merely sliding a product carousel. Plan the before / intervention / after beats from the September call, with the actual ecommerce UI still recognisable. Keep copy available throughout; bound playback speed and motion distance.
+2. **Commerce storytelling — implemented, browser-reviewed:** make the agency's intervention apparent in the discovery journey, rather than merely sliding a product carousel. Plan the before / intervention / after beats from the September call, with the actual ecommerce UI still recognisable. Keep copy available throughout; bound playback speed and motion distance.
 3. **Whole-page art direction:** judge hero → credentials → discovery → open testimonial → purchase → partnership as a sequence. Preserve open sections; do not turn the whole page into cards. Improve visual transitions and differentiated depth rather than adding text-heavy modules. The removed audit/FAQ spread stays removed.
 4. **Delivery review:** compare real browser renders with the chosen references, including intermediate scroll positions and phone compositions. Publish cohesive visual increments. Do not equate passing tests with client approval.
 
 ### First visual increment: verification
 
 The desktop stage is now 530–580px rather than 490–720px (558px rather than 652px at 1440×900). The supporting objects have their own gentle one-time settling motion and move with the scroll-driven contraction. Platform marks remain separate real assets; the enlarged Shopify mark is the official vector from Shopify's brand kit. Tested opening, 26% narrowing and expanded compositions at 1440×900, opening at 1080×700, and the static phone layout at 390×844. No horizontal page overflow or console errors were observed. The existing centred start, reverse-scroll behaviour, focus handoff and reduced-motion path are retained. Build, lint and ten playback/readiness tests pass. Local proof images are in `output/happy-mondays-visual-reset-2026-10-02` in the parent workspace. This is a visible design increment, not a claim of final client acceptance.
+
+### Second visual increment: discovery with a visible intervention
+
+The existing foreground product surface now becomes a restrained product-feed view. Its title changes from Everyday Grip Sock to Pilates Grip Socks, material and colour details resolve, and the Happy Mondays completion mark appears before the Shopping result advances. This is an illustrative concept journey, not a promised ranking or client result. No additional panel or homepage section was added.
+
+Reviewed real production-bundle keyframes at 1512ms (original catalogue), 2518ms (refined fields, no carousel advance), and 3515ms (matching). A temporary local-only rAF harness paused those keyframes; that review establishes visual ordering, not real-time performance. The production clock remains bounded, scroll-responsive and finite. Checked completed compositions at 1440×900 and 390×844; the phone feed is slightly wider and omits the smallest field labels. No horizontal overflow. Build, lint and diff checks pass. Clean desktop/mobile proof images are saved beside the partnership proofs. The audit/FAQ spread stays removed.
 
 ### Source findings rechecked this pass
 
