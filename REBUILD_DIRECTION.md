@@ -23,6 +23,12 @@ The existing foreground product surface now becomes a restrained product-feed vi
 
 Reviewed real production-bundle keyframes at 1512ms (original catalogue), 2518ms (refined fields, no carousel advance), and 3515ms (matching). A temporary local-only rAF harness paused those keyframes; that review establishes visual ordering, not real-time performance. The production clock remains bounded, scroll-responsive and finite. Checked completed compositions at 1440×900 and 390×844; the phone feed is slightly wider and omits the smallest field labels. No horizontal overflow. Build, lint and diff checks pass. Clean desktop/mobile proof images are saved beside the partnership proofs. The audit/FAQ spread stays removed.
 
+### Third visual increment: a recognisable client story
+
+Replaced the generic oversized quotation mark with an open editorial composition using The Diamond Store's actual jewellery photography and wordmark. The existing attributed quote remains unchanged; no new metric or outcome claim was added. The photograph introduces a human, close-up texture between the two constructed commerce scenes, without a surrounding card, shadow or new section. A spring-followed ±8px photo drift stays subordinate to the text; reduced motion is static. On phones the smaller image and wordmark sit together above the quote and attribution.
+
+Reviewed desktop 1440×900 and phone 390×844 renders. Provenance is recorded with the source assets. Ellie’s exact linked draft was fetched directly: it is the 7 September content plan with unresolved questions, not later approved copy. Its useful direction is the Monday emotion, named client evidence, a warmer voice and concrete agency work. Its unverified metrics and proposed homepage pricing table are not reinstated. The 1 September transcript's branding and visual-reference discussion (15:21–20:56 and 25:47–35:12) was re-read directly, reinforcing recognisable Shopify/Shopping micro-UI, light material surfaces and a positive emotional response.
+
 ### Source findings rechecked this pass
 
 - Live Figma frame 2721:296: deliberate graphic regions and soft material surfaces are useful; the old checklist / performance-number / capacity-card content is not the direction to copy.

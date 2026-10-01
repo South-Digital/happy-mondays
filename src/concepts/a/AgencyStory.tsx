@@ -1,5 +1,7 @@
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useToast } from "../../components/Toast";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { usePrefersReducedMotion } from "../../lib/motion";
 import { Wordmark } from "../../components/Brand";
 import "./agency-story.css";
 
@@ -15,13 +17,21 @@ export function StoryLink({ href, children, className = "as-link", tabIndex }: {
 }
 
 export function ClientStory() {
+  const section = useRef<HTMLElement>(null);
+  const reduced = usePrefersReducedMotion();
+  const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
+  const progress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: .5 });
+  const photoY = useTransform(progress, [0, 1], [-8, 8]);
   return (
-    <section className="as-proof" id="client-stories" tabIndex={-1} aria-label="A word from The Diamond Store">
+    <section ref={section} className="as-proof" id="client-stories" tabIndex={-1} aria-label="A word from The Diamond Store">
       <figure>
+        <div className="as-proof-photo">
+          <motion.img src="/images/client-stories/diamond-store-jewellery.jpg" width="867" height="867" loading="lazy" decoding="async" alt="Diamond jewellery from The Diamond Store worn by a model" style={reduced ? undefined : { y: photoY }} />
+        </div>
+        <img className="as-proof-brand" src="/images/client-stories/diamond-store.svg" width="418" height="144" loading="lazy" decoding="async" alt="The Diamond Store London" />
         <blockquote>“Their knowledge of Google Ads is second to none and they are <em>constantly finding new ways to scale and grow.</em>”</blockquote>
         <figcaption className="as-proof-source">
-          <span className="as-quote-mark" aria-hidden="true">“</span>
-          <p>Gary Ingram<span>Co-Founder<br />The Diamond Store</span></p>
+          <p>Gary Ingram<span>Co-Founder, The Diamond Store</span></p>
           <StoryLink href="/case-studies/the-diamond-store">Read their story <span aria-hidden="true">↗</span></StoryLink>
         </figcaption>
       </figure>
