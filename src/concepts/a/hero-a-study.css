@@ -572,9 +572,9 @@
 .ha-credentials {
   position: relative;
   z-index: 1;
-  padding: 29px 24px 89px;
+  padding: 29px 24px 137px;
   max-width: 1250px;
-  margin: -164px auto 0;
+  margin: -212px auto 0;
 }
 .ha-proof-reveal > div:first-child {
   font-size: 13px;
@@ -827,8 +827,8 @@
     height: 150px;
   }
   .ha-credentials {
-    margin-top: -116px;
-    padding: 27px 16px 60px;
+    margin-top: -140px;
+    padding: 27px 16px 84px;
   }
   .ha-proof-reveal > div:first-child {
     gap: 12px 20px;
