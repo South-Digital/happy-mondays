@@ -29,8 +29,28 @@ export function SmoothScroll() {
     };
 
     configure();
+    // On a fresh SPA load the browser can resolve the fragment before React
+    // mounts its target. Wait for layout, then honour it without a long scroll
+    // through every scene. Leave an already-restored history position alone.
+    const anchorFrame = requestAnimationFrame(() => {
+      if (!window.location.hash || window.scrollY !== 0) return;
+      let id: string;
+      try { id = decodeURIComponent(window.location.hash.slice(1)); }
+      catch { return; }
+      const target = document.getElementById(id);
+      if (!target) return;
+      if (lenis) {
+        // The pinned journey measures its travel during mount. Refresh the
+        // scroll limit before seeking below it rather than clamping too early.
+        lenis.resize();
+        lenis.scrollTo(target, { immediate: true });
+      }
+      else target.scrollIntoView({ behavior: "instant", block: "start" });
+      target.focus({ preventScroll: true });
+    });
     preference.addEventListener("change", configure);
     return () => {
+      cancelAnimationFrame(anchorFrame);
       preference.removeEventListener("change", configure);
       lenis?.destroy();
     };

@@ -9,6 +9,7 @@
 - Full-page and 900px review exposed mismatched layout breakpoints: the commerce wrapper became a single 580px column at 980px, but the editorial sections kept desktop columns until 800px. The audit copy was only 249px wide and its folio 279px wide; the quote and footer were similarly compressed.
 - Moved the editorial stacking breakpoint to 980px to match the enclosing commerce layout. At 900px, the audit copy and folio each use the full 580px width, actions sit together, FAQs form one reading column and the footer uses two columns. No new containers or decorative cards.
 - Verified 980px (stacked) and 981px (two-column audit with 400px/448px columns), plus tab selection and keyboard FAQ expansion. The desktop composition and phone rules are unchanged. This corrects responsive composition rather than reducing font sizes to fit a cramped grid.
+- Live verification also exposed fresh fragment URLs landing at the hero because React had not mounted the target when the browser first resolved it. SmoothScroll now resolves the initial target after layout, refreshes Lenis's measured scroll extent (including the pinned journey), seeks immediately and transfers focus. It does not intervene when the browser has already restored a nonzero position. Fresh `#getting-started` loads verified within 0.3px of the section top in normal desktop and reduced-motion tablet views.
 
 ### Navigation and scene delivery follow-through
 
