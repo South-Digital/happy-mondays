@@ -2,7 +2,7 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
-## 2 October — visual reset (active priority)
+## 2 October — visual reset (implemented and published for review)
 
 The user rejected the previous pass as visually unchanged. Technical verification is a delivery requirement, not the design roadmap. The following work supersedes the earlier “no visual defect” conclusions.
 
@@ -10,8 +10,8 @@ The user rejected the previous pass as visually unchanged. Technical verificatio
 
 1. **Partnership scene — implemented, browser-reviewed:** replace empty space with custom physical artwork, shorten the desktop row, preserve the centred scroll opening. Connected glass platform medallions for the business card; a pearl-white calendar sculpture for predictable monthly fees. Keep the coastal team scene and understated personal contact. Review opening, narrowing, expanded and mobile compositions.
 2. **Commerce storytelling — implemented, browser-reviewed:** make the agency's intervention apparent in the discovery journey, rather than merely sliding a product carousel. Plan the before / intervention / after beats from the September call, with the actual ecommerce UI still recognisable. Keep copy available throughout; bound playback speed and motion distance.
-3. **Whole-page art direction:** judge hero → credentials → discovery → open testimonial → purchase → partnership as a sequence. Preserve open sections; do not turn the whole page into cards. Improve visual transitions and differentiated depth rather than adding text-heavy modules. The removed audit/FAQ spread stays removed.
-4. **Delivery review:** compare real browser renders with the chosen references, including intermediate scroll positions and phone compositions. Publish cohesive visual increments. Do not equate passing tests with client approval.
+3. **Whole-page art direction — implemented, browser-reviewed:** judge hero → credentials → discovery → open testimonial → purchase → partnership as a sequence. Preserve open sections; do not turn the whole page into cards. Improve visual transitions and differentiated depth rather than adding text-heavy modules. The removed audit/FAQ spread stays removed.
+4. **Delivery review — completed:** compare real browser renders with the chosen references, including intermediate scroll positions and phone compositions. Publish cohesive visual increments. Do not equate passing tests with client approval.
 
 ### First visual increment: verification
 
@@ -36,6 +36,16 @@ Reviewed desktop 1440×900 and phone 390×844 renders. Provenance is recorded wi
 - 18 September design review, 17–41 minutes: premium photographic nature plus software familiarity, integrated depth, restrained soft gradients and frosted materials; not a new SaaS interface, not vector landscapes. 42–56 minutes: ecommerce interactions as a subtle nod, gentle scroll transitions and white/off-white contrast. The reference's literal rocks/branches are not requirements.
 - Live client Slack, 24 September: Concept A preferred; gradients and animation still below the reference. Blue should be an accent with natural colours, rounded buttons and subtle shadows. The 30 September conversation requests progress/timing, not a change in visual direction.
 - Archived introduction, August follow-up, kickoff agenda, answered content plan and Miro capture consulted. This is not an assertion that every historical comment has been re-read in full.
+
+### Integrated delivery review
+
+Published visual work: `b5c9385` (partnership artwork and proportions), `706487e` (visible product-feed intervention), `0dc6868` (editorial client story). Both Vercel projects report successful deployments for the final visual commit; the review site serves the new assets and bundle.
+
+At 1440×900, the 558px partnership row remains unchanged until centred. Measured opening top 170.52px; at 27% progress the two supporting cards remain readable at approximately 344px wide. At 82% the team scene has expanded, with the paragraph and right-side invitation sharing the same vertical centre (650.59px). Reverse scrolling restores the original 426.66px side widths and full opacity. The release returns naturally to the footer. Screenshots record opening, compression and expanded states. Phone checks include 390px and 320px layouts; reduced motion presents static compositions without the desktop pin. The audit/FAQ spread remains absent. Build, lint and ten playback/readiness policy tests pass; browser review covers the visual states separately.
+
+The meaningful reference takeaways carried into this delivery are recognisable platform objects, soft physical materials, photographic depth, visible ecommerce intervention and an open client-proof composition. The site retains its existing coastal hero, restrained blue/sage/sand palette and legible copy rather than adding more boxed modules. Concept destinations remain available for routes to be built later.
+
+Source coverage is recorded honestly: live relevant Figma frames, live Miro references, client Slack direction, Ellie's exact rough draft, client call visual discussions and archived comments were reviewed. Relevant internal-call excerpts were cross-checked. The 21 September walkthrough has no exposed transcript and its audio was not reviewed; historical Figma comment coverage comes from the archive, not a fresh exhaustive comment export. This is a completed design/development refinement pass for review, not a statement of client approval or a completed full-site route build.
 
 ## 2 October — audit section removed at user request
 
