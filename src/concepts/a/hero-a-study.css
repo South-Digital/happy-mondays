@@ -1005,14 +1005,17 @@
 
 /* Keep the primary action in view when a tablet or phone turns sideways. */
 @media (min-width: 701px) and (max-width: 1100px) and (max-height: 600px) {
-  .ha-nav { height: 80px; }
-  .ha-intro { padding-top: 20px; }
-  .ha-intro h1 { font-size: 56px; }
-  .ha-intro p { font-size: 16px; margin-top: 18px; }
-  .ha-hero-cta { margin-top: 20px; }
-  .ha-scene { height: calc(870px + var(--ha-terrace-extension)); }
-  .ha-object { top: 390px; }
-  .ha-order-position { top: 620px; }
+  /* Compress gradually across 320–360px heights, without another layout step.
+     Shift the dashboard, order and landscape together to preserve their depth. */
+  .ha-study { --ha-landscape-compression: clamp(0px, calc(360px - 100svh), 40px); }
+  .ha-nav { height: calc(80px - var(--ha-landscape-compression) * .4); }
+  .ha-intro { padding-top: calc(20px - var(--ha-landscape-compression) * .2); }
+  .ha-intro h1 { font-size: calc(56px - var(--ha-landscape-compression) * .3); }
+  .ha-intro p { font-size: 16px; margin-top: calc(18px - var(--ha-landscape-compression) * .15); }
+  .ha-hero-cta { margin-top: calc(20px - var(--ha-landscape-compression) * .1); }
+  .ha-scene { height: calc(870px - var(--ha-landscape-compression) + var(--ha-terrace-extension)); }
+  .ha-object { top: calc(390px - var(--ha-landscape-compression)); }
+  .ha-order-position { top: calc(620px - var(--ha-landscape-compression)); }
 }
 
 /* Warm reflected light connects the coast to the natural palette below. */

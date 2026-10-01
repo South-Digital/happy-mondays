@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Short landscape opening
+
+- At 844×320, the hero action ended at y=356.63, below the opening viewport. The existing landscape rule covered taller phones/tablets but did not sufficiently compress the shortest view.
+- Added a bounded shared compression value across 320–360px heights inside the existing landscape rule. Navigation height, headline size and spacing interpolate gradually; the dashboard, notification and landscape move together. Standard portrait and taller landscape rules retain their existing values, and the button retains its 52px height.
+- The action now ends at y=297.55 for a 320px viewport, y=327.09 at 340px and y=356.63 at 360px. Checked normal and reduced-motion rendering, completed dashboard composition, and real Tab navigation through the short menu: its final action remains visible, only the menu scrolls and Escape restores the summary. No horizontal overflow observed. Build and lint pass.
+
 ### Route delivery weight
 
 - The initial Concept A stylesheet also contained Concept B and archived refinement CSS. Kept Concept A eager, made the alternative route load its own assets on demand, and placed internal lazy imports behind the client-review build flag. The client build now emits only the entry files and Concept B files; archived route assets are absent from that build.
