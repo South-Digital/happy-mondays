@@ -2,6 +2,25 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## Homepage focus correction — 1 October 2026
+
+This supersedes the detailed pricing and three-step audit treatment below. The user rejected the templated feel, cautioned against too many cards, and questioned whether a pricing instrument belongs on the homepage. The homepage should establish relevance, demonstrate the search-to-sale approach, supply credible evidence and invite a conversation. Detailed comparisons belong on deeper routes.
+
+- Removed the homepage pricing section and its currency controls. Navigation, discovery and the existing flat-fee card link to the planned `/pricing` route. The pricing exploration is saved outside the app for future consideration, not represented as an implemented pricing page.
+- Replaced the generic process with an open, interactive audit spread: finding products, choosing them, completing the order. These are proposed diagnostic questions, not new contractual deliverables or guarantees. No additional card containers or generated scenery were introduced.
+- Reworked the verified client quote as an open editorial spread. Kept the approved coastal hero, commerce scenes and team expansion intact.
+- Made faded side cards inaccessible to assistive technology and removed the pricing link from the tab sequence while hidden. Restores automatically on reverse scroll. Corrected reduced-motion selectors for the audit controls.
+
+### Next refinement roadmap
+
+1. [x] Remove detailed homepage pricing and retain clear route signposts.
+2. [x] Open the audit and proof layouts; check the transition from the team scene.
+3. [x] Verify 320, 390, 1024 and 1440px layouts, all audit selections, keyboard FAQ activation, reduced-motion rendering and hidden-card focus state.
+4. [ ] Reassess the complete narrative against client review; acceptance remains unproven after the earlier rejection. Keep further changes grounded in a concrete visual or content problem.
+5. [ ] Complete deeper service, pricing, case-study and booking destinations in the full site build. Current links explicitly retain preview feedback.
+
+Validation for this iteration: client-review build, TypeScript lint, all six scene-playback tests and clean diff. No horizontal overflow at checked widths or browser warnings/errors in the current normal-motion session. Browser screenshots saved in the parent workspace `output/happy-mondays-editorial-pass-2026-10-01/`. These checks establish implementation behaviour, not client design acceptance.
+
 ## Call-grounded homepage content — 1 October 2026
 
 Re-read all four available client calls (17 August, 24 August, 1 September and 18 September), Ellie's rough draft, and the newer answered content plan. The latter is authoritative where the earlier draft contains questions or conflicting assumptions.

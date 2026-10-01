@@ -19,9 +19,9 @@ The original `happy-mondays` Vercel project is separate and its settings were no
 
 ## Review scope
 
-Concept A is now a full homepage concept: coastal hero and credentials, discovery and purchase scenes, client quote, expanding team cards, spend-band pricing, audit journey, FAQs and footer. Concept B remains the alternative opening direction. Booking and unbuilt route links give preview feedback. Concept-brand store values are illustrative; the client quote is sourced from the supplied audit PDF. The pricing and process copy follow the newer answered content plan.
+Concept A is now a full homepage concept: coastal hero and credentials, discovery and purchase scenes, client quote, expanding team cards, an interactive audit invitation, FAQs and footer. Concept B remains the alternative opening direction. Booking and unbuilt route links give preview feedback. Concept-brand store values are illustrative; the client quote is sourced from the supplied audit PDF. The flat-fee positioning and process copy follow the newer answered content plan. Detailed pricing has been removed from the homepage; the navigation and existing fee card link to the planned pricing route.
 
-The 1 October content pass preserves the existing motion system and adds native FAQ and currency controls. It has been reviewed on desktop and narrow mobile, with reduced-motion and normal-motion journeys. These additions are a content/design concept, not completion of the service, pricing, case-study or booking routes.
+The 1 October content pass preserves the existing motion system and adds native FAQ and audit exploration controls. It has been reviewed on desktop and narrow mobile, with reduced-motion and normal-motion journeys. These additions are a content/design concept, not completion of the service, pricing, case-study or booking routes.
 
 ## Final local verification
 

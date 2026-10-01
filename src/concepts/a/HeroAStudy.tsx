@@ -14,7 +14,7 @@ import "./hero-a-study.css";
 const links = [
   { label: "Client stories", href: "#client-stories" },
   { label: "Our approach", href: "#the-approach" },
-  { label: "Pricing", href: "#fees" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/articles" },
 ];
 

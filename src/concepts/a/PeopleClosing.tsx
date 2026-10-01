@@ -3,6 +3,7 @@ import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useT
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
+import { StoryLink } from "./AgencyStory";
 import "./people-closing.css";
 
 const TRAVEL = 1.7;
@@ -23,6 +24,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     typeof window !== "undefined" && window.matchMedia("(min-width: 1080px) and (min-height: 700px)").matches,
   );
   const [contactVisible, setContactVisible] = useState(false);
+  const [sideVisible, setSideVisible] = useState(true);
   const start = useMotionValue(0);
   const distance = useMotionValue(1);
   const { scrollY } = useScroll();
@@ -79,6 +81,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const centreLeft = useTransform(opening, value => `calc(${(1 - value) * 100 / 3}% + ${(1 - value) * 20 / 3}px)`);
   const centreWidth = useTransform(opening, value => `calc(${100 - (1 - value) * 200 / 3}% - ${(1 - value) * 40 / 3}px)`);
   const sideOpacity = useTransform(progress, [0, 0.27, 0.44, 1], [1, 1, 0, 0]);
+  useMotionValueEvent(sideOpacity, "change", value => setSideVisible(value >= 0.08));
   const sidePadding = useTransform(progress, [0.12, 0.4], [36, 24]);
   const sideInset = useTransform(progress, [0.12, 0.57], [0, 14]);
   const padding = useTransform(progress, [0.25, 0.85], [36, 62]);
@@ -99,6 +102,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
         <section className="pc-journey" aria-label="Working with Happy Mondays">
           <div className="pc-stage" ref={stage}>
             <motion.article {...businessTilt} className="pc-reason pc-reason--business"
+              aria-hidden={animated && !sideVisible}
               style={{ ...businessTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
@@ -110,13 +114,14 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               </div>
             </motion.article>
             <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
+              aria-hidden={animated && !sideVisible}
               style={{ ...feeTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
                 <p>Senior expertise. A fixed fee within your spend band. Know what we’re working on, what it costs and why it matters.</p>
                 <div className="pc-signature">
                   <span>Clear scope. Close collaboration.</span>
-                  <span>More confidence in what comes next.</span>
+                  <StoryLink href="/pricing" tabIndex={animated && !sideVisible ? -1 : undefined}>Explore pricing <span aria-hidden="true">↗</span></StoryLink>
                 </div>
               </div>
             </motion.article>

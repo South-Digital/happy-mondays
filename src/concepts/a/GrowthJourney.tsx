@@ -11,7 +11,7 @@ import { useToast } from "../../components/Toast";
 import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
-import { AgencyFooter, ClearPricing, ClientStory, GettingStarted } from "./AgencyStory";
+import { AgencyFooter, ClientStory, GettingStarted } from "./AgencyStory";
 
 function GoogleMark() {
   return (
@@ -655,7 +655,6 @@ export function GrowthJourney() {
           <Storefront />
         </section>
         </PeopleClosing>
-        <ClearPricing />
         <GettingStarted />
         <AgencyFooter />
       </div>

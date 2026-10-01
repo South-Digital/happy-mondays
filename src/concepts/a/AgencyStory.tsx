@@ -3,10 +3,10 @@ import { useToast } from "../../components/Toast";
 import { Wordmark } from "../../components/Brand";
 import "./agency-story.css";
 
-/** Real route targets remain inspectable while this is a design review. */
-export function StoryLink({ href, children, className = "as-link" }: { href: string; children: ReactNode; className?: string }) {
+/** Keep planned destinations inspectable in the concept review. */
+export function StoryLink({ href, children, className = "as-link", tabIndex }: { href: string; children: ReactNode; className?: string; tabIndex?: number }) {
   const { show } = useToast();
-  return <a href={href} className={className} onClick={event => {
+  return <a href={href} className={className} tabIndex={tabIndex} onClick={event => {
     event.preventDefault();
     show(href.startsWith("/book-a-call")
       ? "Booking preview — the calendar will be connected before launch."
@@ -17,51 +17,36 @@ export function StoryLink({ href, children, className = "as-link" }: { href: str
 export function ClientStory() {
   return (
     <section className="as-proof" id="client-stories" aria-label="A word from The Diamond Store">
-      <div className="as-proof-brand"><span>The</span><strong>Diamond Store</strong></div>
+      <div className="as-proof-source"><span className="as-quote-mark" aria-hidden="true">“</span><p>Gary Ingram<span>Co-Founder<br />The Diamond Store</span></p></div>
       <figure>
-        <blockquote>“Their knowledge of Google Ads is second to none and they are constantly finding new ways to scale and grow.”</blockquote>
-        <figcaption><span><strong>Gary Ingram</strong><span>Co-Founder, The Diamond Store</span></span>
-          <StoryLink href="/case-studies/the-diamond-store">Read their story <span aria-hidden="true">↗</span></StoryLink>
-        </figcaption>
+        <blockquote>“Their knowledge of Google Ads is second to none and they are <em>constantly finding new ways to scale and grow.</em>”</blockquote>
+        <figcaption><StoryLink href="/case-studies/the-diamond-store">Read their story <span aria-hidden="true">↗</span></StoryLink></figcaption>
       </figure>
     </section>
   );
 }
 
-const bands = [
-  { spend: "10,000–30,000", fee: "1,997" },
-  { spend: "30,000–60,000", fee: "2,997" },
-  { spend: "60,000–100,000", fee: "3,997" },
+const auditPages = [
+  { title: "Getting found.", tab: "Getting found", question: "Are the right people finding your products?", rows: [["Product feed", "Does Google understand your range?"], ["Search intent", "Do the searches match the products?"], ["Campaigns", "Where is the budget going?"]] },
+  { title: "Choosing a product.", tab: "Choosing", question: "Is the page doing the product justice?", rows: [["Product pages", "Is the reason to buy clear?"], ["Pricing", "Does the offer make sense?"], ["Recommendations", "What belongs beside this product?"]] },
+  { title: "Completing the order.", tab: "Buying", question: "What stands between interest and a sale?", rows: [["Basket", "Is the next step obvious?"], ["Delivery", "Are cost and timing easy to find?"], ["Checkout", "Where could a buyer hesitate?"]] },
 ];
 
-export function ClearPricing() {
-  const [currency, setCurrency] = useState<"USD" | "GBP">("USD");
-  const symbol = currency === "USD" ? "$" : "£";
-  return (
-    <section className="as-pricing" id="fees" aria-labelledby="as-pricing-title">
-      <div className="as-pricing-copy">
-        <h2 id="as-pricing-title"><span>Room to grow.</span><br />A fee you know.</h2>
-        <p>A fixed monthly fee for your ad spend band. So you can plan ahead, and we can focus on where your budget works hardest.</p>
-        <StoryLink href="/pricing" className="cj-service-link">Explore pricing <span aria-hidden="true">↗</span></StoryLink>
-        <div className="as-pricing-principle"><span aria-hidden="true">↗</span><p>Grow within your band.<br /><strong>Your management fee stays the same.</strong></p></div>
-      </div>
-      <div className="as-fee-sheet">
-        <div className="as-fee-top"><span>Monthly management</span>
-          <div className="as-currency" role="group" aria-label="Pricing currency">
-            {(["USD", "GBP"] as const).map(unit => <button key={unit} type="button" aria-pressed={unit === currency} onClick={() => setCurrency(unit)}>{unit}</button>)}
-          </div>
-        </div>
-        <table>
-          <caption className="as-sr-only">Monthly ad spend and management fees in {currency}</caption>
-          <thead><tr><th scope="col">Your monthly ad spend</th><th scope="col">Our monthly fee</th></tr></thead>
-          <tbody>{bands.map(band => <tr key={band.fee}><th scope="row">{symbol}{band.spend}</th><td>{symbol}{band.fee}</td></tr>)}
-            <tr className="as-custom"><th scope="row">Above {symbol}100,000</th><td><StoryLink href="/book-a-call">Let’s talk <span aria-hidden="true">↗</span></StoryLink></td></tr>
-          </tbody>
-        </table>
-        <p className="as-fee-note">Consistently above your band? We decide together whether to scale up or focus on efficiency. A busier month alone doesn’t change your fee.</p>
-      </div>
-    </section>
-  );
+function AuditFolio() {
+  const [active, setActive] = useState(0);
+  const page = auditPages[active];
+  return <div className="as-audit-folio">
+    <div className="as-folio-tabs" role="group" aria-label="Explore what the audit examines">
+      {auditPages.map((item, index) => <button type="button" key={item.title} aria-pressed={index === active} aria-controls="as-audit-pages" onClick={() => setActive(index)}><span aria-hidden="true">0{index + 1}</span>{item.tab}</button>)}
+    </div>
+    <div className="as-audit-pages" id="as-audit-pages" aria-live="polite">
+      <article key={page.title} className="as-audit-chapter">
+        <h3>{page.title}</h3>
+        <p className="as-chapter-question">{page.question}</p>
+        <dl>{page.rows.map(([label, question]) => <div key={label}><dt>{label}</dt><dd>{question}</dd></div>)}</dl>
+      </article>
+    </div>
+  </div>;
 }
 
 const questions = [
@@ -74,26 +59,19 @@ const questions = [
 export function GettingStarted() {
   return (
     <section className="as-start" id="getting-started" aria-labelledby="as-start-title">
-      <div className="as-start-heading"><h2 id="as-start-title"><span>See what’s possible.</span><br />Start with your store.</h2>
-        <p>The Revenue Leak Audit gives us something real to talk about. Your account, your store, and the opportunities between them.</p>
+      <div className="as-audit-spread">
+        <div className="as-audit-copy">
+          <h2 id="as-start-title">Where does the next sale get stuck?</h2>
+          <p>The Revenue Leak Audit follows the journey from first search to checkout.</p>
+          <div className="as-audit-invitation"><p>We start with a 15-minute conversation. Then a closer look at your account and store, with a personal video to make sense of it all.</p><StoryLink href="/book-a-call?type=audit" className="cj-service-link">Start with your store <span aria-hidden="true">↗</span></StoryLink><StoryLink href="/revenue-leak-audit">Inside the audit <span aria-hidden="true">↗</span></StoryLink></div>
+        </div>
+        <AuditFolio />
       </div>
-      <div className="as-start-grid">
-        <div className="as-first-steps">
-          <ol>
-            <li><span aria-hidden="true">01</span><div><h3>A conversation first.</h3><p>Spend 15 minutes with Keanu. Tell us where you are and what you want to change.</p></div></li>
-            <li><span aria-hidden="true">02</span><div><h3>Then, a proper look.</h3><p>We review your ad account and store, then walk you through the findings in a personal video.</p></div></li>
-            <li><span aria-hidden="true">03</span><div><h3>Decide with a clearer picture.</h3><p>Understand what needs attention before deciding whether we’re the team to help.</p></div></li>
-          </ol>
-          <StoryLink href="/book-a-call?type=audit" className="ha-button">Let’s look at your store <span aria-hidden="true">↗</span></StoryLink>
-          <StoryLink href="/revenue-leak-audit">Explore the audit</StoryLink>
-        </div>
-        <div className="as-questions" aria-label="Common questions">
-          {questions.map(question => <details key={question.title}>
-            <summary>{question.title}<span aria-hidden="true" className="as-disclosure-mark" /></summary>
-            <p>{question.answer}</p>
-          </details>)}
-          <p className="as-question-note">Something else on your mind? <StoryLink href="/book-a-call">Let’s talk.</StoryLink></p>
-        </div>
+      <div className="as-questions" aria-label="Common questions">
+        {questions.map(question => <details key={question.title}>
+          <summary>{question.title}<span aria-hidden="true" className="as-disclosure-mark" /></summary>
+          <p>{question.answer}</p>
+        </details>)}
       </div>
     </section>
   );
