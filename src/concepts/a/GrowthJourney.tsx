@@ -12,7 +12,7 @@ import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import "./growth-journey.css";
 import { PeopleClosing } from "./PeopleClosing";
 import { sceneImage } from "./sceneImages";
-import { AgencyFooter, ClientStory, GettingStarted } from "./AgencyStory";
+import { ClientStory, GettingStarted } from "./AgencyStory";
 
 function GoogleMark() {
   return (
@@ -653,7 +653,6 @@ export function GrowthJourney() {
         </section>
         </PeopleClosing>
         <GettingStarted />
-        <AgencyFooter />
       </div>
     </section>
   );

@@ -4,6 +4,13 @@
 
 ## Detail pass — 1 October 2026
 
+### Keyboard reading structure
+
+- Browser inspection confirmed the footer had no content-info landmark because it lived inside the main content. Moved it outside `main` while retaining its shared width container, colours and reduced-motion handling. The 1440px footer rectangle is unchanged (1320×247px at the same document position); at 390px it remains 350px wide.
+- Added a focus-only Skip to content link to the hero heading. Verified first Tab reveals it, Enter focuses the heading, and the next Tab reaches Start with an audit instead of repeating navigation. Checked normal desktop and reduced-motion phone behaviour; the link is offscreen after focus leaves and causes no horizontal overflow.
+- Grouped the decorative Shopify dashboard into a single labelled illustration, matching the commerce scenes. Its fictitious Analytics/chart headings and order notification no longer interrupt the real page's reading sequence. Its accessible label explicitly identifies concept data; no visual disclaimer or visual layout change was added.
+- Build and lint pass. This is targeted keyboard/semantic verification, not a claim of a complete assistive-technology audit.
+
 ### Audit reading hierarchy
 
 - Reviewed the quote → purchase scene and expanded team → audit → footer sequence. Kept those open layouts and their existing section spacing; the quieter lower page provides a useful contrast to the large photographic compositions.

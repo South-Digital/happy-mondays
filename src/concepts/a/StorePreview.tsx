@@ -45,10 +45,10 @@ export function StorePreview({ time }: { time: number }) {
     <motion.div
       className="ha-store"
       style={{ opacity: entrance, y: 30 * (1 - entrance), scale: .985 + .015 * entrance }}
-      role="group"
-      aria-label="Illustrative Shopify analytics"
+      role="img"
+      aria-label="Illustrative Shopify dashboard with rising sales and a new-order notification. The figures are concept data, not client results."
     >
-      <div className="ha-store-interior">
+      <div className="ha-store-interior" aria-hidden="true">
         <aside className="ha-store-sidebar" aria-hidden="true">
           <div className="ha-store-brand">
             <img src="/images/icon-shopify.png" width="19" height="23" alt="" />
@@ -168,7 +168,7 @@ export function StorePreview({ time }: { time: number }) {
 
 export function OrderPreview({ reveal }: { reveal: number }) {
   return (
-    <motion.div className="ha-order" style={{ opacity: reveal, y: 16 * (1 - reveal), scale: .97 + .03 * reveal }} aria-hidden={reveal < 0.9}>
+    <motion.div className="ha-order" style={{ opacity: reveal, y: 16 * (1 - reveal), scale: .97 + .03 * reveal }} aria-hidden="true">
       <span className="ha-order-icon">
         <img src="/images/icon-shopify.png" width="24" height="29" alt="" />
       </span>

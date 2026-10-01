@@ -169,7 +169,7 @@ export function HeroAStudy() {
         <div className="ha-ambient-light" aria-hidden="true" />
         <StudyNav />
         <div className="ha-intro">
-          <motion.h1 id="ha-title"
+          <motion.h1 id="ha-title" tabIndex={-1}
             initial={reduced ? false : { opacity: 0.3, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reduced ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
