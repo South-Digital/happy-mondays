@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Idle scene behaviour
+
+- Reviewed the clock, scroll springs and pointer-tilt lifecycle. Scene clocks stop when invisible, unloaded, paused, hidden, reduced or complete; the readiness hold also stops scheduling. Tilt measurement only schedules while a pointer needs measuring. No perpetual decorative CSS animation was found in Concept A.
+- A temporary harness around the current production bundle observed the app root for five seconds after the hero, discovery and purchase compositions settled. All three samples recorded zero attribute, text or child-list mutations. Completed clocks stayed at 4800/5800ms; unvisited commerce clocks remained at 0. The document remained visible in every sample. Saved `idle-scene-review.json` in the task output.
+- This verifies resting DOM behaviour, not zero JavaScript execution, GPU activity, energy usage or performance on another device. Lenis retains its expected animation-frame scheduler. No production optimisation was justified by these observations. The served harness was removed; its local snapshot remains excluded from Git.
+
 ### Readable service-copy entrances
 
 - On direct entry to the approach section, measured the parent copy at 0.876 opacity while its inline cart was only 0.098. The icon's independent 1.2-second entrance plus 180ms delay left a visible hole in the heading after the words were already readable. Both offscreen copy blocks also began entirely transparent.
