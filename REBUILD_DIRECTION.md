@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Intermediate-width and disclosure review
+
+- Reviewed the hero-to-commerce transition at 1101px and 800px. The eight-column laptop logo row and four-column tablet layout retain clear spacing; the partner line and client marks remain visually separate without adding another container. No layout change was justified by these views.
+- Opened the weekly-reporting answer at 390px and inspected its paragraph measure, disclosure spacing and page width (zero horizontal overflow). Real Tab input moved to the next question with a visible, unclipped focus treatment. Reviewed the expanded answer again at 1024px, where the two-column questions and footer remain coherent.
+- This is a verification-only pass: existing page styling and copy are retained. No additional cards, animation or cosmetic override were introduced. These observations are limited to the inspected states and do not establish client acceptance.
+
 ### Team photograph delivery and crop resolution
 
 - At 390px / 1×, the 366×540px team card selected a 960px-wide panorama based on the screen-width hint. `object-fit: cover` actually scales that panorama to 1296px wide, so the chosen source was being enlarged. Updated the shared picture sizing hint to account for the photograph’s ratio and the card heights, including tablet and expanded desktop views.
