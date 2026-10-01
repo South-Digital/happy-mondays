@@ -17,12 +17,20 @@ export function useSceneTimeline(
   progress?: MotionValue<number>,
   storyReady = true,
 ) {
-  const elapsed = useRef(0);
+  const elapsed = useRef(reduced ? duration : 0);
   const rate = useRef(1);
-  const [frameState, setFrameState] = useState({ time: 0, rate: 1 });
+  const [frameState, setFrameState] = useState({ time: reduced ? duration : 0, rate: 1 });
   const [paused, setPaused] = useState(false);
   const [revision, setRevision] = useState(0);
   const [hidden, setHidden] = useState(() => document.hidden);
+  useEffect(() => {
+    if (!reduced) return;
+    // Reduced motion displays the completed composition. Commit that position
+    // to the clock too, so restoring motion never rewinds an already-seen scene.
+    elapsed.current = duration;
+    rate.current = 1;
+    setFrameState({ time: duration, rate: 1 });
+  }, [reduced, duration]);
   useEffect(() => {
     const onVisibility = () => setHidden(document.hidden);
     document.addEventListener("visibilitychange", onVisibility);

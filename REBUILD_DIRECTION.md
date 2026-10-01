@@ -4,6 +4,13 @@
 
 ## Detail pass — 1 October 2026
 
+### Motion continuity
+
+- Checked the normal-motion journey at 1440×900 with real wheel scrolling. Discovery paused at 878ms when only its bottom edge remained visible, resumed when returned to view and retained its completed composition afterwards.
+- Checked the team expansion at opening, narrowing, contact reveal and full width, then reversed. The 652px stage remained centred within 0.5px; narrowing side text stayed readable, hidden cards returned to the accessibility/focus sequence on reversal, and the expanded invitation stayed in one right-aligned row. No additional decorative motion was added.
+- Corrected a clock-state inconsistency when reduced motion changes during a visit. The static completed scene now also commits its completed time, so re-enabling motion cannot rewind an already-seen composition. A temporary browser harness exercised both initially animated → reduced → animated and initially reduced → animated; both remained at the completed frame. System preferences were not changed.
+- Build, lint and the six playback-policy tests pass. Continue the broader visual/content review against client feedback; these checks do not establish client acceptance.
+
 ### Tablet narrative rhythm
 
 - Full-page and 900px review exposed mismatched layout breakpoints: the commerce wrapper became a single 580px column at 980px, but the editorial sections kept desktop columns until 800px. The audit copy was only 249px wide and its folio 279px wide; the quote and footer were similarly compressed.
