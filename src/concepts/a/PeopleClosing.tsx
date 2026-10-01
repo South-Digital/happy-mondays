@@ -151,7 +151,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={{ ...feeTilt.style, ...sideLayout }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <p>Senior expertise. A fixed fee within your spend band. Know what we’re working on, what it costs and why it matters.</p>
+                <p>A fixed monthly fee within your spend band. You know what to budget, without paying a percentage of your ad spend.</p>
                 <div className="pc-signature">
                   <span>Clear scope. Close collaboration.</span>
                   <StoryLink href="/pricing" tabIndex={animated && !sideVisible ? -1 : undefined}>Explore pricing <span aria-hidden="true">↗</span></StoryLink>

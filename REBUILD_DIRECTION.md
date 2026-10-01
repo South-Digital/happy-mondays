@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### More specific partnership copy
+
+- Re-read the answered content plan (document `12DRCfA0w_32IYcG_u30bOXScNhf-dFMsEzeeFnwrmME`, opening questions 5–6 and homepage answers). The confirmed fee substance is a fixed monthly charge within a spend band, no percentage of ad spend, with predictable owner cash flow as a stated reason. Replaced the fee card's repeated “senior expertise” and general working-process sentence with that concrete explanation. Spend bands remain explicit; no numeric pricing table, forever-fixed-fee promise or unapproved exclusivity claim was added.
+- Removed the reporting FAQ's closing generalisation about calls filling calendars. The answer retains the actual deliverables: live dashboards, Monday metrics, weekly recap, key numbers, work in progress and client inputs. Other partnership wording and the team emphasis remain intact.
+- Reviewed the card at 1440px, the centred three-card opening at 1080×700, and the 390px static layout. Paragraphs retain their bottom alignment and footer separation; the expanded FAQ is readable without horizontal overflow. Build, lint and diff checks pass.
+
 ### Focus continuity through the expanding cards
 
 - Reproduced a keyboard/pointer crossover defect: after focusing Explore pricing and scrolling to 76.3% of the team transition, focus remained inside the now-hidden fee card. Its `tabIndex=-1` prevented new tab entry but did not release existing focus.

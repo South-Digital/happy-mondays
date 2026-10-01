@@ -64,7 +64,7 @@ function AuditFolio() {
 const questions = [
   { title: "Is Happy Mondays right for my store?", answer: "We work with Shopify brands already running Google Ads, with historical data to learn from. Typically, that means at least 10,000 a month in ad spend in your local currency. If you’re below that with room to grow, we can talk it through." },
   { title: "Do you look beyond Google Ads?", answer: "Yes. We look at the account alongside your product pages, conversion rate and pricing. Better results depend on both. For paid social and email, we work with specialist partners." },
-  { title: "How will I know what’s happening?", answer: "You have live dashboards, a Monday metrics update and a weekly written recap: what happened, the key numbers, what we’re working on and anything we need from you. Calls have a purpose, rather than filling the calendar." },
+  { title: "How will I know what’s happening?", answer: "You have live dashboards, a Monday metrics update and a weekly written recap: what happened, the key numbers, what we’re working on and anything we need from you." },
   { title: "What do I receive with the audit?", answer: "A detailed PDF and a personal Loom walkthrough explaining what we found and what to prioritise. We begin with a 15-minute conversation, then request access to Google Ads and, ideally, Shopify." },
 ];
 
