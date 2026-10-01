@@ -1,4 +1,4 @@
-/* A shared sticky frame holds the tail of the buying scene above the cards. */
+/* Centre the cards within a shared sticky frame with the preceding scene. */
 .pc-sequence {
   --pc-section-gap: 120px;
   --pc-height: clamp(450px, calc(100svh - var(--pc-section-gap) - 128px), 720px);
@@ -105,7 +105,7 @@
   height: calc(var(--pc-context-height) + var(--pc-section-gap) + var(--pc-height) + 170svh);
   /* Keep following content beyond the frame until the pin has released,
      including tall viewports where the card itself reaches its height cap. */
-  margin-bottom: max(54px, calc(100svh - var(--pc-height) - var(--pc-section-gap) - 74px));
+  margin-bottom: max(54px, calc((100svh - var(--pc-height)) / 2 + 6px));
 }
 .pc-sequence[data-animated="true"] .pc-pin { position: sticky; top: var(--pc-pin-top); }
 .pc-sequence[data-animated="true"] .pc-stage { display: block; height: var(--pc-height); }

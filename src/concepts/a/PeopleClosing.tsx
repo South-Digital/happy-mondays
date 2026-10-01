@@ -5,7 +5,6 @@ import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
 import "./people-closing.css";
 
-const PEEK = 80;
 const TRAVEL = 1.7;
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 
@@ -15,7 +14,9 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const reduced = usePrefersReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const context = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const [contextHeight, setContextHeight] = useState(0);
+  const [pinTop, setPinTop] = useState(0);
   const [roomForMotion, setRoomForMotion] = useState(() =>
     typeof window !== "undefined" && window.matchMedia("(min-width: 1080px) and (min-height: 700px)").matches,
   );
@@ -35,16 +36,22 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   }, []);
 
   useLayoutEffect(() => {
-    if (!ref.current || !context.current) return;
+    if (!ref.current || !context.current || !stage.current) return;
     const measure = () => {
       const height = context.current!.offsetHeight;
+      const gap = parseFloat(getComputedStyle(stage.current!.parentElement!).marginTop);
+      const centredTop = (window.innerHeight - stage.current!.offsetHeight) / 2;
+      // Pin and progress share the same measured centre, including the section gap.
+      const top = centredTop - height - gap;
       setContextHeight(height);
-      start.set(ref.current!.getBoundingClientRect().top + window.scrollY + height - PEEK);
+      setPinTop(top);
+      start.set(ref.current!.getBoundingClientRect().top + window.scrollY - top);
       distance.set(window.innerHeight * TRAVEL);
     };
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(context.current);
+    observer.observe(stage.current);
     window.addEventListener("resize", measure);
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); };
   }, [animated, distance, start]);
@@ -70,11 +77,11 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
 
   return (
     <motion.section ref={ref} className="pc-sequence" data-animated={animated}
-      style={{ "--pc-pin-top": `${PEEK - contextHeight}px`, "--pc-context-height": `${contextHeight}px`, "--pc-progress": progress } as MotionStyle}>
+      style={{ "--pc-pin-top": `${pinTop}px`, "--pc-context-height": `${contextHeight}px`, "--pc-progress": progress } as MotionStyle}>
       <div className="pc-pin">
         <div className="pc-context" ref={context}>{children}</div>
         <section className="pc-journey" aria-label="Working with Happy Mondays">
-          <div className="pc-stage">
+          <div className="pc-stage" ref={stage}>
             <motion.article {...businessTilt} className="pc-reason pc-reason--business"
               style={{ ...businessTilt.style, ...(animated ? { width: sideWidth, opacity: sideOpacity, top: sideInset, bottom: sideInset, padding: sidePadding, pointerEvents: sidePointerEvents } : {}) }}>
               <div className="pc-reason-inner">
