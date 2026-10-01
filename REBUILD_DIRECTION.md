@@ -4,6 +4,12 @@
 
 ## Detail pass — 1 October 2026
 
+### Live motion-preference regression review
+
+- Tested the actual Concept A components in a temporary development harness that dispatches preference-change events through a controlled `matchMedia` implementation. This exercises live hook updates without changing the user's operating-system preference. The harness is local-only and is not part of the production build.
+- After scrolling the hero, switching to reduced motion clears the scenery, dashboard, foreground and order transforms. Further scrolling leaves them at `none`; Lenis releases the page (its root class is removed). Both commerce depth planes reset to `none`, and both narrative clocks resolve to 5800ms. Re-enabling motion restores Lenis while keeping completed clocks at 5800ms.
+- Switching the team scene to reduced motion restores its full 1320px static width, both side-card opacities and the contact detail. This verifies the previous geometry fix for preference changes as well as viewport changes. No additional production change was justified. This harness tests JavaScript preference handling and data-attribute styles; it is not a substitute for a native OS/browser accessibility audit.
+
 ### Team scene continuity on refresh and resize
 
 - Reproduced two visible continuity defects: refreshing at 36.6% of the pinned transition briefly restored the closed three-card layout, and resizing an animated desktop page to 390px retained an obsolete animated card width (109px), padding and hidden contact opacity. The latter persisted after scrolling settled.
