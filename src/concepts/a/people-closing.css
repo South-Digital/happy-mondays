@@ -80,13 +80,13 @@
 .pc-signature > span:first-child { font-size: 15px; font-weight: 500; }
 .pc-signature > span:last-child { opacity: .8; }
 .pc-plus { padding: 0 7px; opacity: .6; }
-.pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; container-type: inline-size; }
+.pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
 .pc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; }
 .pc-people::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(0deg, #fffffcb3, transparent 32%),
+    linear-gradient(0deg, #fffffcd4, transparent 40%),
     linear-gradient(90deg, #fffffcb8, #fffffca6 48%, #fffffc50 70%, transparent 84%);
 }
 .pc-people-content {
@@ -102,22 +102,20 @@
 .pc-contact { position: absolute; left: 250px; bottom: 3px; white-space: nowrap; }
 .pc-contact img { flex-shrink: 0; }
 /* Once the opening card has room, the copy and invitation share one lower row. */
-@container (min-width: 1100px) {
-  .pc-people-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 570px;
-    grid-template-rows: auto 1fr auto;
-    column-gap: 32px;
-  }
-  .pc-people-content > h2 { grid-column: 1 / -1; grid-row: 1; }
-  .pc-people-content > p {
-    grid-column: 1; grid-row: 3;
-    align-self: center; margin: 0; padding-top: 0;
-  }
-  .pc-invitation {
-    grid-column: 2; grid-row: 3;
-    align-self: center; min-height: 54px; padding-top: 0; border-top: 0;
-  }
+.pc-people-content[data-wide="true"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 570px;
+  grid-template-rows: auto 1fr auto;
+  column-gap: 32px;
+}
+.pc-people-content[data-wide="true"] > h2 { grid-column: 1 / -1; grid-row: 1; }
+.pc-people-content[data-wide="true"] > p {
+  grid-column: 1; grid-row: 3;
+  align-self: center; margin: 0; padding-top: 0;
+}
+.pc-people-content[data-wide="true"] > .pc-invitation {
+  grid-column: 2; grid-row: 3;
+  align-self: center; min-height: 54px; padding-top: 0; border-top: 0;
 }
 .pc-sequence[data-animated="true"] {
   height: calc(var(--pc-context-height) + var(--pc-section-gap) + var(--pc-height) + 170svh);
@@ -138,6 +136,13 @@
 @media (max-width: 980px) {
   .pc-sequence { --pc-section-gap: 94px; }
 }
+@media (min-width: 701px) and (max-width: 980px) {
+  .pc-reason { padding: 28px; min-height: 380px; }
+  .pc-reason h2 { font-size: 28px; }
+  .pc-reason p { font-size: 16px; }
+  .pc-people-content { padding: 48px 36px; }
+  .pc-contact { left: 238px; }
+}
 /* The fade completes before the narrowing copy becomes a column of words. */
 @media (max-width: 700px) {
   .pc-sequence { margin-bottom: 36px; }
@@ -146,7 +151,7 @@
   .pc-reason { min-height: 370px; padding: 32px; border-radius: 28px; }
   .pc-reason h2 { font-size: clamp(33px, 8vw, 42px); }
   .pc-reason p { font-size: 16px; }
-  .pc-people { min-height: 590px; border-radius: 28px; }
+  .pc-people { min-height: 540px; border-radius: 28px; }
   .pc-people-content { padding: 38px 28px; }
   .pc-people h2 { font-size: clamp(36px, 10vw, 48px); }
   .pc-photo img { object-position: 45% center; }

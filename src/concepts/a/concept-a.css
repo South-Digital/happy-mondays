@@ -16,6 +16,11 @@
   --ca-body-tracking: -0.015em;
   --ca-body-leading: 1.6;
 }
+.ca-direction a:focus-visible,
+.ca-direction button:focus-visible {
+  outline: 2px solid var(--ca-action);
+  outline-offset: 5px;
+}
 @media (max-width: 700px) {
   .ca-direction {
     --ca-display-tracking: -0.04em;

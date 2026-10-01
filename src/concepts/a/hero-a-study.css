@@ -470,7 +470,7 @@
   position: absolute;
   z-index: 4;
   inset: auto 0 -1px;
-  height: 150px;
+  height: 190px;
   pointer-events: none;
   background: linear-gradient(
     180deg,
@@ -572,17 +572,17 @@
 .ha-credentials {
   position: relative;
   z-index: 1;
-  padding: 29px 24px 46px;
+  padding: 29px 24px 89px;
   max-width: 1250px;
-  margin: -128px auto 0;
+  margin: -164px auto 0;
 }
 .ha-proof-reveal > div:first-child {
-  font-size: 12px;
+  font-size: 13px;
   color: #59626c;
   gap: 20px;
 }
 .ha-logos {
-  margin-top: 27px;
+  margin-top: 20px;
 }
 .ha-logos img {
   opacity: 0.9;
@@ -824,11 +824,11 @@
     );
   }
   .ha-scene-fade {
-    height: 120px;
+    height: 150px;
   }
   .ha-credentials {
-    margin-top: -92px;
-    padding: 27px 16px 32px;
+    margin-top: -116px;
+    padding: 27px 16px 60px;
   }
   .ha-proof-reveal > div:first-child {
     gap: 12px 20px;
@@ -982,8 +982,17 @@
 }
 
 /* A compact, quiet signature beneath the scene on phones. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .ha-logos ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 680px;
+    margin-inline: auto;
+    gap: 0 18px;
+  }
+}
 @media (max-width: 700px) {
-  .ha-logos { margin-top: 20px; }
+  .ha-logos { margin-top: 16px; }
   .ha-logos ul { max-width: 300px; gap: 0 18px; }
   .ha-logos img { width: 132px; height: auto; }
 }

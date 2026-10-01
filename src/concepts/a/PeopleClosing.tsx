@@ -15,6 +15,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const context = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const content = useRef<HTMLDivElement>(null);
+  const [wideContent, setWideContent] = useState(false);
   const [contextHeight, setContextHeight] = useState(0);
   const [pinTop, setPinTop] = useState(0);
   const [roomForMotion, setRoomForMotion] = useState(() =>
@@ -27,6 +29,20 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const raw = useTransform(() => clamp((scrollY.get() - start.get()) / distance.get()));
   const progress = useSpring(raw, { stiffness: 105, damping: 27, mass: 0.55 });
   const animated = roomForMotion && !reduced;
+
+  // Measure both layouts before moving the copy and CTA between them.
+  // A CSS container breakpoint alone makes the bottom row snap.
+  useLayoutEffect(() => {
+    const card = content.current?.parentElement;
+    if (!card) return;
+    const measure = () => setWideContent(wide => card.clientWidth >= (wide ? 1080 : 1100));
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
+
+  const rowTransition = { layout: { duration: reduced ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] as const } };
 
   useEffect(() => {
     const query = window.matchMedia("(min-width: 1080px) and (min-height: 700px)");
@@ -111,12 +127,12 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   srcSet="/images/page-atmosphere/terrace-coastal-960.webp 960w, /images/page-atmosphere/terrace-coastal-1942.webp 1942w"
                   sizes="(max-width: 980px) 100vw, 1320px" alt="" width="1942" height="809" loading="lazy" />
               </motion.picture>
-              <motion.div className="pc-people-content" style={animated ? { padding } : undefined}>
+              <motion.div ref={content} className="pc-people-content" data-wide={wideContent} style={animated ? { padding } : undefined}>
                 <h2 id="cj-people-heading">
                   <span>Good people.</span>On your side.
                 </h2>
-                <p>Work directly with a senior team that gets to know your products, your customers and where you want to go.</p>
-                <div className="pc-invitation">
+                <motion.p layout="position" transition={rowTransition}>Work directly with a senior team that gets to know your products, your customers and where you want to go.</motion.p>
+                <motion.div className="pc-invitation" layout="position" transition={rowTransition}>
                   <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">
                     Let’s talk about your store
                   </MockLink>
@@ -126,7 +142,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                     <img src="/images/editorial/keanu-480.webp" alt="Keanu Fischell, founder of Happy Mondays" width="48" height="48" loading="lazy" />
                     <div><strong>Your first chat with Keanu</strong><span>Founder, Happy Mondays</span></div>
                   </motion.div>
-                </div>
+                </motion.div>
               </motion.div>
             </motion.article>
           </div>

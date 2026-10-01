@@ -623,7 +623,7 @@
   border-top: 1px solid #e3e6de;
   padding: 30px 0 40px;
   font-size: 13px;
-  color: #7e8577;
+  color: var(--ca-body);
 }
 .cj-footer a {
   color: inherit;
@@ -631,6 +631,9 @@
   min-height: 44px;
   display: flex;
   align-items: center;
+}
+@media (hover: hover) {
+  .cj-footer a:hover { color: var(--ca-ink); text-decoration: underline; text-underline-offset: 5px; }
 }
 @media (min-width: 1600px) {
   .cj-wrap {
@@ -699,7 +702,7 @@
     border-radius: 22px;
   }
   .cj-footer {
-    font-size: 11px;
+    font-size: 12px;
     padding-bottom: 24px;
   }
   /* Read the same composition at hand-held scale: three results, larger key UI. */
@@ -1219,7 +1222,7 @@
   color: var(--ca-ink);
 }
 .cj-conversation-person span {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--ca-body);
 }
 .cj-conversation .ha-button {
@@ -1249,7 +1252,7 @@
     font-size: 18px;
   }
   .cj-conversation-person span {
-    font-size: 11px;
+    font-size: 12px;
   }
   .cj-footer-brand {
     gap: 16px;
