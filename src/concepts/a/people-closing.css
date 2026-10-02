@@ -1,13 +1,15 @@
-/* Closing cards stay in document flow after the store scene. */
+/* The store scrolls away before the independently pinned closing stage. */
 .pc-sequence {
   --pc-section-gap: 120px;
+  --pc-height: clamp(480px, 54svh, 510px);
   --pc-small-title: clamp(25px, 2.1vw, 30px);
   position: relative;
+  margin-top: var(--pc-section-gap);
   padding-bottom: 32px;
   margin-bottom: 22px;
 }
 .pc-context > .cj-row { padding-bottom: 0; }
-.pc-journey { margin-top: var(--pc-section-gap); position: relative; }
+.pc-journey { position: relative; }
 .pc-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .pc-reason, .pc-people {
   /* Clip the oversized glow without creating an internal scroll container.
@@ -207,7 +209,7 @@
 /* Small screens use the complete, unpinned composition. */
 @media (max-width: 700px) {
   .pc-sequence { margin-bottom: 4px; }
-  .pc-journey { margin: var(--pc-section-gap) -8px 0; }
+  .pc-journey { margin: 0 -8px; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
   .pc-reason { min-height: 440px; padding: 32px; border-radius: 28px; }
   .pc-reason h2 { font-size: clamp(33px, 8vw, 42px); }
@@ -239,3 +241,79 @@
   .pc-people::before { background: linear-gradient(90deg, #faf6edc9, #faf6ed99 55%, #faf6ed24); }
   .pc-invitation { gap: 22px; }
 }
+
+/* Expansion uses a fixed panorama and stable text measures at every frame. */
+.pc-sequence[data-animated="true"] {
+  height: calc(var(--pc-height) + var(--pc-travel) + var(--pc-exit) + 110px);
+  padding-bottom: 0;
+  margin-bottom: calc(54px - var(--pc-exit) / 2);
+}
+.pc-sequence[data-animated="true"] .pc-pin {
+  position: sticky; top: var(--pc-pin-top);
+  /* The expanded aperture extends below the base stage. Reserve real space,
+     not a collapsing margin, so its lower corners survive the pin release. */
+  padding-bottom: 110px;
+}
+.pc-sequence[data-animated="true"] .pc-stage { display: block; height: var(--pc-height); }
+/* Stable side measures retreat beneath the aperture instead of crumpling. */
+.pc-sequence[data-animated="true"] .pc-reason {
+  position: absolute; min-height: 0; inset-block: 0;
+  width: var(--pc-side-width); opacity: var(--pc-side-opacity); padding: 30px;
+}
+.pc-reason[aria-hidden="true"] { pointer-events: none; }
+.pc-sequence[data-animated="true"] .pc-reason--business { left: 0; }
+.pc-sequence[data-animated="true"] .pc-reason--fee { right: 0; }
+.pc-sequence[data-animated="true"] .pc-reason-inner {
+  transform: translate3d(var(--pc-side-x), var(--pc-side-y), 0) scale(var(--pc-side-scale));
+}
+.pc-sequence[data-animated="true"] .pc-reason h2,
+.pc-sequence[data-animated="true"] .pc-reason p { opacity: var(--pc-side-copy-opacity); }
+.pc-sequence[data-animated="true"] .pc-reason--business .pc-reason-inner {
+  transform: translate3d(calc(-1 * var(--pc-side-x)), var(--pc-side-y), 0) scale(var(--pc-side-scale));
+}
+.pc-sequence[data-animated="true"] .pc-people {
+  position: absolute; min-height: 0;
+  left: var(--pc-frame-left); width: var(--pc-frame-width);
+  top: var(--pc-frame-top); height: var(--pc-frame-height); border-radius: var(--pc-radius);
+}
+/* A single, full-size landscape behind the opening window. Its crop is never
+   recalculated from the animated card width. */
+.pc-sequence[data-animated="true"] .pc-photo {
+  inset: auto; left: calc(-1 * var(--pc-frame-left));
+  top: calc((var(--pc-frame-height) - var(--pc-canvas-height)) / 2);
+  width: var(--pc-canvas-width); height: var(--pc-canvas-height);
+  transform: scale(var(--pc-photo-scale)); transform-origin: 65% 50%;
+}
+.pc-sequence[data-animated="true"] .pc-people-content { padding: 0; min-height: 0; }
+.pc-sequence[data-animated="true"] .pc-people h2 {
+  position: absolute; left: 0; top: 0; font-size: 34px; white-space: nowrap;
+  transform-origin: 0 0;
+  transform: translate3d(var(--pc-title-x), var(--pc-title-y), 0) scale(var(--pc-title-scale));
+}
+.pc-sequence[data-animated="true"] .pc-people-content > p {
+  position: absolute; left: 0; top: 0; margin: 0; padding: 0;
+  width: var(--pc-copy-width); max-width: none;
+  transform: translate3d(var(--pc-copy-x), var(--pc-copy-y), 0);
+}
+.pc-sequence[data-animated="true"] .pc-invitation {
+  position: absolute; left: 0; top: 0; margin: 0; padding: 0;
+  width: var(--pc-invite-width); max-width: none; min-height: 54px;
+  transform: translate3d(var(--pc-invite-x), var(--pc-invite-y), 0);
+}
+.pc-sequence[data-animated="true"] .pc-invitation .ha-button { flex-basis: var(--pc-button-width); width: var(--pc-button-width); margin-left: var(--pc-button-x); }
+.pc-sequence[data-animated="true"] .pc-contact {
+  position: absolute; left: 0; top: 3px;
+  opacity: var(--pc-contact-opacity);
+  transform: translate3d(var(--pc-contact-x), var(--pc-contact-y), 0);
+}
+
+.pc-sequence[data-animated="true"] .pc-invitation { flex-direction: row; align-items: center; gap: 24px; }
+.pc-sequence[data-animated="true"] .pc-invitation .ha-button { max-width: none; padding-inline: 24px; }
+.pc-sequence[data-animated="true"] .pc-contact { white-space: nowrap; }
+.pc-sequence[data-animated="true"] .pc-invitation .pc-contact strong { font-size: 15px; }
+.pc-sequence[data-animated="true"] .pc-invitation .pc-contact span { font-size: 14px; }
+.pc-sequence[data-animated="true"] .pc-invitation .pc-contact .ca-founder-portrait { width: 48px; height: 48px; flex-basis: 48px; }
+.pc-sequence[data-animated="true"] .pc-reason-inner { min-width: 196px; }
+.pc-sequence[data-animated="true"] .pc-reason p,
+.pc-sequence[data-animated="true"] .pc-people-content > p { font-size: 16px; line-height: 1.5; }
+.pc-people h2:focus-visible { outline: 2px solid var(--ca-action); outline-offset: 6px; }
