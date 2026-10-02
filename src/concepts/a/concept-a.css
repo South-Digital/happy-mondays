@@ -16,6 +16,8 @@
   --ca-display-leading: 1.08;
   --ca-body-tracking: -0.015em;
   --ca-body-leading: 1.6;
+  --ca-section-space: clamp(112px, 10vw, 144px);
+  --ca-footer-space: 72px;
 }
 .ca-direction a:focus-visible,
 .ca-direction button:focus-visible {
@@ -86,4 +88,12 @@
 @media (prefers-reduced-motion: reduce) {
   .ca-direction :is(.ha-nav-desktop > a, .as-link, .as-link > span, .as-back-top > span, .cj-text-link, .ha-menu-toggle) { transition: none; }
   .ca-direction :is(.as-link > span, .as-back-top > span) { transform: none; }
+}
+
+/* Section cadence contracts with the stacked editorial layout. */
+@media (max-width: 980px) {
+  .ca-direction { --ca-section-space: 96px; --ca-footer-space: 64px; }
+}
+@media (max-width: 680px) {
+  .ca-direction { --ca-section-space: 80px; }
 }

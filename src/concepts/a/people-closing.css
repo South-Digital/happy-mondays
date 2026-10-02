@@ -1,14 +1,14 @@
 /* The store scrolls away before the independently pinned closing stage. */
 .pc-sequence {
-  --pc-section-gap: 120px;
+  --pc-section-gap: var(--ca-section-space);
   --pc-height: clamp(480px, 54svh, 510px);
   --pc-small-title: clamp(25px, 2.1vw, 30px);
   position: relative;
   margin-top: var(--pc-section-gap);
-  padding-bottom: 32px;
-  margin-bottom: 22px;
+  padding-bottom: 0;
+  margin-bottom: var(--ca-footer-space);
 }
-.pc-context > .cj-row { padding-bottom: 0; }
+.pc-context > .cj-row { padding-block: 0; }
 .pc-journey { position: relative; }
 .pc-stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .pc-reason, .pc-people {
@@ -193,10 +193,6 @@
   .pc-invitation .pc-contact span { font-size: 12px; }
   .pc-invitation .pc-contact .ca-founder-portrait { width: 38px; height: 38px; flex-basis: 38px; }
 }
-/* Match the 62px bottom + 32px top spacing between the other mobile sections. */
-@media (max-width: 980px) {
-  .pc-sequence { --pc-section-gap: 94px; }
-}
 @media (min-width: 701px) and (max-width: 980px) {
   .pc-reason { padding: 28px; min-height: 470px; }
   .pc-reason h2 { font-size: 28px; }
@@ -208,7 +204,6 @@
 }
 /* Small screens use the complete, unpinned composition. */
 @media (max-width: 700px) {
-  .pc-sequence { margin-bottom: 4px; }
   .pc-journey { margin: 0 -8px; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
   .pc-reason { min-height: 440px; padding: 32px; border-radius: 28px; }
