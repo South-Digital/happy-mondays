@@ -11,7 +11,7 @@ import { useHeroEntrance } from "./useHeroEntrance";
 import { FounderPortrait } from "./FounderPortrait";
 import { useHeroDepth } from "./useHeroDepth";
 import { StoryLink } from "./AgencyStory";
-import terracePreview from "./assets/terrace-clean-preview.webp";
+import terracePreview from "./assets/terrace-natural-preview.webp";
 import "./hero-a-study.css";
 import "./shopify-preview.css";
 
@@ -128,15 +128,15 @@ function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: b
     >
       <source
         type="image/avif"
-        srcSet="/images/hero-a-terrace-magnific/coast-800.avif 800w, /images/hero-a-terrace-magnific/coast-1440.avif 1440w, /images/hero-a-terrace-magnific/coast-2400.avif 2400w, /images/hero-a-terrace-magnific/coast-3172.avif 3172w"
+        srcSet="/images/hero-a-terrace-natural/coast-800.avif 800w, /images/hero-a-terrace-natural/coast-1440.avif 1440w, /images/hero-a-terrace-natural/coast-1586.avif 1586w"
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
       />
       <motion.img
         initial={{ opacity: 0 }}
         animate={{ opacity: ready && !failed ? 1 : 0 }}
         transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
-        src="/images/hero-a-terrace-magnific/coast-1440.webp"
-        srcSet="/images/hero-a-terrace-magnific/coast-800.webp 800w, /images/hero-a-terrace-magnific/coast-1440.webp 1440w, /images/hero-a-terrace-magnific/coast-2400.webp 2400w, /images/hero-a-terrace-magnific/coast-3172.webp 3172w"
+        src="/images/hero-a-terrace-natural/coast-1440.webp"
+        srcSet="/images/hero-a-terrace-natural/coast-800.webp 800w, /images/hero-a-terrace-natural/coast-1440.webp 1440w, /images/hero-a-terrace-natural/coast-1586.webp 1586w"
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
         width={1586}
         height={992}

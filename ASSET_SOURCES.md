@@ -68,3 +68,8 @@ The new hero uses `public/images/hero-a-v2/`. Its exact ImageGen prompt, origina
 
 ## Hero coast — Magnific refinement, 2 October 2026
 The original generated terrace image was upscaled through Magnific Precision (Magnific v2 photo, Subtle), 2× to 3172 × 1984. Sharpness 7%, grain 4%, ultra detail 7%. Composition retained; not documentary photography. Responsive AVIF/WebP exports at 800, 1440, 2400 and 3172 pixels live in `public/images/hero-a-terrace-magnific/`. The original download is retained outside this public repository.
+
+## Sea correction — 2 October 2026
+The Precision upscale was rejected after visual review for an etched, repetitive water texture. Concept A now uses a built-in ImageGen water replacement, retaining the terrace composition. A calm-water edit removed the old pattern; a second edit restored delicate fast-shutter ripples. Native 1586×992; exports are downsampled only, never presented as a higher-resolution source. Current files: `public/images/hero-a-terrace-natural/`, with a matching inline preview. Concept B remains unchanged.
+
+Final edit prompt: Refine only the water. Keep the calm photographic sea, replacing directional long-exposure blur with subtle sharp natural small ripples captured with a fast shutter. Barely ruffled water, irregular delicate wavelets, no dark outlines, repetitive engraved texture, glitter or motion blur. Preserve stone parapet diagonal edge, floor, island, sky, proportions and horizon.

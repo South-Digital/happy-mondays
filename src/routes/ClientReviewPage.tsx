@@ -6,7 +6,7 @@ const directions = [
   {
     route: "a",
     name: "Landscape with depth.",
-    image: "/images/hero-a-terrace-magnific/coast-1440.webp",
+    image: "/images/hero-a-terrace-natural/coast-1440.webp",
     description: "Your store, in a better place. A recognisable Shopify dashboard sits within the coastal scene, with soft glass and a layered foreground bringing the opening to life.",
     scope: "Preferred direction · Homepage design and motion study.",
   },
