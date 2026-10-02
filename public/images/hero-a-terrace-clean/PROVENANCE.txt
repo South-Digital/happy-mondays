@@ -1,0 +1,5 @@
+Generated with built-in imagegen, 2 October 2026.
+Edit source: hero-a-terrace-extended/coast-1440.webp.
+Output: exec-73816abf-ccfb-4dbd-a4fe-dac67b392bad.png, native 1586 x 992.
+Prompt: Remove ONLY the out-of-focus olive branches intruding from the left edge and lower-left corner, reconstructing sea, travertine ledge and floor. Preserve camera, horizon, islands, diagonal ledge, floor, sunlight and right-hand shadows. Clean uninterrupted ledge silhouette; no new objects or text.
+Both background and foreground now use this same source. Variants are downscaled/encoded only.

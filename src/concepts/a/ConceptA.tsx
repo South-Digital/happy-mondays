@@ -1,18 +1,27 @@
-import { Seo } from '../../components/Seo'
-import { Pillars } from '../shared/Pillars'
-import { HeroA } from './HeroA'
-import { SearchShopping } from './SearchShopping'
+import { Seo } from "../../components/Seo";
+import { SmoothScroll } from "../../components/SmoothScroll";
+import { GrowthJourney } from "./GrowthJourney";
+import { HeroAStudy, StudyNav } from "./HeroAStudy";
+import { AgencyFooter } from "./AgencyStory";
+import { usePrefersReducedMotion } from "../../lib/motion";
+import "./concept-a.css";
+import "./optical-edges.css";
 
-/** Concept A — "Landscape with depth" (§3). The preferred direction. */
 export default function ConceptA() {
+  const reduced = usePrefersReducedMotion();
   return (
     <>
+      <SmoothScroll />
       <Seo title="Concept A — Landscape with depth · Happy Mondays" />
-      <main className="bg-white">
-        <HeroA />
-        <Pillars className="py-24 xl:py-32" />
-        <SearchShopping className="pb-28 xl:pb-36" />
-      </main>
+      <div className="ca-direction" data-motion={reduced ? "reduce" : "full"}>
+        <a className="ca-skip-link" href="#ha-title">Skip to content</a>
+        <div className="ca-nav-position"><StudyNav /></div>
+        <main>
+          <HeroAStudy />
+          <GrowthJourney />
+        </main>
+        <div className="cj-wrap"><AgencyFooter /></div>
+      </div>
     </>
-  )
+  );
 }

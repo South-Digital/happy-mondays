@@ -1,0 +1,63 @@
+import { useLayoutEffect, type RefObject } from "react";
+import {
+  useMotionValue,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+
+/** Native scroll drives compositor transforms; layout is measured only on resize. */
+export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
+  const { scrollY } = useScroll();
+  const start = useMotionValue(0);
+  const distance = useMotionValue(480);
+  const strength = useMotionValue(1);
+  const orderTravel = useMotionValue(-44);
+  const target = useTransform(() =>
+    Math.max(0, Math.min(1, (scrollY.get() - start.get()) / distance.get())),
+  );
+  const progress = target;
+
+  useLayoutEffect(() => {
+    const element = scene.current;
+    if (!element) return;
+    const measure = () => {
+      start.set(element.getBoundingClientRect().top + window.scrollY);
+      // Keep the opening depth independent of how many sections follow.
+      const available =
+        document.documentElement.scrollHeight - window.innerHeight;
+      distance.set(Math.max(160, Math.min(480, available)));
+      // The card shares the chart's horizontal space at medium widths;
+      // keep it anchored so its surface cannot cover the chart heading.
+      orderTravel.set(
+        window.innerWidth <= 700 ? -8 : window.innerWidth <= 1200 ? 0 : -44,
+      );
+      strength.set(
+        window.innerWidth <= 700 ? 0.45 : window.innerWidth <= 1100 ? 0.7 : 1,
+      );
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element.parentElement ?? element);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [scene, start, distance, strength, orderTravel, progress, target]);
+
+  // Ease all planes together into and out of their short depth journey.
+  // Linear clamping made the sea and dashboard stop abruptly at its limit.
+  const eased = useTransform(() => {
+    const p = progress.get();
+    return p * p * (3 - 2 * p);
+  });
+  const depth = useTransform(() => eased.get() * strength.get());
+  return {
+    seaY: useTransform(depth, [0, 1], [0, 44]),
+    foregroundY: useTransform(depth, [0, 1], [0, -10]),
+    dashboardY: useTransform(depth, [0, 1], [0, -24]),
+    dashboardScale: useTransform(depth, [0, 1], [1, 1.022]),
+    orderY: useTransform(() => eased.get() * orderTravel.get()),
+    orderScale: useTransform(depth, [0, 1], [1, 1.018]),
+  };
+}

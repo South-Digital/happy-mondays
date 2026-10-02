@@ -1,0 +1,22 @@
+{
+  "sourcePage": "https://www.thediamondstore.co.uk/",
+  "retrieved": "2026-10-02",
+  "purpose": "Real brand imagery accompanying the existing attributed client quote in the Happy Mondays review concept. Not presented as Happy Mondays creative work.",
+  "assets": [
+    {
+      "file": "diamond-store-jewellery.jpg",
+      "source": "https://www.thediamondstore.co.uk/cdn/shop/files/hp-inspiration-stacking-pieces.jpg?v=1788791667&width=1920",
+      "treatment": "Original downloaded image, unmodified. Responsive crop uses CSS."
+    },
+    {
+      "file": "diamond-store.svg",
+      "source": "https://www.thediamondstore.co.uk/cdn/shop/files/logo-full.svg?v=1787568193&width=300",
+      "treatment": "Original wordmark, unmodified."
+    },
+    {
+      "file": "gary-ingram.webp",
+      "source": "User-supplied Gary Ingram headshot, 2 October 2026 (codex-clipboard-37ea8b42-285e-408f-9172-ea13373e5d1b.png)",
+      "treatment": "Resized to 480px wide and encoded as WebP. Face-focused CSS crop in the 56px circular portrait; no generated or retouched facial features."
+    }
+  ]
+}

@@ -6,9 +6,8 @@ import type { Transition, Variants } from 'framer-motion'
  * so the whole site shares one easing family, one set of durations and one
  * stagger. Premium restraint: calm, precise, no spring, no overshoot, no bounce.
  *
- * Only transform and opacity are animated, with two deliberate exceptions noted
- * at their call sites: button fill brightening (a paint-only background change,
- * which the brief asks for) and the tab crossfade's opacity.
+ * Shared defaults animate transform and opacity. Concept A also uses bounded
+ * image masks and SVG chart clipping for its independently coordinated scenes.
  */
 
 /** One easing family. Entrances decelerate; state changes are symmetric. */
@@ -56,7 +55,11 @@ const entrance = (duration = DUR.entrance, delay = 0): Transition => ({
 })
 
 /** Hero load sequence: a rise-and-fade at a given step of the stagger. */
-export const riseAt = (step: number, reduced: boolean, distance: number = DIST.md) => ({
+export const riseAt = (
+  step: number,
+  reduced: boolean,
+  distance: number = DIST.md,
+) => ({
   initial: reduced ? false : { opacity: 0, y: distance },
   animate: { opacity: 1, y: 0 },
   transition: entrance(DUR.entrance, reduced ? 0 : step * STAGGER),
@@ -89,13 +92,20 @@ export const groupChild = (reduced: boolean): Variants => ({
 export function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return false
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    return (
+      new URLSearchParams(window.location.search).get('motion') === 'reduce' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
   })
 
   useEffect(() => {
     if (!window.matchMedia) return
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches)
+    const onChange = (e: MediaQueryListEvent) =>
+      setReduced(
+        new URLSearchParams(window.location.search).get('motion') ===
+          'reduce' || e.matches,
+      )
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
   }, [])
@@ -109,7 +119,11 @@ export function usePrefersReducedMotion(): boolean {
  */
 export function useCountUp(
   value: number,
-  { delay = 0, duration = DUR.count, run = true }: { delay?: number; duration?: number; run?: boolean } = {},
+  {
+    delay = 0,
+    duration = DUR.count,
+    run = true,
+  }: { delay?: number; duration?: number; run?: boolean } = {},
 ) {
   const reduced = usePrefersReducedMotion()
   const [n, setN] = useState(reduced || !run ? value : 0)

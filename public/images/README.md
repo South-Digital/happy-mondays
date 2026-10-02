@@ -206,3 +206,7 @@ is x 91..1909 at 1440, 192..1808 at 1280 and the full 0..2000 at 1024, where it
 flips to width-driven. Its export is a 2000x1667 **landscape** crop while the
 frame uses a 1450x1933 **portrait** one (node 2166:4484, object-position centre
 92%), so the frame's crop cannot be reproduced from this file at all.
+
+## Clutch icon
+
+`icon-clutch.svg` extracts the C-and-dot mark from the Clutch vector wordmark at https://cdn.worldvectorlogo.com/logos/clutchco.svg (source: https://worldvectorlogo.com/logo/clutchco). The C uses Clutch's dark `#17313B` for a light background; the original red dot and path geometry are retained. Used in the Concept A study’s credentials row.
