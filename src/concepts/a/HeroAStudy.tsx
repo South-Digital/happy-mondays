@@ -1,9 +1,10 @@
 import { motion, useScroll, useTransform, type MotionStyle } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "../../components/Brand";
-import { MockLink, useToast } from "../../components/Toast";
+import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 
+import { MobileNavigation } from "./MobileNavigation";
 import { ClientLogos } from "./ClientLogos";
 import { StorePreview, OrderPreview } from "./StorePreview";
 import { segment, settle } from "./useSceneTimeline";
@@ -36,25 +37,6 @@ export function StudyNav() {
     const p = Math.max(0, Math.min(1, value / 40));
     return p * p * (3 - 2 * p);
   });
-  const menu = useRef<HTMLDetailsElement>(null);
-  const { show } = useToast();
-  useEffect(() => {
-    const dismiss = (event: PointerEvent) => {
-      if (menu.current?.open && !menu.current.contains(event.target as Node)) {
-        menu.current.open = false;
-      }
-    };
-    const desktop = window.matchMedia("(min-width: 901px)");
-    const closeOnDesktop = () => {
-      if (desktop.matches && menu.current) menu.current.open = false;
-    };
-    document.addEventListener("pointerdown", dismiss);
-    desktop.addEventListener("change", closeOnDesktop);
-    return () => {
-      document.removeEventListener("pointerdown", dismiss);
-      desktop.removeEventListener("change", closeOnDesktop);
-    };
-  }, []);
   return (
     <motion.header className="ha-nav" style={{ "--ha-nav-progress": compact, "--ha-nav-glass": glass } as MotionStyle}>
       <a href="#ha-top" aria-label="Happy Mondays — home">
@@ -66,53 +48,7 @@ export function StudyNav() {
           : <StoryLink key={link.label} href={link.href} className="">{link.label}</StoryLink>)}
         <MockLink className="ha-button ha-nav-action" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
       </nav>
-      <details
-        className="ha-mobile-menu"
-        ref={menu}
-        onToggle={(event) => {
-          if (event.currentTarget.open) {
-            event.currentTarget.querySelector("nav")?.scrollTo({ top: 0, behavior: "instant" });
-          }
-        }}
-        onBlur={(event) => {
-          // A disclosure should release keyboard focus naturally, then close
-          // before the next page control is obscured by its panel.
-          if (event.relatedTarget instanceof Node && !event.currentTarget.contains(event.relatedTarget)) {
-            event.currentTarget.open = false;
-          }
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Escape" && menu.current) {
-            menu.current.open = false;
-            menu.current.querySelector("summary")?.focus();
-          }
-        }}
-      >
-        <summary>
-          Menu <span aria-hidden="true">+</span>
-        </summary>
-        <nav aria-label="Mobile navigation" data-lenis-prevent>
-          {[...links, { label: "Book a call", href: "/book-a-call" }].map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={event => {
-                if (menu.current) {
-                  menu.current.open = false;
-                  menu.current.querySelector("summary")?.focus();
-                }
-                if (link.href.startsWith("#")) return;
-                event.preventDefault();
-                show(link.label === "Book a call"
-                  ? "Design preview — the booking calendar will be connected before launch."
-                  : "Design preview — this page is not connected yet.");
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-      </details>
+      <MobileNavigation links={links} reduced={reduced} />
     </motion.header>
   );
 }

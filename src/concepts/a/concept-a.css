@@ -59,3 +59,31 @@
 @media (max-width: 700px) {
   .ca-direction :is(#the-approach, #client-stories, #cj-discovery-heading, #cj-purchase-heading, #cj-people-heading) { scroll-margin-top: 88px; }
 }
+
+/* Quiet, consistent affordances for navigation and editorial links. */
+.ca-direction :is(.ha-nav-desktop > a:not(.ha-button), .as-footer nav .as-link) {
+  position: relative;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left calc(50% + 11px);
+  background-size: 0% 1px;
+  transition: background-size 240ms cubic-bezier(.22,1,.36,1), color 180ms ease;
+}
+.ca-direction .cj-text-link { transition: color 180ms ease, text-decoration-color 180ms ease; }
+.ca-direction .as-proof-arrow { transition: transform 240ms cubic-bezier(.22,1,.36,1), background-color 200ms ease, border-color 200ms ease; }
+.ca-direction .ha-menu-toggle { transition: background-color 180ms ease, border-color 180ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .ca-direction :is(.ha-nav-desktop > a:not(.ha-button), .as-footer nav .as-link):hover { background-size: 100% 1px; color: var(--ca-ink); }
+  .ca-direction .cj-text-link:hover { color: var(--ca-action); text-decoration-color: currentColor; }
+  .ca-direction .as-link:hover .as-proof-arrow { background-color: #e5edef; border-color: #8ba5af; }
+  .ca-direction .ha-menu-toggle:hover { background-color: #fff; border-color: #b7c9cf; }
+}
+.ca-direction :is(.ha-nav-desktop > a:not(.ha-button), .as-footer nav .as-link):focus-visible { background-size: 100% 1px; }
+.ca-direction .as-link:focus-visible .as-proof-arrow { background-color: #e5edef; border-color: #8ba5af; }
+.ca-direction .ha-menu-toggle:active { background-color: #e5edef; }
+.ca-direction[data-motion="reduce"] :is(.ha-nav-desktop > a, .as-link, .as-link > span, .as-back-top > span, .cj-text-link, .ha-menu-toggle) { transition: none; }
+.ca-direction[data-motion="reduce"] :is(.as-link > span, .as-back-top > span) { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ca-direction :is(.ha-nav-desktop > a, .as-link, .as-link > span, .as-back-top > span, .cj-text-link, .ha-menu-toggle) { transition: none; }
+  .ca-direction :is(.as-link > span, .as-back-top > span) { transform: none; }
+}

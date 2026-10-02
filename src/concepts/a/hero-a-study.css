@@ -130,7 +130,7 @@
   box-shadow: none;
 }
 .ha-study a:focus-visible,
-.ha-mobile-menu summary:focus-visible,
+.ha-mobile-menu .ha-menu-toggle:focus-visible,
 .ha-mobile-menu a:focus-visible {
   outline: 2px solid var(--ca-action);
   outline-offset: 4px;
@@ -865,10 +865,10 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ha-button,
-  .ha-mobile-menu summary > span {
+  .ha-mobile-menu .ha-menu-toggle > span {
     transition: none;
   }
-  .ha-mobile-menu[open] nav {
+  .ha-mobile-menu[data-open="true"] nav {
     animation: none;
   }
 }
@@ -892,10 +892,10 @@
 }
 
 .ha-study[data-motion="reduce"] .ha-button,
-.ha-study[data-motion="reduce"] .ha-mobile-menu summary > span {
+.ha-study[data-motion="reduce"] .ha-mobile-menu .ha-menu-toggle > span {
   transition: none;
 }
-.ha-study[data-motion="reduce"] .ha-mobile-menu[open] nav {
+.ha-study[data-motion="reduce"] .ha-mobile-menu[data-open="true"] nav {
   animation: none;
 }
 
@@ -921,7 +921,7 @@
     font-size: 13px;
     color: #3c4651;
   }
-  .ha-mobile-menu summary {
+  .ha-mobile-menu .ha-menu-toggle {
     cursor: pointer;
     list-style: none;
     display: flex;
@@ -933,15 +933,15 @@
     padding: 0 17px;
     background: rgba(255, 255, 255, 0.6);
   }
-  .ha-mobile-menu summary::-webkit-details-marker {
+  .ha-mobile-menu .ha-menu-toggle::-webkit-details-marker {
     display: none;
   }
-  .ha-mobile-menu summary > span {
+  .ha-mobile-menu .ha-menu-toggle > span {
     font-size: 18px;
     font-weight: 400;
     transition: transform 200ms ease;
   }
-  .ha-mobile-menu[open] summary > span {
+  .ha-mobile-menu[data-open="true"] .ha-menu-toggle > span {
     transform: rotate(45deg);
   }
   .ha-mobile-menu nav {
@@ -953,8 +953,8 @@
     background: #fafaf8;
     box-shadow: 0 20px 50px rgba(33, 50, 70, 0.12);
   }
-  .ha-mobile-menu[open] nav {
-    animation: ha-menu-enter 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  .ha-mobile-menu[data-open="true"] nav {
+    animation: none;
   }
   .ha-mobile-menu nav a {
     width: 100%;
@@ -1153,8 +1153,8 @@
   .ha-scene { height: calc(var(--ha-dashboard-top) + 605px); }
 }
 
-.ca-direction[data-motion="reduce"] .ha-mobile-menu[open] nav { animation: none; }
-.ca-direction[data-motion="reduce"] .ha-mobile-menu summary > span { transition: none; }
+.ca-direction[data-motion="reduce"] .ha-mobile-menu[data-open="true"] nav { animation: none; }
+.ca-direction[data-motion="reduce"] .ha-mobile-menu .ha-menu-toggle > span { transition: none; }
 
 
 /* One navigation surface compacts as the page leaves its opening position.
@@ -1201,3 +1201,7 @@
   .ca-nav-position .ha-nav { --ha-nav-wide: calc(100vw - 40px); --ha-nav-height: 82px; padding-left: calc(18px * var(--ha-nav-progress)); }
   .ca-nav-position .ha-nav img { height: calc(26px - 3px * var(--ha-nav-progress)) !important; }
 }
+
+/* Native button semantics; the panel owns its coordinated entrance and exit. */
+.ha-menu-toggle { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+.ha-menu-toggle > span { pointer-events: none; }
