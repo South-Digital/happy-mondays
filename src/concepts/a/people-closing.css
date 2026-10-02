@@ -27,7 +27,22 @@
 .pc-reason-inner { flex: 1; display: grid; grid-template-rows: auto minmax(160px, 1fr) auto; min-width: 0; }
 .pc-reason::before {
   content: ""; pointer-events: none; position: absolute;
-  inset: 14% -8% 19%; z-index: -1;
+  inset: 5% 0 8%; z-index: -1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* Photographic colour, defocused into irregular light rather than a flat halo.
+     Fade the atmosphere to the page so this stays an open composition. */
+  filter: blur(28px) saturate(.7);
+  mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 68%, transparent 96%),
+    linear-gradient(to right, transparent, #000 22%, #000 78%, transparent);
+  mask-composite: intersect;
+  opacity: .86;
+  transform: translate3d(calc(var(--pc-side-x, 0px) * -.25), calc(var(--pc-side-y, 0px) * .4), 0);
+}
+.pc-reason::after {
+  content: ""; pointer-events: none; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(ellipse at 22% 25%, #fafaf8bd, transparent 49%),
+    linear-gradient(180deg, #fafaf8 6%, #fafaf800 37%, #fafaf800 62%, #fafaf8 91%);
 }
 .pc-reason--fee { color: #2c414b; }
 
@@ -99,14 +114,22 @@
 .pc-platform--shopify { left: 20.5%; top: 24%;  }
 .pc-platform--google { left: 61%; top: 48%;  }
 
-/* Colour belongs to the objects, not another enclosing card. */
+/* 18 September call + Miro: blurred nature behind a crisp foreground.
+   Reuse the page's olive grove and coastal plate for a related material palette. */
 .pc-reason--business::before {
-  background: radial-gradient(ellipse at 64% 45%, #a1b9a76b 0%, #d9ddb354 35%, transparent 69%);
-  filter: blur(18px);
+  background-image: linear-gradient(125deg, #dce6ca12, #83a58c45), url('/images/morrow/courtyard-800.webp');
+  background-position: 42% 8%;
+  background-size: 185% auto;
 }
 .pc-reason--fee::before {
-  background: radial-gradient(ellipse at 56% 45%, #a4c9df85 0%, #e6dec64f 39%, transparent 70%);
-  filter: blur(18px);
+  background-image: url('/images/hero-a-v2/coast-800.webp');
+  background-position: 57% 49%;
+  background-size: auto 125%;
+  filter: blur(32px) saturate(.62);
+}
+.pc-reason--fee::after {
+  background: radial-gradient(ellipse at 72% 22%, #f8f4e8d9, transparent 52%),
+    linear-gradient(180deg, #fafaf8 6%, #fafaf800 37%, #fafaf800 62%, #fafaf8 91%);
 }
 .pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
@@ -230,3 +253,5 @@
 @media (max-width: 700px) {
   .pc-art { width: calc(100% + 32px); max-width: 360px; margin: 6px -16px; }
 }
+
+.pc-sequence[data-animated="false"] .pc-reason::before { transform: none; }

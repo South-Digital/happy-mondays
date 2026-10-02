@@ -2,6 +2,14 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — source-grounded blurred backdrops
+
+Reopened the live Miro board and the actual 18 September transcript, specifically 38:10–41:05 and 48:01–51:54. The board explicitly requests an out-of-focus nature photograph behind sharp foreground elements, with warm neutrals, restrained accent colour and layered depth. Its Solidroad integration and blog captures show irregular, optically blurred colour rather than uniform radial glows. On the call, Dan describes the colours and feeling of an unrecognisably blurred background; Keanu prefers the softer gradients and rejects excessive colour. These are source observations; the olive/blue pairing below is our application to the existing page.
+
+Sources: [Miro](https://miro.com/app/board/uXjVHmXBav0=/?share_link_id=173104433004), [18 September transcript](https://docs.google.com/document/d/1QZw3pYGizFvJs8p1F_FfgZgWTCP7Plpl8sHHL8ScW_A/edit).
+
+Replaced the two pale radial halos with defocused crops of the existing olive-grove and coastal photographs. Uneven olive/sage and blue/stone fields now give the glass and pearl artwork tonal separation. A separate daylight veil keeps heading and paragraph areas quiet; intersecting edge masks blend to the page without another enclosing card. The background moves slightly with the existing scroll geometry and fades with its supporting column, while the foreground retains its independent movement. No new animation clock or asset dependency; reduced motion remains static. Centre artwork, copy, dimensions and scroll timing are unchanged. Browser review covered the 1280×720 opening, intermediate expansion, hidden-side endpoint and reversal, plus 390×844 stacked reduced-motion views. No horizontal overflow; reduced-motion backdrop transform is none. Build, diff checks and five existing journey geometry tests pass. Proofs are saved in the parent output folder under `happy-mondays-gradients-2026-10-02`.
+
 ## 2 October — liquid-glass buttons retained, material reworked
 
 User clarified that glass itself is wanted; the flat-button correction misread the feedback. Replaced that correction with a continuous lens treatment: translucent fill and backdrop blur, broad white and blue internal reflections, and a single irregular 1.25px highlight at the perimeter. No inset ring. Clear service/navigation actions retain dark text; primary actions use tinted blue glass with white text. Surface light and perimeter highlights shift together on hover over 700ms. The existing commerce-frame treatment is unchanged.
