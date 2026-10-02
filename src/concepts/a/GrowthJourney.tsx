@@ -69,6 +69,13 @@ function Bag() {
 }
 const IMG = "/images/morrow/";
 const FRAGRANCE = "/images/serein/";
+const sereinEditorial = {
+  src: `${FRAGRANCE}fig-cedar-editorial-v1-960.webp`,
+  srcSet: `${FRAGRANCE}fig-cedar-editorial-v1-480.webp 480w, ${FRAGRANCE}fig-cedar-editorial-v1-960.webp 960w`,
+  sizes: "(max-width: 980px) 36vw, 19vw",
+  width: 960,
+  height: 1200,
+};
 const sceneDuration = 5800;
 
 /** One coordinated entrance; scroll subsequently moves the optical planes at
@@ -103,6 +110,13 @@ function useComposition(plate: string, base = IMG) {
       image.src = source.src;
       return image.decode().catch(() => undefined);
     });
+    if (base === FRAGRANCE) {
+      const editorial = new Image();
+      editorial.sizes = sereinEditorial.sizes;
+      editorial.srcset = sereinEditorial.srcSet;
+      editorial.src = sereinEditorial.src;
+      assets.push(editorial.decode().catch(() => undefined));
+    }
     Promise.all(assets).then(() => {
       if (!cancelled) setLoaded(true);
     });
@@ -415,31 +429,25 @@ function Storefront() {
               }}
             >
               <div className="cj-store-nav">
+                <span className="cj-store-collection">Home fragrance</span>
                 <span className="cj-store-wordmark">SEREIN</span>
-                <span>Objects for slower living.</span>
-                <Bag />
+                <span className="cj-store-bag"><Bag /><span>{added > 0.5 ? "02" : recommendation > 0 ? "01" : "00"}</span></span>
               </div>
               <div className="cj-store-body">
                 <div className="cj-store-photo">
-                  <Product base={FRAGRANCE} />
-                  <span>01 / 03</span>
+                  <img {...sereinEditorial} alt="" loading="lazy" />
+                  <div className="cj-store-image-caption"><span>The everyday ritual</span><span>01 — 03</span></div>
                 </div>
                 <div className="cj-store-copy">
-                  <h3>Fig &amp; Cedar</h3>
-                  <strong>$68.00</strong>
-                  <p>
-                    A quieter kind of luxury.
-                    <br />
-                    Fig leaf. Cedar. A little stillness.
-                  </p>
-                  <div className="cj-fragrance-notes">
-                    <span>Fig leaf</span>
-                    <span>Cedarwood</span>
-                  </div>
-                  <span className="cj-store-size">Scented candle · 280 g</span>
-                  <div className="cj-add-to-bag">
-                    {recommendation > 0 ? "Added to bag" : "Add to bag"}
-                    {recommendation > 0 ? <Check /> : <span>+</span>}
+                  <span className="cj-store-eyebrow">The signature candle</span>
+                  <h3>Fig <em>&amp;</em><br />Cedar</h3>
+                  <p>Green fig. Warm cedar.<br />A little stillness.</p>
+                  <div className="cj-store-purchase">
+                    <div className="cj-store-price"><span>Amber glass · 280 g</span><strong>$68</strong></div>
+                    <div className="cj-add-to-bag">
+                      {recommendation > 0 ? "Added to bag" : "Add to bag"}
+                      {recommendation > 0 ? <Check /> : <span>↗</span>}
+                    </div>
                   </div>
                 </div>
               </div>
