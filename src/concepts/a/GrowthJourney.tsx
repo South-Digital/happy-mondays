@@ -3,7 +3,6 @@ import {
   motion,
   useInView,
   useScroll,
-  useMotionValueEvent,
   useTransform,
 } from "framer-motion";
 import { EASE, usePrefersReducedMotion } from "../../lib/motion";
@@ -181,11 +180,10 @@ function ScenePhoto({ name, base = IMG }: { name: string; base?: string }) {
   );
 }
 function Discovery() {
-  const { ref, reduced, scene, backY, frontY, loaded, scrollYProgress } =
+  const { ref, reduced, scene, backY, frontY, loaded } =
     useComposition("courtyard");
-  const [scrollTime, setScrollTime] = useState(0);
-  useMotionValueEvent(scrollYProgress, "change", value => setScrollTime(segment(value, .2, .35) * 4400));
-  const t = Math.max(scene.time * 5800 / sceneDuration, scrollTime);
+  // The shared clock responds to scroll velocity without seeking or rewinding.
+  const t = scene.time * 5800 / sceneDuration;
   const enter = settle(segment(t, 60, 950));
   // Establish the original catalogue, refine its data, then show discovery.
   // The movement follows the intervention rather than implying a random rank jump.
@@ -381,7 +379,9 @@ function Storefront() {
   const recommendation = settle(segment(t, 1350, 1150));
   const added = settle(segment(t, 2950, 950));
   const confirmation = settle(segment(t, 4050, 1150));
-  const total = (68 + 42 * added).toFixed(2);
+  const hasAdded = added > 0.5;
+  // A basket changes transactionally: item count, checkmark and total agree.
+  const total = hasAdded ? "110.00" : "68.00";
   return (
     <div
       className="cj-art"
@@ -432,7 +432,7 @@ function Storefront() {
               <div className="cj-store-nav">
                 <span className="cj-store-collection">Home fragrance</span>
                 <span className="cj-store-wordmark">SEREIN</span>
-                <span className="cj-store-bag"><Bag /><span>{added > 0.5 ? "02" : recommendation > 0 ? "01" : "00"}</span></span>
+                <span className="cj-store-bag"><Bag /><span>{hasAdded ? "02" : recommendation > 0 ? "01" : "00"}</span></span>
               </div>
               <div className="cj-store-body">
                 <div className="cj-store-photo">
@@ -476,7 +476,7 @@ function Storefront() {
             >
               <div className="cj-cart-heading">
                 <b>Your bag</b>
-                <span>{added > 0.5 ? "2 items" : "1 item"}</span>
+                <span>{hasAdded ? "2 items" : "1 item"}</span>
               </div>
               <div className="cj-cart-line">
                 <div className="cj-cart-product">
@@ -500,9 +500,9 @@ function Storefront() {
                   <span>Fig & Cedar diffuser · $42</span>
                 </div>
                 <span
-                  className={`cj-recommend-check ${added > 0.5 ? "is-added" : ""}`}
+                  className={`cj-recommend-check ${hasAdded ? "is-added" : ""}`}
                 >
-                  {added > 0.5 ? <Check /> : "+"}
+                  {hasAdded ? <Check /> : "+"}
                 </span>
               </div>
               <div className="cj-cart-total">

@@ -27,7 +27,9 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     canvasWidth: width, canvasHeight: endHeight,
     photoScale: mix(1.08, 1, opening),
     sideWidth: width * 0.3 - 12,
-    sideOpacity: 1 - blend(progress, 0.26, 0.57),
+    // Keep the coloured surfaces solid while they slide behind the aperture;
+    // dissolve only the narrow remaining edges, rather than ghosting the cards.
+    sideOpacity: 1 - blend(progress, 0.42, 0.76),
     // Fade readable content before the aperture crosses its left inset.
     // Artwork and atmosphere can remain underneath the expanding scene.
     sideCopyOpacity: 1 - blend((width + frameWidth) / 2 - (width * .7 + 12), -8, 16),

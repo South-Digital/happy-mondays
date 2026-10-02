@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
@@ -105,17 +105,19 @@ export function StudyNav() {
 
 export function ContinuingNav() {
   const { scrollY } = useScroll();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(() => window.scrollY > 660);
   const reduced = usePrefersReducedMotion();
-  useMotionValueEvent(scrollY, "change", value => setVisible(value > 620));
-  if (!visible) return null;
-  return <motion.nav className="ha-continuing-nav" aria-label="Quick navigation"
+  // Separate thresholds prevent a trackpad hovering at the boundary from
+  // repeatedly mounting and dismissing the navigation.
+  useMotionValueEvent(scrollY, "change", value => setVisible(current => value > (current ? 540 : 660)));
+  return <AnimatePresence>{visible && <motion.nav key="continuing-nav" className="ha-continuing-nav" aria-label="Quick navigation"
     initial={reduced ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: .25 }}>
+    exit={{ opacity: 0, y: -8, pointerEvents: "none" }}
+    transition={{ duration: reduced ? 0 : .25, ease: [0.22, 1, 0.36, 1] }}>
     <a href="#ha-top" aria-label="Happy Mondays — back to top"><Wordmark size="lg" /></a>
     <a className="ha-continuing-story" href="#client-stories">Client stories</a>
     <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
-  </motion.nav>;
+  </motion.nav>}</AnimatePresence>;
 }
 
 function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: boolean; ready: boolean; reduced: boolean; onReady: () => void }) {
