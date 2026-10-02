@@ -99,6 +99,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     "--pc-button-width": `${value.buttonWidth}px`,
     "--pc-button-x": `${value.buttonX}px`,
     "--pc-contact-y": `${value.contactY}px`,
+    "--pc-contact-x": `${value.contactX}px`,
   }));
   // Bind the single geometry snapshot to CSS without a React render each frame.
   useLayoutEffect(() => {

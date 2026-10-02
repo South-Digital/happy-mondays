@@ -614,3 +614,7 @@ Validation: client-review build and TypeScript lint pass; no horizontal overflow
 - Rechecked desktop normal motion, closing mid-transition/final/release/reverse states, tablet and 320/390px reduced-motion layouts. No horizontal overflow or broken loaded images observed. Corrected the tablet store-label wrap.
 - All 16 geometry, playback and readiness tests pass, including release velocity continuity. Client-review TypeScript/Vite build passes.
 - Booking remains the existing design-preview notice, not a connected calendar. Screenshot evidence is in the parent workspace's output/happy-mondays-final-pass-2026-10-02 directory.
+
+### Mid-transition contact correction
+
+The CTA previously moved right before the portrait appeared, creating an isolated button mid-scroll. It now keeps the same left edge as the paragraph at every progress value. Keanu appears to its right after sufficient space opens, with a constant 24px gap. Static layouts use the same button-first order. Verified the midpoint, portrait reveal, settled view and reverse scroll in the browser; geometry checks cover alignment and non-overlap at 1,001 samples across four widths.

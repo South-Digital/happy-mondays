@@ -3,7 +3,7 @@ export function peopleJourney(progress: number, width: number, height: number, v
   canvasWidth: number; canvasHeight: number; photoScale: number;
   sideWidth: number; sideOpacity: number; sideCopyOpacity: number; sideScale: number; sideY: number; sideX: number; artworkProgress: number;
   titleX: number; titleY: number; titleScale: number; copyWidth: number; copyX: number; copyY: number;
-  invitationX: number; invitationY: number; invitationWidth: number; buttonWidth: number; buttonX: number; contactOpacity: number; contactY: number;
+  invitationX: number; invitationY: number; invitationWidth: number; buttonWidth: number; buttonX: number; contactX: number; contactOpacity: number; contactY: number;
 };
 
 export function peopleRelease(scrollAfterStory: number, releaseDistance: number): number;

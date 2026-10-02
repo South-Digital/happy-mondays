@@ -18,9 +18,13 @@ for (const [width, height, viewport] of [[984,480,700], [1184,480,720], [1320,48
       assert.ok(current.invitationX + current.invitationWidth <= current.frameWidth + 0.0001);
       assert.ok(current.invitationY + 54 < current.frameHeight);
       if (current.contactOpacity > 0) {
-        assert.ok(current.invitationX + 236 < current.frameWidth);
+        assert.ok(current.invitationX + current.contactX + 236 < current.frameWidth);
+        assert.ok(current.contactX - current.buttonWidth >= 24 - 0.0001);
       }
       assert.ok(current.invitationX + current.buttonX + current.buttonWidth <= current.frameWidth);
+      // A partially visible portrait must never leave the action floating away
+      // from its copy or overlap it while the card changes width.
+      assert.equal(current.invitationX + current.buttonX, current.copyX);
       if (current.sideCopyOpacity > 0) {
         assert.ok(current.frameLeft + current.frameWidth < width - current.sideWidth + 30);
       }

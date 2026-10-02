@@ -39,14 +39,16 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     copyWidth: Math.min(360, initialWidth - 68),
     copyX: mix(34, endPadding, composition),
     copyY: mix(height - 206, endHeight * 0.16 + 74.8 * Math.min(1.88, width / 660) + 28, composition),
-    // Resolve beside the portrait below the left-hand copy, leaving the sea open.
+    // Keep the action anchored to the copy throughout. Reveal the portrait
+    // in the space to its right only once the aperture has opened.
     invitationX: mix(34, endPadding, composition),
     invitationY: mix(height - 88, endHeight - endPadding - 86, composition),
     invitationWidth,
     buttonWidth: mix(232, 252, composition),
-    buttonX: mix(0, 260, composition),
-    contactOpacity: blend(progress, 0.68, 0.88),
-    contactY: mix(8, 0, blend(progress, 0.68, 0.88)),
+    buttonX: 0,
+    contactX: mix(232, 252, composition) + 24,
+    contactOpacity: blend(progress, 0.58, 0.8),
+    contactY: mix(8, 0, blend(progress, 0.58, 0.8)),
   };
 }
 
