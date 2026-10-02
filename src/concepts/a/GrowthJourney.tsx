@@ -101,6 +101,7 @@ function useComposition(plate: string, base = IMG) {
             "product-1",
             "product-2",
             "product-3",
+            "product-4",
           ];
     const assets = names.map((name) => {
       const image = new Image();
@@ -275,12 +276,13 @@ function Discovery() {
                   className="cj-results-track"
                   style={{ "--advance": position } as CSSProperties}
                 >
-                  {[2, 3, 1, 2, 0, 1, 2, 3, 1].map((variant, index) => {
+                  {[2, 3, 1, 4, 0, 2, 3, 1, 4].map((variant, index) => {
                     const [brand, name, price] = [
                       ["Morrow Studio", "Everyday Grip Sock", "$28.00"],
                       ["Form Studio", "Soft Rib Grip Sock", "$28.00"],
                       ["Sunday Movement", "Studio Grip Sock", "$26.00"],
                       ["Aster Studio", "Classic Grip Sock", "$24.00"],
+                      ["Tempo Studio", "Checker Grip Sock", "$27.00"],
                     ][variant];
                     return (
                       <div

@@ -292,6 +292,12 @@
   letter-spacing: -0.03em;
   color: #4a4c43;
 }
+.cj-search-caption > * {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .cj-search-caption b {
   font-weight: 500;
   color: #30352e;

@@ -1,6 +1,6 @@
 # Morrow Studio — concept product art direction
 
-Created for the 30 September 2026 Happy Mondays review revision. Morrow Studio, Form Studio, Sunday Movement and Aster Studio are illustrative concept brands here; products, prices and ratings do not represent actual client results or inventory. The page identifies the concept brand and illustrative figures beneath the two scenes.
+Created for the 30 September 2026 Happy Mondays review revision. Morrow Studio, Form Studio, Sunday Movement, Aster Studio and Tempo Studio are illustrative concept brands here; products, prices and ratings do not represent actual client results or inventory. The page identifies the concept brand and illustrative figures beneath the two scenes.
 
 ## Art direction
 
@@ -27,3 +27,5 @@ User visual target: `codex-clipboard-f0a9bb1b-6504-41b4-bc63-de149a033753.png`.
 6. Extract and recenter each individual sock from that sheet on a transparent 3:4 canvas, full silhouette, preserving its material and lighting and removing all neighbouring products. Individual sources: `exec-27a0a108-25a3-49a6-b805-a6ee6d3ad377.png`, `exec-aeedee5a-4997-4533-b879-89a583b2f34d.png`, `exec-24f3f418-0a5c-43f6-bf03-87c0476de360.png`, `exec-f42f8e82-b65c-49db-a8f7-e78ddcff7c48.png`.
 
 Original generated masters remain in the user's generated-images library. WebP conversion is for delivery performance and retains transparency; the artwork is not embedded into a single flattened scene.
+
+- `product-4.webp` (plus 240/480px variants): distinct dusty-rose checker-cuff grip sock for concept brand Tempo Studio. Built-in ImageGen, 2 October 2026; reference `product-1.webp` for camera/light. Prompt: preserve catalogue angle and transparent silhouette; replace sage knit with dusty rose, ivory checker cuff, matching silicone dots, no logo/text. Source: `exec-06ca9878-e378-47a1-8661-165517fbe898.png`. Generated alpha preserved.
