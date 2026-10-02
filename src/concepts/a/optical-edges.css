@@ -1,0 +1,86 @@
+/* The hero's optical frame, scaled to the object rather than repeated as a card.
+   The masked rim leaves text and platform UI untouched. No extra layout space. */
+.ca-direction :is(.ha-button, .cj-service-link, .as-proof-arrow, .cj-glass) {
+  position: relative;
+  --optical-rim: 3px;
+  --optical-highlight: #ffffffed;
+  --optical-shade: #63839538;
+}
+
+.ca-direction :is(.ha-button, .cj-service-link, .as-proof-arrow, .cj-glass)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid #ffffff85;
+}
+
+@supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+  .ca-direction :is(.ha-button, .cj-service-link, .as-proof-arrow, .cj-glass)::after {
+    border: 0;
+    padding: var(--optical-rim);
+    background: linear-gradient(135deg,
+      var(--optical-highlight) 2%, #ffffff55 22%, var(--optical-shade) 43%,
+      #ffffff14 55%, var(--optical-highlight) 76%, var(--optical-shade) 100%);
+    background-size: 200% 100%;
+    background-position: 20% 50%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: background-position 550ms cubic-bezier(.22,1,.36,1), opacity 180ms ease;
+  }
+}
+
+/* Clear secondary actions: a quiet centre inside a thick, light-catching rim. */
+.ca-direction .cj-service-link {
+  border-color: #93a9b14d;
+  background: linear-gradient(165deg, #ffffffe0, #ffffff80 45%, #dae7ec85);
+  box-shadow: inset 0 0 0 3px #ffffff38, inset 0 -2px 3px #587d9224,
+    0 1px 2px #2a465620, 0 8px 18px -12px #2a46566b;
+}
+.ca-direction .cj-service-link::before {
+  inset: 3px;
+  border: 1px solid #ffffff80;
+  background: linear-gradient(175deg, #ffffff55, transparent 55%);
+}
+
+/* Blue stays the strongest action; only its edge borrows the glass material. */
+.ca-direction .ha-button {
+  --optical-rim: 2px;
+  --optical-highlight: #f1fbff85;
+  --optical-shade: #0b314a40;
+}
+.ca-direction .ha-button::after { opacity: .72; }
+.ca-direction .as-proof-arrow {
+  --optical-rim: 2px;
+  background: linear-gradient(145deg, #fff, #e7eff06b);
+  border-color: #7795a036;
+  box-shadow: inset 0 -1px 2px #64839124, 0 3px 8px -5px #35566c50;
+}
+
+/* Physical thickness around the commerce planes, not around the whole section. */
+.ca-direction .cj-glass {
+  --optical-rim: clamp(2px, .65cqw, 4px);
+  --optical-shade: #51798d40;
+  border-color: #ffffffb3;
+  box-shadow: inset 0 0 0 3px #e5f0f01f, inset 0 1px 1px #fff,
+    0 20px 45px -15px #2c2a2340, 0 2px 5px #3731210a;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .ca-direction :is(.ha-button, .cj-service-link):hover::after,
+  .ca-direction .as-link:hover .as-proof-arrow::after { background-position: 85% 50%; opacity: 1; }
+  .ca-direction .cj-service-link:hover {
+    background-color: #fff;
+    box-shadow: inset 0 0 0 3px #ffffff50, inset 0 -2px 3px #587d9230,
+      0 1px 2px #2a465620, 0 10px 22px -12px #2a465670;
+  }
+}
+.ca-direction :is(.ha-button, .cj-service-link):active::after { opacity: .5; }
+.ca-direction .cj-service-link:active { box-shadow: inset 0 2px 4px #29475820, 0 2px 6px -4px #29475850; }
+.ca-direction[data-motion="reduce"] :is(.ha-button, .cj-service-link, .as-proof-arrow, .cj-glass)::after { transition: none; }
+@media (prefers-reduced-motion:reduce) {
+  .ca-direction :is(.ha-button, .cj-service-link, .as-proof-arrow, .cj-glass)::after { transition: none; }
+}

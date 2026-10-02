@@ -5,6 +5,7 @@ import { HeroAStudy } from "./HeroAStudy";
 import { AgencyFooter } from "./AgencyStory";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import "./concept-a.css";
+import "./optical-edges.css";
 
 export default function ConceptA() {
   const reduced = usePrefersReducedMotion();

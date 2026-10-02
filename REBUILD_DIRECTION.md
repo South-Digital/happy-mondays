@@ -2,6 +2,12 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — shared optical edge treatment
+
+Extended the dashboard's glass-edge language to the two service buttons, the four commerce planes and the client-story arrow. A masked gradient rim preserves an empty centre, so the effect never washes over text or platform UI. Secondary actions use a 3px clear rim and inner lip; blue primary actions retain their fill with a quieter 2px highlight. Commerce rim thickness scales from 2px to 4px with its scene. Photographs and whole sections remain unframed.
+
+Hover shifts the light along the rim over 550ms; press lowers the highlight. Pointer events pass through the decorative layer, existing keyboard focus remains visible, and both OS and page reduced-motion settings remove that transition. No new JavaScript loop or dependency was added. Browser review covers desktop discovery/hero, 390px phone, actual primary-action click, hover endpoint and keyboard focus; measured no horizontal overflow. Build/TypeScript and diff checks pass.
+
 ## 2 October — Diamond Store editorial redesign
 
 Replaced the ruled, generic testimonial row with an open photographic composition: the actual client campaign image as a lightly angled print, a separately generated optical-glass prism, soft blue/champagne light and a narrower quotation measure. It sits between discovery and purchase as an unpinned, readable pause rather than another enclosing card or scroll takeover. The photo and prism follow the scroll spring at small opposing distances, with slight independent rotation. Text never fades or waits for the art.
