@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionStyle } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
@@ -22,6 +22,20 @@ const links = [
 ];
 
 export function StudyNav() {
+  const reduced = usePrefersReducedMotion();
+  const { scrollY } = useScroll();
+  // Keep one persistent navigation tree: links and keyboard focus travel with
+  // the header as its transparent, full-width layout becomes a compact lens.
+  const compact = useTransform(scrollY, value => {
+    if (reduced) return value > 24 ? 1 : 0;
+    const p = Math.max(0, Math.min(1, (value - 8) / 192));
+    return p * p * p * (p * (p * 6 - 15) + 10);
+  });
+  const glass = useTransform(scrollY, value => {
+    if (reduced) return value > 24 ? 1 : 0;
+    const p = Math.max(0, Math.min(1, value / 40));
+    return p * p * (3 - 2 * p);
+  });
   const menu = useRef<HTMLDetailsElement>(null);
   const { show } = useToast();
   useEffect(() => {
@@ -42,7 +56,7 @@ export function StudyNav() {
     };
   }, []);
   return (
-    <header className="ha-nav">
+    <motion.header className="ha-nav" style={{ "--ha-nav-progress": compact, "--ha-nav-glass": glass } as MotionStyle}>
       <a href="#ha-top" aria-label="Happy Mondays — home">
         <Wordmark size="lg" />
       </a>
@@ -50,7 +64,7 @@ export function StudyNav() {
         {links.map(link => link.href.startsWith("#")
           ? <a key={link.label} href={link.href}>{link.label}</a>
           : <StoryLink key={link.label} href={link.href} className="">{link.label}</StoryLink>)}
-        <MockLink className="ha-button ha-nav-cta" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
+        <MockLink className="ha-button ha-nav-action" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
       </nav>
       <details
         className="ha-mobile-menu"
@@ -99,25 +113,8 @@ export function StudyNav() {
           ))}
         </nav>
       </details>
-    </header>
+    </motion.header>
   );
-}
-
-export function ContinuingNav() {
-  const { scrollY } = useScroll();
-  const [visible, setVisible] = useState(() => window.scrollY > 660);
-  const reduced = usePrefersReducedMotion();
-  // Separate thresholds prevent a trackpad hovering at the boundary from
-  // repeatedly mounting and dismissing the navigation.
-  useMotionValueEvent(scrollY, "change", value => setVisible(current => value > (current ? 540 : 660)));
-  return <AnimatePresence>{visible && <motion.nav key="continuing-nav" className="ha-continuing-nav" aria-label="Quick navigation"
-    initial={reduced ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -8, pointerEvents: "none" }}
-    transition={{ duration: reduced ? 0 : .25, ease: [0.22, 1, 0.36, 1] }}>
-    <a href="#ha-top" aria-label="Happy Mondays — back to top"><Wordmark size="lg" /></a>
-    <a className="ha-continuing-story" href="#client-stories">Client stories</a>
-    <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
-  </motion.nav>}</AnimatePresence>;
 }
 
 function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: boolean; ready: boolean; reduced: boolean; onReady: () => void }) {
