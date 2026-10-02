@@ -18,6 +18,7 @@ export function peopleJourney(progress, width, height, viewportHeight) {
   const endPadding = Math.min(64, width * 0.048);
   const titleY = mix(34, endHeight * 0.16, composition);
   const titleScale = mix(1, Math.min(1.88, width / 660), composition);
+  const invitationWidth = mix(232, 512, composition);
   return {
     opening,
     frameLeft: (width - frameWidth) / 2,
@@ -26,7 +27,11 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     canvasWidth: width, canvasHeight: endHeight,
     photoScale: mix(1.08, 1, opening),
     sideWidth: width * 0.3 - 12,
-    sideOpacity: 1 - blend(progress, 0.2, 0.42),
+    sideOpacity: 1 - blend(progress, 0.26, 0.57),
+    // Fade readable content before the aperture crosses its left inset.
+    // Artwork and atmosphere can remain underneath the expanding scene.
+    sideCopyOpacity: 1 - blend((width + frameWidth) / 2 - (width * .7 + 12), -8, 16),
+    artworkProgress: blend(progress, 0.14, 0.55),
     sideScale: mix(1, 0.94, retreat),
     sideY: mix(0, 18, retreat),
     sideX: mix(0, 22, retreat),
@@ -34,11 +39,14 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     copyWidth: Math.min(360, initialWidth - 68),
     copyX: mix(34, endPadding, composition),
     copyY: mix(height - 206, endHeight * 0.16 + 74.8 * Math.min(1.88, width / 660) + 28, composition),
-    // Keep the contact on the plaster wall, clear of the sea/tree seam.
-    invitationX: mix(34, width * 0.72 - 290, composition),
-    invitationY: mix(height - 88, endHeight - endPadding - 54, composition),
-    invitationWidth: mix(232, 290, composition),
-    contactOpacity: blend(progress, 0.62, 0.84),
-    contactY: mix(10, 0, blend(progress, 0.62, 0.84)),
+    // The invitation resolves into one horizontal group, right-aligned to the
+    // same scene inset as the heading, with breathing room above the terrace.
+    invitationX: mix(34, width - endPadding - 512, composition),
+    invitationY: mix(height - 88, endHeight - endPadding - 110, composition),
+    invitationWidth,
+    buttonWidth: mix(232, 252, composition),
+    buttonX: mix(0, 260, composition),
+    contactOpacity: blend(progress, 0.68, 0.88),
+    contactY: mix(8, 0, blend(progress, 0.68, 0.88)),
   };
 }

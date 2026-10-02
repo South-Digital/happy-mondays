@@ -2,6 +2,16 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — partnership lighting, layered objects and contact placement
+
+User clarified that the photographic colour must fill the entire side cards; the previous edge masks and fade into the white page were rejected. Both backgrounds now remain opaque to their rounded edges. The follow-up light pass adds warmer upper highlights, lighter sage and coastal blue midtones, and retained photographic variation.
+
+Replaced the flattened artwork with two newly generated transparent source elements: one optical glass disc and one pearl calendar. Independent instances support a small separation of the platform discs and compression of the calendar stack as the centre expands. Original official platform marks remain separate SVGs. Ambient movement pauses when offscreen or hidden; reduced motion uses the complete still arrangement. The side cards now remain visible further into the expansion. Their text yields before the measured aperture crosses its inset, avoiding clipped letters while the objects remain visible. No additional scroll clock is introduced.
+
+The final contact composition is a single right-aligned horizontal group, lifted above the terrace: Keanu's portrait/details sit on the quieter wall, then the button on the right. On mobile the button and contact details stack directly below the copy. Both use the existing booking preview behavior. The middle photographic crop and veil reveal more olive shadow without obscuring the text.
+
+Verification: client-review build and five geometry tests pass. Tests now cover the moving button and visible contact staying within the aperture, the final right inset, and clearance above the lower edge. Visual checks cover 1280 and 1440px desktops, 1024px tablet, and 390px mobile/reduced motion. Proofs are in the parent output folder under `happy-mondays-partnership-refinement-2026-10-02`. Asset provenance is recorded beside the images. This is a refinement for review, not a claim of client design acceptance.
+
 ## 2 October — source-grounded blurred backdrops
 
 Reopened the live Miro board and the actual 18 September transcript, specifically 38:10–41:05 and 48:01–51:54. The board explicitly requests an out-of-focus nature photograph behind sharp foreground elements, with warm neutrals, restrained accent colour and layered depth. Its Solidroad integration and blog captures show irregular, optically blurred colour rather than uniform radial glows. On the call, Dan describes the colours and feeling of an unrecognisably blurred background; Keanu prefers the softer gradients and rejects excessive colour. These are source observations; the olive/blue pairing below is our application to the existing page.

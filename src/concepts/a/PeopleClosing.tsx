@@ -83,11 +83,15 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     "--pc-radius": `${value.radius}px`, "--pc-canvas-width": `${value.canvasWidth}px`,
     "--pc-canvas-height": `${value.canvasHeight}px`, "--pc-photo-scale": value.photoScale,
     "--pc-side-width": `${value.sideWidth}px`, "--pc-side-opacity": value.sideOpacity,
+    "--pc-side-copy-opacity": value.sideCopyOpacity,
     "--pc-side-scale": value.sideScale, "--pc-side-y": `${value.sideY}px`, "--pc-side-x": `${value.sideX}px`,
+    "--pc-art-progress": value.artworkProgress,
     "--pc-title-x": `${value.titleX}px`, "--pc-title-y": `${value.titleY}px`, "--pc-title-scale": value.titleScale,
     "--pc-copy-width": `${value.copyWidth}px`, "--pc-copy-x": `${value.copyX}px`, "--pc-copy-y": `${value.copyY}px`,
     "--pc-invite-x": `${value.invitationX}px`, "--pc-invite-y": `${value.invitationY}px`,
     "--pc-invite-width": `${value.invitationWidth}px`, "--pc-contact-opacity": value.contactOpacity,
+    "--pc-button-width": `${value.buttonWidth}px`,
+    "--pc-button-x": `${value.buttonX}px`,
     "--pc-contact-y": `${value.contactY}px`,
   }));
   // Bind the single geometry snapshot to CSS without a React render each frame.

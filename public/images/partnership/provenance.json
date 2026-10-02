@@ -20,7 +20,19 @@
       "archive_path": "02 - Glyph/svg/shopify_glyph.svg",
       "brand_page": "https://www.shopify.com/brand-assets",
       "notes": "Unmodified official SVG. Replaces the pre-existing 32px PNG in the larger artwork only."
+    },
+    {
+      "file": "glass-disc-v2-{400,800}.webp",
+      "master": "exec-5d7bec31-d8ff-4f39-a1d6-90e297f3e3a7.png",
+      "source": "OpenAI imagegen",
+      "brief": "Single optical glass medallion derived from the approved assembly, with sage refraction and warm ivory daylight. Transparent blank face; official platform marks remain separate unmodified SVGs. Instances compose into two independently moving foreground objects."
+    },
+    {
+      "file": "calendar-single-v2-{400,800}.webp",
+      "master": "exec-85a9c874-db27-46f0-87b7-b9e8d46dbf86.png",
+      "source": "OpenAI imagegen",
+      "brief": "Single pearl calendar derived from the approved stack, retaining embossed blank dates and blue checked day. Warm top-left illumination and cool blue edge. Transparent instances create the independently compressing three-layer stack."
     }
   ],
-  "encoding": "WebP quality 88, alpha quality 100, widths 640 and 960; generated masters remain in the session image directory."
+  "encoding": "Original assembly variants: WebP quality 88, alpha quality 100, widths 640 and 960. New independent v2 elements: same encoding at 400 and 800; generated masters retained in session image directory."
 }

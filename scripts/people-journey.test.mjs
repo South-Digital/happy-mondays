@@ -17,6 +17,13 @@ for (const [width, height, viewport] of [[984,480,700], [1184,480,720], [1320,48
       assert.equal(current.copyWidth, opening.copyWidth);
       assert.ok(current.invitationX + current.invitationWidth <= current.frameWidth + 0.0001);
       assert.ok(current.invitationY + 54 < current.frameHeight);
+      if (current.contactOpacity > 0) {
+        assert.ok(current.invitationX + 236 < current.frameWidth);
+      }
+      assert.ok(current.invitationX + current.buttonX + current.buttonWidth <= current.frameWidth);
+      if (current.sideCopyOpacity > 0) {
+        assert.ok(current.frameLeft + current.frameWidth < width - current.sideWidth + 30);
+      }
       assert.ok(current.copyY >= current.titleY + 74.8 * current.titleScale + 20);
       previous = current;
     }
@@ -28,7 +35,8 @@ test('readable holds and reversible geometry without breakpoint switches', () =>
   assert.deepEqual(at(0.9), at(1));
   assert.equal(at(1).sideOpacity, 0);
   assert.equal(at(1).contactOpacity, 1);
-  assert.ok(at(1).invitationX + at(1).invitationWidth <= 1184 * 0.8);
+  assert.equal(at(1).invitationX + at(1).invitationWidth, 1184 - 1184 * .048);
+  assert.ok(at(1).invitationY + 54 <= at(1).frameHeight - 100);
   const forward = Array.from({length:101}, (_,i) => at(i/100));
   const reverse = Array.from({length:101}, (_,i) => at((100-i)/100)).reverse();
   assert.deepEqual(forward, reverse);
