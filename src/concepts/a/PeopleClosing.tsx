@@ -122,7 +122,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
           <div className="pc-stage" ref={stage}>
             <motion.article {...businessTilt} className="pc-reason pc-reason--business"
               aria-hidden={animated && !sideVisible}
-              style={{ ...businessTilt.style, boxShadow: "none" }}>
+              style={businessTilt.style}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
                 <PartnershipArtwork kind="platforms" reduced={reduced} visible={!animated || sideVisible} />
@@ -131,7 +131,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
             </motion.article>
             <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
               aria-hidden={animated && !sideVisible}
-              style={{ ...feeTilt.style, boxShadow: "none" }}>
+              style={feeTilt.style}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
                 <PartnershipArtwork kind="calendar" reduced={reduced} visible={!animated || sideVisible} />
