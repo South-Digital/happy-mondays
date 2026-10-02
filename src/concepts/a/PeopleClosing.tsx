@@ -3,7 +3,6 @@ import { motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useS
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
-import { StoryLink } from "./AgencyStory";
 import "./people-closing.css";
 
 const TRAVEL = 1.7;
@@ -155,10 +154,6 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   </motion.div>
                 </motion.div>
                 <p>Your products. Your margins. Your ambitions. We get to know your business, then join the dots.</p>
-                <div className="pc-signature" aria-label="Google Ads and Shopify, one team">
-                  <span>Google Ads <span className="pc-plus">+</span> Shopify</span>
-                  <span>One team. The whole picture.</span>
-                </div>
               </div>
             </motion.article>
             <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
@@ -176,9 +171,6 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   </motion.div>
                 </motion.div>
                 <p>A fixed monthly fee within your spend band. Clear priorities, close collaboration. No percentage of ad spend.</p>
-                <div className="pc-signature">
-                  <StoryLink href="/pricing" tabIndex={animated && !sideVisible ? -1 : undefined}>Explore pricing <span aria-hidden="true">↗</span></StoryLink>
-                </div>
               </div>
             </motion.article>
             <motion.article {...peopleTilt} className="pc-people" aria-labelledby="cj-people-heading"

@@ -58,20 +58,13 @@
   margin: auto 0 22px;
   padding-top: 12px;
 }
-.pc-signature, .pc-invitation {
+.pc-reason p { margin-bottom: 0; }
+.pc-invitation {
   border-top: 1px solid #40595026;
   padding-top: 16px;
   margin-top: 0;
   min-height: 77px;
 }
-.pc-signature {
-  display: flex; flex-direction: column; justify-content: center;
-  min-height: 70px; flex-shrink: 0;
-  gap: 7px; font-size: 13px; line-height: 1.4; letter-spacing: -.02em;
-}
-.pc-signature .as-link { font-size: 13px; min-height: 44px; }
-.pc-signature > span:first-child { font-size: 15px; font-weight: 500; }
-.pc-signature > span:last-child { opacity: .8; }
 /* Physical objects sit in the same soft daylight as the photographic centre.
    Their aspect ratio stays intact while the card's layout narrows around them. */
 .pc-art {
@@ -99,7 +92,6 @@
     radial-gradient(ellipse at 0% 100%, #e8d8b9cf, transparent 60%);
   filter: blur(24px);
 }
-.pc-plus { padding: 0 7px; opacity: .6; }
 .pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
 .pc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; }
@@ -202,11 +194,9 @@
   .pc-sequence[data-animated="true"] .pc-art { width: min(100%, 330px); margin-block: 4px 0; }
   .pc-sequence[data-animated="true"] .pc-reason p,
   .pc-sequence[data-animated="true"] .pc-people-content > p { font-size: 16px; line-height: 1.5; }
-  .pc-sequence[data-animated="true"] .pc-signature { min-height: 71px; }
 }
 @media (max-width: 700px) {
   .pc-art { width: min(100%, 330px); margin-block: 10px; }
-  .pc-reason p { margin-bottom: 20px; }
 }
 
 .pc-people-content:not([data-wide="true"]) > p { max-width: min(32ch, 100%); }
