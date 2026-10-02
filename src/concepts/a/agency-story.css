@@ -18,9 +18,9 @@
 .as-proof blockquote em { font-style: normal; color: #375969; }
 .as-proof-source { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px; margin-top: 38px; }
 .as-proof-person { display: flex; align-items: center; gap: 13px; }
-/* Reserved for Gary's supplied photograph. Initials are a placeholder, not a generated person. */
+/* The supplied portrait uses a face-focused CSS crop; the source stays intact. */
 .as-proof-portrait { width: 56px; height: 56px; flex: 0 0 56px; display: grid; place-items: center; border-radius: 50%; overflow: hidden; background: linear-gradient(145deg,#f3f1eb,#dce6e7); border: 1px solid #fff; box-shadow: inset 0 0 0 1px #47606a0a; color: #516570; font-size: 15px; }
-.as-proof-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.as-proof-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(1.55); transform-origin: 64% 0%; }
 .as-proof-source p { font-size: 14px; line-height: 1.5; margin: 0; }
 .as-proof-source p > span { display: block; color: var(--ca-body); font-size: 12px; margin-top: 3px; }
 .as-proof-source .as-link { font-size: 12px; flex-shrink: 0; gap: 12px; text-decoration: none; }

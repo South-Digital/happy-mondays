@@ -4,7 +4,7 @@ Created with the built-in image generation tool. Decorative optical-glass sculpt
 
 Runtime asset: `optical-prism-v1.webp`.
 
-Gary's real headshot is pending. `ClientStory` accepts an optional `portraitSrc`; its 56px portrait slot currently shows a neutral GI monogram, never a synthetic likeness.
+Gary's user-supplied headshot was added on 2 October. `ClientStory` receives `portraitSrc` pointing to `gary-ingram.webp`; its 56px portrait slot uses a face-focused CSS crop of the real photograph.
 
 ## Generation prompt
 

@@ -652,7 +652,7 @@ export function GrowthJourney() {
             </div>
           </Copy>
         </section>
-        <ClientStory />
+        <ClientStory portraitSrc="/images/client-stories/gary-ingram.webp" />
         <PeopleClosing>
         <section
           className="cj-row cj-row--reverse"
