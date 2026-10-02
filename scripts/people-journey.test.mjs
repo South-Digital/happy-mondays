@@ -28,6 +28,7 @@ test('readable holds and reversible geometry without breakpoint switches', () =>
   assert.deepEqual(at(0.9), at(1));
   assert.equal(at(1).sideOpacity, 0);
   assert.equal(at(1).contactOpacity, 1);
+  assert.ok(at(1).invitationX + at(1).invitationWidth <= 1184 * 0.8);
   const forward = Array.from({length:101}, (_,i) => at(i/100));
   const reverse = Array.from({length:101}, (_,i) => at((100-i)/100)).reverse();
   assert.deepEqual(forward, reverse);

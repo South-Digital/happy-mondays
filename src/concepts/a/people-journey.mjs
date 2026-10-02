@@ -34,7 +34,8 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     copyWidth: Math.min(360, initialWidth - 68),
     copyX: mix(34, endPadding, composition),
     copyY: mix(height - 206, endHeight * 0.16 + 74.8 * Math.min(1.88, width / 660) + 28, composition),
-    invitationX: mix(34, width - endPadding - 290, composition),
+    // Keep the contact on the plaster wall, clear of the sea/tree seam.
+    invitationX: mix(34, width * 0.72 - 290, composition),
     invitationY: mix(height - 88, endHeight - endPadding - 54, composition),
     invitationWidth: mix(232, 290, composition),
     contactOpacity: blend(progress, 0.62, 0.84),

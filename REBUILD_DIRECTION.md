@@ -2,6 +2,14 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — actual-tab QA correction
+
+The user's clipping screenshot was reproduced in their open Chrome preview at 1727×963. It still loaded `index-CfEzq_bT.js` / `index-CZLBb7UI.css`, with zero pin bottom padding: the 620px scene extended 55px past the story's clipping edge. Previous QA inspected a newer temporary tab and did not establish that the user's already-open preview had refreshed. This was a delivery/verification gap, not a user error.
+
+Refreshing that exact tab verified the existing 110px pin clearance and restored the lower corners. The contact destination is now at 72% of the scene width, entirely on the plaster wall rather than over the sea/tree seam. The extra radial photographic wash is removed. Static layouts also reserve 32px of real bottom space for the edge/shadow; the previous collapsing margin alone was insufficient for hover tilt. Overall section spacing is retained.
+
+QA must identify the loaded bundle in the actual review tab after rebuilding, and distinguish that from the deployed commit. Browser checks in this correction include the supplied 1727×963 context, 1080×700 expansion/release/reverse, 1024×680 static and 320×780 phone. Geometry samples record the clipping boundary, button inset, contact containment, visible copy overlap and page overflow. Hidden contact geometry is not treated as a visible overlap. A screenshot of an endpoint alone does not validate the journey.
+
 ## 2 October — supporting artwork motion
 
 The supporting graphics previously only settled once, triggered by visibility of the entire stage. Each object now observes its own visibility and image readiness. Separate layers compose the entrance, damped scroll drift, and a restrained continuous perspective/vertical movement; a masked light sweep stays within the original transparent artwork. The platform marks move with their glass assembly. This animates the existing raster compositions, not separately modelled calendar pages or medallions.

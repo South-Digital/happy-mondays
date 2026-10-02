@@ -4,7 +4,8 @@
   --pc-small-title: clamp(25px, 2.1vw, 30px);
   --pc-height: clamp(480px, 54svh, 510px);
   position: relative;
-  margin-bottom: 54px;
+  padding-bottom: 32px;
+  margin-bottom: 22px;
 }
 .pc-context > .cj-row { padding-bottom: 0; }
 .pc-journey { margin-top: var(--pc-section-gap); position: relative; }
@@ -125,7 +126,7 @@
 .pc-people h2:focus-visible { outline: 2px solid var(--ca-action); outline-offset: 6px; }
 .pc-people h2 > span { display: block; color: var(--ca-heading-soft); font-weight: var(--ca-display-weight); }
 .pc-people-content > p { max-width: 360px; color: var(--ca-body); margin: 28px 0 0; padding-top: 0; }
-.pc-invitation { align-self: flex-end; width: 100%; max-width: 290px; position: relative; min-height: 54px; margin-top: auto; padding-top: 0; }
+.pc-invitation { align-self: flex-end; width: 100%; max-width: 290px; position: relative; min-height: 54px; margin-top: auto; margin-inline-end: 24%; padding-top: 0; }
 .pc-invitation .ha-button { font-size: 14px; min-height: 54px; padding-inline: 24px; white-space: nowrap; }
 .pc-contact { position: absolute; left: 0; top: -72px; white-space: nowrap; }
 .pc-contact img { flex-shrink: 0; }
@@ -133,6 +134,7 @@
 .pc-invitation .pc-contact span { font-size: 14px; }
 .pc-sequence[data-animated="true"] {
   height: calc(var(--pc-context-height) + var(--pc-section-gap) + var(--pc-height) + 180svh + 110px);
+  padding-bottom: 0;
   margin-bottom: 54px;
 }
 .pc-sequence[data-animated="true"] .pc-pin {
@@ -170,12 +172,6 @@
   transform: scale(var(--pc-photo-scale)); transform-origin: 65% 50%;
 }
 .pc-sequence[data-animated="true"] .pc-people-content { padding: 0; min-height: 0; }
-.pc-people::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse at 88% 83%, #fffffcf2, #fffffcbb 12%, transparent 39%);
-  opacity: 1;
-}
-.pc-sequence[data-animated="true"] .pc-people::after { opacity: var(--pc-contact-opacity); }
 .pc-sequence[data-animated="true"] .pc-people h2 {
   position: absolute; left: 0; top: 0; font-size: 34px; white-space: nowrap;
   transform-origin: 0 0;
@@ -209,7 +205,7 @@
 }
 /* Small screens use the complete, unpinned composition. */
 @media (max-width: 700px) {
-  .pc-sequence { margin-bottom: 36px; }
+  .pc-sequence { margin-bottom: 4px; }
   .pc-journey { margin: var(--pc-section-gap) -8px 0; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
   .pc-reason { min-height: 440px; padding: 32px; border-radius: 28px; }
@@ -220,7 +216,7 @@
   .pc-people h2 { font-size: clamp(36px, 10vw, 48px); }
   .pc-photo img { object-position: 45% center; }
   .pc-people-content > p { font-size: 16px; max-width: 32ch; }
-  .pc-invitation { align-self: flex-start; }
+  .pc-invitation { align-self: flex-start; margin-inline-end: 0; }
   .pc-contact { white-space: normal; }
   .pc-invitation .ha-button { padding-inline: 20px; }
 }
