@@ -30,14 +30,6 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                 <p>Your products, your margins, your ambitions. We get to know your business, then join the dots.</p>
               </div>
             </motion.article>
-            <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
-              style={feeTilt.style}>
-              <div className="pc-reason-inner">
-                <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <PartnershipArtwork kind="calendar" reduced={reduced} visible={true} />
-                <p>One clear monthly fee, agreed around your spend band. Never a percentage of your ad spend.</p>
-              </div>
-            </motion.article>
             <motion.article {...peopleTilt} className="pc-people" aria-labelledby="cj-people-heading"
               style={peopleTilt.style}>
               <motion.picture className="pc-photo" aria-hidden="true">
@@ -50,7 +42,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   alt="" width="1942" height="809" loading="lazy" decoding="async" />
               </motion.picture>
               <div className="pc-people-content">
-                <h2 id="cj-people-heading" tabIndex={-1}>
+                <h2 id="cj-people-heading">
                   <span>Good people.</span>On your side.
                 </h2>
                 <p>Work directly with a senior team that gets to know your products, your customers and where you want to go.</p>
@@ -63,6 +55,14 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                     <div><strong>Your first chat with Keanu</strong><span>Founder, ex-Google</span></div>
                   </div>
                 </div>
+              </div>
+            </motion.article>
+            <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
+              style={feeTilt.style}>
+              <div className="pc-reason-inner">
+                <h2><span>A flat fee.</span><br />A clear plan.</h2>
+                <PartnershipArtwork kind="calendar" reduced={reduced} visible={true} />
+                <p>One clear monthly fee, agreed around your spend band. Never a percentage of your ad spend.</p>
               </div>
             </motion.article>
           </div>
