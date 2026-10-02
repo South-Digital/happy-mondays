@@ -13,10 +13,10 @@
   position: relative;
   isolation: isolate;
   border-color: transparent;
-  --lens-fill: #242b2feF;
-  --lens-light: #f4f3e924;
-  --lens-shadow: #0d161b38;
-  --lens-edge: #f5f6e880;
+  --lens-fill: #264e65d9;
+  --lens-light: #d4f0ff38;
+  --lens-shadow: #0b304750;
+  --lens-edge: #ebfaffb3;
   --lens-edge-shade: #163e5766;
   background:
     radial-gradient(ellipse at 14% 0%, var(--lens-light), transparent 63%),

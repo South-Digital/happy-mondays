@@ -146,7 +146,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={feeTilt.style}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <PartnershipArtwork kind="fee" reduced={reduced} visible={!animated || sideVisible} />
+                <PartnershipArtwork kind="calendar" reduced={reduced} visible={!animated || sideVisible} />
                 <p>One clear monthly fee, agreed around your spend band. Never a percentage of your ad spend.</p>
               </div>
             </motion.article>

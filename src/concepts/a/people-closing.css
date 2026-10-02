@@ -71,7 +71,7 @@
   animation: pc-platform-drift 7s ease-in-out infinite;
   animation-play-state: paused;
 }
-.pc-art--fee .pc-art-float { animation-name: pc-calendar-drift; animation-duration: 8.5s; }
+.pc-art--calendar .pc-art-float { animation-name: pc-calendar-drift; animation-duration: 8.5s; }
 .pc-art-light {
   position: absolute; inset: 0; opacity: 0;
   background: linear-gradient(108deg, transparent 37%, #ffffffb3 46%, #ffffff30 51%, transparent 60%);
@@ -99,7 +99,7 @@
   100% { background-position: -50% 0; opacity: 0; }
 }
 .pc-art-object { position: absolute; width: 100%; height: 100%; object-fit: contain; }
-.pc-art--platforms, .pc-art--fee { aspect-ratio: 3 / 2; }
+.pc-art--platforms, .pc-art--calendar { aspect-ratio: 3 / 2; }
 .pc-art-piece { position: absolute; aspect-ratio: 1; }
 .pc-art-piece--shopify, .pc-art-piece--google { width: 64%; }
 .pc-art-piece--shopify {
@@ -132,7 +132,7 @@
   background: #344b4224; filter: blur(10px); border-radius: 50%;
   transform: scaleX(calc(1 - var(--pc-art-progress, 0) * .12));
 }
-.pc-art--fee .pc-art-float::after { background: #34536b21; }
+.pc-art--calendar .pc-art-float::after { background: #34536b21; }
 
 /* 18 September call + Miro: blurred nature behind a crisp foreground.
    Reuse the page's olive grove and coastal plate for a related material palette. */
@@ -142,13 +142,13 @@
   background-size: 145% auto;
 }
 .pc-reason--fee::before {
-  background-image: url('/images/morrow/courtyard-800.webp');
+  background-image: url('/images/hero-a-v2/coast-800.webp');
   background-position: 57% 49%;
   background-size: auto 125%;
-  filter: blur(36px) saturate(.3) brightness(1.13);
+  filter: blur(36px) saturate(.7) brightness(1.08);
 }
 .pc-reason--fee::after {
-  background: linear-gradient(130deg, #f5eeddbf, #e8e1d5a3 44%, #c5c6b99c);
+  background: linear-gradient(130deg, #faf2ddbf, #dfedf4a3 44%, #c1dce99c);
 }
 .pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
@@ -290,16 +290,3 @@
   .pc-people::before { background: linear-gradient(90deg, #faf6edc9, #faf6ed99 55%, #faf6ed24); }
   .pc-invitation { gap: 22px; }
 }
-
-.pc-art--fee { display: grid; align-items: center; }
-.pc-fee-study { position: absolute; inset: 5% 9%; padding: 16px 20px; display: flex; flex-direction: column; border-radius: 22px; background: linear-gradient(135deg,#ffffffe8,#f9f8f0b8); border: 1px solid #ffffffc9; box-shadow: 0 18px 34px -22px #4d4a3652, inset 0 1px 0 #fff; color: #444f45; }
-.pc-fee-study-heading { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 500; }
-.pc-fee-study-heading svg { width: 20px; height: 20px; opacity: .6; }
-.pc-fee-plot { position: relative; flex: 1; min-height: 48px; margin: 12px 0 10px; border-bottom: 1px solid #64706524; }
-.pc-fee-spend { position: absolute; bottom: 0; width: 13%; background: linear-gradient(#c0c5b890,#d7dacb40); border-radius: 5px 5px 0 0; transform-origin: bottom; }
-.pc-fee-plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.pc-fee-key { flex-shrink: 0; display: flex; justify-content: center; gap: 16px; font-size: 10px; color: #6a7167; }
-.pc-fee-key span::before { content: ''; display: inline-block; width: 10px; height: 2px; margin-right: 5px; vertical-align: middle; background: #b3bbad; }
-.pc-fee-key span:last-child::before { background: #56665c; }
-.pc-fee-study > p { flex-shrink: 0; font-size: 10px !important; line-height: 1.3 !important; margin: 8px 0 0 !important; padding: 0 !important; color: #7e8278; text-align: center; opacity: 1 !important; }
-@media (min-width:1080px) { .pc-sequence[data-animated="true"] .pc-fee-study { inset: 8% 5% 6%; } }

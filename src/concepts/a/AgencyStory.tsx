@@ -22,6 +22,8 @@ export function ClientStory({ portraitSrc }: { portraitSrc?: string }) {
   const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
   const progress = scrollYProgress;
   const photoY = useTransform(progress, [0, 1], [10, -10]);
+  const prismY = useTransform(progress, [0, 1], [-10, 10]);
+  const prismRotate = useTransform(progress, [0, 1], [-3, 2]);
 
   return (
     <section ref={section} className="as-proof" id="client-stories" tabIndex={-1} aria-label="A word from The Diamond Store">
@@ -31,6 +33,7 @@ export function ClientStory({ portraitSrc }: { portraitSrc?: string }) {
           <motion.div className="as-proof-photo" style={reduced ? undefined : { y: photoY }}>
             <img src="/images/client-stories/diamond-store-jewellery.jpg" width="867" height="867" loading="lazy" decoding="async" alt="Diamond jewellery from The Diamond Store worn by a model" />
           </motion.div>
+          <motion.img className="as-proof-prism" src="/images/client-stories/optical-prism-v1.webp" width="960" height="640" loading="lazy" decoding="async" alt="" aria-hidden="true" style={reduced ? undefined : { y: prismY, rotate: prismRotate }} />
         </div>
         <figure className="as-proof-editorial">
           <div className="as-proof-masthead"><span>A client’s perspective</span>
