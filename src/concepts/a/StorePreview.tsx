@@ -29,9 +29,9 @@ function Sparkline({ values, progress }: { values: number[]; progress: number })
 export function StorePreview({ time }: { time: number }) {
   const id = useId().replace(/:/g, "");
   const entrance = settle(segment(time, 60, 900));
-  const chart = settle(segment(time, 1350, 2750));
-  const newOrder = settle(segment(time, 3550, 650));
-  const sales = 128381 + Math.round(79 * newOrder);
+  const chart = settle(segment(time, 1050, 2350));
+  const newOrder = settle(segment(time, 2800, 650));
+  const sales = 96750 + Math.round(31631 * chart) + Math.round(79 * newOrder);
   const metrics = [
     { label: "Total sales", value: "$" + sales.toLocaleString("en-US"), change: "24.8%", points: salesByDay },
     { label: "Orders", value: (1841 + (newOrder >= 1 ? 1 : 0)).toLocaleString("en-US"), change: "18.6%", points: [178, 221, 205, 254, 284, 340, 360] },
@@ -39,7 +39,7 @@ export function StorePreview({ time }: { time: number }) {
     { label: "Returning customer rate", value: "28.6%", change: "8.3%", points: [24, 26, 25, 28, 27, 30, 31] },
   ];
   return (
-    <motion.div className="ha-store ha-admin" style={{ opacity: entrance, y: 30 * (1 - entrance), scale: .985 + .015 * entrance }}
+    <motion.div className="ha-store ha-admin" style={{ opacity: entrance, y: 42 * (1 - entrance), rotateX: 5 * (1 - entrance), transformPerspective: 1200, scale: .975 + .025 * entrance }}
       role="img" aria-label="Illustrative Shopify Analytics dashboard: $128,460 total sales, 1,842 orders, 3.4% conversion rate and 28.6% returning customer rate. Fictional store data, not client results.">
       <div className="ha-store-interior" aria-hidden="true">
         <aside className="ha-store-sidebar">
@@ -55,7 +55,7 @@ export function StorePreview({ time }: { time: number }) {
           <div className="ha-admin-settings"><Polaris name="SettingsFilled" />Settings</div>
         </aside>
         <div className="ha-store-main">
-          <div className="ha-store-heading"><h2><Polaris name="ChartVerticalFilled" />Analytics</h2><div className="ha-admin-customize"><Polaris name="MenuHorizontal" /><span>Customize</span></div></div>
+          <div className="ha-store-heading"><h2><Polaris name="ChartVerticalFilled" />Analytics</h2><span className="ha-example-label">Illustrative store</span><div className="ha-admin-customize"><Polaris name="MenuHorizontal" /><span>Customize</span></div></div>
           <div className="ha-admin-filters"><span><Polaris name="Calendar" />Last 7 days<Polaris name="ChevronDown" /></span><span>Compare: Previous period<Polaris name="ChevronDown" /></span><span>USD $</span></div>
           <div className="ha-store-metrics">
             {metrics.map((metric, index) => <div key={metric.label} style={{ opacity: .4 + .6 * settle(segment(time, 900 + index * 80, 650)), transform: `translateY(${4 * (1 - settle(segment(time, 900 + index * 80, 650)))}px)` }}>
@@ -65,7 +65,7 @@ export function StorePreview({ time }: { time: number }) {
           </div>
           <div className="ha-sales-report">
             <div className="ha-chart-title"><h3>Total sales over time</h3><Polaris name="MenuHorizontal" /></div>
-            <div className="ha-chart-summary"><strong>${sales.toLocaleString("en-US")}</strong><span><Polaris name="ArrowUp" />24.8%</span></div>
+
             <div className="ha-chart">
               <div className="ha-chart-scale"><span>$30K</span><span>$15K</span><span>$0</span></div>
               <div className="ha-chart-plot">

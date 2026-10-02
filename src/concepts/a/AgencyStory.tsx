@@ -1,6 +1,6 @@
 import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useToast } from "../../components/Toast";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { Wordmark } from "../../components/Brand";
 import "./agency-story.css";
@@ -20,30 +20,27 @@ export function ClientStory({ portraitSrc }: { portraitSrc?: string }) {
   const section = useRef<HTMLElement>(null);
   const reduced = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: .5 });
+  const progress = scrollYProgress;
   const photoY = useTransform(progress, [0, 1], [10, -10]);
-  const photoRotate = useTransform(progress, [0, 1], [-2.4, -1.2]);
-  const prismY = useTransform(progress, [0, 1], [-12, 12]);
-  const prismRotate = useTransform(progress, [0, 1], [-4, 2]);
+
   return (
     <section ref={section} className="as-proof" id="client-stories" tabIndex={-1} aria-label="A word from The Diamond Store">
       <div className="as-proof-spread">
         <div className="as-proof-art">
           <div className="as-proof-light" aria-hidden="true" />
-          <motion.div className="as-proof-photo" style={reduced ? undefined : { y: photoY, rotate: photoRotate }}>
+          <motion.div className="as-proof-photo" style={reduced ? undefined : { y: photoY }}>
             <img src="/images/client-stories/diamond-store-jewellery.jpg" width="867" height="867" loading="lazy" decoding="async" alt="Diamond jewellery from The Diamond Store worn by a model" />
           </motion.div>
-          <motion.img className="as-proof-prism" src="/images/client-stories/optical-prism-v1.webp" width="960" height="640" loading="lazy" decoding="async" alt="" aria-hidden="true" style={reduced ? undefined : { y: prismY, rotate: prismRotate }} />
         </div>
         <figure className="as-proof-editorial">
           <div className="as-proof-masthead"><span>A client’s perspective</span>
           <img className="as-proof-brand" src="/images/client-stories/diamond-store.svg" width="418" height="144" loading="lazy" decoding="async" alt="The Diamond Store London" />
           </div>
-          <blockquote><span className="as-proof-quote-mark" aria-hidden="true">“</span>Their knowledge of Google Ads is second to none and they are <em>constantly finding new ways to scale and grow.</em>”</blockquote>
+          <blockquote><span className="as-proof-quote-mark" aria-hidden="true">“</span>They have our business at the heart of all of their decisions. <em>Their knowledge of Google Ads has enabled us to take our growth to the next level.</em>”</blockquote>
           <figcaption className="as-proof-source">
             <div className="as-proof-person">
-              <span className="as-proof-portrait">{portraitSrc ? <img src={portraitSrc} alt="Gary Ingram" width="64" height="64" /> : <span aria-hidden="true">GI</span>}</span>
-              <p>Gary Ingram<span>Co-Founder, The Diamond Store</span></p>
+              <span className="as-proof-portrait">{portraitSrc ? <img src={portraitSrc} alt="" width="64" height="64" /> : <span aria-hidden="true">GI</span>}</span>
+              <p>Gary Ingram<span>CRO, The Diamond Store</span></p>
             </div>
             <StoryLink href="/case-studies/the-diamond-store">Read their story <span className="as-proof-arrow" aria-hidden="true">↗</span></StoryLink>
           </figcaption>

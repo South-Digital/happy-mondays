@@ -1,19 +1,20 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionStyle } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useTransform, type MotionStyle } from "framer-motion";
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
 import { peopleJourney, peopleRelease } from "./people-journey.mjs";
 import { PartnershipArtwork } from "./PartnershipArtwork";
 import "./people-closing.css";
+import { FounderPortrait } from "./FounderPortrait";
 
-const TRAVEL = 1.8;
+const TRAVEL = 1.1;
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 // Select enough source detail for both the fixed panorama and static terrace.
 const terraceSizes = "(max-width: 700px) 1297px, (max-width: 980px) 1393px, 1730px";
 
 /** Pin the real preceding scene and the cards together. The reader controls
- * progress; a damped follower softens wheel steps without a timed takeover. */
+ * progress through the page’s single scroll interpolator, without a timed takeover. */
 export function PeopleClosing({ children }: { children: ReactNode }) {
   const reduced = usePrefersReducedMotion();
   const ref = useRef<HTMLElement>(null);
@@ -35,7 +36,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const [travelSpace, setTravelSpace] = useState({ travel: 1296, exit: 240 });
   const { scrollY } = useScroll();
   const raw = useTransform(() => clamp((scrollY.get() - start.get()) / distance.get()));
-  const progress = useSpring(raw, { stiffness: 150, damping: 30, mass: 0.7 });
+  const progress = raw;
   const animated = roomForMotion && !reduced;
   const releaseY = useTransform(() => peopleRelease(scrollY.get() - start.get() - distance.get(), exitDistance.get()));
 
@@ -59,14 +60,14 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
       setPinTop(top);
       start.set(ref.current!.getBoundingClientRect().top + window.scrollY - top);
       distance.set(window.innerHeight * TRAVEL);
-      const exit = Math.min(280, Math.max(180, window.innerHeight * .3));
+      const exit = 0;
       exitDistance.set(exit);
       setTravelSpace({ travel: window.innerHeight * TRAVEL, exit });
     };
     measure();
     // History restoration can mount us halfway through the pinned sequence.
-    // Start there immediately; only subsequent scrolling should be spring-led.
-    progress.jump(clamp((window.scrollY - start.get()) / distance.get()));
+    // The scene follows the same scroll position immediately, without another spring.
+
     const observer = new ResizeObserver(measure);
     observer.observe(context.current);
     observer.observe(stage.current);
@@ -145,7 +146,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={feeTilt.style}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <PartnershipArtwork kind="calendar" reduced={reduced} visible={!animated || sideVisible} />
+                <PartnershipArtwork kind="fee" reduced={reduced} visible={!animated || sideVisible} />
                 <p>One clear monthly fee, agreed around your spend band. Never a percentage of your ad spend.</p>
               </div>
             </motion.article>
@@ -171,10 +172,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   </MockLink>
                   <div className="cj-conversation-person pc-contact"
                     aria-hidden={animated && !contactVisible}>
-                    <img src="/images/editorial/keanu-480.webp"
-                      srcSet="/images/editorial/keanu-480-96.webp 96w, /images/editorial/keanu-480-192.webp 192w, /images/editorial/keanu-480.webp 480w"
-                      sizes="48px" alt="Keanu Fischell, founder of Happy Mondays" width="48" height="48" loading="lazy" />
-                    <div><strong>Your first chat with Keanu</strong><span>Founder, Happy Mondays</span></div>
+                    <FounderPortrait />
+                    <div><strong>Your first chat with Keanu</strong><span>Founder, ex-Google</span></div>
                   </div>
                 </div>
               </div>

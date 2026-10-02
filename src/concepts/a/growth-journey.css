@@ -181,7 +181,7 @@
 .cj-search {
   border-radius: 3cqw;
   padding: 2.3cqw 2.3cqw 2.5cqw;
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #272825;
   transform-origin: 50% 75%;
 }
@@ -349,7 +349,7 @@
 .cj-detail {
   background: linear-gradient(135deg, #fffffffa, #f5f8faed);
   border-radius: 2.7cqw;
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #31332e;
   transform-origin: 35% 75%;
   overflow: hidden;
@@ -477,7 +477,7 @@
   gap: 0.65cqw;
 }
 .cj-store-wordmark span {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   letter-spacing: 0.06em;
   font-size: 1cqw;
 }
@@ -1328,4 +1328,43 @@
 /* Give the buying copy a little more space from the outside page edge. */
 @media (min-width: 981px) {
   .cj-row--reverse > .cj-copy { padding-inline-start: clamp(20px, 2.3vw, 36px); }
+}
+
+.cj-feed-title { overflow: hidden; }
+.cj-copy h2 { text-wrap: balance; }
+.cj-copy > p { text-wrap: pretty; }
+
+.cj-scene-caption { font-size: 11px; line-height: 1.5; color: #6a706b; letter-spacing: .01em; text-align: center; margin: 15px 0 0; }
+.cj-position-note { margin-left: auto; font-variant-numeric: tabular-nums; color: #3c5547; }
+.cj-result-position { display: block; font-size: 10px; color: #7c817a; line-height: 1; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+.cj-search-results { --columns: 5; --travel: 4; height: 30cqw; }
+.cj-search-caption { font-size: max(9px, 1.38cqw); }
+.cj-search-product { height: 12cqw; }
+@media (max-width: 980px) {
+  .cj-search-results { --columns: 3; --travel: 4; height: 35cqw; }
+  .cj-search-result[data-variant="3"] { display: block; }
+  .cj-search-product { height: 18cqw; }
+}
+@media (max-width: 700px) {
+  .cj-search-results { --columns: 2; height: 41cqw; }
+  .cj-search-product { height: 18cqw; }
+  .cj-search-caption { font-size: max(10px, 2.2cqw); }
+  .cj-scene-caption { font-size: 10px; text-wrap: balance; padding-inline: 8px; }
+}
+
+.pc-reason-inner > p { text-wrap: pretty; }
+
+/* Keep the physical product below readable shopping titles. */
+.cj-stage--discovery .cj-physical-product { top: 23%; }
+.cj-stage--discovery .cj-contact-shadow { top: 91%; }
+.cj-stage--discovery .cj-detail-depth { top: 59%; }
+@media (max-width: 700px) {
+  .cj-stage--discovery .cj-physical-product { top: 28%; }
+  .cj-stage--discovery .cj-detail-depth { top: 66%; left: 27%; width: 68%; }
+  .cj-stage--discovery .cj-detail-product { height: 16cqw; }
+}
+@media (max-width: 700px) {
+  .cj-stage--discovery { aspect-ratio: 5 / 6; }
+  .cj-stage--discovery .cj-search-results { height: 44cqw; }
+  .cj-stage--discovery .cj-physical-product { top: 32%; }
 }

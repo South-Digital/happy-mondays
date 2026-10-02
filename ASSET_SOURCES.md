@@ -32,11 +32,11 @@ Both selected outputs were visually reviewed, as were 1,000 px detail crops of t
 
 ## People and testimony
 
-**Keanu Fischell portrait:** recovered from page 52 of the client-supplied 57-page Babydoc audit. Embedded source: 1,600 × 1,066 JPEG. It has not been AI-reconstructed. Exports: 480, 960 and 1,600 px wide. Local source PDF: `/Users/zacsanter/HappyMondays/95-research/2026-09-23/babydoc-audit.pdf`.
+**Keanu Fischell portrait:** recovered from page 52 of the client-supplied 57-page Babydoc audit. Embedded source: 1,600 × 1,066 JPEG. This original is now used in the October review pass. An intervening iteration used an AI-restored portrait from the editorial folder; that restoration is no longer rendered in Concept A. Exports: 480, 960 and 1,600 px wide. Local source PDF: `/Users/zacsanter/HappyMondays/95-research/2026-09-23/babydoc-audit.pdf`.
 
 Source message: https://southdigitalgroup.slack.com/archives/C0BSCJZAV44/p1788858977633579
 
-**Gary Ingram quote:** page 56 of the same supplied audit, attributed to Co-Founder, The Diamond Store. The wording used on the page is a faithful excerpt. No revenue, ROAS or growth statistic is attached to the quote. Confirm publication permission and final attribution before public launch.
+**Gary Ingram quote:** page 56 of the same supplied audit, attributed to Co-Founder, The Diamond Store. The audit supplied an earlier quote. The October review pass now uses the quote and CRO title published on https://www.hellohappymondays.com/reviews. The headshot was supplied directly by Zac on 2 October. No revenue, ROAS or growth statistic is attached to the quote. Confirm publication permission and final attribution before public launch.
 
 **Founder credentials:** the source content plan identifies four years inside Google. The refined copy applies the Google background to Keanu, not to every member of the team. Research authority: `doc-early-content-plan.txt`, the supplied copy/strategy materials and `PROJECT_UNDERSTANDING.md` in the dated research folder.
 
@@ -65,3 +65,6 @@ The checkered product remains the supplied Figma export, used at a small display
 ## Source-grounded Concept A hero study — 23 September
 
 The new hero uses `public/images/hero-a-v2/`. Its exact ImageGen prompt, original dimensions, Magnific 4× master dimensions and responsive export details are documented in that folder's `README.md` and `HERO_A_REVIEW.md`. This photograph replaces the earlier coastal image only in the new hero study; earlier generated assets remain attached to the rejected pass.
+
+## Hero coast — Magnific refinement, 2 October 2026
+The original generated terrace image was upscaled through Magnific Precision (Magnific v2 photo, Subtle), 2× to 3172 × 1984. Sharpness 7%, grain 4%, ultra detail 7%. Composition retained; not documentary photography. Responsive AVIF/WebP exports at 800, 1440, 2400 and 3172 pixels live in `public/images/hero-a-terrace-magnific/`. The original download is retained outside this public repository.

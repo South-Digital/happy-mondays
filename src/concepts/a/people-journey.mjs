@@ -8,9 +8,9 @@ const mix = (a, b, t) => a + (b - a) * t;
 // One reversible spatial timeline. The scene is a fixed panorama behind an
 // opening aperture; copy keeps its measure instead of reflowing every frame.
 export function peopleJourney(progress, width, height, viewportHeight) {
-  const opening = blend(progress, 0.14, 0.86);
-  const composition = blend(progress, 0.2, 0.84);
-  const retreat = blend(progress, 0.16, 0.52);
+  const opening = blend(progress, 0.04, 0.92);
+  const composition = blend(progress, 0.08, 0.9);
+  const retreat = blend(progress, 0.08, 0.52);
   const initialWidth = width * 0.4 - 16;
   const endHeight = Math.max(height, Math.min(620, viewportHeight - 144));
   const frameWidth = mix(initialWidth, width, opening);
@@ -31,7 +31,7 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     // Fade readable content before the aperture crosses its left inset.
     // Artwork and atmosphere can remain underneath the expanding scene.
     sideCopyOpacity: 1 - blend((width + frameWidth) / 2 - (width * .7 + 12), -8, 16),
-    artworkProgress: blend(progress, 0.14, 0.55),
+    artworkProgress: blend(progress, 0.04, 0.55),
     sideScale: mix(1, 0.94, retreat),
     sideY: mix(0, 18, retreat),
     sideX: mix(0, 22, retreat),
@@ -55,6 +55,7 @@ export function peopleJourney(progress, width, height, viewportHeight) {
 // Begin leaving the pin with zero velocity, meet normal page speed at its end.
 // The fixed final offset is paired with an equal negative section margin.
 export function peopleRelease(scrollAfterStory, releaseDistance) {
+  if (releaseDistance <= 0) return 0;
   const t = clamp(scrollAfterStory / releaseDistance);
   return -releaseDistance * t * t / 2;
 }

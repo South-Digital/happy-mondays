@@ -3,7 +3,7 @@ import {
   motion,
   useInView,
   useScroll,
-  useSpring,
+  useMotionValueEvent,
   useTransform,
 } from "framer-motion";
 import { EASE, usePrefersReducedMotion } from "../../lib/motion";
@@ -76,7 +76,7 @@ const sereinEditorial = {
   width: 960,
   height: 1200,
 };
-const sceneDuration = 5800;
+const sceneDuration = 4200;
 
 /** One coordinated entrance; scroll subsequently moves the optical planes at
  * different depths. The photographed product and its supporting stone stay together. */
@@ -117,11 +117,15 @@ function useComposition(plate: string, base = IMG) {
       editorial.src = sereinEditorial.src;
       assets.push(editorial.decode().catch(() => undefined));
     }
+    // A slow decorative asset must not hold the readable interface indefinitely.
+    const deadline = window.setTimeout(() => { if (!cancelled) setLoaded(true); }, 1600);
     Promise.all(assets).then(() => {
+      window.clearTimeout(deadline);
       if (!cancelled) setLoaded(true);
     });
     return () => {
       cancelled = true;
+      window.clearTimeout(deadline);
     };
   }, [nearby, loaded, plate, base]);
   const { scrollYProgress } = useScroll({
@@ -137,14 +141,10 @@ function useComposition(plate: string, base = IMG) {
     scrollYProgress,
     storyReady,
   );
-  const depth = useSpring(scrollYProgress, {
-    stiffness: 85,
-    damping: 30,
-    mass: 0.35,
-  });
+  const depth = scrollYProgress;
   const backY = useTransform(depth, [0, 1], [8, -8]);
   const frontY = useTransform(depth, [0, 1], [18, -18]);
-  return { ref, reduced, scene, backY, frontY, loaded };
+  return { ref, reduced, scene, backY, frontY, loaded, scrollYProgress };
 }
 /** Original concept products; all platform lettering and surfaces are live HTML. */
 function Product({
@@ -180,9 +180,11 @@ function ScenePhoto({ name, base = IMG }: { name: string; base?: string }) {
   );
 }
 function Discovery() {
-  const { ref, reduced, scene, backY, frontY, loaded } =
+  const { ref, reduced, scene, backY, frontY, loaded, scrollYProgress } =
     useComposition("courtyard");
-  const t = scene.time;
+  const [scrollTime, setScrollTime] = useState(0);
+  useMotionValueEvent(scrollYProgress, "change", value => setScrollTime(segment(value, .2, .35) * 4400));
+  const t = Math.max(scene.time * 5800 / sceneDuration, scrollTime);
   const enter = settle(segment(t, 60, 950));
   // Establish the original catalogue, refine its data, then show discovery.
   // The movement follows the intervention rather than implying a random rank jump.
@@ -273,7 +275,7 @@ function Discovery() {
                   className="cj-results-track"
                   style={{ "--advance": position } as CSSProperties}
                 >
-                  {[2, 3, 0, 1, 2, 3, 0, 1].map((variant, index) => {
+                  {[2, 3, 1, 2, 0, 1, 2, 3, 1].map((variant, index) => {
                     const [brand, name, price] = [
                       ["Morrow Studio", "Everyday Grip Sock", "$28.00"],
                       ["Form Studio", "Soft Rib Grip Sock", "$28.00"],
@@ -289,6 +291,7 @@ function Discovery() {
                           opacity: variant === 0 ? 1 : 1 - 0.24 * focus,
                         }}
                       >
+                        <span className="cj-result-position">{Math.max(1, index + 1 - Math.round(position * 4))}</span>
                         <div className="cj-search-product">
                           <Product variant={variant} />
                         </div>
@@ -296,11 +299,7 @@ function Discovery() {
                           <b>{brand}</b>
                           <span>{variant === 0 && t >= 2650 ? "Pilates Grip Socks" : name}</span>
                           <strong>{price}</strong>
-                          {variant === 0 && (
-                            <span className="cj-stars">
-                              ★★★★★ <small>(127)</small>
-                            </span>
-                          )}
+
                         </div>
                         {variant === 0 && (
                           <span
@@ -349,8 +348,8 @@ function Discovery() {
                 </div>
                 <div className="cj-detail-copy">
                   <div className="cj-feed-title">
-                    <b style={{ opacity: 1 - refine, transform: `translateY(${-4 * refine}px)` }}>Everyday Grip Sock</b>
-                    <b style={{ opacity: refine, transform: `translateY(${4 * (1 - refine)}px)` }}>Pilates Grip Socks</b>
+                    <b style={{ opacity: 1 - segment(refine, 0, .42), transform: `translateY(${-6 * refine}px)` }}>Everyday Grip Sock</b>
+                    <b style={{ opacity: segment(refine, .58, .42), transform: `translateY(${6 * (1 - refine)}px)` }}>Pilates Grip Socks</b>
                   </div>
                   <strong>$28.00</strong>
                   <div className="cj-feed-attributes" style={{ opacity: attributes, transform: `translateY(${5 * (1 - attributes)}px)` }}>
@@ -361,12 +360,13 @@ function Discovery() {
               </div>
               <div className="cj-feed-status" data-ready={t >= 2850}>
                 <span className="cj-feed-status-mark" style={{ "--ready": ready } as CSSProperties}><Check /></span>
-                <span>{t < 2850 ? "Refining product details" : "Feed refined by Happy Mondays"}</span>
+                <span>{t < 2850 ? "Refining product details" : "Feed refined"}</span><span className="cj-position-note">Position {Math.max(1, 5 - Math.round(position * 4))}</span>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
+      <p className="cj-scene-caption">Illustration · Position 5 to 1 · Morrow is a concept brand</p>
     </div>
   );
 }
@@ -375,12 +375,12 @@ function Storefront() {
     "atelier",
     FRAGRANCE,
   );
-  const t = scene.time;
+  const t = scene.time * 5800 / sceneDuration;
   const enter = settle(segment(t, 60, 950));
   const recommendation = settle(segment(t, 1350, 1150));
   const added = settle(segment(t, 2950, 950));
   const confirmation = settle(segment(t, 4050, 1150));
-  const total = added > 0.5 ? "110.00" : "68.00";
+  const total = (68 + 42 * added).toFixed(2);
   return (
     <div
       className="cj-art"
@@ -525,6 +525,7 @@ function Storefront() {
           </motion.div>
         </div>
       </div>
+      <p className="cj-scene-caption">Concept store · An illustrative shopping journey</p>
     </div>
   );
 }
@@ -560,36 +561,6 @@ function JourneyLink({
   );
 }
 
-/** Small physical objects sit inside live type; no bitmap lettering. */
-function EditorialIcon({ kind }: { kind: "cart" | "card" }) {
-  const reduced = usePrefersReducedMotion();
-  const ref = useRef<HTMLSpanElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-  const y = useTransform(progress, [0, 1], [4, -4]);
-  const rotate = useTransform(progress, [0, 1], [-2, 2]);
-  return (
-    <motion.span
-      ref={ref}
-      className={`cj-editorial-icon cj-editorial-icon--${kind}`}
-      style={reduced ? undefined : { y, rotate }}
-      aria-hidden="true"
-    >
-      <img
-        src={`/images/editorial/${kind}.webp`}
-        srcSet={[128, 256, 384].map(width => `/images/editorial/${kind}-${width}.webp ${width}w`).concat(`/images/editorial/${kind}.webp 600w`).join(", ")}
-        sizes={kind === "cart"
-          ? "(max-width: 540px) 55px, (max-width: 980px) 63px, 76px"
-          : "(max-width: 540px) 75px, (max-width: 980px) 87px, 104px"}
-        width="600"
-        height={kind === "cart" ? 494 : 353}
-        alt=""
-        loading="lazy"
-      />
-    </motion.span>
-  );
-}
-
 function Copy({
   kind,
   children,
@@ -612,7 +583,6 @@ function Copy({
         <h2 id={id} aria-label="Your products. Their next find.">
           <span className="cj-heading-soft cj-icon-line">
             <span>Your </span>
-            <EditorialIcon kind="cart" />
             <span>products.</span>
           </span>
           <span className="cj-heading-emphasis">Their next find.</span>
@@ -622,7 +592,6 @@ function Copy({
           <span className="cj-heading-soft">From looking. </span>
           <span className="cj-heading-emphasis cj-icon-line">
             <span>To </span>
-            <EditorialIcon kind="card" />
             <span>buying.</span>
           </span>
         </h2>

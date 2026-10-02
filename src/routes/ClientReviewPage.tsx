@@ -6,16 +6,16 @@ const directions = [
   {
     route: "a",
     name: "Landscape with depth.",
-    image: "/images/hero-a-v2/coast-1440.webp",
+    image: "/images/hero-a-terrace-magnific/coast-1440.webp",
     description: "Your store, in a better place. A recognisable Shopify dashboard sits within the coastal scene, with soft glass and a layered foreground bringing the opening to life.",
-    scope: "Preferred direction · Refined opening and two product-led follow-on sections.",
+    scope: "Preferred direction · Homepage design and motion study.",
   },
   {
     route: "b",
     name: "Nature first.",
     image: "/images/hero-b-v2/terrace-1440.webp",
     description: "A little room to breathe. An immersive coastal landscape, a confident headline and soft details give the brand space to make its first impression.",
-    scope: "Earlier alternative · Nature-first hero retained for comparison.",
+    scope: "As presented 23 September · Retained for reference.",
   },
 ];
 
@@ -25,7 +25,7 @@ export default function ClientReviewPage() {
       <Seo title="Happy Mondays — Design directions" />
       <header className="flex items-center justify-between gap-6">
         <Wordmark size="lg" />
-        <p className="text-xs text-ink-60">Design directions · September 2026</p>
+        <p className="text-xs text-ink-60">Design directions · October 2026</p>
       </header>
       <section className="pb-10 pt-16 md:pb-12 md:pt-20">
         <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.045em] md:text-6xl">

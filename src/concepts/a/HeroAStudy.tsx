@@ -1,13 +1,14 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "../../components/Brand";
 import { MockLink, useToast } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
-import { ProofRow } from "../shared/ProofRow";
+
 import { ClientLogos } from "./ClientLogos";
 import { StorePreview, OrderPreview } from "./StorePreview";
-import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
-import { useSceneReadiness } from "./useSceneReadiness";
+import { segment, settle } from "./useSceneTimeline";
+import { useHeroEntrance } from "./useHeroEntrance";
+import { FounderPortrait } from "./FounderPortrait";
 import { useHeroDepth } from "./useHeroDepth";
 import { StoryLink } from "./AgencyStory";
 import terracePreview from "./assets/terrace-clean-preview.webp";
@@ -21,7 +22,7 @@ const links = [
   { label: "Blog", href: "/articles" },
 ];
 
-function StudyNav() {
+export function StudyNav() {
   const menu = useRef<HTMLDetailsElement>(null);
   const { show } = useToast();
   useEffect(() => {
@@ -103,6 +104,21 @@ function StudyNav() {
   );
 }
 
+export function ContinuingNav() {
+  const { scrollY } = useScroll();
+  const [visible, setVisible] = useState(false);
+  const reduced = usePrefersReducedMotion();
+  useMotionValueEvent(scrollY, "change", value => setVisible(value > 620));
+  if (!visible) return null;
+  return <motion.nav className="ha-continuing-nav" aria-label="Quick navigation"
+    initial={reduced ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: .25 }}>
+    <a href="#ha-top" aria-label="Happy Mondays — back to top"><Wordmark size="lg" /></a>
+    <a className="ha-continuing-story" href="#client-stories">Client stories</a>
+    <MockLink className="ha-button" message="Design preview — the booking calendar will be connected before launch.">Book a call</MockLink>
+  </motion.nav>;
+}
+
 function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: boolean; ready: boolean; reduced: boolean; onReady: () => void }) {
   const [failed, setFailed] = useState(false);
   return (
@@ -112,15 +128,15 @@ function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: b
     >
       <source
         type="image/avif"
-        srcSet="/images/hero-a-terrace-clean/coast-800.avif 800w, /images/hero-a-terrace-clean/coast-1440.avif 1440w, /images/hero-a-terrace-clean/coast-1586.avif 1586w"
+        srcSet="/images/hero-a-terrace-magnific/coast-800.avif 800w, /images/hero-a-terrace-magnific/coast-1440.avif 1440w, /images/hero-a-terrace-magnific/coast-2400.avif 2400w, /images/hero-a-terrace-magnific/coast-3172.avif 3172w"
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
       />
       <motion.img
         initial={{ opacity: 0 }}
         animate={{ opacity: ready && !failed ? 1 : 0 }}
         transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
-        src="/images/hero-a-terrace-clean/coast-1440.webp"
-        srcSet="/images/hero-a-terrace-clean/coast-800.webp 800w, /images/hero-a-terrace-clean/coast-1440.webp 1440w, /images/hero-a-terrace-clean/coast-1586.webp 1586w"
+        src="/images/hero-a-terrace-magnific/coast-1440.webp"
+        srcSet="/images/hero-a-terrace-magnific/coast-800.webp 800w, /images/hero-a-terrace-magnific/coast-1440.webp 1440w, /images/hero-a-terrace-magnific/coast-2400.webp 2400w, /images/hero-a-terrace-magnific/coast-3172.webp 3172w"
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
         width={1586}
         height={992}
@@ -139,16 +155,21 @@ export function HeroAStudy() {
   const scene = useRef<HTMLDivElement>(null);
   const depth = useHeroDepth(scene);
   const dashboard = useRef<HTMLDivElement>(null);
-  const dashboardVisible = useInView(dashboard, { amount: 0.12 });
-  const dashboardStoryReady = useSceneReadiness(dashboard);
-  const { scrollYProgress: dashboardProgress } = useScroll({
-    target: dashboard,
-    offset: ["start end", "end start"],
-  });
+
   const [coastReady, setCoastReady] = useState(false);
   const [wallReady, setWallReady] = useState(false);
-  const sceneReady = coastReady && wallReady;
-  const { time, rate } = useSceneTimeline(dashboardVisible, sceneReady, reduced, 4800, 60, dashboardProgress, dashboardStoryReady);
+  const [decodeDeadline, setDecodeDeadline] = useState(false);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDecodeDeadline(true), 700);
+    return () => clearTimeout(timer);
+  }, []);
+  const sceneReady = (coastReady && wallReady) || decodeDeadline;
+  const time = useHeroEntrance(reduced);
+  const reveal = (start: number, duration: number) => settle(segment(time, start, duration));
+  const lineStyle = (start: number) => {
+    const value = reveal(start, 1000);
+    return { opacity: value, transform: `translateY(${18 * (1 - value)}px)`, filter: `blur(${12 * (1 - value)}px)` };
+  };
 
   const credentials = useRef<HTMLDivElement>(null);
   const { scrollYProgress: proofProgress } = useScroll({
@@ -164,7 +185,7 @@ export function HeroAStudy() {
       className="ha-study"
       data-motion={reduced ? "reduce" : "full"}
       data-hero-time={Math.round(time)}
-      data-hero-rate={rate.toFixed(2)}
+      data-hero-rate="1"
       aria-labelledby="ha-title"
     >
       <div className="ha-scene" ref={scene}>
@@ -177,31 +198,21 @@ export function HeroAStudy() {
         </motion.div>
         <div className="ha-sky-wash" aria-hidden="true" />
         <div className="ha-ambient-light" aria-hidden="true" />
-        <StudyNav />
+        <div className="ha-nav-space" aria-hidden="true" />
         <div className="ha-intro">
-          <motion.h1 id="ha-title" tabIndex={-1}
-            initial={reduced ? false : { opacity: 0.3, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduced ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span>Open Shopify.</span><span>Smile.</span>
-          </motion.h1>
-          <motion.p
-            initial={reduced ? false : { opacity: 0.4, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <h1 id="ha-title" tabIndex={-1}>
+            <span style={lineStyle(100)}>Open Shopify.</span>{" "}<span style={lineStyle(290)}>Smile.</span>
+          </h1>
+          <p style={{ opacity: reveal(650, 650), transform: `translateY(${6 * (1 - reveal(650, 650))}px)` }}>
             <span>Google Ads for Shopify brands.</span>
-            <span>A growth partner. A flat monthly fee.</span>
-          </motion.p>
+            <span>Better ads. A better store. One flat monthly fee.</span>
+          </p>
         </div>
-        <motion.div className="ha-hero-cta"
-          initial={reduced ? false : { opacity: 0.65 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: reduced ? 0 : 0.45 }}
-        >
+        <div className="ha-hero-cta" style={{ opacity: reveal(850, 650) }}>
           <StoryLink href="/book-a-call?type=audit" className="ha-button">Start with an audit</StoryLink>
-        </motion.div>
+          <span className="ha-human-cue"><FounderPortrait />Start with a 15-minute chat with Keanu</span>
+        </div>
+        <div className="ha-arrival-mist" aria-hidden="true" style={{ opacity: 1 - reveal(0, 2200) }} />
         <motion.div
           className="ha-object"
           ref={dashboard}
@@ -214,7 +225,7 @@ export function HeroAStudy() {
                 : { y: depth.dashboardY, scale: depth.dashboardScale }
             }
           >
-            <StorePreview time={time} />
+            <StorePreview time={Math.max(0, time - 650)} />
           </motion.div>
         </motion.div>
         <motion.div
@@ -235,7 +246,7 @@ export function HeroAStudy() {
               reduced ? undefined : { y: depth.orderY, scale: depth.orderScale }
             }
           >
-            <OrderPreview reveal={settle(segment(time, 3450, 850))} />
+            <OrderPreview reveal={settle(segment(time, 3500, 700))} />
           </motion.div>
         </motion.div>
       </div>
@@ -244,7 +255,7 @@ export function HeroAStudy() {
           className="ha-proof-reveal"
           style={reduced ? undefined : { y: proofY, opacity: proofOpacity }}
         >
-          <ProofRow clutchIcon />
+          <div className="ha-verified-proof"><span><img src="/images/icon-clutch.svg" width="16" height="18" alt="" />5.0 on Clutch</span><span aria-hidden="true">·</span><span>Led by an ex-Google founder</span></div>
           <ClientLogos />
         </motion.div>
       </div>

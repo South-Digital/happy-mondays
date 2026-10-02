@@ -2,7 +2,6 @@ import { useLayoutEffect, type RefObject } from "react";
 import {
   useMotionValue,
   useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion";
 
@@ -16,12 +15,7 @@ export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
   const target = useTransform(() =>
     Math.max(0, Math.min(1, (scrollY.get() - start.get()) / distance.get())),
   );
-  // Damped: soften wheel steps without overshoot or changing page scroll.
-  const progress = useSpring(target, {
-    stiffness: 180,
-    damping: 32,
-    mass: 0.45,
-  });
+  const progress = target;
 
   useLayoutEffect(() => {
     const element = scene.current;
@@ -42,7 +36,6 @@ export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
       );
     };
     measure();
-    progress.jump(target.get());
     const observer = new ResizeObserver(measure);
     observer.observe(element.parentElement ?? element);
     window.addEventListener("resize", measure);

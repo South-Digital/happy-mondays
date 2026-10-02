@@ -35,8 +35,8 @@ for (const [width, height, viewport] of [[984,480,700], [1184,480,720], [1320,48
 }
 test('readable holds and reversible geometry without breakpoint switches', () => {
   const at = p => peopleJourney(p, 1184, 480, 720);
-  assert.deepEqual(at(0), at(0.14));
-  assert.deepEqual(at(0.9), at(1));
+  assert.deepEqual(at(0), at(0.04));
+  assert.deepEqual(at(0.94), at(1));
   assert.equal(at(1).sideOpacity, 0);
   assert.equal(at(1).contactOpacity, 1);
   assert.equal(at(1).invitationX, at(1).copyX);
@@ -55,4 +55,8 @@ test('pin release joins stationary and normal scrolling without a velocity jump'
     assert.ok(entrySpeed < .001);
     assert.ok(Math.abs(exitSpeed - 1) < .001);
   }
+});
+
+test('direct sticky release has no residual displacement', () => {
+  for (const y of [-100, 0, 10, 300, 1000]) assert.equal(peopleRelease(y, 0), 0);
 });

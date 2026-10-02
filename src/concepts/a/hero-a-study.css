@@ -1090,3 +1090,75 @@
   .ha-store-metrics > div:first-child strong { font-size: 19px; }
   .ha-metric-label { font-size: 7px; }
 }
+
+/* Opening sequence: the light clears, type resolves, then the store arrives.
+   The same photograph/grade serves both depth planes to preserve the seam. */
+.ha-coast { filter: saturate(.68) brightness(1.055) contrast(.94); }
+.ha-coast img { filter: none; }
+.ha-arrival-mist { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: radial-gradient(ellipse at 50% 42%, #fafaf8 8%, #f7f4edeb 44%, #f7f4ed80 78%); }
+.ha-intro { z-index: 5; }
+.ha-intro h1 span { will-change: auto; }
+.ha-human-cue { display: flex; align-items: center; justify-content: center; gap: 9px; color: var(--ca-body); font-size: 11px; line-height: 1.4; }
+.ha-hero-cta { flex-direction: column; align-items: center; gap: 11px; }
+.ca-founder-portrait { display: block; width: 48px; height: 48px; flex: 0 0 48px; border-radius: 50%; overflow: hidden; background: #e9e4dc; }
+.ca-founder-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 57% 22%; transform: scale(1.65); transform-origin: 57% 18%; display: block; }
+.ha-human-cue .ca-founder-portrait { width: 26px; height: 26px; flex-basis: 26px; }
+.ha-example-label { font: 10px/1.3 Inter, sans-serif; color: #68736e; margin-left: auto; margin-right: 16px; }
+.ha-nav { max-width: 1320px; }
+@media (min-width: 701px) {
+  .ha-study { --ha-dashboard-top: clamp(460px, calc(50svh + 10px), 490px); }
+  .ha-scene { height: calc(var(--ha-dashboard-top) + 680px); }
+  .ha-nav { height: 82px; }
+  .ha-intro { padding-top: 20px; }
+  .ha-intro h1 { font-size: clamp(68px, 6vw, 76px); line-height: 1.03; }
+  .ha-intro p { margin-top: 18px; font-size: 17px; }
+  .ha-hero-cta { margin-top: 19px; }
+  .ha-hero-cta > .ha-button { min-height: 48px; }
+  .ha-object { top: var(--ha-dashboard-top); width: min(860px, 86%); margin-left: calc(min(860px, 86%) / -2); }
+  .ha-order-position { top: calc(var(--ha-dashboard-top) + 295px); left: max(5%, calc(50% - 525px)); }
+}
+@media (min-width: 1101px) and (max-height: 760px) {
+  .ha-study { --ha-dashboard-top: 405px; }
+  .ha-nav { height: 72px; }
+  .ha-intro { padding-top: 14px; }
+  .ha-intro h1 { font-size: 64px; }
+  .ha-intro p { margin-top: 14px; font-size: 16px; }
+  .ha-hero-cta { margin-top: 15px; gap: 8px; }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .ha-study { --ha-dashboard-top: 450px; }
+  .ha-intro h1 { font-size: 68px; }
+  .ha-order-position { top: calc(var(--ha-dashboard-top) + 350px); left: 5%; }
+}
+@media (max-width: 700px) {
+  .ha-intro { padding-top: 18px; }
+  .ha-hero-cta { margin-top: 20px; gap: 10px; }
+  .ha-object { margin-top: 28px; }
+  .ha-example-label { font-size: 9px; margin-right: 0; }
+  .ha-human-cue { font-size: 10px; }
+}
+
+.ca-direction { position: relative; }
+.ca-nav-position { position: absolute; inset: 0 0 auto; z-index: 30; }
+.ha-nav-space { height: 82px; }
+.ha-verified-proof { display: flex; align-items: center; justify-content: center; }
+.ha-verified-proof > span { display: inline-flex; align-items: center; gap: 6px; }
+.ha-verified-proof img { filter: grayscale(1); }
+.ha-continuing-nav { position: fixed; z-index: 80; top: 16px; left: 50%; translate: -50% 0; width: min(660px, calc(100% - 40px)); min-height: 64px; padding: 10px 12px 10px 24px; border-radius: 999px; display: flex; align-items: center; gap: 28px; background: #fafaf8e8; border: 1px solid #fff; backdrop-filter: blur(16px); box-shadow: 0 8px 32px -16px #252d3538; }
+.ha-continuing-nav img { height: 23px !important; width: auto; }
+.ha-continuing-nav > a:first-child { margin-right: auto; }
+.ha-continuing-nav .ha-button { min-height: 42px; font-size: 13px; padding-inline: 20px; }
+.ha-continuing-story { font-size: 12px; color: var(--ca-body); }
+@media (min-width: 1101px) and (max-height:760px) { .ha-nav-space { height: 72px; } }
+@media (max-width:700px) {
+  .ha-continuing-nav { top: 10px; min-height: 58px; padding: 8px 9px 8px 18px; }
+  .ha-continuing-story { display: none; }
+  .ha-verified-proof { gap: 12px !important; font-size: 11px !important; }
+}
+
+@media (min-width: 1101px) and (max-height: 760px) {
+  .ha-scene { height: calc(var(--ha-dashboard-top) + 605px); }
+}
+
+.ca-direction[data-motion="reduce"] .ha-mobile-menu[open] nav { animation: none; }
+.ca-direction[data-motion="reduce"] .ha-mobile-menu summary > span { transition: none; }

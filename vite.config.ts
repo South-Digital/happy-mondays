@@ -18,16 +18,19 @@ export default defineConfig({
     },
     configResolved(config) { thisOutputDirectory = resolve(config.root, config.build.outDir) },
     closeBundle() {
-      if (process.env.VITE_CLIENT_REVIEW !== 'true') return
       // Source/provenance notes stay in Git, outside the client-facing build.
       const removeNotes = (directory: string) => {
         for (const item of readdirSync(directory, { withFileTypes: true })) {
           const path = join(directory, item.name)
           if (item.isDirectory()) removeNotes(path)
-          else if (item.name.endsWith('.md')) rmSync(path)
+          else if (!/^licen[cs]e/i.test(item.name) && /\.md$|provenance|prompts?(?:\.|-)/i.test(item.name)) rmSync(path)
         }
       }
       removeNotes(thisOutputDirectory)
+      // Unused superseded studies must not ship with the client preview.
+      for (const folder of ['at-present', 'commerce-scenes']) {
+        rmSync(join(thisOutputDirectory, 'images', folder), { recursive: true, force: true })
+      }
     },
   }],
   resolve: {

@@ -2,17 +2,17 @@
 .ca-direction {
   background: #fafaf8;
   --ca-ink: #202730;
-  --ca-action: #28536b;
-  --ca-action-top: #35627a;
-  --ca-action-bottom: #244b62;
-  --ca-action-border: #20475e;
-  --ca-action-hover: #20495f;
+  --ca-action: #242b2f;
+  --ca-action-top: #3b4347;
+  --ca-action-bottom: #242b2f;
+  --ca-action-border: #30383d;
+  --ca-action-hover: #343e43;
   --ca-body: #515b65;
   --ca-lead: #343e48;
-  --ca-heading-soft: #7b838d;
+  --ca-heading-soft: #6e7680;
   --ca-display-weight: 500;
   --ca-emphasis-weight: 600;
-  --ca-display-tracking: -0.045em;
+  --ca-display-tracking: -0.03em;
   --ca-display-leading: 1.08;
   --ca-body-tracking: -0.015em;
   --ca-body-leading: 1.6;

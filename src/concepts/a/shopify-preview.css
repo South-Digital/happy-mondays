@@ -91,3 +91,16 @@
   .ha-admin .ha-store-metrics > div { padding-inline: 5px; }
   .ha-admin .ha-metric-label { font-size: 6px; }
 }
+
+/* Keep the main sales curve, rather than four tiny duplicates, in the opening fold. */
+.ha-admin .ha-metric-spark { display: none; }
+.ha-admin .ha-store-metrics > div { padding-bottom: 13px; }
+.ha-admin .ha-metric-label { font-size: 10px; }
+.ha-admin .ha-chart { margin-top: 16px; }
+.ha-admin .ha-chart svg { height: 145px; }
+.ha-admin .ha-admin-note { display: none; }
+@media (max-width:700px) {
+  .ha-admin .ha-metric-label { font-size: 8px; }
+  .ha-admin .ha-store-metrics > div { padding-bottom: 9px; }
+  .ha-admin .ha-chart svg { height: 130px; }
+}
