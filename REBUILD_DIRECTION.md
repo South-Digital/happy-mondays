@@ -2,6 +2,12 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — liquid-glass buttons retained, material reworked
+
+User clarified that glass itself is wanted; the flat-button correction misread the feedback. Replaced that correction with a continuous lens treatment: translucent fill and backdrop blur, broad white and blue internal reflections, and a single irregular 1.25px highlight at the perimeter. No inset ring. Clear service/navigation actions retain dark text; primary actions use tinted blue glass with white text. Surface light and perimeter highlights shift together on hover over 700ms. The existing commerce-frame treatment is unchanged.
+
+Reviewed desktop service and hero actions plus 390px phone. Verified actual hover endpoints, original action click behavior, zero horizontal overflow in the phone view, non-interactive decorative layers and zero transition duration in reduced motion. Build/TypeScript and diff checks pass. Screenshot saved in the parent output folder as `liquid-lens-buttons.png`. Visual acceptance remains with the user.
+
 ## 2 October — button treatment corrected
 
 The user rejected the heavy resting button treatment but explicitly liked the hover idea. Removed the thick masked rim and inner lip from controls. Secondary actions now have a translucent white fill, one fine border and a restrained shadow; primary actions use the existing solid blue with a softer shadow. Kept the travelling highlight as a 1px edge-only glint that appears on hover, rather than a permanent bevel. Graphic-plane rims stay intact. The client-story arrow returns to its simpler original border.

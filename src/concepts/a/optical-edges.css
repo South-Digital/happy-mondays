@@ -7,37 +7,88 @@
   --optical-shade: #63839538;
 }
 
-/* Controls stay quiet at rest. Only a fine edge catches light on hover. */
-.ca-direction :is(.ha-button, .cj-service-link) { position: relative; }
+/* One continuous lens, rather than concentric bevels. The centre stays clear;
+   broad internal reflections and a hairline perimeter carry the material. */
+.ca-direction :is(.ha-button, .cj-service-link) {
+  position: relative;
+  isolation: isolate;
+  border-color: transparent;
+  --lens-fill: #264e65d9;
+  --lens-light: #d4f0ff38;
+  --lens-shadow: #0b304750;
+  --lens-edge: #ebfaffb3;
+  --lens-edge-shade: #163e5766;
+  background:
+    radial-gradient(ellipse at 14% 0%, var(--lens-light), transparent 63%),
+    radial-gradient(ellipse at 90% 100%, var(--lens-shadow), transparent 60%),
+    var(--lens-fill);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: inset 0 1px 2px #ffffff55, inset 0 -2px 4px #143b4f24,
+    0 2px 3px -2px #203f4d30, 0 8px 18px -12px #203f4d55;
+  transition: background-color 220ms ease, box-shadow 280ms ease;
+}
+.ca-direction :is(.cj-service-link, .ha-nav-cta) {
+  --lens-fill: #f1f6f64d;
+  --lens-light: #ffffffed;
+  --lens-shadow: #89afbd42;
+  --lens-edge: #ffffff;
+  --lens-edge-shade: #688b9b70;
+  color: var(--ca-ink);
+  box-shadow: inset 0 2px 3px #ffffffd9, inset 0 -3px 6px #789aaa24,
+    0 1px 2px #35546612, 0 8px 18px -12px #35546670;
+}
+.ca-direction :is(.ha-button, .cj-service-link)::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 15% 0%, #ffffff70, transparent 46%);
+  background-size: 190% 100%;
+  background-position: 5% 50%;
+  opacity: .48;
+  transition: background-position 700ms cubic-bezier(.22,1,.36,1), opacity 280ms ease;
+}
 @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
   .ca-direction :is(.ha-button, .cj-service-link)::after {
     content: "";
     position: absolute;
-    inset: 0;
-    padding: 1px;
+    inset: -1px;
+    padding: 1.25px;
     border-radius: inherit;
     pointer-events: none;
-    opacity: 0;
-    background: linear-gradient(115deg, transparent 12%, #ffffffed 32%, #bad9e266 42%, transparent 54%, #ffffffb3 76%, transparent 88%);
-    background-size: 220% 100%;
-    background-position: 5% 50%;
+    background: linear-gradient(130deg, var(--lens-edge) 4%, #ffffff38 24%,
+      var(--lens-edge-shade) 46%, #ffffff2b 58%, var(--lens-edge) 78%, var(--lens-edge-shade));
+    background-size: 180% 100%;
+    background-position: 10% 50%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    transition: background-position 650ms cubic-bezier(.22,1,.36,1), opacity 200ms ease;
+    transition: background-position 700ms cubic-bezier(.22,1,.36,1);
   }
-  @media (hover:hover) and (pointer:fine) {
-    .ca-direction :is(.ha-button, .cj-service-link):hover::after {
-      opacity: 1;
-      background-position: 85% 50%;
-    }
+}
+@media (hover:hover) and (pointer:fine) {
+  .ca-direction :is(.ha-button, .cj-service-link):hover {
+    background-color: var(--lens-fill);
+    box-shadow: inset 0 1px 3px #ffffff80, inset 0 -3px 6px #577d9126,
+      0 2px 3px -2px #203f4d30, 0 10px 22px -12px #203f4d65;
   }
-  .ca-direction :is(.ha-button, .cj-service-link):active::after { opacity: .35; }
-  .ca-direction[data-motion="reduce"] :is(.ha-button, .cj-service-link)::after { transition: none; }
-  @media (prefers-reduced-motion:reduce) {
-    .ca-direction :is(.ha-button, .cj-service-link)::after { transition: none; }
-  }
+  .ca-direction :is(.ha-button, .cj-service-link):hover::before { background-position: 85% 50%; opacity: .8; }
+  .ca-direction :is(.ha-button, .cj-service-link):hover::after { background-position: 85% 50%; }
+}
+.ca-direction :is(.ha-button, .cj-service-link):active {
+  box-shadow: inset 0 1px 4px #24465628, 0 2px 5px -3px #203f4d30;
+}
+.ca-direction[data-motion="reduce"] :is(.ha-button, .cj-service-link),
+.ca-direction[data-motion="reduce"] :is(.ha-button, .cj-service-link)::before,
+.ca-direction[data-motion="reduce"] :is(.ha-button, .cj-service-link)::after { transition: none; }
+@media (prefers-reduced-motion:reduce) {
+  .ca-direction :is(.ha-button, .cj-service-link),
+  .ca-direction :is(.ha-button, .cj-service-link)::before,
+  .ca-direction :is(.ha-button, .cj-service-link)::after { transition: none; }
 }
 .ca-direction .cj-glass::after {
   content: "";
