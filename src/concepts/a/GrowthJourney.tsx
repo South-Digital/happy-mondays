@@ -368,7 +368,6 @@ function Discovery() {
           </motion.div>
         </div>
       </div>
-      <p className="cj-scene-caption">Illustration · Position 5 to 1 · Morrow is a concept brand</p>
     </div>
   );
 }
@@ -527,7 +526,6 @@ function Storefront() {
           </motion.div>
         </div>
       </div>
-      <p className="cj-scene-caption">Concept store · An illustrative shopping journey</p>
     </div>
   );
 }

@@ -1341,7 +1341,6 @@
 .cj-copy > p { text-wrap: pretty; }
 .cj-copy--purchase > p { text-wrap: balance; }
 
-.cj-scene-caption { font-size: 11px; line-height: 1.5; color: #6a706b; letter-spacing: .01em; text-align: center; margin: 15px 0 0; }
 .cj-position-note { margin-left: auto; font-variant-numeric: tabular-nums; color: #3c5547; }
 .cj-result-position { display: block; font-size: 10px; color: #7c817a; line-height: 1; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
 .cj-search-results { --columns: 5; --travel: 4; height: 30cqw; }
@@ -1356,7 +1355,6 @@
   .cj-search-results { --columns: 2; height: 41cqw; }
   .cj-search-product { height: 18cqw; }
   .cj-search-caption { font-size: max(10px, 2.2cqw); }
-  .cj-scene-caption { font-size: 10px; text-wrap: balance; padding-inline: 8px; }
 }
 
 .pc-reason-inner > p { text-wrap: pretty; }
