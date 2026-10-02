@@ -2,6 +2,12 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — supporting artwork motion
+
+The supporting graphics previously only settled once, triggered by visibility of the entire stage. Each object now observes its own visibility and image readiness. Separate layers compose the entrance, damped scroll drift, and a restrained continuous perspective/vertical movement; a masked light sweep stays within the original transparent artwork. The platform marks move with their glass assembly. This animates the existing raster compositions, not separately modelled calendar pages or medallions.
+
+Ambient playback pauses offscreen, when the supporting column fades away, and when the document is hidden. Reduced motion removes the ambient animations and scroll transforms. Browser checks observed changing transforms while stationary, paused playback after returning to the top, and identity transforms/no CSS animation under `motion=reduce`; no console errors. Build and TypeScript lint pass.
+
 ## 2 October — continuous partnership scroll scene
 
 The user found the transition and final composition unrefined. This replaces the earlier narrowing-card/FLIP treatment below. The centre is now an aperture onto a fixed panoramic canvas: its frame opens horizontally and vertically while the photograph gently settles, rather than continuously re-cropping with the changing card width. Supporting artwork and copy retain their measures, retreat slightly and fade before the aperture cuts through their text.

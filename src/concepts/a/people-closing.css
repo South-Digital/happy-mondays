@@ -54,7 +54,43 @@
   width: calc(100% + 44px); max-width: 410px; justify-self: center; align-self: center;
   margin: 0 -22px; pointer-events: none;
 }
-.pc-art-settle { position: absolute; inset: 0; }
+.pc-art-scroll, .pc-art-settle, .pc-art-float { position: absolute; inset: 0; }
+.pc-art-float {
+  transform-origin: 50% 65%;
+  animation: pc-platform-drift 7s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.pc-art--calendar .pc-art-float { animation-name: pc-calendar-drift; animation-duration: 8.5s; }
+.pc-art-light {
+  position: absolute; inset: 0; opacity: 0;
+  background: linear-gradient(108deg, transparent 37%, #ffffffb3 46%, #ffffff30 51%, transparent 60%);
+  background-size: 300% 100%; background-position: 150% 0;
+  mask: url('/images/partnership/connected-platforms-640.webp') center / contain no-repeat;
+  animation: pc-glass-light 8s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.pc-art--calendar .pc-art-light {
+  mask-image: url('/images/partnership/monthly-plan-640.webp');
+  animation-duration: 10s;
+}
+.pc-art[data-active="true"] .pc-art-float,
+.pc-art[data-active="true"] .pc-art-light { animation-play-state: running; }
+.pc-art[data-reduced="true"] .pc-art-float,
+.pc-art[data-reduced="true"] .pc-art-light { animation: none; }
+@keyframes pc-platform-drift {
+  0%, 100% { transform: perspective(850px) translateY(0) rotateY(-2deg) rotateZ(-0.7deg); }
+  50% { transform: perspective(850px) translateY(-7px) rotateY(2deg) rotateZ(0.7deg); }
+}
+@keyframes pc-calendar-drift {
+  0%, 100% { transform: perspective(850px) translateY(-2px) rotateX(-2deg) rotateZ(0.6deg); }
+  50% { transform: perspective(850px) translateY(5px) rotateX(2deg) rotateZ(-0.8deg); }
+}
+@keyframes pc-glass-light {
+  0%, 12% { background-position: 150% 0; opacity: 0; }
+  18% { opacity: 0.55; }
+  34% { background-position: -50% 0; opacity: 0; }
+  100% { background-position: -50% 0; opacity: 0; }
+}
 .pc-art-object { position: absolute; width: 100%; height: 100%; object-fit: contain; }
 .pc-art--platforms { aspect-ratio: 3 / 2; }
 .pc-art--calendar { aspect-ratio: 3 / 2; }

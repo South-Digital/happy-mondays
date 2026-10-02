@@ -1,9 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionStyle } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionStyle } from "framer-motion";
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
 import { peopleJourney } from "./people-journey.mjs";
+import { PartnershipArtwork } from "./PartnershipArtwork";
 import "./people-closing.css";
 
 const TRAVEL = 1.8;
@@ -18,7 +19,6 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const context = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
-  const artworkSeen = useInView(stage, { once: true, amount: 0.4 });
   const heading = useRef<HTMLHeadingElement>(null);
   const [contextHeight, setContextHeight] = useState(0);
   const [pinTop, setPinTop] = useState(0);
@@ -125,17 +125,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={{ ...businessTilt.style, boxShadow: "none" }}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
-                <motion.div className="pc-art pc-art--platforms" aria-hidden="true">
-                  <motion.div className="pc-art-settle" initial={false}
-                    animate={{ y: reduced || artworkSeen ? 0 : 12, rotate: reduced || artworkSeen ? 0 : -3, scale: reduced || artworkSeen ? 1 : 0.95 }}
-                    transition={{ duration: reduced ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}>
-                  <img className="pc-art-object" src="/images/partnership/connected-platforms-640.webp"
-                    srcSet="/images/partnership/connected-platforms-640.webp 640w, /images/partnership/connected-platforms-960.webp 960w"
-                    sizes="(max-width: 700px) 85vw, 400px" width="1536" height="1024" alt="" loading="lazy" />
-                  <img className="pc-platform pc-platform--shopify" src="/images/partnership/shopify-bag.svg" alt="" width="72" height="72" />
-                  <img className="pc-platform pc-platform--google" src="/images/icon-google-ads.svg" alt="" width="72" height="72" />
-                  </motion.div>
-                </motion.div>
+                <PartnershipArtwork kind="platforms" reduced={reduced} visible={!animated || sideVisible} />
                 <p>Your products, your margins, your ambitions. We get to know your business, then join the dots.</p>
               </div>
             </motion.article>
@@ -144,15 +134,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
               style={{ ...feeTilt.style, boxShadow: "none" }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
-                <motion.div className="pc-art pc-art--calendar" aria-hidden="true">
-                  <motion.div className="pc-art-settle" initial={false}
-                    animate={{ y: reduced || artworkSeen ? 0 : 16, rotate: reduced || artworkSeen ? 0 : 3, scale: reduced || artworkSeen ? 1 : 0.95 }}
-                    transition={{ duration: reduced ? 0 : 0.9, ease: [0.22, 1, 0.36, 1] }}>
-                  <img className="pc-art-object" src="/images/partnership/monthly-plan-640.webp"
-                    srcSet="/images/partnership/monthly-plan-640.webp 640w, /images/partnership/monthly-plan-960.webp 960w"
-                    sizes="(max-width: 700px) 85vw, 400px" width="1536" height="1024" alt="" loading="lazy" />
-                  </motion.div>
-                </motion.div>
+                <PartnershipArtwork kind="calendar" reduced={reduced} visible={!animated || sideVisible} />
                 <p>One clear monthly fee, agreed around your spend band. Never a percentage of your ad spend.</p>
               </div>
             </motion.article>
