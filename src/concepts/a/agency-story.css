@@ -1,17 +1,30 @@
 /* Open editorial proof and an explorable audit. Contained scenes live elsewhere. */
 .as-link { color: var(--ca-ink); display: inline-flex; align-items: center; gap: 18px; min-height: 44px; width: fit-content; font-size: 14px; font-weight: 500; text-decoration: underline; text-decoration-color: #65747a70; text-underline-offset: 6px; }
 .as-link > span, .as-back-top > span { display: inline-block; transition: transform .24s ease; }
-.as-proof { margin: 12px 0 120px; padding: 48px 0; border-block: 1px solid #20273018; }
-.as-proof figure { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 2fr); column-gap: 8%; row-gap: 24px; align-items: center; margin: 0; }
-.as-proof-photo { grid-column: 1; grid-row: 1 / 4; align-self: stretch; min-height: 320px; overflow: hidden; border-radius: 16px; background: #c6b2a1; }
-.as-proof-photo img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; object-position: 50% 58%; scale: 1.08; display: block; }
-.as-proof-brand { grid-column: 2; grid-row: 1; width: 150px; max-width: 100%; height: auto; }
-.as-proof blockquote { grid-column: 2; grid-row: 2; margin: 0; font-size: clamp(27px, 2.65vw, 38px); line-height: 1.3; letter-spacing: -.04em; font-weight: 400; text-wrap: pretty; }
+/* A photographic print and a separate optical object: an open pause between scenes. */
+.as-proof { margin: 12px 0 112px; padding: 50px 0 34px; }
+.as-proof-spread { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 7%; align-items: center; }
+.as-proof-art { position: relative; aspect-ratio: 1 / 1.03; isolation: isolate; }
+.as-proof-light { position: absolute; inset: 5% -12% -8% -15%; z-index: -1; background: radial-gradient(ellipse at 65% 66%, #b9d3db55, transparent 58%), radial-gradient(ellipse at 35% 63%, #e5d3b763, transparent 62%); filter: blur(26px); pointer-events: none; }
+.as-proof-photo { position: absolute; width: 78%; height: 87%; top: 1%; left: 6%; padding: 7px; background: #fff; transform: rotate(-1.8deg); box-shadow: 0 20px 40px -26px #392c2366, 0 2px 5px #392c2310; }
+.as-proof-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 48% 52%; display: block; }
+.as-proof-prism { position: absolute; width: 64%; height: auto; right: -5%; bottom: -2%; pointer-events: none; }
+.as-proof-editorial { margin: 0; padding: 6px 0 22px; min-width: 0; }
+.as-proof-masthead { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 46px; }
+.as-proof-masthead > span { color: var(--ca-body); font-size: 12px; letter-spacing: .015em; }
+.as-proof-brand { width: 142px; height: auto; }
+.as-proof blockquote { position: relative; margin: 0; max-width: 620px; font-size: clamp(29px, 3vw, 43px); line-height: 1.22; letter-spacing: -.045em; font-weight: 400; text-wrap: pretty; }
+.as-proof-quote-mark { position: absolute; right: 100%; margin-right: .06em; }
 .as-proof blockquote em { font-style: normal; color: #375969; }
-.as-proof-source { grid-column: 2; grid-row: 3; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 4px; }
-.as-proof-source p { font-size: 15px; line-height: 1.5; margin: 0; }
-.as-proof-source p > span { display: block; color: var(--ca-body); font-size: 13px; margin-top: 3px; }
-.as-proof-source .as-link { font-size: 13px; flex-shrink: 0; }
+.as-proof-source { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px; margin-top: 38px; }
+.as-proof-person { display: flex; align-items: center; gap: 13px; }
+/* Reserved for Gary's supplied photograph. Initials are a placeholder, not a generated person. */
+.as-proof-portrait { width: 56px; height: 56px; flex: 0 0 56px; display: grid; place-items: center; border-radius: 50%; overflow: hidden; background: linear-gradient(145deg,#f3f1eb,#dce6e7); border: 1px solid #fff; box-shadow: inset 0 0 0 1px #47606a0a; color: #516570; font-size: 15px; }
+.as-proof-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.as-proof-source p { font-size: 14px; line-height: 1.5; margin: 0; }
+.as-proof-source p > span { display: block; color: var(--ca-body); font-size: 12px; margin-top: 3px; }
+.as-proof-source .as-link { font-size: 12px; flex-shrink: 0; gap: 12px; text-decoration: none; }
+.as-proof-arrow { display: grid !important; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid #647d853b; font-size: 18px; background: #ffffff70; }
 .as-start { padding: 64px 12px 80px; border-top: 1px solid #20273018; }
 .as-audit-spread { display: grid; grid-template-columns: 1fr 1.12fr; gap: 7%; align-items: center; }
 .as-audit-copy h2 { font-size: clamp(42px,3.8vw,56px); font-weight: 500; letter-spacing: -.048em; line-height: 1.08; margin: 0 0 28px; max-width: 540px; text-wrap: pretty; }
@@ -69,14 +82,13 @@
 }
 /* Match the commerce section's single-column container, not just phone width. */
 @media (max-width:980px) {
-  .as-proof { padding: 32px 0 36px; margin-bottom: 78px; }
-  .as-proof figure { grid-template-columns: 150px minmax(0,1fr); column-gap: 28px; row-gap: 26px; }
-  .as-proof-photo { grid-column: 1; grid-row: 1; min-height: 0; height: 150px; border-radius: 12px; }
-  .as-proof-photo img { min-height: 0; object-position: 50% 58%; }
-  .as-proof-brand { grid-column: 2; grid-row: 1; width: min(150px,100%); }
-  .as-proof blockquote { grid-column: 1 / -1; grid-row: 2; max-width: 700px; }
-  .as-proof-source { grid-column: 1 / -1; grid-row: 3; gap: 20px; }
-  .as-proof-source p > span { font-size: 12px; }
+  .as-proof { margin-bottom: 76px; padding: 22px 0 20px; }
+  .as-proof-spread { grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: 6%; }
+  .as-proof-masthead { margin-bottom: 25px; }
+  .as-proof-masthead > span { display: none; }
+  .as-proof blockquote { font-size: clamp(27px,3.4vw,34px); }
+  .as-proof-source { margin-top: 28px; gap: 14px; }
+  .as-proof-source .as-link { margin-left: 69px; }
   .as-start { padding: 48px 0 65px; }
   .as-audit-spread { grid-template-columns: 1fr; gap: 50px; }
   .as-audit-copy h2 { max-width: 530px; font-size: 49px; }
@@ -92,13 +104,21 @@
   .as-footer-intro { grid-column: 1 / -1; }
   .as-back-top { grid-column: 1 / -1; }
 }
+@media (max-width:680px) {
+  .as-proof { padding: 6px 0 14px; margin-bottom: 65px; }
+  .as-proof-spread { grid-template-columns: 1fr; gap: 38px; }
+  .as-proof-art { width: 88%; max-width: 380px; justify-self: center; aspect-ratio: 1.12; }
+  .as-proof-photo { left: 2%; width: 78%; height: 92%; }
+  .as-proof-prism { right: -7%; bottom: -9%; width: 61%; }
+  .as-proof-editorial { padding: 0 7px; }
+  .as-proof-masthead { margin-bottom: 25px; }
+  .as-proof-masthead > span { display: block; font-size: 11px; }
+  .as-proof-brand { width: 120px; }
+  .as-proof blockquote { font-size: clamp(27px,6.8vw,36px); line-height: 1.25; }
+  .as-proof-source { margin-top: 26px; }
+  .as-proof-source .as-link { margin-left: 69px; }
+}
 @media (max-width:480px) {
-  .as-proof figure { grid-template-columns: 132px minmax(0,1fr); column-gap: 28px; }
-  .as-proof-photo { height: 144px; }
-  .as-proof-brand { width: 138px; }
-  .as-proof-source { align-items: start; gap: 14px; }
-  .as-proof-source p { font-size: 14px; }
-  .as-proof-source p > span { max-width: 180px; }
   .as-audit-copy h2 { font-size: 41px; max-width: 340px; }
   .as-audit-invitation > .as-link { display: flex; margin: 10px 0 0; }
   .as-folio-tabs { gap: 8px; }

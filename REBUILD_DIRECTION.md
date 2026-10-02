@@ -2,6 +2,14 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — Diamond Store editorial redesign
+
+Replaced the ruled, generic testimonial row with an open photographic composition: the actual client campaign image as a lightly angled print, a separately generated optical-glass prism, soft blue/champagne light and a narrower quotation measure. It sits between discovery and purchase as an unpinned, readable pause rather than another enclosing card or scroll takeover. The photo and prism follow the scroll spring at small opposing distances, with slight independent rotation. Text never fades or waits for the art.
+
+The existing quote and client wordmark are unchanged. Gary's 56px portrait position is reserved beside his attribution; a neutral GI monogram remains until the user provides his photograph. `ClientStory` accepts `portraitSrc` for the real image. No synthetic likeness or new result claim was added. The generated object is decorative, not client merchandise. Prompt/provenance is in `public/images/client-stories/OPTICAL-PRISM.md`; the runtime transparent WebP is 73KB.
+
+Browser review: 1280px and 1440px desktop, 820px tablet, 390px and 320px phone. Reviewed the adjacent discovery/purchase spacing, the full attribution and action, and normal-motion scroll/reversal with the text at full opacity. Reduced motion renders static artwork. No horizontal overflow in measured phone/desktop views or runtime errors in the normal-motion review. Production build, TypeScript lint and diff checks pass. Proofs and the original generated PNG are saved in the parent workspace under `output/happy-mondays-client-story-2026-10-02`. The case-study destination remains the existing concept-preview link, pending its route build.
+
 ## 2 October — actual-tab QA correction
 
 The user's clipping screenshot was reproduced in their open Chrome preview at 1727×963. It still loaded `index-CfEzq_bT.js` / `index-CZLBb7UI.css`, with zero pin bottom padding: the 620px scene extended 55px past the story's clipping edge. Previous QA inspected a newer temporary tab and did not establish that the user's already-open preview had refreshed. This was a delivery/verification gap, not a user error.
