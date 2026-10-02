@@ -601,3 +601,16 @@ User approved the recent icon and foreground concepts and requested their implem
 - Asset sources and processing are recorded in public/images/editorial/PROVENANCE.txt and public/images/hero-a-terrace/PROVENANCE.txt.
 
 Validation: client-review build and TypeScript lint pass; no horizontal overflow at 320, 390, 768, 1024, 1440, 1920 and 2560px. Visual checks covered the hero, both editorial sections and closing card; normal and reduced motion, scene completion, reverse scroll, foreground overlap and image loading were checked. No browser warnings/errors observed.
+
+
+## 2 October — closing composition, scroll release and Shopify refinement
+
+- Moved the expanded Keanu/contact invitation to the left beneath the copy, lowered it by 24px and retained the horizontal portrait/button pairing and minimum 80px lower-edge clearance. Static tablet/desktop follows the same composition; mobile retains its stack.
+- Balanced the closing paragraph without changing its measure during expansion, preventing reflow while scrolling.
+- Added a reversible 180–280px release after the card expansion. The pin starts leaving at zero velocity and meets normal page scrolling at full velocity. The footer gap compensates for the release offset.
+- Repaired the sliced olive branch in the hero with imagegen. Sea and terrace now use the same source, keeping the ledge continuous. Prompt/provenance lives beside the responsive assets.
+- Reviewed Shopify's official 2026 Analytics reference and help documentation. Adopted official Polaris icons, a visible Analytics selection, date/comparison filters, metric summaries and internally consistent seven-day sample sales data. The order notification adds its $79 to the total.
+- Preserved the requested Happy Mondays interpretation: independent rounded sidebar and page surfaces, an optical glass rim, softer light and enlarged typography. Removed the literal dark admin toolbar after user steering. This remains an illustrative composition with fictional data, not an exact Shopify screenshot.
+- Rechecked desktop normal motion, closing mid-transition/final/release/reverse states, tablet and 320/390px reduced-motion layouts. No horizontal overflow or broken loaded images observed. Corrected the tablet store-label wrap.
+- All 16 geometry, playback and readiness tests pass, including release velocity continuity. Client-review TypeScript/Vite build passes.
+- Booking remains the existing design-preview notice, not a connected calendar. Screenshot evidence is in the parent workspace's output/happy-mondays-final-pass-2026-10-02 directory.

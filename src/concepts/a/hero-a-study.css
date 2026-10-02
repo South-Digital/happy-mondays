@@ -2,6 +2,7 @@
 .ha-study {
   --ha-ground: #fafaf8;
   --ha-terrace-extension: calc(max(100vw, 1440px) * .125473);
+  --ha-dashboard-room: 96px;
   --ha-ink: var(--ca-ink);
   --ha-blue: #2a63f5;
   background: var(--ha-ground);
@@ -11,7 +12,7 @@
 }
 .ha-scene {
   position: relative;
-  height: calc(980px + var(--ha-terrace-extension));
+  height: calc(980px + var(--ha-terrace-extension) + var(--ha-dashboard-room));
   isolation: isolate;
   overflow: clip;
   background: var(--ha-ground);
@@ -31,7 +32,7 @@
   left: 50%;
   width: max(100%, 1440px);
   transform: translateX(-50%);
-  aspect-ratio: 2/1;
+  aspect-ratio: 1586 / 992;
   display: block;
   /* An inline preview holds the composition while the full photograph decodes. */
   background-size: cover;
@@ -455,7 +456,7 @@
     100% 50.907%, 100% 100%, 0% 100%
   );
 }
-.ha-scenery .ha-coast { bottom: var(--ha-terrace-extension); }
+.ha-scenery .ha-coast { bottom: 0; }
 .ha-sky-wash { bottom: var(--ha-terrace-extension); }
 /* A ground-colour wash lifts the wall's shade without washing out the sea. */
 .ha-coast-foreground::after {
@@ -589,7 +590,7 @@
 @media (min-width: 1600px) {
   .ha-credentials { max-width: 1440px; }
   .ha-scene {
-    height: calc(1040px + var(--ha-terrace-extension));
+    height: calc(1040px + var(--ha-terrace-extension) + var(--ha-dashboard-room));
   }
   .ha-object {
     top: 500px;
@@ -621,7 +622,7 @@
     font-size: 68px;
   }
   .ha-scene {
-    height: calc(950px + var(--ha-terrace-extension));
+    height: calc(950px + var(--ha-terrace-extension) + var(--ha-dashboard-room));
   }
   .ha-object {
     top: 470px;
@@ -899,7 +900,7 @@
 /* Keep the chart visible as the photograph grows on very wide screens. */
 @media (min-width: 1921px) {
   .ha-scene {
-    height: calc(1040px + (100vw - 1920px) * 0.18 + var(--ha-terrace-extension));
+    height: calc(1040px + (100vw - 1920px) * 0.18 + var(--ha-terrace-extension) + var(--ha-dashboard-room));
   }
 }
 
@@ -1012,7 +1013,7 @@
   .ha-intro h1 { font-size: calc(56px - var(--ha-landscape-compression) * .3); }
   .ha-intro p { font-size: 16px; margin-top: calc(18px - var(--ha-landscape-compression) * .15); }
   .ha-hero-cta { margin-top: calc(20px - var(--ha-landscape-compression) * .1); }
-  .ha-scene { height: calc(870px - var(--ha-landscape-compression) + var(--ha-terrace-extension)); }
+  .ha-scene { height: calc(870px - var(--ha-landscape-compression) + var(--ha-terrace-extension) + var(--ha-dashboard-room)); }
   .ha-object { top: calc(390px - var(--ha-landscape-compression)); }
   .ha-order-position { top: calc(620px - var(--ha-landscape-compression)); }
 }

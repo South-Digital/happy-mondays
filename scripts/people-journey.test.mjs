@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { peopleJourney } from '../src/concepts/a/people-journey.mjs';
+import { peopleJourney, peopleRelease } from '../src/concepts/a/people-journey.mjs';
 
 for (const [width, height, viewport] of [[984,480,700], [1184,480,720], [1320,486,900], [1800,510,1100]]) {
   test(`panorama stays centred and copy keeps its measure at ${width}px`, () => {
@@ -35,9 +35,20 @@ test('readable holds and reversible geometry without breakpoint switches', () =>
   assert.deepEqual(at(0.9), at(1));
   assert.equal(at(1).sideOpacity, 0);
   assert.equal(at(1).contactOpacity, 1);
-  assert.equal(at(1).invitationX + at(1).invitationWidth, 1184 - 1184 * .048);
-  assert.ok(at(1).invitationY + 54 <= at(1).frameHeight - 100);
+  assert.equal(at(1).invitationX, at(1).copyX);
+  assert.ok(at(1).invitationY + 54 <= at(1).frameHeight - 80);
   const forward = Array.from({length:101}, (_,i) => at(i/100));
   const reverse = Array.from({length:101}, (_,i) => at((100-i)/100)).reverse();
   assert.deepEqual(forward, reverse);
+});
+
+test('pin release joins stationary and normal scrolling without a velocity jump', () => {
+  for (const length of [180, 216, 270, 280]) {
+    assert.ok(Math.abs(peopleRelease(-10, length)) === 0);
+    assert.equal(peopleRelease(length + 10, length), -length / 2);
+    const entrySpeed = -(peopleRelease(.01, length) - peopleRelease(0, length)) / .01;
+    const exitSpeed = -(peopleRelease(length, length) - peopleRelease(length - .01, length)) / .01;
+    assert.ok(entrySpeed < .001);
+    assert.ok(Math.abs(exitSpeed - 1) < .001);
+  }
 });

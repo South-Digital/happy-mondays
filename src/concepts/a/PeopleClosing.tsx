@@ -3,7 +3,7 @@ import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useT
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
-import { peopleJourney } from "./people-journey.mjs";
+import { peopleJourney, peopleRelease } from "./people-journey.mjs";
 import { PartnershipArtwork } from "./PartnershipArtwork";
 import "./people-closing.css";
 
@@ -31,10 +31,13 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const geometry = useMotionValue({ width: 1184, height: 480, viewportHeight: 720 });
   const start = useMotionValue(0);
   const distance = useMotionValue(1);
+  const exitDistance = useMotionValue(240);
+  const [travelSpace, setTravelSpace] = useState({ travel: 1296, exit: 240 });
   const { scrollY } = useScroll();
   const raw = useTransform(() => clamp((scrollY.get() - start.get()) / distance.get()));
   const progress = useSpring(raw, { stiffness: 150, damping: 30, mass: 0.7 });
   const animated = roomForMotion && !reduced;
+  const releaseY = useTransform(() => peopleRelease(scrollY.get() - start.get() - distance.get(), exitDistance.get()));
 
   useEffect(() => {
     const query = window.matchMedia("(min-width: 1080px) and (min-height: 700px)");
@@ -56,6 +59,9 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
       setPinTop(top);
       start.set(ref.current!.getBoundingClientRect().top + window.scrollY - top);
       distance.set(window.innerHeight * TRAVEL);
+      const exit = Math.min(280, Math.max(180, window.innerHeight * .3));
+      exitDistance.set(exit);
+      setTravelSpace({ travel: window.innerHeight * TRAVEL, exit });
     };
     measure();
     // History restoration can mount us halfway through the pinned sequence.
@@ -66,7 +72,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     observer.observe(stage.current);
     window.addEventListener("resize", measure);
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); };
-  }, [animated, distance, start, progress, geometry]);
+  }, [animated, distance, exitDistance, start, progress, geometry]);
 
   const scene = useTransform(() => {
     const { width, height, viewportHeight } = geometry.get();
@@ -119,8 +125,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   }, [animated, sideVisible, businessTilt.ref, feeTilt.ref]);
   return (
     <motion.section ref={ref} className="pc-sequence" data-animated={animated}
-      style={{ "--pc-pin-top": `${pinTop}px`, "--pc-context-height": `${contextHeight}px` } as MotionStyle}>
-      <div className="pc-pin">
+      style={{ "--pc-pin-top": `${pinTop}px`, "--pc-context-height": `${contextHeight}px`, "--pc-travel": `${travelSpace.travel}px`, "--pc-exit": `${travelSpace.exit}px` } as MotionStyle}>
+      <motion.div className="pc-pin" style={animated ? { y: releaseY } : undefined}>
         <div className="pc-context" ref={context}>{children}</div>
         <section className="pc-journey" aria-label="Working with Happy Mondays">
           <div className="pc-stage" ref={stage}>
@@ -174,7 +180,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
             </motion.article>
           </div>
         </section>
-      </div>
+      </motion.div>
     </motion.section>
   );
 }

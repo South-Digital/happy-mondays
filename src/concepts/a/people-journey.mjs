@@ -39,14 +39,20 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     copyWidth: Math.min(360, initialWidth - 68),
     copyX: mix(34, endPadding, composition),
     copyY: mix(height - 206, endHeight * 0.16 + 74.8 * Math.min(1.88, width / 660) + 28, composition),
-    // The invitation resolves into one horizontal group, right-aligned to the
-    // same scene inset as the heading, with breathing room above the terrace.
-    invitationX: mix(34, width - endPadding - 512, composition),
-    invitationY: mix(height - 88, endHeight - endPadding - 110, composition),
+    // Resolve beside the portrait below the left-hand copy, leaving the sea open.
+    invitationX: mix(34, endPadding, composition),
+    invitationY: mix(height - 88, endHeight - endPadding - 86, composition),
     invitationWidth,
     buttonWidth: mix(232, 252, composition),
     buttonX: mix(0, 260, composition),
     contactOpacity: blend(progress, 0.68, 0.88),
     contactY: mix(8, 0, blend(progress, 0.68, 0.88)),
   };
+}
+
+// Begin leaving the pin with zero velocity, meet normal page speed at its end.
+// The fixed final offset is paired with an equal negative section margin.
+export function peopleRelease(scrollAfterStory, releaseDistance) {
+  const t = clamp(scrollAfterStory / releaseDistance);
+  return -releaseDistance * t * t / 2;
 }

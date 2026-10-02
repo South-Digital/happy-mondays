@@ -5,3 +5,5 @@ export function peopleJourney(progress: number, width: number, height: number, v
   titleX: number; titleY: number; titleScale: number; copyWidth: number; copyX: number; copyY: number;
   invitationX: number; invitationY: number; invitationWidth: number; buttonWidth: number; buttonX: number; contactOpacity: number; contactY: number;
 };
+
+export function peopleRelease(scrollAfterStory: number, releaseDistance: number): number;

@@ -10,9 +10,9 @@ import { segment, settle, useSceneTimeline } from "./useSceneTimeline";
 import { useSceneReadiness } from "./useSceneReadiness";
 import { useHeroDepth } from "./useHeroDepth";
 import { StoryLink } from "./AgencyStory";
-import coastPreview from "./assets/coast-preview.webp";
-import terracePreview from "./assets/terrace-preview.webp";
+import terracePreview from "./assets/terrace-clean-preview.webp";
 import "./hero-a-study.css";
+import "./shopify-preview.css";
 
 const links = [
   { label: "Client stories", href: "#client-stories" },
@@ -108,22 +108,22 @@ function Coast({ foreground = false, ready, reduced, onReady }: { foreground?: b
   return (
     <picture
       className={foreground ? "ha-coast ha-coast-foreground" : "ha-coast"}
-      style={{ backgroundImage: `url(${foreground ? terracePreview : coastPreview})` }}
+      style={{ backgroundImage: `url(${terracePreview})` }}
     >
       <source
         type="image/avif"
-        srcSet={foreground ? "/images/hero-a-terrace-extended/coast-800.avif 800w, /images/hero-a-terrace-extended/coast-1440.avif 1440w, /images/hero-a-terrace-extended/coast-1586.avif 1586w" : "/images/hero-a-terrace/coast-800.avif 800w, /images/hero-a-terrace/coast-1440.avif 1440w, /images/hero-a-terrace/coast-2400.avif 2400w, /images/hero-a-terrace/coast-3548.avif 3548w"}
+        srcSet="/images/hero-a-terrace-clean/coast-800.avif 800w, /images/hero-a-terrace-clean/coast-1440.avif 1440w, /images/hero-a-terrace-clean/coast-1586.avif 1586w"
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
       />
       <motion.img
         initial={{ opacity: 0 }}
         animate={{ opacity: ready && !failed ? 1 : 0 }}
         transition={{ duration: reduced ? 0 : 1.4, ease: [0.22, 1, 0.36, 1] }}
-        src={foreground ? "/images/hero-a-terrace-extended/coast-1440.webp" : "/images/hero-a-terrace/coast-1440.webp"}
-        srcSet={foreground ? "/images/hero-a-terrace-extended/coast-800.webp 800w, /images/hero-a-terrace-extended/coast-1440.webp 1440w, /images/hero-a-terrace-extended/coast-1586.webp 1586w" : "/images/hero-a-terrace/coast-800.webp 800w, /images/hero-a-terrace/coast-1440.webp 1440w, /images/hero-a-terrace/coast-2400.webp 2400w, /images/hero-a-terrace/coast-3548.webp 3548w"}
+        src="/images/hero-a-terrace-clean/coast-1440.webp"
+        srcSet="/images/hero-a-terrace-clean/coast-800.webp 800w, /images/hero-a-terrace-clean/coast-1440.webp 1440w, /images/hero-a-terrace-clean/coast-1586.webp 1586w"
         sizes="(max-width:700px) 1180px, (max-width:1440px) 1440px, 100vw"
-        width={foreground ? 1586 : 3548}
-        height={foreground ? 992 : 1774}
+        width={1586}
+        height={992}
         alt=""
         decoding="async"
         onLoad={event => { setFailed(false); event.currentTarget.decode().catch(() => {}).then(onReady); }}

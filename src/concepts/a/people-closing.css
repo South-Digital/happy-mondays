@@ -167,8 +167,8 @@
 .pc-people h2 { width: fit-content; font-size: clamp(42px, 4.8vw, 66px); color: var(--ca-ink); font-weight: var(--ca-emphasis-weight); }
 .pc-people h2:focus-visible { outline: 2px solid var(--ca-action); outline-offset: 6px; }
 .pc-people h2 > span { display: block; color: var(--ca-heading-soft); font-weight: var(--ca-display-weight); }
-.pc-people-content > p { max-width: 360px; color: var(--ca-body); margin: 28px 0 0; padding-top: 0; }
-.pc-invitation { align-self: flex-end; display: flex; align-items: center; gap: 24px; width: 512px; max-width: 100%; position: relative; min-height: 54px; margin-top: auto; margin-bottom: 56px; padding-top: 0; }
+.pc-people-content > p { max-width: 360px; text-wrap: balance; color: var(--ca-body); margin: 28px 0 0; padding-top: 0; }
+.pc-invitation { align-self: flex-start; display: flex; align-items: center; gap: 24px; width: 512px; max-width: 100%; position: relative; min-height: 54px; margin-top: auto; margin-bottom: 32px; padding-top: 0; }
 .pc-invitation .ha-button { font-size: 14px; min-height: 54px; padding-inline: 24px; white-space: nowrap; }
 .pc-invitation > .ha-button { flex: 0 0 252px; }
 .pc-contact { position: relative; flex: 0 0 236px; order: -1; white-space: nowrap; }
@@ -176,9 +176,9 @@
 .pc-invitation .pc-contact strong { font-size: 15px; }
 .pc-invitation .pc-contact span { font-size: 14px; }
 .pc-sequence[data-animated="true"] {
-  height: calc(var(--pc-context-height) + var(--pc-section-gap) + var(--pc-height) + 180svh + 110px);
+  height: calc(var(--pc-context-height) + var(--pc-section-gap) + var(--pc-height) + var(--pc-travel) + var(--pc-exit) + 110px);
   padding-bottom: 0;
-  margin-bottom: 54px;
+  margin-bottom: calc(54px - var(--pc-exit) / 2);
 }
 .pc-sequence[data-animated="true"] .pc-pin {
   position: sticky; top: var(--pc-pin-top);
