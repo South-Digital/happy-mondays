@@ -1,8 +1,8 @@
 /* Centre the cards within a shared sticky frame with the preceding scene. */
 .pc-sequence {
   --pc-section-gap: 120px;
-  --pc-small-title: clamp(26px, 2.3vw, 32px);
-  --pc-height: clamp(530px, 62svh, 580px);
+  --pc-small-title: clamp(25px, 2.1vw, 30px);
+  --pc-height: clamp(480px, 54svh, 510px);
   position: relative;
   margin-bottom: 54px;
 }
@@ -12,35 +12,23 @@
 .pc-reason, .pc-people {
   /* Clip the oversized glow without creating an internal scroll container.
      Keyboard focus must never pan a card to its decorative pseudo-elements. */
-  position: relative; isolation: isolate; border-radius: 32px; overflow: clip;
+  position: relative; isolation: isolate; border-radius: 28px; overflow: clip;
   box-shadow: inset 0 1px 0 #ffffffad, 0 24px 46px -40px #34453866;
 }
 .pc-reason {
   display: flex;
   padding: 28px;
-  min-height: 520px;
+  min-height: 470px;
   color: #273c35;
-  background: #e0e7db;
+  background: transparent;
+  box-shadow: none;
 }
-.pc-reason-inner { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-.pc-reason::before, .pc-reason::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: -15%;
-  z-index: -1;
+.pc-reason-inner { flex: 1; display: grid; grid-template-rows: auto minmax(160px, 1fr) auto; min-width: 0; }
+.pc-reason::before {
+  content: ""; pointer-events: none; position: absolute;
+  inset: 14% -8% 19%; z-index: -1;
 }
-
-.pc-reason--fee {
-  color: #2c414b;
-  background: #dce6ea;
-}
-
-.pc-reason::after {
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px #ffffff73;
-}
+.pc-reason--fee { color: #2c414b; }
 
 .pc-reason h2, .pc-people h2 {
   margin: 0;
@@ -58,39 +46,35 @@
   margin: auto 0 22px;
   padding-top: 12px;
 }
-.pc-reason p { margin-bottom: 0; }
+.pc-reason p { margin: 0; padding-top: 16px; }
 .pc-invitation {
-  border-top: 1px solid #40595026;
-  padding-top: 16px;
+  padding-top: 4px;
   margin-top: 0;
   min-height: 77px;
 }
 /* Physical objects sit in the same soft daylight as the photographic centre.
    Their aspect ratio stays intact while the card's layout narrows around them. */
 .pc-art {
-  position: relative; flex: 1 1 190px; min-height: 150px;
-  width: min(100%, 360px); align-self: center;
-  margin: 8px -10px 4px; pointer-events: none;
+  position: relative; min-height: 160px;
+  width: calc(100% + 44px); max-width: 410px; justify-self: center; align-self: center;
+  margin: 0 -22px; pointer-events: none;
 }
 .pc-art-settle { position: absolute; inset: 0; }
 .pc-art-object { position: absolute; width: 100%; height: 100%; object-fit: contain; }
-.pc-art--platforms { aspect-ratio: 3 / 2; flex: 0 0 auto; }
-.pc-art--calendar { aspect-ratio: 3 / 2; flex: 0 0 auto; }
+.pc-art--platforms { aspect-ratio: 3 / 2; }
+.pc-art--calendar { aspect-ratio: 3 / 2; }
 .pc-platform { position: absolute; width: 18%; height: 27%; object-fit: contain;  }
 .pc-platform--shopify { left: 20.5%; top: 24%;  }
 .pc-platform--google { left: 61%; top: 48%;  }
-.pc-reason--business { background: #dce5d6; }
+
+/* Colour belongs to the objects, not another enclosing card. */
 .pc-reason--business::before {
-  background: radial-gradient(ellipse at 10% 0%, #ffffffeb, transparent 55%),
-    radial-gradient(ellipse at 100% 62%, #7e9b90b0, transparent 62%),
-    radial-gradient(ellipse at 0% 100%, #d3c998df, transparent 55%);
-  filter: blur(24px);
+  background: radial-gradient(ellipse at 64% 45%, #a1b9a76b 0%, #d9ddb354 35%, transparent 69%);
+  filter: blur(18px);
 }
 .pc-reason--fee::before {
-  background: radial-gradient(ellipse at 5% 0%, #ffffffed, transparent 52%),
-    radial-gradient(ellipse at 100% 48%, #80adc8bf, transparent 66%),
-    radial-gradient(ellipse at 0% 100%, #e8d8b9cf, transparent 60%);
-  filter: blur(24px);
+  background: radial-gradient(ellipse at 56% 45%, #a4c9df85 0%, #e6dec64f 39%, transparent 70%);
+  filter: blur(18px);
 }
 .pc-people { grid-column: 1 / -1; min-height: 580px; background: #eeeae1; z-index: 2; }
 .pc-photo { position: absolute; inset: 0; z-index: -2; }
@@ -159,14 +143,14 @@
   transform: translateY(calc(var(--pc-contact-y) * 1px));
 }
 .pc-sequence[data-animated="true"] .pc-people h2 {
-  font-size: clamp(var(--pc-small-title), calc(var(--pc-small-title) + (var(--pc-progress) - .25) * 63.333px), 66px);
+  font-size: clamp(34px, calc(34px + (var(--pc-progress) - .25) * 53.333px), 66px);
 }
 /* Match the 62px bottom + 32px top spacing between the other mobile sections. */
 @media (max-width: 980px) {
   .pc-sequence { --pc-section-gap: 94px; }
 }
 @media (min-width: 701px) and (max-width: 980px) {
-  .pc-reason { padding: 28px; min-height: 520px; }
+  .pc-reason { padding: 28px; min-height: 470px; }
   .pc-reason h2 { font-size: 28px; }
   .pc-reason p { font-size: 16px; }
   .pc-people-content { padding: 48px 36px; }
@@ -177,7 +161,7 @@
   .pc-sequence { margin-bottom: 36px; }
   .pc-journey { margin: var(--pc-section-gap) -8px 0; }
   .pc-stage { grid-template-columns: 1fr; gap: 16px; }
-  .pc-reason { min-height: 510px; padding: 32px; border-radius: 28px; }
+  .pc-reason { min-height: 440px; padding: 32px; border-radius: 28px; }
   .pc-reason h2 { font-size: clamp(33px, 8vw, 42px); }
   .pc-reason p { font-size: 16px; }
   .pc-people { min-height: 540px; border-radius: 28px; }
@@ -191,12 +175,12 @@
 
 @media (min-width: 1080px) {
   .pc-sequence[data-animated="true"] .pc-reason-inner { min-width: 196px; }
-  .pc-sequence[data-animated="true"] .pc-art { width: min(100%, 330px); margin-block: 4px 0; }
+  .pc-sequence[data-animated="true"] .pc-art { width: calc(100% + 44px); }
   .pc-sequence[data-animated="true"] .pc-reason p,
   .pc-sequence[data-animated="true"] .pc-people-content > p { font-size: 16px; line-height: 1.5; }
 }
 @media (max-width: 700px) {
-  .pc-art { width: min(100%, 330px); margin-block: 10px; }
+  .pc-art { width: calc(100% + 32px); max-width: 360px; margin: 6px -16px; }
 }
 
 .pc-people-content:not([data-wide="true"]) > p { max-width: min(32ch, 100%); }

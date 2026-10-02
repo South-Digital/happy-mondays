@@ -2,6 +2,10 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — partnership composition follow-up
+
+After the outer footer rows were removed, the user still found the section visually weak. The revised composition makes the coastal team scene the focal point: a 40% centre with 30% supporting columns instead of three equal cards. The side backgrounds and perimeter shadows are removed; restrained sage and blue light sits around the larger physical artwork. Headings, artwork and copy now use a deliberate three-row grid. The desktop frame is 480–510px, with smaller supporting type and shorter fee copy. The middle invitation remains; its redundant dividing line is removed. Existing centred pin, gradual narrowing, spring following and full-width team/contact scene are preserved. No extra homepage module or footer row was added.
+
 ## 2 October — visual reset (implemented and published for review)
 
 The user rejected the previous pass as visually unchanged. Technical verification is a delivery requirement, not the design roadmap. The following work supersedes the earlier “no visual defect” conclusions.

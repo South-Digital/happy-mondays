@@ -95,14 +95,14 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   useMotionValueEvent(progress, "change", value => setContactVisible(value > 0.68));
   // First: read. Then: narrow while still legible. Last: finish opening and hold.
   const opening = useTransform(progress, [0, 0.12, 0.9, 1], [0, 0, 1, 1]);
-  const sideWidth = useTransform(opening, value => `calc(${(1 - value) * 100 / 3}% - ${(1 - value) * 40 / 3}px)`);
-  const centreLeft = useTransform(opening, value => `calc(${(1 - value) * 100 / 3}% + ${(1 - value) * 20 / 3}px)`);
-  const centreWidth = useTransform(opening, value => `calc(${100 - (1 - value) * 200 / 3}% - ${(1 - value) * 40 / 3}px)`);
+  const sideWidth = useTransform(opening, value => `calc(${(1 - value) * 30}% - ${(1 - value) * 12}px)`);
+  const centreLeft = useTransform(opening, value => `calc(${(1 - value) * 30}% + ${(1 - value) * 8}px)`);
+  const centreWidth = useTransform(opening, value => `calc(${100 - (1 - value) * 60}% - ${(1 - value) * 16}px)`);
   const sideOpacity = useTransform(progress, [0, 0.27, 0.44, 1], [1, 1, 0, 0]);
   useMotionValueEvent(sideOpacity, "change", value => setSideVisible(value >= 0.08));
-  const sidePadding = useTransform(progress, [0.12, 0.4], [28, 22]);
+  const sidePadding = useTransform(progress, [0.12, 0.4], [30, 22]);
   const sideInset = useTransform(progress, [0.12, 0.57], [0, 14]);
-  const padding = useTransform(progress, [0.25, 0.85], [28, 52]);
+  const padding = useTransform(progress, [0.25, 0.85], [34, 52]);
   const photoPosition = useTransform(opening, [0, 1], ["72% center", "52% center"]);
   const artY = useTransform(opening, [0, 0.5], [0, -18]);
   const artRotate = useTransform(opening, [0, 0.5], [0, -5]);
@@ -139,7 +139,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
           <div className="pc-stage" ref={stage}>
             <motion.article {...businessTilt} className="pc-reason pc-reason--business"
               aria-hidden={animated && !sideVisible}
-              style={{ ...businessTilt.style, ...sideLayout }}>
+              style={{ ...businessTilt.style, ...sideLayout, boxShadow: "none" }}>
               <div className="pc-reason-inner">
                 <h2><span>Your business.</span><br />Our starting point.</h2>
                 <motion.div className="pc-art pc-art--platforms" aria-hidden="true" style={animated ? { y: artY, rotate: artRotate } : undefined}>
@@ -153,12 +153,12 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                   <img className="pc-platform pc-platform--google" src="/images/icon-google-ads.svg" alt="" width="72" height="72" />
                   </motion.div>
                 </motion.div>
-                <p>Your products. Your margins. Your ambitions. We get to know your business, then join the dots.</p>
+                <p>Your products, your margins, your ambitions. We get to know your business, then join the dots.</p>
               </div>
             </motion.article>
             <motion.article {...feeTilt} className="pc-reason pc-reason--fee"
               aria-hidden={animated && !sideVisible}
-              style={{ ...feeTilt.style, ...sideLayout }}>
+              style={{ ...feeTilt.style, ...sideLayout, boxShadow: "none" }}>
               <div className="pc-reason-inner">
                 <h2><span>A flat fee.</span><br />A clear plan.</h2>
                 <motion.div className="pc-art pc-art--calendar" aria-hidden="true" style={animated ? { y: artY, rotate: artRotate } : undefined}>
@@ -170,7 +170,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
                     sizes="(max-width: 700px) 85vw, 400px" width="1536" height="1024" alt="" loading="lazy" />
                   </motion.div>
                 </motion.div>
-                <p>A fixed monthly fee within your spend band. Clear priorities, close collaboration. No percentage of ad spend.</p>
+                <p>One clear monthly fee, agreed around your spend band. Never a percentage of your ad spend.</p>
               </div>
             </motion.article>
             <motion.article {...peopleTilt} className="pc-people" aria-labelledby="cj-people-heading"
