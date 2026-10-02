@@ -3,7 +3,7 @@ import { motion, useMotionValue, useMotionValueEvent, useScroll, useTransform, t
 import { MockLink } from "../../components/Toast";
 import { usePrefersReducedMotion } from "../../lib/motion";
 import { useCardTilt } from "./useCardTilt";
-import { peopleJourney, peopleRelease } from "./people-journey.mjs";
+import { peopleJourney, peopleArrival, peopleRelease } from "./people-journey.mjs";
 import { PartnershipArtwork } from "./PartnershipArtwork";
 import "./people-closing.css";
 import { FounderPortrait } from "./FounderPortrait";
@@ -32,12 +32,16 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
   const start = useMotionValue(0);
   const distance = useMotionValue(1);
   const exitDistance = useMotionValue(240);
-  const [travelSpace, setTravelSpace] = useState({ travel: 1296, exit: 240 });
+  const arrivalDistance = useMotionValue(144);
+  const [travelSpace, setTravelSpace] = useState({ travel: 1296, exit: 240, arrival: 144 });
   const { scrollY } = useScroll();
   const raw = useTransform(() => clamp((scrollY.get() - start.get()) / distance.get()));
   const progress = raw;
   const animated = roomForMotion && !reduced;
-  const releaseY = useTransform(() => peopleRelease(scrollY.get() - start.get() - distance.get(), exitDistance.get()));
+  const stageY = useTransform(() =>
+    peopleArrival(scrollY.get() - start.get(), arrivalDistance.get()) +
+    peopleRelease(scrollY.get() - start.get() - distance.get(), exitDistance.get()),
+  );
 
   useEffect(() => {
     const query = window.matchMedia("(min-width: 1080px) and (min-height: 700px)");
@@ -51,15 +55,18 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     const measure = () => {
       geometry.set({ width: stage.current!.clientWidth, height: stage.current!.offsetHeight, viewportHeight: window.innerHeight });
       const centredTop = (window.innerHeight - stage.current!.offsetHeight) / 2;
-      // The store is outside the pin: only the card stage determines its start.
-      const top = centredTop;
+      // Start decelerating just before centre, ending exactly at centre.
+      // This offset also makes reverse scrolling leave the pin continuously.
+      const arrival = Math.min(160, window.innerHeight * 0.16);
+      arrivalDistance.set(arrival);
+      const top = centredTop - arrival / 2;
       setPinTop(top);
       start.set(ref.current!.getBoundingClientRect().top + window.scrollY - top);
       distance.set(window.innerHeight * TRAVEL);
       // Ease out of the pin before handing back to normal document scroll.
       const exit = Math.min(240, window.innerHeight * 0.24);
       exitDistance.set(exit);
-      setTravelSpace({ travel: window.innerHeight * TRAVEL, exit });
+      setTravelSpace({ travel: window.innerHeight * TRAVEL, exit, arrival });
     };
     measure();
     // History restoration can mount us halfway through the pinned sequence.
@@ -70,7 +77,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     observer.observe(stage.current);
     window.addEventListener("resize", measure);
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); };
-  }, [animated, distance, exitDistance, start, progress, geometry]);
+  }, [animated, distance, exitDistance, arrivalDistance, start, progress, geometry]);
 
   const scene = useTransform(() => {
     const { width, height, viewportHeight } = geometry.get();
@@ -109,8 +116,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     apply(sceneStyle.get());
     return sceneStyle.on("change", apply);
   }, [sceneStyle]);
-  const businessTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
-  const feeTilt = useCardTilt(reduced, animated ? sideOpacity : undefined);
+  const businessTilt = useCardTilt(reduced || (animated && inJourney), animated ? sideOpacity : undefined);
+  const feeTilt = useCardTilt(reduced || (animated && inJourney), animated ? sideOpacity : undefined);
   const peopleTilt = useCardTilt(reduced || (animated && inJourney));
   useLayoutEffect(() => {
     if (!animated || sideVisible) return;
@@ -126,8 +133,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     <>
     <div className="pc-context" ref={context}>{children}</div>
     <motion.section ref={ref} className="pc-sequence" data-animated={animated}
-      style={{ "--pc-pin-top": `${pinTop}px`, "--pc-travel": `${travelSpace.travel}px`, "--pc-exit": `${travelSpace.exit}px` } as MotionStyle}>
-      <motion.div className="pc-pin" style={animated ? { y: releaseY } : undefined}>
+      style={{ "--pc-pin-top": `${pinTop}px`, "--pc-travel": `${travelSpace.travel}px`, "--pc-exit": `${travelSpace.exit}px`, "--pc-arrival": `${travelSpace.arrival}px` } as MotionStyle}>
+      <motion.div className="pc-pin" style={animated ? { y: stageY } : undefined}>
         <section className="pc-journey" aria-label="Working with Happy Mondays">
           <div className="pc-stage" ref={stage}>
             <motion.article {...businessTilt} className="pc-reason pc-reason--business"

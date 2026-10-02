@@ -191,7 +191,10 @@ function Discovery() {
   const refine = settle(segment(t, 1650, 800));
   const attributes = settle(segment(t, 2050, 650));
   const ready = settle(segment(t, 2650, 450));
-  const position = settle(segment(t, 2850, 1300));
+  // A visible rearrangement starts and ends at rest; entrance easing would
+  // throw the catalogue sideways at full speed on its first moving frame.
+  const travel = segment(t, 2850, 1300);
+  const position = travel * travel * travel * (travel * (travel * 6 - 15) + 10);
   const focus = settle(segment(t, 3100, 1050));
   return (
     <div

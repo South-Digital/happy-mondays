@@ -248,7 +248,7 @@
   --pc-section-gap: max(120px, calc((100svh - var(--pc-height)) / 2 + 24px));
   height: calc(var(--pc-height) + var(--pc-travel) + var(--pc-exit) + 110px);
   padding-bottom: 0;
-  margin-bottom: calc(54px - var(--pc-exit) / 2);
+  margin-bottom: calc(54px + var(--pc-arrival) / 2 - var(--pc-exit) / 2);
 }
 .pc-sequence[data-animated="true"] .pc-pin {
   position: sticky; top: var(--pc-pin-top);

@@ -7,3 +7,5 @@ export function peopleJourney(progress: number, width: number, height: number, v
 };
 
 export function peopleRelease(scrollAfterStory: number, releaseDistance: number): number;
+
+export function peopleArrival(scrollBeforeStory: number, arrivalDistance: number): number;

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { peopleJourney, peopleRelease } from '../src/concepts/a/people-journey.mjs';
+import { peopleJourney, peopleArrival, peopleRelease } from '../src/concepts/a/people-journey.mjs';
 
 for (const [width, height, viewport] of [[984,480,700], [1184,480,720], [1320,486,900], [1800,510,1100]]) {
   test(`panorama stays centred and copy keeps its measure at ${width}px`, () => {
@@ -60,4 +60,34 @@ test('pin release joins stationary and normal scrolling without a velocity jump'
 
 test('direct sticky release has no residual displacement', () => {
   for (const y of [-100, 0, 10, 300, 1000]) assert.equal(peopleRelease(y, 0), 0);
+});
+
+
+test('arrival meets the centred pin without speed or acceleration discontinuities', () => {
+  for (const distance of [112, 128, 144, 160]) {
+    const centre = 160;
+    const top = scroll => Math.max(centre - distance / 2, centre - distance / 2 - scroll) + peopleArrival(scroll, distance);
+    const h = .1;
+    const speed = scroll => (top(scroll + h) - top(scroll - h)) / (2 * h);
+    const acceleration = scroll => (top(scroll + h) - 2 * top(scroll) + top(scroll - h)) / (h * h);
+    assert.equal(top(0), centre);
+    assert.equal(top(100), centre);
+    assert.ok(Math.abs(speed(-distance) + 1) < .0001);
+    assert.ok(Math.abs(speed(0)) < .0001);
+    assert.ok(Math.abs(acceleration(-distance)) < .0001);
+    assert.ok(Math.abs(acceleration(0)) < .0001);
+    for (let scroll = -distance; scroll <= 0; scroll += 1) {
+      assert.ok(top(scroll) >= centre);
+      assert.ok(speed(scroll) >= -1.00001 && speed(scroll) <= .00001);
+    }
+  }
+});
+
+test('release acceleration also meets stationary and normal page motion', () => {
+  const distance = 216;
+  const offset = scroll => scroll <= distance ? peopleRelease(scroll, distance) : -distance / 2 - (scroll - distance);
+  const h = .1;
+  const acceleration = scroll => (offset(scroll + h) - 2 * offset(scroll) + offset(scroll - h)) / (h * h);
+  assert.ok(Math.abs(acceleration(0)) < .0001);
+  assert.ok(Math.abs(acceleration(distance)) < .0001);
 });

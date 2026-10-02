@@ -55,10 +55,22 @@ export function peopleJourney(progress, width, height, viewportHeight) {
   };
 }
 
-// Begin leaving the pin with zero velocity, meet normal page speed at its end.
+// Integral of smoothstep: velocity and acceleration both meet the neighbouring
+// motion at either end. Half the travel remains as a constant layout offset.
+const travelIntegral = t => t * t * t * (1 - t / 2);
+
+// Decelerate normal document movement into the centred pin. The sticky top is
+// raised by half this distance, exactly cancelling the final arrival offset.
+export function peopleArrival(scrollBeforeStory, arrivalDistance) {
+  if (arrivalDistance <= 0) return 0;
+  const t = clamp((scrollBeforeStory + arrivalDistance) / arrivalDistance);
+  return arrivalDistance * travelIntegral(t);
+}
+
+// Accelerate out of the pin, meeting normal document velocity and acceleration.
 // The fixed final offset is paired with an equal negative section margin.
 export function peopleRelease(scrollAfterStory, releaseDistance) {
   if (releaseDistance <= 0) return 0;
   const t = clamp(scrollAfterStory / releaseDistance);
-  return -releaseDistance * t * t / 2;
+  return -releaseDistance * travelIntegral(t);
 }

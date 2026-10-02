@@ -45,13 +45,19 @@ export function useHeroDepth(scene: RefObject<HTMLDivElement>) {
     };
   }, [scene, start, distance, strength, orderTravel, progress, target]);
 
-  const depth = useTransform(() => progress.get() * strength.get());
+  // Ease all planes together into and out of their short depth journey.
+  // Linear clamping made the sea and dashboard stop abruptly at its limit.
+  const eased = useTransform(() => {
+    const p = progress.get();
+    return p * p * (3 - 2 * p);
+  });
+  const depth = useTransform(() => eased.get() * strength.get());
   return {
     seaY: useTransform(depth, [0, 1], [0, 44]),
     foregroundY: useTransform(depth, [0, 1], [0, -10]),
     dashboardY: useTransform(depth, [0, 1], [0, -24]),
     dashboardScale: useTransform(depth, [0, 1], [1, 1.022]),
-    orderY: useTransform(() => progress.get() * orderTravel.get()),
+    orderY: useTransform(() => eased.get() * orderTravel.get()),
     orderScale: useTransform(depth, [0, 1], [1, 1.018]),
   };
 }
