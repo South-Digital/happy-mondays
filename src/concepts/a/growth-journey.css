@@ -1333,6 +1333,7 @@
 .cj-feed-title { overflow: hidden; }
 .cj-copy h2 { text-wrap: balance; }
 .cj-copy > p { text-wrap: pretty; }
+.cj-copy--purchase > p { text-wrap: balance; }
 
 .cj-scene-caption { font-size: 11px; line-height: 1.5; color: #6a706b; letter-spacing: .01em; text-align: center; margin: 15px 0 0; }
 .cj-position-note { margin-left: auto; font-variant-numeric: tabular-nums; color: #3c5547; }
