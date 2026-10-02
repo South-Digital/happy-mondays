@@ -105,16 +105,14 @@
   border-radius: 999px;
   min-height: 52px;
   padding: 0 24px;
-  background: linear-gradient(175deg, var(--ca-action-top), var(--ca-action) 55%, var(--ca-action-bottom));
+  background: var(--ca-action);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 1px 2px rgba(20, 42, 89, 0.16),
-    0 4px 8px -4px rgba(20, 42, 89, 0.22);
+    0 2px 5px -2px rgba(20, 42, 59, 0.18);
   transition:
     background-color 180ms ease,
     box-shadow 180ms ease;
@@ -123,14 +121,12 @@
   .ha-button:hover {
     background: var(--ca-action-hover);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.24),
-      0 1px 2px rgba(20, 42, 89, 0.18),
-      0 6px 12px -6px rgba(20, 42, 89, 0.3);
+      0 4px 9px -4px rgba(20, 42, 59, 0.22);
   }
 }
 .ha-button:active {
   background: #1a4055;
-  box-shadow: inset 0 1px 3px rgba(12, 31, 79, 0.2);
+  box-shadow: none;
 }
 .ha-study a:focus-visible,
 .ha-mobile-menu summary:focus-visible,

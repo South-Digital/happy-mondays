@@ -2,6 +2,12 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
+## 2 October — button treatment corrected
+
+The user rejected the heavy resting button treatment but explicitly liked the hover idea. Removed the thick masked rim and inner lip from controls. Secondary actions now have a translucent white fill, one fine border and a restrained shadow; primary actions use the existing solid blue with a softer shadow. Kept the travelling highlight as a 1px edge-only glint that appears on hover, rather than a permanent bevel. Graphic-plane rims stay intact. The client-story arrow returns to its simpler original border.
+
+Reviewed the resting service action in the actual page and verified a 1px hover rim, 650ms edge movement, and zero resting glint opacity. Reduced motion removes the transition; decorative layers remain non-interactive. Build/TypeScript and diff checks pass. This supersedes the button portion of the earlier optical-edge treatment.
+
 ## 2 October — shared optical edge treatment
 
 Extended the dashboard's glass-edge language to the two service buttons, the four commerce planes and the client-story arrow. A masked gradient rim preserves an empty centre, so the effect never washes over text or platform UI. Secondary actions use a 3px clear rim and inner lip; blue primary actions retain their fill with a quieter 2px highlight. Commerce rim thickness scales from 2px to 4px with its scene. Photographs and whole sections remain unframed.
