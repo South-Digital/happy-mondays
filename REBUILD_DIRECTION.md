@@ -2,7 +2,15 @@
 
 **Status: layered replacement implemented, visually reviewed and published for review.** The previous continuation was rejected. The active rebuild below supersedes earlier interpretations, including the restrictions on concept brands and translucent platform UI. Visual acceptance belongs to the user/client; successful builds alone do not establish design quality.
 
-## 2 October — partnership composition follow-up
+## 2 October — continuous partnership scroll scene
+
+The user found the transition and final composition unrefined. This replaces the earlier narrowing-card/FLIP treatment below. The centre is now an aperture onto a fixed panoramic canvas: its frame opens horizontally and vertically while the photograph gently settles, rather than continuously re-cropping with the changing card width. Supporting artwork and copy retain their measures, retreat slightly and fade before the aperture cuts through their text.
+
+One reversible spatial timeline positions the heading, paragraph and invitation continuously. There is no width-triggered layout switch. The final scene groups heading and paragraph at the upper left, with Keanu and the action at the lower right; a local light wash keeps that contact legible without another enclosing card. A damped scroll follower softens wheel input, with opening and ending holds. The pin still starts when the base frame is vertically centred. The expanded frame has real release clearance so its bottom corners and shadow are not clipped by the story container.
+
+Verification: production build and TypeScript lint pass. Five timeline tests cover four desktop geometries, fixed text measure, centred frame, heading/copy clearance, contained CTA, end holds and deterministic reverse sampling. Browser review covers 1280×720 and 1080×700 normal motion (opening, intermediate, expanded, reverse and fast-scroll release), 390×844 phone, and the reduced-motion desktop composition. These are visual state and interaction checks, not an instrumented frame-rate benchmark. Small screens and reduced motion remain unpinned. No additional homepage section or outer footer row was introduced.
+
+## 2 October — partnership composition follow-up (superseded motion)
 
 After the outer footer rows were removed, the user still found the section visually weak. The revised composition makes the coastal team scene the focal point: a 40% centre with 30% supporting columns instead of three equal cards. The side backgrounds and perimeter shadows are removed; restrained sage and blue light sits around the larger physical artwork. Headings, artwork and copy now use a deliberate three-row grid. The desktop frame is 480–510px, with smaller supporting type and shorter fee copy. The middle invitation remains; its redundant dividing line is removed. Existing centred pin, gradual narrowing, spring following and full-width team/contact scene are preserved. No extra homepage module or footer row was added.
 
