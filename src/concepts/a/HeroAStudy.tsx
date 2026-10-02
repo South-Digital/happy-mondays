@@ -8,7 +8,6 @@ import { ClientLogos } from "./ClientLogos";
 import { StorePreview, OrderPreview } from "./StorePreview";
 import { segment, settle } from "./useSceneTimeline";
 import { useHeroEntrance } from "./useHeroEntrance";
-import { FounderPortrait } from "./FounderPortrait";
 import { useHeroDepth } from "./useHeroDepth";
 import { StoryLink } from "./AgencyStory";
 import terracePreview from "./assets/terrace-natural-preview.webp";
@@ -210,7 +209,6 @@ export function HeroAStudy() {
         </div>
         <div className="ha-hero-cta" style={{ opacity: reveal(850, 650) }}>
           <StoryLink href="/book-a-call?type=audit" className="ha-button">Start with an audit</StoryLink>
-          <span className="ha-human-cue"><FounderPortrait />Every audit starts with a 15-minute call with Keanu</span>
         </div>
         <div className="ha-arrival-mist" aria-hidden="true" style={{ opacity: 1 - reveal(0, 2200) }} />
         <motion.div
