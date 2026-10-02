@@ -53,3 +53,9 @@
     --ca-display-tracking: -0.04em;
   }
 }
+
+/* Section links land below the floating navigation in native and Lenis scroll. */
+.ca-direction :is(#the-approach, #client-stories, #cj-discovery-heading, #cj-purchase-heading, #cj-people-heading) { scroll-margin-top: 104px; }
+@media (max-width: 700px) {
+  .ca-direction :is(#the-approach, #client-stories, #cj-discovery-heading, #cj-purchase-heading, #cj-people-heading) { scroll-margin-top: 88px; }
+}

@@ -23,7 +23,7 @@
 .as-proof-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transform: scale(1.55); transform-origin: 64% 0%; }
 .as-proof-source p { font-size: 14px; line-height: 1.5; margin: 0; }
 .as-proof-source p > span { display: block; color: var(--ca-body); font-size: 12px; margin-top: 3px; }
-.as-proof-source .as-link { font-size: 12px; flex-shrink: 0; gap: 12px; text-decoration: none; }
+.as-proof-source .as-link { font-size: 13px; flex-shrink: 0; gap: 12px; text-decoration: none; }
 .as-proof-arrow { display: grid !important; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid #647d853b; font-size: 18px; background: #ffffff70; }
 .as-start { padding: 64px 12px 80px; border-top: 1px solid #20273018; }
 .as-audit-spread { display: grid; grid-template-columns: 1fr 1.12fr; gap: 7%; align-items: center; }

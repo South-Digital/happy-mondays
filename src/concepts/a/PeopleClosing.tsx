@@ -56,7 +56,8 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
       setPinTop(top);
       start.set(ref.current!.getBoundingClientRect().top + window.scrollY - top);
       distance.set(window.innerHeight * TRAVEL);
-      const exit = 0;
+      // Ease out of the pin before handing back to normal document scroll.
+      const exit = Math.min(240, window.innerHeight * 0.24);
       exitDistance.set(exit);
       setTravelSpace({ travel: window.innerHeight * TRAVEL, exit });
     };
@@ -90,7 +91,7 @@ export function PeopleClosing({ children }: { children: ReactNode }) {
     "--pc-side-scale": value.sideScale, "--pc-side-y": `${value.sideY}px`, "--pc-side-x": `${value.sideX}px`,
     "--pc-art-progress": value.artworkProgress,
     "--pc-title-x": `${value.titleX}px`, "--pc-title-y": `${value.titleY}px`, "--pc-title-scale": value.titleScale,
-    "--pc-copy-width": `${value.copyWidth}px`, "--pc-copy-x": `${value.copyX}px`, "--pc-copy-y": `${value.copyY}px`,
+    "--pc-copy-scale": value.copyScale, "--pc-copy-width": `${value.copyWidth}px`, "--pc-copy-x": `${value.copyX}px`, "--pc-copy-y": `${value.copyY}px`,
     "--pc-invite-x": `${value.invitationX}px`, "--pc-invite-y": `${value.invitationY}px`,
     "--pc-invite-width": `${value.invitationWidth}px`, "--pc-contact-opacity": value.contactOpacity,
     "--pc-button-width": `${value.buttonWidth}px`,

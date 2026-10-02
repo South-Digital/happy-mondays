@@ -12,7 +12,7 @@ export function peopleJourney(progress, width, height, viewportHeight) {
   const composition = blend(progress, 0.08, 0.9);
   const retreat = blend(progress, 0.08, 0.52);
   const initialWidth = width * 0.4 - 16;
-  const endHeight = Math.max(height, Math.min(620, viewportHeight - 144));
+  const endHeight = Math.max(height, Math.min(620, viewportHeight - 184));
   const frameWidth = mix(initialWidth, width, opening);
   const frameHeight = mix(height, endHeight, opening);
   const endPadding = Math.min(64, width * 0.048);
@@ -37,6 +37,7 @@ export function peopleJourney(progress, width, height, viewportHeight) {
     sideX: mix(0, 22, retreat),
     titleX: mix(34, endPadding, composition), titleY, titleScale,
     copyWidth: Math.min(360, initialWidth - 68),
+    copyScale: mix(1, 1.125, composition),
     copyX: mix(34, endPadding, composition),
     copyY: mix(height - 206, endHeight * 0.16 + 74.8 * Math.min(1.88, width / 660) + 28, composition),
     // Keep the action anchored to the copy throughout. Reveal the portrait

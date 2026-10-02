@@ -12,7 +12,8 @@ for (const [width, height, viewport] of [[984,480,700], [1184,480,720], [1320,48
       assert.ok(Math.abs(current.frameLeft + current.frameWidth / 2 - width / 2) < 0.0001);
       assert.ok(Math.abs(current.frameTop + current.frameHeight / 2 - height / 2) < 0.0001);
       assert.ok(current.frameWidth >= previous.frameWidth - 0.0001);
-      assert.ok(current.frameHeight <= viewport - 100);
+      // The expanded scene clears the 80px floating nav plus breathing room.
+      assert.ok((viewport - current.frameHeight) / 2 >= 92);
       assert.equal(current.canvasWidth, width);
       assert.equal(current.copyWidth, opening.copyWidth);
       assert.ok(current.invitationX + current.invitationWidth <= current.frameWidth + 0.0001);

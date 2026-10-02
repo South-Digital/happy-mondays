@@ -175,7 +175,7 @@
 .pc-contact img { flex-shrink: 0; }
 .pc-invitation .pc-contact strong { font-size: 15px; }
 .pc-invitation .pc-contact span { font-size: 14px; }
-/* Keep the original business / people / fee composition without scroll pinning. */
+/* Keep all three cards readable in the static desktop fallback. */
 @media (min-width: 981px) {
   .pc-stage { grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) minmax(0, 1fr); gap: 20px; }
   .pc-reason, .pc-people { min-width: 0; min-height: 520px; }
@@ -244,6 +244,8 @@
 
 /* Expansion uses a fixed panorama and stable text measures at every frame. */
 .pc-sequence[data-animated="true"] {
+  /* Clear the preceding scene before this independent pin begins. */
+  --pc-section-gap: max(120px, calc((100svh - var(--pc-height)) / 2 + 24px));
   height: calc(var(--pc-height) + var(--pc-travel) + var(--pc-exit) + 110px);
   padding-bottom: 0;
   margin-bottom: calc(54px - var(--pc-exit) / 2);
@@ -293,7 +295,8 @@
 .pc-sequence[data-animated="true"] .pc-people-content > p {
   position: absolute; left: 0; top: 0; margin: 0; padding: 0;
   width: var(--pc-copy-width); max-width: none;
-  transform: translate3d(var(--pc-copy-x), var(--pc-copy-y), 0);
+  transform-origin: 0 0;
+  transform: translate3d(var(--pc-copy-x), var(--pc-copy-y), 0) scale(var(--pc-copy-scale));
 }
 .pc-sequence[data-animated="true"] .pc-invitation {
   position: absolute; left: 0; top: 0; margin: 0; padding: 0;
